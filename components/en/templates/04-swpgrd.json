@@ -1,0 +1,75 @@
+{
+  "title": "Connect for Shopware · Dynamic product grid",
+  "templateType": "section",
+  "content": [
+    {
+      "id": "swexda",
+      "name": "block",
+      "cid": "swpgrd",
+      "parent": 0,
+      "children": [],
+      "settings": {},
+      "slotChildren": {
+        "swsgrd": [
+          "swexdb"
+        ]
+      }
+    },
+    {
+      "id": "swexdb",
+      "name": "dw-shopware-product-grid",
+      "parent": "swexda",
+      "children": [],
+      "label": "Dynamic product grid",
+      "settings": {
+        "preset": "compact",
+        "infoPosition": "below",
+        "linkStyle": "button",
+        "linkTarget": "same",
+        "imageMaxHeight": "240px",
+        "titleTypography": {
+          "font-size": "22px",
+          "line-height": "1.3"
+        },
+        "limit": 6,
+        "columns": 3,
+        "gap": "24px",
+        "showPagination": true,
+        "showShopLink": true,
+        "buttonText": "View product"
+      }
+    }
+  ],
+  "components": [
+    {
+      "id": "swpgrd",
+      "category": "deckerweb Shopware",
+      "elements": [
+        {
+          "id": "swpgrd",
+          "name": "block",
+          "parent": 0,
+          "children": [
+            "swsgrd"
+          ],
+          "label": "Connect for Shopware · Dynamic product grid",
+          "settings": {
+            "_width": "100%",
+            "_direction": "column",
+            "_rowGap": "16px"
+          }
+        },
+        {
+          "id": "swsgrd",
+          "name": "slot",
+          "parent": "swpgrd",
+          "children": [],
+          "label": "Dynamic product grid",
+          "settings": {}
+        }
+      ],
+      "properties": []
+    }
+  ],
+  "globalClasses": []
+}

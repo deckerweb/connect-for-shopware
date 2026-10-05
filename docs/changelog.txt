@@ -1,0 +1,84 @@
+== Changelog ==
+
+= 0.5.1-dev · 2026-10-06 =
+* Improved: User-approved Signal artwork in matte blue, with a lighter headline and paired German/English banners.
+* Improved: Genuine reconstructed SVG icon and matching PNG icons in 128/256 pixels; banners in 772×250 and 1544×500 pixels.
+* Improved: Versioned artwork URLs prevent browsers from retaining previous icons and banners after update.
+* Improved: Editable SVG and matching PNG for every banner; dedicated GitHub banner 1280×640 in German and English.
+* Misc: Export dimensions, locale artwork paths, cached updater icons and package contents verified; Connector behavior unchanged.
+
+= 0.5.0-dev · 2026-10-06 =
+* New: Configurable storefront URL and optional separate Store API endpoint; no preconfigured customer shop.
+* Improved: Sales Channel, language, currency, formatting and tax labels derive from the anonymous Store API context; SEO URLs use that context.
+* Improved: Shop-specific cache and outage scopes; shop changes invalidate cache, diagnostics and Quick View tickets.
+* Fixed: Removed customer names, fixed domains, channel/language/product/category IDs and selections from source, documentation and starter templates.
+* Misc: Server-side constant/environment credentials retained; generic multi-shop fixture tests and URL validation added.
+
+= 0.4.0-dev · 2026-10-06 =
+* New: Optional native Bricks Components installer with selection, populated examples and additional version copies.
+* Improved: Connect for Shopware branding, stable slug, bundled artwork, bilingual documentation and shared updater V2.
+* Fixed: Preserve existing components, assignments, settings and Gutenberg block identifiers during migration.
+* Fixed: Bricks external CSS is generated once; avoid a second pass removing styles through selector deduplication.
+* Misc: deckerweb standards audit and local migration/installer regression checks.
+
+= 0.3.0-dev · 2026-10-05 =
+* New: Connection test and safe diagnostics with last success, duration and neutral failure status.
+* New: Optional detected page-cache purge on manual refresh for WP Rocket, LiteSpeed Cache, WP Super Cache and W3 Total Cache.
+* New: Network-free product column in post/page lists and shared Gutenberg/Bricks presentation presets.
+* New: Standalone Shopware Product Button Gutenberg block and native Bricks element.
+* New: Optional category shop link and pagination for dynamic grids.
+* New: Optional Quick View with gallery, tabs, shop button, signed read tickets and request limit.
+* Improved: Outage fallback, 60-second retry pause, network budget and atomic cache locks; retained content hides expired prices and availability.
+* Fixed: Gallery/tab IDs stay unique in dynamically loaded dialogs.
+* Misc: Bilingual setup, cache behavior, limits and FAQ; expanded local regression checks.
+
+= 0.2.0-dev · 2026-10-04 =
+* New: Gutenberg Product Grid block and native Bricks element for dynamic product groups through active Shopware categories.
+* New: Category selection, maximum product count, Shopware sorting, heading and responsive columns.
+* New: Protected editor API and native Bricks AJAX category/sorting selectors.
+* Improved: Shared repository and card rendering; Shopware evaluates rules and prices without duplicate rule maintenance.
+* Misc: Dynamic categories verified, including pagination and price sorting. Implementation and setup documented in both languages.
+
+= 0.1.6-dev · 2026-10-04 =
+* Improved: Standalone Gutenberg Product block shares the subtle card border, padding and compact typography of Related Products.
+* Improved: Description and tab content use readable headings and text spacing.
+* Misc: Image positioning, gallery, tabs and native Gutenberg styling remain available.
+
+= 0.1.5-dev · 2026-10-04 =
+* Improved: Related products use compact cards with images above readable titles and consistent spacing.
+* Improved: Grid adapts column count to available width; additional products wrap without deletion.
+* Fixed: Single-product image/text layout no longer creates narrow text columns inside grid cards.
+
+= 0.1.4-dev · 2026-10-04 =
+* Improved: Product search, ordering and removal available directly in block settings and shared with document assignments.
+* Improved: Clear notice for missing assignments replaces empty server preview.
+* Fixed: Related Products preview uses explicit article context and current assignments, including unsaved changes.
+* Misc: Protected preview never persists assignments; frontend continues using saved article products.
+
+= 0.1.3-dev · 2026-10-04 =
+* New: Video posters with external provider links; no automatic player loading.
+* Fixed: Astra link rules no longer override Gutenberg button fallback styling.
+* Fixed: Gallery includes images and YouTube/Vimeo videos from the installed Shopware video extension.
+* Misc: Verified a concrete variant with image/video media and frontend theme rules.
+
+= 0.1.2-dev · 2026-10-04 =
+* New: Optional description, PDF data sheets and manufacturer tabs with keyboard navigation and no-JavaScript fallback.
+* New: Cover-only or full product gallery with selectable thumbnails.
+* New: Current/new-tab product links; new-tab links use noopener noreferrer.
+* Improved: Product facts and CTA beside or below the image, before the description; responsive layout.
+* Fixed: Gutenberg button fallback styling and reliable front-end stylesheet loading.
+* Misc: Customer reports 0.1.1 working with PHP 8.3.x and Elementor 4.x; 0.1.2 locally tested on PHP 8.4.5.
+
+= 0.1.1-dev · 2026-10-04 =
+* New: Custom product description text with preserved line breaks.
+* Improved: Optional theme-styled Gutenberg and native Bricks buttons; existing text links stay unchanged.
+* Misc: Verified manufacturer and PDF media availability through read-only API calls.
+
+= 0.1.0-dev · 2026-10-04 =
+* New: Shared read-only Store API client, repository, mapper and rendering.
+* New: Dynamic Gutenberg Product and Related Products blocks.
+* New: Native Bricks Product and Related Products elements with searchable product and variant controls.
+* New: Article-level product assignments in Gutenberg and the classic editor.
+* New: Configurable 15–60-minute cache and protected manual refresh.
+* New: German and English UI and documentation; accessible changelog dialog.
+* Misc: Initial development build; staging acceptance pending at that release.

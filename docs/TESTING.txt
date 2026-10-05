@@ -1,0 +1,20 @@
+Connect for Shopware 0.5.0-dev · 2026-10-06
+Local WordPress 7.1.2 / Bricks 2.4.2 / PHP 8.4.5; offline fixtures, no shop mutation.
+PASS: real fixture mapping, variant/family prices, media, SEO filtering, cache refresh, read allowlist, pagination
+PASS: 29 WordPress/Bricks integration checks (WP 7.1.2 / Bricks 2.4.2 / PHP 8.4.5)
+Additional presentation checks passed
+Layout, gallery and product details checks passed
+Link target checks passed
+Image/video regression checks passed
+Related preview permissions, unsaved selection and saved frontend checks passed
+Dynamic grid core, REST, Gutenberg and Bricks checks passed
+PASS: 29 operations, outage, CTA, pagination and Quick View checks
+PASS: 18 components installer, access, persistence, copy, example, rendering and lock checks
+PASS: 19 rebrand, compatible data/block names, footer, artwork and updater safeguards
+PASS: no Bricks dependency, hidden installer and retained Gutenberg registration
+PASS: 28 configurable-shop, URL safety, context, currency/tax, SEO, cache isolation and ticket checks
+PASS: native Bricks AJAX selectors and permission denial.
+PASS: PHP/JavaScript syntax and preserved block/element identifiers.
+PASS: no customer names/domains/fixed channel, language, product or category IDs in PHP, translations, docs or starter templates; no credentials shipped.
+BROWSER PASS: shop URL saved; prior diagnostics cleared; connection test displays dynamic channel/language/currency/tax context, without credentials.
+LIMITS: full licensed Bricks editing, responsive UI, live API against each configured shop, and PHP 8.3 execution of this version require external acceptance. Previous release was user-confirmed on PHP 8.3.x. No live GitHub publication/update performed.

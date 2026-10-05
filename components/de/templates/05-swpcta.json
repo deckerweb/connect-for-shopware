@@ -1,0 +1,62 @@
+{
+  "title": "Connect for Shopware · Produktbutton",
+  "templateType": "section",
+  "content": [
+    {
+      "id": "swexea",
+      "name": "block",
+      "cid": "swpcta",
+      "parent": 0,
+      "children": [],
+      "settings": {},
+      "slotChildren": {
+        "swscta": [
+          "swexeb"
+        ]
+      }
+    },
+    {
+      "id": "swexeb",
+      "name": "dw-shopware-product-button",
+      "parent": "swexea",
+      "children": [],
+      "label": "Produktbutton",
+      "settings": {
+        "linkTarget": "same",
+        "buttonText": "Zum Produkt"
+      }
+    }
+  ],
+  "components": [
+    {
+      "id": "swpcta",
+      "category": "deckerweb Shopware",
+      "elements": [
+        {
+          "id": "swpcta",
+          "name": "block",
+          "parent": 0,
+          "children": [
+            "swscta"
+          ],
+          "label": "Connect for Shopware · Produktbutton",
+          "settings": {
+            "_width": "100%",
+            "_direction": "column",
+            "_rowGap": "16px"
+          }
+        },
+        {
+          "id": "swscta",
+          "name": "slot",
+          "parent": "swpcta",
+          "children": [],
+          "label": "Produktbutton",
+          "settings": {}
+        }
+      ],
+      "properties": []
+    }
+  ],
+  "globalClasses": []
+}

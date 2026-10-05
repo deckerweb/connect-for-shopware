@@ -1,0 +1,8 @@
+Connect for Shopware 0.5.1-dev · 2026-10-06 · approved matte-blue artwork release
+PASS: all six banners have editable native-vector SVG and matching PNG, including dedicated GitHub 1280×640 in DE/EN; no embedded raster, scripts or external resources.
+PASS: genuine vector icon, PNG icons 128/256, German/English banners 772×250 and 1544×500, image decoding and dimension checks.
+PASS: all Connector logic, settings, element/block IDs and frontend JS/CSS unchanged; updater artwork URL versions added intentionally.
+PASS: 20 rebrand, compatible data/block names, footer, artwork and updater safeguards
+PASS: current metadata, translations, categorized DE/EN history, five release entries in standard readmes and no customer references/credentials.
+VISUAL PASS: standalone DE/EN banner content checked; no presentation sheet, separate matte-blue vector mark matches the approved direction.
+Previous 0.5.0 functional regressions remain applicable; user confirmed that version. No live GitHub update/publication or customer deployment performed.

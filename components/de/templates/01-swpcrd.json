@@ -1,0 +1,94 @@
+{
+  "title": "Connect for Shopware · Produktkarte",
+  "templateType": "section",
+  "content": [
+    {
+      "id": "swexaa",
+      "name": "block",
+      "cid": "swpcrd",
+      "parent": 0,
+      "children": [],
+      "settings": {},
+      "slotChildren": {
+        "swscrd": [
+          "swexab"
+        ]
+      }
+    },
+    {
+      "id": "swexab",
+      "name": "dw-shopware-product",
+      "parent": "swexaa",
+      "children": [],
+      "label": "Produktkarte",
+      "settings": {
+        "preset": "compact",
+        "infoPosition": "below",
+        "linkStyle": "button",
+        "linkTarget": "same",
+        "imageMaxHeight": "240px",
+        "titleTypography": {
+          "font-size": "22px",
+          "line-height": "1.3"
+        },
+        "buttonText": "Zum Produkt"
+      }
+    }
+  ],
+  "components": [
+    {
+      "id": "swpcrd",
+      "category": "deckerweb Shopware",
+      "elements": [
+        {
+          "id": "swpcrd",
+          "name": "block",
+          "parent": 0,
+          "children": [
+            "swscrd"
+          ],
+          "label": "Connect for Shopware · Produktkarte",
+          "settings": {
+            "_width": "100%",
+            "_direction": "column",
+            "_rowGap": "16px",
+            "_padding": {
+              "top": "16px",
+              "right": "16px",
+              "bottom": "16px",
+              "left": "16px"
+            },
+            "_border": {
+              "style": "solid",
+              "width": {
+                "top": "1px",
+                "right": "1px",
+                "bottom": "1px",
+                "left": "1px"
+              },
+              "color": {
+                "hex": "#e5e7eb"
+              },
+              "radius": {
+                "top": "8px",
+                "right": "8px",
+                "bottom": "8px",
+                "left": "8px"
+              }
+            }
+          }
+        },
+        {
+          "id": "swscrd",
+          "name": "slot",
+          "parent": "swpcrd",
+          "children": [],
+          "label": "Produktkarte",
+          "settings": {}
+        }
+      ],
+      "properties": []
+    }
+  ],
+  "globalClasses": []
+}

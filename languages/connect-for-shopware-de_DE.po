@@ -1,0 +1,590 @@
+msgid ""
+msgstr "Project-Id-Version: Connect for Shopware 0.5.1-dev\nLanguage: de_DE\nContent-Type: text/plain; charset=UTF-8\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "%d minutes"
+msgstr "%d Minuten"
+
+msgid "%d products · %d dynamic grids"
+msgstr "%d Produkte · %d dynamische Raster"
+
+msgid "Access denied."
+msgstr "Zugriff verweigert."
+
+msgid "Add"
+msgstr "Hinzufügen"
+
+msgid "After expiry, the next request fetches fresh data. This is not a scheduled refresh."
+msgstr "Nach Ablauf lädt der nächste Abruf frische Daten. Es gibt keine automatische Aktualisierung nach Zeitplan."
+
+msgid "Already installed"
+msgstr "Bereits installiert"
+
+msgid "Also install starter templates without product selections"
+msgstr "Auch Startvorlagen ohne Produktauswahl installieren"
+
+msgid "Apply a preset, then adjust individual settings."
+msgstr "Eine Vorlage anwenden und die einzelnen Einstellungen bei Bedarf anpassen."
+
+msgid "Automatic"
+msgstr "Automatisch"
+
+msgid "Availability"
+msgstr "Verfügbarkeit"
+
+msgid "Available"
+msgstr "Verfügbar"
+
+msgid "Back to search results"
+msgstr "Zurück zu den Suchtreffern"
+
+msgid "Below image"
+msgstr "Unter dem Bild"
+
+msgid "Bricks Components"
+msgstr "Bricks Components"
+
+msgid "Button"
+msgstr "Button"
+
+msgid "Button background"
+msgstr "Button-Hintergrund"
+
+msgid "Button border"
+msgstr "Button-Rahmen"
+
+msgid "Button padding"
+msgstr "Button-Innenabstand"
+
+msgid "Button text"
+msgstr "Buttontext"
+
+msgid "Changelog"
+msgstr "Änderungsverlauf"
+
+msgid "Changing the shop clears the Connector cache and connection diagnostics. Existing product selections are retained; choose products from the new shop where necessary."
+msgstr "Ein Shopwechsel leert Connector-Cache und Verbindungsdiagnose. Bestehende Produktauswahlen bleiben erhalten; bei Bedarf Produkte aus dem neuen Shop auswählen."
+
+msgid "Check connector configuration."
+msgstr "Connector-Konfiguration prüfen."
+
+msgid "Choose variant"
+msgstr "Variante wählen"
+
+msgid "Clear detected page caches on manual connector refresh (entire site)."
+msgstr "Beim manuellen Connector-Refresh erkannte Seiten-Caches der gesamten Website leeren."
+
+msgid "Clear selection"
+msgstr "Auswahl leeren"
+
+msgid "Close"
+msgstr "Schließen"
+
+msgid "Columns"
+msgstr "Spalten"
+
+msgid "Compact recommendation"
+msgstr "Kompakte Empfehlung"
+
+msgid "Configured"
+msgstr "Konfiguriert"
+
+msgid "Connection and diagnostics"
+msgstr "Verbindung und Diagnose"
+
+msgid "Connection configuration"
+msgstr "Verbindungskonfiguration"
+
+msgid "Connection interrupted."
+msgstr "Verbindung unterbrochen."
+
+msgid "Connector cache cleared. Products will reload on the next request."
+msgstr "Connector-Cache geleert. Produkte werden beim nächsten Abruf neu geladen."
+
+msgid "Content"
+msgstr "Inhalt"
+
+msgid "Cover image"
+msgstr "Coverbild"
+
+msgid "Current tab"
+msgstr "Bestehendem Tab"
+
+msgid "Currently unavailable"
+msgstr "Derzeit nicht verfügbar"
+
+msgid "Custom button URL (optional)"
+msgstr "Eigenes Buttonziel (optional)"
+
+msgid "Custom text"
+msgstr "Eigener Text"
+
+msgid "Data sheets"
+msgstr "Datenblätter"
+
+msgid "Data sheets tab"
+msgstr "Tab Datenblätter"
+
+msgid "Deactivate the legacy deckerweb Shopware Connector before activating Connect for Shopware. Existing settings and product assignments are preserved."
+msgstr "Vor der Aktivierung von Connect for Shopware das alte deckerweb Shopware Connector deaktivieren. Einstellungen und Produktzuordnungen bleiben erhalten."
+
+msgid "Description"
+msgstr "Beschreibung"
+
+msgid "Description tab"
+msgstr "Tab Beschreibung"
+
+msgid "Detected page caches"
+msgstr "Erkannte Seiten-Caches"
+
+msgid "Display preset"
+msgstr "Darstellungsvorlage"
+
+msgid "Documentation"
+msgstr "Dokumentation"
+
+msgid "During a shop outage, retained product content can be shown without expired prices or availability. Retry pauses last 60 seconds."
+msgstr "Bei einer Shop-Störung können vorhandene Produktinhalte ohne veraltete Preise oder Verfügbarkeit angezeigt werden. Zwischen erneuten Versuchen liegen 60 Sekunden."
+
+msgid "Dynamic Shopware category"
+msgstr "Dynamische Shopware-Kategorie"
+
+msgid "Dynamic product listing unavailable. Check the category and connector configuration."
+msgstr "Dynamisches Produktraster nicht verfügbar. Kategorie und Connector-Konfiguration prüfen."
+
+msgid "Enter a public HTTPS shop URL without credentials, query parameters or fragments. The optional API URL must end in /store-api."
+msgstr "Eine öffentliche HTTPS-Shop-URL ohne Zugangsdaten, Query-Parameter oder Fragment eingeben. Die optionale API-URL muss mit /store-api enden."
+
+msgid "Enter the public storefront base URL, including an installation or language path when required. No shop is preconfigured."
+msgstr "Die öffentliche Shop-Basisadresse eingeben, bei Bedarf mit Installations- oder Sprachpfad. Kein Shop ist voreingestellt."
+
+msgid "Excluding VAT; shipping costs apply in the shop."
+msgstr "Zuzüglich MwSt.; Versandkosten fallen im Shop an."
+
+msgid "From"
+msgstr "ab"
+
+msgid "Full product details"
+msgstr "Ausführliche Produktdetails"
+
+msgid "Full-page or CDN caches can retain rendered prices longer. Configure their expiry and purge integration before customer use."
+msgstr "Seiten- oder CDN-Caches können dargestellte Preise länger speichern. Ablaufzeiten und Leerung vor dem Kundeneinsatz abstimmen."
+
+msgid "Grid gap"
+msgstr "Rasterabstand"
+
+msgid "Heading tag"
+msgstr "Überschriften-Tag"
+
+msgid "Hide"
+msgstr "Ausblenden"
+
+msgid "Image"
+msgstr "Bild"
+
+msgid "Image border"
+msgstr "Bildrahmen"
+
+msgid "Image maximum height"
+msgstr "Maximale Bildhöhe"
+
+msgid "Image width"
+msgstr "Bildbreite"
+
+msgid "Images"
+msgstr "Bilder"
+
+msgid "Including VAT; shipping costs apply in the shop."
+msgstr "inkl. MwSt., zzgl. Versandkosten im Shop"
+
+msgid "Install selected components"
+msgstr "Ausgewählte Components installieren"
+
+msgid "Install selected reusable components. Existing definitions and customizations are preserved."
+msgstr "Ausgewählte wiederverwendbare Components installieren. Bestehende Definitionen und Anpassungen bleiben erhalten."
+
+msgid "Install this bundled version as an additional copy for existing components"
+msgstr "Diese mitgelieferte Version bei bestehenden Components als zusätzliche Kopie installieren"
+
+msgid "Installation could not be completed. You can safely retry."
+msgstr "Die Installation konnte nicht abgeschlossen werden. Du kannst sie sicher erneut versuchen."
+
+msgid "Installed: %d · Existing: %d · Example templates: %d"
+msgstr "Installiert: %d · Vorhanden: %d · Beispielvorlagen: %d"
+
+msgid "Invalid product selection."
+msgstr "Ungültige Produktauswahl."
+
+msgid "Invalid shop response."
+msgstr "Ungültige Antwort des Shops."
+
+msgid "JavaScript is required to select products. Existing assignments are preserved."
+msgstr "Zur Produktauswahl ist JavaScript erforderlich. Vorhandene Zuordnungen bleiben erhalten."
+
+msgid "Last connection error"
+msgstr "Letzter Verbindungsfehler"
+
+msgid "Last connection test failed."
+msgstr "Letzter Verbindungstest fehlgeschlagen."
+
+msgid "Last connection test successful."
+msgstr "Letzter Verbindungstest erfolgreich."
+
+msgid "Last request duration"
+msgstr "Dauer des letzten Abrufs"
+
+msgid "Last successful shop request"
+msgstr "Letzter erfolgreicher Shop-Abruf"
+
+msgid "Leave empty to append /store-api to the shop URL. Set this only when the API uses a different base path or host. HTTPS with the standard port is required; redirects are not followed."
+msgstr "Leer lassen, um /store-api an die Shop-URL anzuhängen. Nur bei einer abweichenden API-Basisadresse ausfüllen. HTTPS mit Standardport ist erforderlich; Weiterleitungen werden nicht verfolgt."
+
+msgid "Leave empty to use Shopware default sorting."
+msgstr "Leer lassen für die Standardsortierung aus Shopware."
+
+msgid "Left of image"
+msgstr "Links vom Bild"
+
+msgid "List price"
+msgstr "Streichpreis"
+
+msgid "Loading product…"
+msgstr "Produkt wird geladen …"
+
+msgid "Manufacturer"
+msgstr "Hersteller"
+
+msgid "Manufacturer tab"
+msgstr "Tab Hersteller"
+
+msgid "Manufacturer website"
+msgstr "Hersteller-Website"
+
+msgid "Matching products for this article"
+msgstr "Passende Produkte zu diesem Artikel"
+
+msgid "Maximum products"
+msgstr "Maximale Produktanzahl"
+
+msgid "More products in the shop"
+msgstr "Weitere Produkte im Shop"
+
+msgid "More products link"
+msgstr "Link zu weiteren Produkten"
+
+msgid "More products link text"
+msgstr "Text für den Link zu weiteren Produkten"
+
+msgid "Move down"
+msgstr "Nach unten"
+
+msgid "Move up"
+msgstr "Nach oben"
+
+msgid "New tab"
+msgstr "Neuem Tab"
+
+msgid "Next page"
+msgstr "Nächste Seite"
+
+msgid "Next results"
+msgstr "Nächste Treffer"
+
+msgid "No active dynamic categories found. Assign a product group to an active category in Shopware."
+msgstr "Keine aktiven dynamischen Kategorien gefunden. In Shopware einer aktiven Kategorie eine Produktgruppe zuordnen."
+
+msgid "No products assigned to the current article."
+msgstr "Dem aktuellen Artikel sind keine Produkte zugeordnet."
+
+msgid "No products assigned yet. Select this block and add products in its settings, then save the article."
+msgstr "Noch keine Produkte zugeordnet. Diesen Block auswählen, in seinen Einstellungen Produkte hinzufügen und den Beitrag speichern."
+
+msgid "No products currently match this selection."
+msgstr "Aktuell passen keine Produkte zu dieser Auswahl."
+
+msgid "No products found."
+msgstr "Keine Produkte gefunden."
+
+msgid "None detected. External/CDN caches must be managed separately."
+msgstr "Keine erkannt. Externe Caches und CDN-Caches müssen separat verwaltet werden."
+
+msgid "Not configured"
+msgstr "Nicht konfiguriert"
+
+msgid "Not recorded yet"
+msgstr "Noch nicht erfasst"
+
+msgid "Only active categories using a dynamic product group are available. Rules remain in Shopware."
+msgstr "Verfügbar sind aktive Kategorien mit dynamischer Produktgruppe. Die Regeln bleiben in Shopware."
+
+msgid "Open product link in"
+msgstr "Produktlink öffnen in"
+
+msgid "Optional: select a complete size and colour combination. Clear this when changing the main product."
+msgstr "Optional: vollständige Kombination aus Gebindegröße und Farbe wählen. Diese Auswahl beim Wechsel des Hauptprodukts leeren."
+
+msgid "Pagination"
+msgstr "Seitenzahlen"
+
+msgid "Please check current prices and availability in the shop."
+msgstr "Aktuelle Preise und Verfügbarkeit bitte im Shop prüfen."
+
+msgid "Please try again shortly."
+msgstr "Bitte in Kürze erneut versuchen."
+
+msgid "Plugin website"
+msgstr "Plugin-Website"
+
+msgid "Previous page"
+msgstr "Vorherige Seite"
+
+msgid "Previous results"
+msgstr "Vorherige Treffer"
+
+msgid "Price"
+msgstr "Preis"
+
+msgid "Product"
+msgstr "Produkt"
+
+msgid "Product / variant"
+msgstr "Produkt / Variante"
+
+msgid "Product data is being refreshed."
+msgstr "Produktdaten werden gerade aktualisiert."
+
+msgid "Product description"
+msgstr "Produktbeschreibung"
+
+msgid "Product details"
+msgstr "Produktdetails"
+
+msgid "Product details tabs"
+msgstr "Produktdetails-Tabs"
+
+msgid "Product display"
+msgstr "Produktdarstellung"
+
+msgid "Product family"
+msgstr "Produktfamilie"
+
+msgid "Product gallery"
+msgstr "Produktgalerie"
+
+msgid "Product information position"
+msgstr "Position der Produktangaben"
+
+msgid "Product link style"
+msgstr "Darstellung des Produktlinks"
+
+msgid "Product pages"
+msgstr "Produktseiten"
+
+msgid "Product source"
+msgstr "Produktquelle"
+
+msgid "Product styling"
+msgstr "Produkt-Styling"
+
+msgid "Product unavailable. Check the selection and connector configuration."
+msgstr "Produkt nicht verfügbar. Auswahl und Connector-Konfiguration prüfen."
+
+msgid "Products matching in Shopware: %d"
+msgstr "Passende Produkte in Shopware: %d"
+
+msgid "Provide a production Sales Channel key server-side via DW_SW_ACCESS_KEY in wp-config.php or the environment. The key is never displayed here."
+msgstr "Einen Produktionsschlüssel des Sales Channels serverseitig über DW_SW_ACCESS_KEY in wp-config.php oder der Umgebung hinterlegen. Der Schlüssel wird hier niemals angezeigt."
+
+msgid "Quick view"
+msgstr "Schnellansicht"
+
+msgid "Quick view unavailable. Please open the product in the shop."
+msgstr "Schnellansicht nicht verfügbar. Bitte das Produkt im Shop öffnen."
+
+msgid "Read-only Shopware products for Gutenberg and native Bricks elements."
+msgstr "Shopware-Produkte ausschließlich lesend für Gutenberg und native Bricks-Elemente."
+
+msgid "Reference price"
+msgstr "Grundpreis"
+
+msgid "Refresh product cache"
+msgstr "Produkt-Cache aktualisieren"
+
+msgid "Related products"
+msgstr "Passende Produkte"
+
+msgid "Remove"
+msgstr "Entfernen"
+
+msgid "Request time budget reached."
+msgstr "Zeitlimit für diesen Seitenaufruf erreicht."
+
+msgid "Reuse Shopware data for"
+msgstr "Shopware-Daten zwischenspeichern für"
+
+msgid "Right of image"
+msgstr "Rechts vom Bild"
+
+msgid "SEO summary"
+msgstr "SEO-Kurztext"
+
+msgid "Sales Channel context"
+msgstr "Sales-Channel-Kontext"
+
+msgid "Sales Channel key rejected."
+msgstr "Sales-Channel-Schlüssel wurde abgelehnt."
+
+msgid "Search products"
+msgstr "Produkte suchen"
+
+msgid "Section heading"
+msgstr "Bereichsüberschrift"
+
+msgid "Select a Shopware product in the block settings."
+msgstr "Ein Shopware-Produkt in den Blockeinstellungen wählen."
+
+msgid "Select a category"
+msgstr "Kategorie auswählen"
+
+msgid "Select a dynamic Shopware category."
+msgstr "Eine dynamische Shopware-Kategorie auswählen."
+
+msgid "Select a product and a matching variant."
+msgstr "Ein Produkt und eine dazu passende Variante auswählen."
+
+msgid "Select a product family or a concrete product. Search by name or number."
+msgstr "Eine Produktfamilie oder ein konkretes Produkt wählen. Suche nach Name oder Artikelnummer."
+
+msgid "Select product / variant"
+msgstr "Produkt / Variante wählen"
+
+msgid "Select product family"
+msgstr "Produktfamilie wählen"
+
+msgid "Shipping costs apply in the shop."
+msgstr "Versandkosten fallen im Shop an."
+
+msgid "Shop access denied."
+msgstr "Zugriff auf den Shop wurde verweigert."
+
+msgid "Shop connection"
+msgstr "Shop-Verbindung"
+
+msgid "Shop data unavailable."
+msgstr "Shopdaten nicht verfügbar."
+
+msgid "Shop data unavailable. Check the connector configuration."
+msgstr "Shopdaten nicht verfügbar. Connector-Konfiguration prüfen."
+
+msgid "Shop resource unavailable."
+msgstr "Die angefragten Shopdaten sind nicht verfügbar."
+
+msgid "Shop temporarily unavailable."
+msgstr "Shop vorübergehend nicht erreichbar."
+
+msgid "Shopware Product"
+msgstr "Shopware-Produkt"
+
+msgid "Shopware Product Button"
+msgstr "Shopware-Produktbutton"
+
+msgid "Shopware Product Grid"
+msgstr "Shopware-Produktraster"
+
+msgid "Shopware Related Products"
+msgstr "Passende Shopware-Produkte"
+
+msgid "Shopware default"
+msgstr "Shopware-Standard"
+
+msgid "Shopware products"
+msgstr "Shopware-Produkte"
+
+msgid "Shopware remains the source of all product data. This connector reads products and links to the shop."
+msgstr "Shopware bleibt die Quelle aller Produktdaten. Der Connector liest Produkte und verlinkt zum Shop."
+
+msgid "Shopware shop URL"
+msgstr "Shopware-Shop-URL"
+
+msgid "Shopware sorting"
+msgstr "Shopware-Sortierung"
+
+msgid "Show"
+msgstr "Anzeigen"
+
+msgid "Show image %d"
+msgstr "Bild %d anzeigen"
+
+msgid "Show video"
+msgstr "Video anzeigen"
+
+msgid "Starter templates have no shop-specific selections. Choose products and categories through the native element controls inside each slot."
+msgstr "Startvorlagen enthalten keine shopspezifische Auswahl. Produkte und Kategorien über die nativen Element-Einstellungen im jeweiligen Slot auswählen."
+
+msgid "Store API URL (optional)"
+msgstr "Store-API-URL (optional)"
+
+msgid "Tax-free; shipping costs apply in the shop."
+msgstr "Steuerfrei; Versandkosten fallen im Shop an."
+
+msgid "Test connection now"
+msgstr "Verbindung jetzt testen"
+
+msgid "Text"
+msgstr "Text"
+
+msgid "Text link"
+msgstr "Textlink"
+
+msgid "Text source"
+msgstr "Textquelle"
+
+msgid "The GitHub package could not be prepared. The installed version has been kept."
+msgstr "Das GitHub-Paket konnte nicht vorbereitet werden. Die installierte Version bleibt erhalten."
+
+msgid "The GitHub package does not contain the Connect for Shopware plugin file."
+msgstr "Das GitHub-Paket enthält nicht die Plugin-Datei von Connect for Shopware."
+
+msgid "The package identity or version does not match a newer Connect for Shopware release."
+msgstr "Identität oder Version des Pakets entsprechen keiner neueren Veröffentlichung von Connect for Shopware."
+
+msgid "The package version differs from the offered update. Please check for updates again."
+msgstr "Die Paketversion weicht vom angebotenen Update ab. Bitte erneut nach Updates suchen."
+
+msgid "The update filesystem is unavailable. Please try again."
+msgstr "Das Dateisystem für Updates ist nicht verfügbar. Bitte erneut versuchen."
+
+msgid "The update package could not be checked."
+msgstr "Das Update-Paket konnte nicht geprüft werden."
+
+msgid "The update package has missing or invalid WordPress/PHP requirements."
+msgstr "Das Update-Paket enthält fehlende oder ungültige WordPress-/PHP-Voraussetzungen."
+
+msgid "These assignments feed Related Products in your Single template."
+msgstr "Diese Zuordnungen liefern die passenden Produkte im Single-Template."
+
+msgid "This release requires a newer WordPress or PHP version. The installed version has been kept."
+msgstr "Diese Veröffentlichung benötigt eine neuere WordPress- oder PHP-Version. Die installierte Version bleibt erhalten."
+
+msgid "Title"
+msgstr "Titel"
+
+msgid "Uses Shopware products assigned to the current article. For a Single template, select a preview article with assignments."
+msgstr "Verwendet Shopware-Produkte, die dem aktuellen Artikel zugeordnet sind. Für ein Single-Template einen Vorschauartikel mit Zuordnungen wählen."
+
+msgid "Variant text"
+msgstr "Variantentext"
+
+msgid "Video"
+msgstr "Video"
+
+msgid "View product"
+msgstr "Zum Produkt"
+
+msgid "Watch video on %s"
+msgstr "Video auf %s ansehen"
+
+msgid "Your shop. Your content. Connected."
+msgstr "Dein Shop. Deine Inhalte. Verbunden."
+
+msgid "discount"
+msgstr "Rabatt"

@@ -1,0 +1,138 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "deckerweb/shopware-product",
+  "title": "Shopware Product",
+  "category": "widgets",
+  "icon": "products",
+  "textdomain": "connect-for-shopware",
+  "attributes": {
+    "showImage": {
+      "type": "boolean",
+      "default": true
+    },
+    "showTitle": {
+      "type": "boolean",
+      "default": true
+    },
+    "showText": {
+      "type": "boolean",
+      "default": false
+    },
+    "showPrice": {
+      "type": "boolean",
+      "default": true
+    },
+    "showListPrice": {
+      "type": "boolean",
+      "default": true
+    },
+    "showAvailability": {
+      "type": "boolean",
+      "default": true
+    },
+    "showVariant": {
+      "type": "boolean",
+      "default": true
+    },
+    "showButton": {
+      "type": "boolean",
+      "default": true
+    },
+    "buttonText": {
+      "type": "string",
+      "default": ""
+    },
+    "buttonUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "textMode": {
+      "type": "string",
+      "default": "summary"
+    },
+    "headingTag": {
+      "type": "string",
+      "default": "h3"
+    },
+    "productId": {
+      "type": "string",
+      "default": ""
+    },
+    "selectionMode": {
+      "type": "string",
+      "default": "variant",
+      "enum": [
+        "variant",
+        "family"
+      ]
+    },
+    "customText": {
+      "type": "string",
+      "default": ""
+    },
+    "linkStyle": {
+      "type": "string",
+      "default": "link"
+    },
+    "showTabs": {
+      "type": "boolean",
+      "default": false
+    },
+    "showDescriptionTab": {
+      "type": "boolean",
+      "default": true
+    },
+    "showDocumentsTab": {
+      "type": "boolean",
+      "default": true
+    },
+    "showManufacturerTab": {
+      "type": "boolean",
+      "default": true
+    },
+    "infoPosition": {
+      "type": "string",
+      "default": "right"
+    },
+    "imageMode": {
+      "type": "string",
+      "default": "cover"
+    },
+    "linkTarget": {
+      "type": "string",
+      "default": "same"
+    },
+    "showQuickView": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "supports": {
+    "html": false,
+    "align": [
+      "wide",
+      "full"
+    ],
+    "spacing": {
+      "margin": true,
+      "padding": true,
+      "blockGap": true
+    },
+    "color": {
+      "text": true,
+      "background": true
+    },
+    "typography": {
+      "fontSize": true,
+      "lineHeight": true
+    },
+    "__experimentalBorder": {
+      "color": true,
+      "radius": true,
+      "width": true
+    }
+  },
+  "editorScript": "dw-sw-editor",
+  "style": "dw-sw-product"
+}

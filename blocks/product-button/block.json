@@ -1,0 +1,66 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "deckerweb/shopware-product-button",
+  "title": "Shopware Product Button",
+  "category": "widgets",
+  "icon": "button",
+  "textdomain": "connect-for-shopware",
+  "attributes": {
+    "buttonText": {
+      "type": "string",
+      "default": ""
+    },
+    "buttonUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "productId": {
+      "type": "string",
+      "default": ""
+    },
+    "selectionMode": {
+      "type": "string",
+      "default": "variant",
+      "enum": [
+        "variant",
+        "family"
+      ]
+    },
+    "linkStyle": {
+      "type": "string",
+      "default": "button"
+    },
+    "linkTarget": {
+      "type": "string",
+      "default": "same"
+    }
+  },
+  "supports": {
+    "html": false,
+    "align": [
+      "wide",
+      "full"
+    ],
+    "spacing": {
+      "margin": true,
+      "padding": true,
+      "blockGap": true
+    },
+    "color": {
+      "text": true,
+      "background": true
+    },
+    "typography": {
+      "fontSize": true,
+      "lineHeight": true
+    },
+    "__experimentalBorder": {
+      "color": true,
+      "radius": true,
+      "width": true
+    }
+  },
+  "editorScript": "dw-sw-editor",
+  "style": "dw-sw-product"
+}

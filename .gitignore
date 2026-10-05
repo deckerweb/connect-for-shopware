@@ -1,0 +1,7 @@
+.DS_Store
+.env
+.env.*
+*.zip
+wp-config.php
+/vendor/
+/node_modules/

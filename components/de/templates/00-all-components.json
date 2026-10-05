@@ -1,0 +1,381 @@
+{
+  "title": "Connect for Shopware · Shopware Komponenten",
+  "templateType": "section",
+  "content": [
+    {
+      "id": "swexaa",
+      "name": "block",
+      "cid": "swpcrd",
+      "parent": 0,
+      "children": [],
+      "settings": {},
+      "slotChildren": {
+        "swscrd": [
+          "swexab"
+        ]
+      }
+    },
+    {
+      "id": "swexab",
+      "name": "dw-shopware-product",
+      "parent": "swexaa",
+      "children": [],
+      "label": "Produktkarte",
+      "settings": {
+        "preset": "compact",
+        "infoPosition": "below",
+        "linkStyle": "button",
+        "linkTarget": "same",
+        "imageMaxHeight": "240px",
+        "titleTypography": {
+          "font-size": "22px",
+          "line-height": "1.3"
+        },
+        "buttonText": "Zum Produkt"
+      }
+    },
+    {
+      "id": "swexba",
+      "name": "block",
+      "cid": "swpdet",
+      "parent": 0,
+      "children": [],
+      "settings": {},
+      "slotChildren": {
+        "swsdet": [
+          "swexbb"
+        ]
+      }
+    },
+    {
+      "id": "swexbb",
+      "name": "dw-shopware-product",
+      "parent": "swexba",
+      "children": [],
+      "label": "Produktdetails",
+      "settings": {
+        "preset": "details",
+        "infoPosition": "right",
+        "linkStyle": "button",
+        "linkTarget": "same",
+        "imageMaxHeight": "360px",
+        "titleTypography": {
+          "font-size": "22px",
+          "line-height": "1.3"
+        },
+        "imageMode": "gallery",
+        "showTabs": "yes",
+        "buttonText": "Zum Produkt"
+      }
+    },
+    {
+      "id": "swexca",
+      "name": "dw-shopware-related-products",
+      "cid": "swrprd",
+      "parent": 0,
+      "children": [],
+      "settings": {}
+    },
+    {
+      "id": "swexda",
+      "name": "block",
+      "cid": "swpgrd",
+      "parent": 0,
+      "children": [],
+      "settings": {},
+      "slotChildren": {
+        "swsgrd": [
+          "swexdb"
+        ]
+      }
+    },
+    {
+      "id": "swexdb",
+      "name": "dw-shopware-product-grid",
+      "parent": "swexda",
+      "children": [],
+      "label": "Dynamisches Produktraster",
+      "settings": {
+        "preset": "compact",
+        "infoPosition": "below",
+        "linkStyle": "button",
+        "linkTarget": "same",
+        "imageMaxHeight": "240px",
+        "titleTypography": {
+          "font-size": "22px",
+          "line-height": "1.3"
+        },
+        "limit": 6,
+        "columns": 3,
+        "gap": "24px",
+        "showPagination": true,
+        "showShopLink": true,
+        "buttonText": "Zum Produkt"
+      }
+    },
+    {
+      "id": "swexea",
+      "name": "block",
+      "cid": "swpcta",
+      "parent": 0,
+      "children": [],
+      "settings": {},
+      "slotChildren": {
+        "swscta": [
+          "swexeb"
+        ]
+      }
+    },
+    {
+      "id": "swexeb",
+      "name": "dw-shopware-product-button",
+      "parent": "swexea",
+      "children": [],
+      "label": "Produktbutton",
+      "settings": {
+        "linkTarget": "same",
+        "buttonText": "Zum Produkt"
+      }
+    }
+  ],
+  "components": [
+    {
+      "id": "swpcrd",
+      "category": "deckerweb Shopware",
+      "elements": [
+        {
+          "id": "swpcrd",
+          "name": "block",
+          "parent": 0,
+          "children": [
+            "swscrd"
+          ],
+          "label": "Connect for Shopware · Produktkarte",
+          "settings": {
+            "_width": "100%",
+            "_direction": "column",
+            "_rowGap": "16px",
+            "_padding": {
+              "top": "16px",
+              "right": "16px",
+              "bottom": "16px",
+              "left": "16px"
+            },
+            "_border": {
+              "style": "solid",
+              "width": {
+                "top": "1px",
+                "right": "1px",
+                "bottom": "1px",
+                "left": "1px"
+              },
+              "color": {
+                "hex": "#e5e7eb"
+              },
+              "radius": {
+                "top": "8px",
+                "right": "8px",
+                "bottom": "8px",
+                "left": "8px"
+              }
+            }
+          }
+        },
+        {
+          "id": "swscrd",
+          "name": "slot",
+          "parent": "swpcrd",
+          "children": [],
+          "label": "Produktkarte",
+          "settings": {}
+        }
+      ],
+      "properties": []
+    },
+    {
+      "id": "swpdet",
+      "category": "deckerweb Shopware",
+      "elements": [
+        {
+          "id": "swpdet",
+          "name": "block",
+          "parent": 0,
+          "children": [
+            "swsdet"
+          ],
+          "label": "Connect for Shopware · Produktdetails",
+          "settings": {
+            "_width": "100%",
+            "_direction": "column",
+            "_rowGap": "16px",
+            "_padding": {
+              "top": "16px",
+              "right": "16px",
+              "bottom": "16px",
+              "left": "16px"
+            },
+            "_border": {
+              "style": "solid",
+              "width": {
+                "top": "1px",
+                "right": "1px",
+                "bottom": "1px",
+                "left": "1px"
+              },
+              "color": {
+                "hex": "#e5e7eb"
+              },
+              "radius": {
+                "top": "8px",
+                "right": "8px",
+                "bottom": "8px",
+                "left": "8px"
+              }
+            }
+          }
+        },
+        {
+          "id": "swsdet",
+          "name": "slot",
+          "parent": "swpdet",
+          "children": [],
+          "label": "Produktdetails",
+          "settings": {}
+        }
+      ],
+      "properties": []
+    },
+    {
+      "id": "swrprd",
+      "category": "deckerweb Shopware",
+      "elements": [
+        {
+          "id": "swrprd",
+          "name": "dw-shopware-related-products",
+          "parent": 0,
+          "children": [],
+          "label": "Connect for Shopware · Passende Produkte",
+          "settings": {
+            "preset": "compact",
+            "infoPosition": "below",
+            "linkStyle": "button",
+            "linkTarget": "same",
+            "imageMaxHeight": "240px",
+            "titleTypography": {
+              "font-size": "22px",
+              "line-height": "1.3"
+            },
+            "columns": 3,
+            "gap": "24px"
+          }
+        }
+      ],
+      "properties": [
+        {
+          "id": "swhead",
+          "label": "Überschrift",
+          "type": "text",
+          "default": "Passende Produkte zu diesem Artikel",
+          "connections": {
+            "swrprd": [
+              "heading"
+            ]
+          }
+        },
+        {
+          "id": "swbtnx",
+          "label": "Buttontext",
+          "type": "text",
+          "default": "Zum Produkt",
+          "connections": {
+            "swrprd": [
+              "buttonText"
+            ]
+          }
+        },
+        {
+          "id": "swtrgt",
+          "label": "Linkziel",
+          "type": "select",
+          "default": "same",
+          "connections": {
+            "swrprd": [
+              "linkTarget"
+            ]
+          },
+          "options": [
+            {
+              "id": "swsame",
+              "label": "Bestehender Tab",
+              "value": "same"
+            },
+            {
+              "id": "swnewt",
+              "label": "Neuer Tab",
+              "value": "new"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "swpgrd",
+      "category": "deckerweb Shopware",
+      "elements": [
+        {
+          "id": "swpgrd",
+          "name": "block",
+          "parent": 0,
+          "children": [
+            "swsgrd"
+          ],
+          "label": "Connect for Shopware · Dynamisches Produktraster",
+          "settings": {
+            "_width": "100%",
+            "_direction": "column",
+            "_rowGap": "16px"
+          }
+        },
+        {
+          "id": "swsgrd",
+          "name": "slot",
+          "parent": "swpgrd",
+          "children": [],
+          "label": "Dynamisches Produktraster",
+          "settings": {}
+        }
+      ],
+      "properties": []
+    },
+    {
+      "id": "swpcta",
+      "category": "deckerweb Shopware",
+      "elements": [
+        {
+          "id": "swpcta",
+          "name": "block",
+          "parent": 0,
+          "children": [
+            "swscta"
+          ],
+          "label": "Connect for Shopware · Produktbutton",
+          "settings": {
+            "_width": "100%",
+            "_direction": "column",
+            "_rowGap": "16px"
+          }
+        },
+        {
+          "id": "swscta",
+          "name": "slot",
+          "parent": "swpcta",
+          "children": [],
+          "label": "Produktbutton",
+          "settings": {}
+        }
+      ],
+      "properties": []
+    }
+  ],
+  "globalClasses": []
+}
