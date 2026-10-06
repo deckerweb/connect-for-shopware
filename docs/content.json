@@ -1,0 +1,228 @@
+{
+  "metadata": {
+    "name": "Connect for Shopware",
+    "slug": "connect-for-shopware",
+    "version": "1.0.1",
+    "wp": "6.6",
+    "php": "8.1",
+    "bricks": "2.4.2",
+    "shopware": "6.7",
+    "repository": "https://github.com/deckerweb/connect-for-shopware"
+  },
+  "content": {
+    "en": {
+      "guide": "# Connect for Shopware · Guide\n\n[Deutsch](Deutsch.md) · [FAQ](FAQ-English.md) · [Changelog](Changelog-English.md)\n\n## Purpose and requirements\n\nDisplay Shopware products in WordPress without importing them. Shopware remains the source for product data and prices. Configure one Shopware 6 shop per WordPress site. Requirements: WordPress 6.6+, PHP 8.1+ and a Shopware 6.7 Store API Sales Channel. Gutenberg works without Bricks; optional Bricks Components require Bricks 2.4.2+. Elementor pages can display WordPress output; there is no separate Elementor widget.\n\n## Installation and connection\n\nDownload the plugin ZIP from the [latest GitHub release](https://github.com/deckerweb/connect-for-shopware/releases/latest), upload it under Plugins → Add New → Upload Plugin, and activate it. Under Settings → Connect for Shopware, save the public HTTPS shop URL. No shop is preconfigured.\n\nProvide the Sales Channel key server-side as `DW_SW_ACCESS_KEY`: define the constant in wp-config.php or expose a PHP environment variable of the same name. A nonempty constant takes precedence. The plugin does not load .env files, store the key in WordPress options or display it in settings. An explicitly included secret PHP file outside the web root can define the same constant. Do not put credentials into blocks, templates or public files.\n\nRun the connection test after saving. The Store API URL defaults to the shop URL plus /store-api. Expand Advanced connection settings to provide a complete API base URL when the storefront uses a language path or a different API host. Both addresses require public HTTPS on the standard port, without credentials, query parameters or fragments. Redirects and private/local HTTP destinations are not supported.\n\nThe anonymous Sales Channel defaults determine language, currency and tax state. A storefront language path does not switch this context by itself. Verify the reported context against the intended storefront. Prices and discounts come from Shopware; WordPress does not recompute them. Shopware currency formatting and net/gross/tax-free labels are used.\n\nChanging shop/API URL clears the Connector cache and diagnostics and invalidates previous Quick View tickets. Existing article selections and installed Components are retained; review them when switching catalogs.\n\nIn Multisite, a server-side `DW_SW_ACCESS_KEYS` constant can map site IDs to credentials. Alternatively, PHP may expose `DW_SW_ACCESS_KEY_<site-ID>`. An explicit site credential takes precedence over the global key; otherwise the existing global constant/environment fallback applies. Different shops each require the matching Sales Channel key. Credentials are never stored in WordPress options.\n\n## Settings\n\n![Connection, cache and diagnostics](https://raw.githubusercontent.com/deckerweb/connect-for-shopware/main/assets/screenshots/settings-en.png)\n\nThe compact status area shows the shop address and last known successful request. This is not continuous live monitoring: run the connection test to check the current state. API overrides and technical diagnostics are collapsible. Connection, cache and optional Bricks Components have separate sections.\n\n## Products and presentation\n\nSearch by product name or number in a Gutenberg block or native Bricks element. Select a product family or an exact variant/size/color. Changing the family clears the variant; the server also validates that relationship. Product cards can display image/gallery, title, summary/description/custom text, variant label, current price, list price, discount, reference price, availability and a shop link. Family prices are marked “from”.\n\nArrange image and main product information left, right or below. Description and tabs follow the main information. Choose the cover image or available product gallery. Video previews link to their provider without loading an external player automatically. Optional tabs show description, available PDF documents and manufacturer data. Images and documents depend on Sales Channel data; inherited covers may show a different size.\n\nChoose a text link or styled button and current/new tab. New-tab links use noopener noreferrer. Product links prefer Shopware SEO URLs, with a technical product URL as fallback. Optional Quick View loads details on demand and supports Escape and focus return. Shop links remain usable if it cannot load.\n\n## Article products and dynamic grids\n\nAssign ordered products in the article's Shopware Products document panel or Related Products block inspector; save the article for frontend output. Related Products reads those assignments. In a Bricks Single template, select a preview article with assigned products. Product Button provides a standalone shop CTA.\n\nFor a dynamic grid, select an active Shopware category backed by a dynamic product group. Shopware evaluates its rules. Choose product count and an available sorting; empty sorting uses the shop default. Pagination and a category shop link are optional. Multiple grids retain independent page parameters. Presentation presets are shared across Gutenberg and Bricks.\n\n## Optional Bricks Components\n\nWith Bricks 2.4.2+ active, settings offer individual Components for product cards, product details, related products, dynamic grids and product buttons. Optional starter templates contain native elements without catalog selections. Nothing installs automatically. Existing definitions and templates are preserved; an additional version-copy option lets you try bundled designs separately. Repeating the same version does not create duplicate copies.\n\nExpand a Component slot in the structure panel and select its native Shopware element to use the product/category search. An empty slot needs an element; starter templates already supply one. Wrapper settings are shared; slot-element settings belong to each instance. Related Products exposes heading, button text and target as connected properties. The installer respects Bricks permissions and import locks. In multisite with shared main-site Components, install on the main site.\n\n## Cache and availability\n\nCache duration defaults to 30 minutes; choose 15, 30 or 60 minutes. The next access after expiry fetches fresh data. There is no scheduled background fetch. Manual refresh clears the Connector cache. Optional integration clears the entire site's detected WP Rocket, LiteSpeed Cache, WP Super Cache or W3 Total Cache page cache. Coordinate server/CDN cache expiry separately so rendered prices do not remain cached longer than intended.\n\nDuring a temporary shop outage, retained product content may appear without expired prices or availability. Without retained data, no product card is shown. A 60-second retry pause and request limits protect both systems. Diagnostics contain status and duration without raw credentials or context tokens. No product import, Shopware extension, remote write operation, WordPress cart or checkout is required.\n\n## Updates, translations and plugin catalog\n\nStable GitHub releases appear in the regular WordPress update system. Automatic updates remain your choice. Updates preserve settings, article assignments and installed Components. English UI and German translations are included. The footer links to documentation in the admin language and opens the structured local changelog, with a text-file fallback when JavaScript is unavailable.\n\nThe optional shared deckerweb plugin catalog is available under Plugins → Add New → deckerweb. Its settings are shared with other installed Library hosts. The Connector runs independently of other deckerweb plugins. Public updates require no GitHub credential.\n\n## Extension hooks\n\n| Hook | Purpose |\n| --- | --- |\n| `dw_sw_post_types` | Filter supported editorial post types; defaults to posts and pages. |\n| `dw_sw_cache_refreshed` | Action after manual Connector cache refresh. |\n| `dw_sw_page_cache_purge_requested` | Action for additional page-cache integrations. |\n\n\n## Permissions, Multisite and data\n\nShop settings and manual refresh require manage_options. Product selection requires editorial permissions; saved assignments additionally require edit_post. Component installation checks native Bricks permissions.\n\nEach network site stores its shop URL, cache lifetime, article assignments and diagnostics separately. New sites start without a configured shop. Library settings apply per network; its introduction status applies per user. Shared Bricks Components are installed on the main site.\n\nDeactivation preserves settings, content and Components. Uninstall removes temporary Connector data, caches and locks across network sites. Shop settings, article assignments and installed Components remain. There is no additional deletion option for editorial content. The Library also detects other inactive hosts and cleans shared data only after the last host is removed, according to its own settings.\n\n## External connections and privacy\n\nConfiguration authorizes read-only Store API requests to the selected shop. Requests send the server-side Sales Channel key, an anonymous context token and necessary product IDs, search terms, sorting and page parameters. No customer accounts or WordPress user profiles are transmitted. The shop server sees the WordPress server IP. Diagnostics omit keys and context tokens.\n\nThe browser loads images from media URLs supplied by the shop. Product, document and manufacturer links open their target addresses; external video players are not automatically embedded. GitHub update checks and downloads contact GitHub. Optional online Library catalog requests follow its settings and start disabled. No telemetry system is included.\n\n## Release rules\n\nCompatible corrections increase the patch version; new features increase the minor version. Incompatible API/data changes require a major release and a documented migration path. Higher platform requirements are explicitly stated in release notes. Published releases and tags serve as fixed references.\n\n\n© 2026 [David Decker – DECKERWEB](https://github.com/deckerweb). GPL v2 or later · SPDX GPL-2.0-or-later.\n",
+      "faq": "# FAQ by topic\n\n[Guide](English.md) · [Deutsch](FAQ-Deutsch.md)\n\n## Installation and updates\n\n**How do I install the plugin?** Upload the plugin ZIP from the latest GitHub release under Plugins → Add New → Upload Plugin, then activate it.\n\n**How do I obtain updates?** Stable releases appear in the normal WordPress update system. Automatic updates remain your choice.\n\n## Data and operation\n\n**Who maintains products and prices?** Shopware only. WordPress stores selections and presentation. No local price calculation.\n\n**What does a 30-minute cache mean?** Data is reused for up to 30 minutes. The next access after expiry fetches new data; no scheduled background fetch. Page/CDN caches can retain rendered prices longer.\n\n**What happens during a shop outage?** Retained content can temporarily appear without expired prices or availability. Without retained data, no product card is shown.\n\n## Shop setup and credentials\n\n**Is the key enough?** No. Configure the shop URL as well. The optional API URL handles a different API base path/host.\n\n**Is .env supported automatically?** No. Hosting must expose DW_SW_ACCESS_KEY to PHP, or wp-config.php must define the constant. A manually included secret file outside the web root is another way to define it.\n\n**Multiple shops at once?** One configured shop per WordPress installation. Different installations can connect different shops.\n\n## Bricks\n\n**Do I need Components?** No. Native elements work immediately. Components are optional reusable designs.\n\n**How do I use product search?** Select the slot's native Shopware element in the structure panel.\n\n**Why is a Component empty?** New slots contain no element. Install starter templates or add a native element. Related products require article assignments.\n\n**Do updates overwrite my design?** No. Existing definitions/examples are preserved; extra version copies are optional.\n\n\n## Permissions and Multisite\n\n**Who can change the connection?** Administrators with manage_options. Authors can select products when they have editorial permissions. Bricks Components also require the appropriate Bricks permissions.\n\n**Can each network site connect a different shop?** Yes. Connection, cache and article assignments are site-scoped. Library settings apply per network.\n\n## Data and uninstall\n\n**Does uninstall remove article assignments?** No. Shop settings, product assignments and installed Components remain; temporary Connector data is cleaned.\n\n**What happens to the shared Library?** Other installed hosts, including inactive hosts, retain data they still need. After the last host is removed, the Library data-removal setting applies.\n"
+    },
+    "de": {
+      "guide": "# Connect for Shopware · Anleitung\n\n[English](English.md) · [FAQ](FAQ-Deutsch.md) · [Änderungsverlauf](Changelog-Deutsch.md)\n\n## Zweck und Voraussetzungen\n\nShopware-Produkte ohne Produktimport in WordPress anzeigen. Shopware bleibt die Quelle für Produktdaten und Preise. Pro WordPress-Website wird ein Shopware-6-Shop konfiguriert. Voraussetzungen: WordPress ab 6.6, PHP ab 8.1 und ein Sales Channel mit Shopware-6.7-Store-API. Gutenberg funktioniert ohne Bricks; optionale Bricks Components benötigen Bricks ab 2.4.2. Elementor-Seiten können WordPress-Ausgaben anzeigen; ein eigenes Elementor-Widget ist nicht enthalten.\n\n## Installation und Verbindung\n\nDas Plugin-ZIP aus dem [aktuellen GitHub-Release](https://github.com/deckerweb/connect-for-shopware/releases/latest) unter Plugins → Installieren → Plugin hochladen installieren und aktivieren. Unter Einstellungen → Connect for Shopware die öffentliche HTTPS-Shop-Adresse speichern. Kein Shop ist voreingestellt.\n\nDen Sales-Channel-Schlüssel serverseitig als `DW_SW_ACCESS_KEY` bereitstellen: Konstante in wp-config.php definieren oder eine gleichnamige PHP-Umgebungsvariable einrichten. Eine nicht leere Konstante hat Vorrang. Das Plugin lädt keine .env-Dateien, speichert den Schlüssel nicht in WordPress-Optionen und zeigt ihn nicht in den Einstellungen an. Eine ausdrücklich eingebundene geheime PHP-Datei außerhalb des Webverzeichnisses kann dieselbe Konstante definieren. Zugangsdaten nicht in Blöcken, Templates oder öffentlichen Dateien hinterlegen.\n\nNach dem Speichern die Verbindung testen. Die Store-API-Adresse entspricht standardmäßig der Shop-Adresse plus /store-api. Bei Sprachpfaden oder einem anderen API-Host unter Erweiterte Verbindungseinstellungen die vollständige API-Basisadresse eintragen. Beide Adressen benötigen öffentliches HTTPS mit Standardport, ohne Zugangsdaten, Query-Parameter oder Fragmente. Weiterleitungen und private/lokale HTTP-Ziele werden nicht unterstützt.\n\nDie Vorgaben des anonymen Sales-Channel-Kontexts bestimmen Sprache, Währung und Steuerart. Ein Sprachpfad in der Shop-Adresse schaltet diesen Kontext nicht selbst um. Den angezeigten Kontext mit dem gewünschten Storefront-Kontext abgleichen. Preise und Rabatte kommen aus Shopware; WordPress berechnet sie nicht neu. Währungsformatierung und Netto-/Brutto-/Steuerfrei-Hinweise folgen Shopware.\n\nEin Wechsel der Shop-/API-Adresse leert Connector-Cache und Diagnose und macht alte Schnellansicht-Tickets ungültig. Artikelzuordnungen und installierte Components bleiben erhalten; beim Katalogwechsel die Produktauswahl prüfen.\n\nIn Multisite kann eine serverseitige Konstante `DW_SW_ACCESS_KEYS` die Schlüssel nach Website-ID zuordnen. Alternativ wird `DW_SW_ACCESS_KEY_<Website-ID>` aus der PHP-Umgebung gelesen. Diese gezielte Zuordnung hat Vorrang vor dem globalen Schlüssel; ohne Zuordnung gilt die bisherige globale Konstante/Umgebungsvariable. Unterschiedliche Shops benötigen jeweils einen passenden Sales-Channel-Schlüssel. Kein Schlüssel wird in WordPress-Optionen gespeichert.\n\n## Einstellungen\n\n![Verbindung, Cache und Diagnose](https://raw.githubusercontent.com/deckerweb/connect-for-shopware/main/assets/screenshots/settings-de.png)\n\nDer kompakte Statusbereich zeigt Shop-Adresse und letzten bekannten erfolgreichen Abruf. Es gibt keine laufende Live-Überwachung: Für den aktuellen Zustand die Verbindung testen. API-Sonderfälle und technische Diagnose sind aufklappbar. Verbindung, Cache und optionale Bricks Components besitzen getrennte Bereiche.\n\n## Produkte und Darstellung\n\nIm Gutenberg-Block oder nativen Bricks-Element nach Produktname oder Artikelnummer suchen. Eine Produktfamilie oder eine konkrete Variante mit Gebindegröße/Farbe wählen. Ein Familienwechsel leert die Variante; der Server prüft die Zuordnung zusätzlich. Produktkarten können Bild/Galerie, Titel, Kurztext/Beschreibung/eigenen Text, Variantentext, aktuellen Preis, Streichpreis, Rabatt, Grundpreis, Verfügbarkeit und Shop-Link zeigen. Familienpreise sind mit „ab“ gekennzeichnet.\n\nBild und Hauptangaben links, rechts oder untereinander anordnen. Beschreibung und Tabs folgen den Hauptangaben. Coverbild oder vorhandene Galerie wählen. Videovorschauen führen zum Anbieter, ohne automatisch einen externen Player zu laden. Optionale Tabs zeigen Beschreibung, vorhandene PDF-Dokumente und Herstellerdaten. Bilder und Dokumente hängen von den Sales-Channel-Daten ab; geerbte Cover können eine andere Gebindegröße zeigen.\n\nTextlink oder gestalteten Button sowie bestehenden/neuen Tab wählen. Links in neuen Tabs verwenden noopener noreferrer. Produktlinks bevorzugen Shopware-SEO-Adressen und nutzen ersatzweise technische Produktadressen. Die optionale Schnellansicht lädt Details bei Bedarf und unterstützt Escape sowie Fokusrückgabe. Shop-Links bleiben bei einem Ladefehler nutzbar.\n\n## Artikelprodukte und dynamische Raster\n\nProdukte geordnet im Dokumentbereich Shopware-Produkte oder im Inspector des Blocks Passende Produkte zuordnen; den Artikel für die Frontend-Ausgabe speichern. Passende Produkte liest diese Zuordnungen. Im Bricks-Single-Template einen Vorschauartikel mit zugeordneten Produkten wählen. Produktbutton stellt einen eigenständigen Shop-CTA bereit.\n\nFür ein dynamisches Raster eine aktive Shopware-Kategorie mit dynamischer Produktgruppe auswählen. Shopware wertet deren Regeln aus. Produktanzahl und verfügbare Sortierung wählen; eine leere Sortierung verwendet den Shop-Standard. Seitennavigation und Kategorie-Shop-Link sind optional. Mehrere Raster behalten getrennte Seitenparameter. Darstellungsvorgaben werden von Gutenberg und Bricks gemeinsam genutzt.\n\n## Optionale Bricks Components\n\nMit aktivem Bricks ab 2.4.2 lassen sich Components für Produktkarte, Produktdetails, passende Produkte, dynamisches Raster und Produktbutton einzeln installieren. Optionale Startvorlagen enthalten native Elemente ohne Katalogauswahl. Es wird nichts automatisch installiert. Vorhandene Definitionen und Vorlagen bleiben erhalten; zusätzliche Versionskopien erlauben das separate Ausprobieren mitgelieferter Designs. Wiederholen derselben Version erzeugt keine doppelten Kopien.\n\nDen Component-Slot in der Strukturansicht aufklappen und sein natives Shopware-Element für die Produkt-/Kategoriensuche auswählen. Ein leerer Slot benötigt ein Element; Startvorlagen enthalten bereits eines. Wrapper-Einstellungen sind gemeinsam, Einstellungen der Slot-Elemente gehören zur jeweiligen Instanz. Passende Produkte stellt Überschrift, Buttontext und Ziel als verbundene Eigenschaften bereit. Der Installer berücksichtigt Bricks-Berechtigungen und Import-Sperren. Bei Multisite mit gemeinsamen Hauptsite-Components auf der Hauptsite installieren.\n\n## Cache und Verfügbarkeit\n\nDie Cache-Dauer beträgt standardmäßig 30 Minuten; wählbar sind 15, 30 oder 60 Minuten. Nach Ablauf lädt der nächste Abruf frische Daten. Es gibt keine Aktualisierung nach Zeitplan. Ein manueller Refresh leert den Connector-Cache. Optional werden die Seiten-Caches der gesamten Website von erkanntem WP Rocket, LiteSpeed Cache, WP Super Cache oder W3 Total Cache geleert. Ablaufzeiten von Server-/CDN-Caches separat abstimmen, damit dargestellte Preise nicht länger als vorgesehen gespeichert bleiben.\n\nBei einer vorübergehenden Shop-Störung können gespeicherte Produktinhalte ohne veraltete Preise oder Verfügbarkeit erscheinen. Ohne gespeicherte Daten wird keine Produktkarte ausgegeben. Eine Wiederholpause von 60 Sekunden und Abrufgrenzen schützen beide Systeme. Die Diagnose enthält Status und Dauer ohne rohe Zugangsdaten oder Kontext-Tokens. Produktimport, Shopware-Erweiterung, schreibende Shop-Abfragen, WordPress-Warenkorb oder Checkout sind nicht erforderlich.\n\n## Updates, Übersetzungen und Plugin-Katalog\n\nStabile GitHub-Releases erscheinen im regulären WordPress-Updatesystem. Automatische Updates bleiben deine Entscheidung. Einstellungen, Artikelzuordnungen und installierte Components bleiben beim Update erhalten. Englische Oberfläche und deutsche Übersetzungen sind enthalten. Der Footer verlinkt die Anleitung in der Adminsprache und öffnet den strukturierten lokalen Änderungsverlauf; ohne JavaScript führt der Link zur Textdatei.\n\nDer optionale gemeinsame deckerweb-Plugin-Katalog ist unter Plugins → Installieren → deckerweb erreichbar. Seine Einstellungen werden mit anderen installierten Library-Hosts geteilt. Der Connector läuft unabhängig von anderen deckerweb-Plugins. Öffentliche Updates benötigen keine GitHub-Zugangsdaten.\n\n## Erweiterungs-Hooks\n\n| Hook | Zweck |\n| --- | --- |\n| `dw_sw_post_types` | Unterstützte redaktionelle Inhaltstypen filtern; Standard: Beiträge und Seiten. |\n| `dw_sw_cache_refreshed` | Aktion nach manuellem Connector-Cache-Refresh. |\n| `dw_sw_page_cache_purge_requested` | Aktion für zusätzliche Seiten-Cache-Anbindungen. |\n\n\n## Berechtigungen, Multisite und Daten\n\nShop-Einstellungen und manueller Cache-Refresh benötigen manage_options; Produktauswahl benötigt redaktionelle Rechte und bei gespeicherten Zuordnungen edit_post. Die Components-Installation prüft zusätzlich die nativen Bricks-Berechtigungen.\n\nJede Website eines Netzwerks speichert Shop-Adresse, Cache-Dauer, Artikelzuordnungen und Diagnose getrennt. Neu angelegte Websites starten ohne konfigurierten Shop. Die Library-Einstellungen gelten je Netzwerk; der Einführungshinweis je Nutzer. Bei gemeinsam genutzten Bricks Components bleibt die Installation auf die Hauptsite begrenzt.\n\nDeaktivierung erhält Einstellungen, Inhalte und Components. Deinstallation entfernt temporäre Connector-Daten, Caches und Sperren auf den Websites des Netzwerks. Shop-Einstellungen, Produktzuordnungen und installierte Components bleiben erhalten. Es gibt keine zusätzliche Löschoption für redaktionelle Inhalte. Die Library berücksichtigt auch deaktivierte andere Hosts und bereinigt gemeinsam benötigte Daten erst beim letzten Host nach ihren eigenen Einstellungen.\n\n## Externe Verbindungen und Datenschutz\n\nDie Einrichtung autorisiert lesende Store-API-Abfragen an den gewählten Shop. Übertragen werden der serverseitige Sales-Channel-Schlüssel, ein anonymer Kontext-Token und notwendige Produkt-IDs, Suchtexte, Sortierungen und Seitenparameter. Es werden keine Kundenkonten oder WordPress-Nutzerprofile übertragen. Shopserver sehen die IP-Adresse der WordPress-Installation. Diagnosen enthalten keine Schlüssel oder Kontext-Tokens.\n\nBilder laden im Browser von den vom Shop gelieferten Medienadressen. Produkt-, Dokument- und Herstellerlinks führen zu ihren Zieladressen; externe Videos werden nicht automatisch eingebettet. GitHub-Updateprüfungen und Downloads kontaktieren GitHub. Die optionalen Online-Katalogabfragen der Library folgen deren Einstellungen und sind zunächst ausgeschaltet. Kein Telemetrie-System ist eingebaut.\n\n## Release-Regeln\n\nKompatible Fehlerkorrekturen erhöhen die Patch-Version, neue Funktionen die Minor-Version. Inkompatible Schnittstellen-/Datenänderungen benötigen eine Major-Version und einen dokumentierten Umstellungsweg. Höhere Mindestanforderungen werden in den Release-Hinweisen ausdrücklich genannt. Veröffentlichte Releases und Tags dienen als feste Referenz.\n\n\n© 2026 [David Decker – DECKERWEB](https://github.com/deckerweb). GPL v2 or later · SPDX GPL-2.0-or-later.\n",
+      "faq": "# Fragen nach Themen\n\n[Anleitung](Deutsch.md) · [English](FAQ-English.md)\n\n## Installation und Updates\n\n**Wie installiere ich das Plugin?** Das Plugin-ZIP aus dem aktuellen GitHub-Release unter Plugins → Installieren → Plugin hochladen installieren und aktivieren.\n\n**Wie erhalte ich Updates?** Stabile Releases erscheinen im normalen WordPress-Updatesystem. Automatische Updates bleiben deine Entscheidung.\n\n## Daten und Betrieb\n\n**Wer pflegt Produkte und Preise?** Ausschließlich Shopware. WordPress speichert Auswahl und Darstellung. Keine lokale Preisberechnung.\n\n**Was bedeutet 30 Minuten Cache?** Daten werden bis zu 30 Minuten wiederverwendet. Erst der nächste Zugriff nach Ablauf fragt neu ab; kein periodischer Hintergrundabruf. Seiten-/CDN-Caches können sichtbare Preise länger behalten.\n\n**Was passiert bei Shop-Ausfall?** Vorhandener Inhalt kann vorübergehend ohne alte Preise und Verfügbarkeit erscheinen. Fehlen Daten vollständig, gibt es keine Produktkarte.\n\n## Shop-Zuordnung und Schlüssel\n\n**Reicht der Key?** Nein. Auch die Shop-URL einstellen. Die optionale API-URL berücksichtigt eine andere API-Basisadresse.\n\n**Wird .env automatisch gelesen?** Nein. Das Hosting muss DW_SW_ACCESS_KEY an PHP übergeben, oder wp-config.php definiert die Konstante. Eine ausdrücklich eingebundene externe Geheimnisdatei kann diese ebenfalls definieren.\n\n**Mehrere Shops gleichzeitig?** Ein konfigurierter Shop pro WordPress-Installation. Verschiedene Installationen können verschiedene Shops verwenden.\n\n## Bricks\n\n**Brauche ich Components?** Nein. Die nativen Elemente funktionieren sofort. Components sind freiwillige wiederverwendbare Gestaltungen.\n\n**Wie nutze ich die Produktsuche?** Im Strukturbaum den Slot und das darin liegende native Shopware-Element auswählen.\n\n**Warum ist eine Component leer?** Ein neuer Slot enthält noch kein Element. Befüllte Beispiele installieren oder selbst ein natives Element hineinziehen. Passende Produkte benötigen Artikelzuordnungen.\n\n**Überschreibt ein Update meine Gestaltung?** Nein. Vorhandene Definitionen/Beispiele werden erhalten; zusätzliche Versionskopien sind optional.\n\n\n## Berechtigungen und Multisite\n\n**Wer darf die Verbindung ändern?** Administratoren mit manage_options. Autoren können Produkte auswählen, wenn sie redaktionelle Berechtigungen haben. Bricks Components benötigen zusätzlich die passenden Bricks-Berechtigungen.\n\n**Kann jede Netzwerk-Website einen anderen Shop verwenden?** Ja. Verbindung, Cache und Artikelzuordnungen sind websitebezogen. Die Library wird je Netzwerk konfiguriert.\n\n## Daten und Deinstallation\n\n**Werden Artikelzuordnungen bei Deinstallation entfernt?** Nein. Shop-Einstellungen, Produktzuordnungen und installierte Components bleiben erhalten; temporäre Connector-Daten werden bereinigt.\n\n**Was geschieht mit der gemeinsamen Library?** Andere installierte Hosts, auch deaktivierte, erhalten ihre gemeinsam benötigten Daten. Beim letzten Host gelten die Library-Einstellungen zur Datenlöschung.\n"
+    }
+  },
+  "history": [
+    {
+      "version": "1.0.1",
+      "date": "2026-10-06",
+      "entries": {
+        "en": [
+          {
+            "category": "Improved",
+            "text": "Load product styles only for rendered blocks and elements."
+          },
+          {
+            "category": "Fixed",
+            "text": "Complete German formal translations for settings, editor controls and update messages."
+          },
+          {
+            "category": "Fixed",
+            "text": "Remove Connector temporary caches and locks on uninstall while preserving settings, assigned products and installed Components."
+          },
+          {
+            "category": "Fixed",
+            "text": "Resolve explicit server-side credentials per Multisite site while retaining the global-key fallback."
+          },
+          {
+            "category": "Misc",
+            "text": "Complete bilingual documentation, release metadata and shared component integration."
+          }
+        ],
+        "de": [
+          {
+            "category": "Verbessert",
+            "text": "Produkt-Styles nur für dargestellte Blöcke und Elemente laden."
+          },
+          {
+            "category": "Behoben",
+            "text": "Vollständige deutsche Sie-Übersetzung für Einstellungen, Editor-Bedienelemente und Update-Meldungen."
+          },
+          {
+            "category": "Behoben",
+            "text": "Temporäre Connector-Caches und Sperren bei Deinstallation entfernen; Einstellungen, Produktzuordnungen und installierte Components erhalten."
+          },
+          {
+            "category": "Behoben",
+            "text": "Explizite serverseitige Schlüssel je Multisite-Website zuordnen; globalen Schlüssel als Fallback erhalten."
+          },
+          {
+            "category": "Sonstiges",
+            "text": "Zweisprachige Dokumentation, Release-Metadaten und gemeinsame Komponenten vervollständigt."
+          }
+        ]
+      }
+    },
+    {
+      "version": "1.0.0",
+      "date": "2026-10-06",
+      "entries": {
+        "en": [
+          {
+            "category": "New",
+            "text": "Read-only Shopware products and variants in native Gutenberg blocks and Bricks elements."
+          },
+          {
+            "category": "New",
+            "text": "Product gallery, descriptions, data sheets, manufacturer, Shopware prices and availability."
+          },
+          {
+            "category": "New",
+            "text": "Article-related products, dynamic product grids, product buttons and optional Quick View."
+          },
+          {
+            "category": "New",
+            "text": "Configurable shop connection, cache, diagnostics and optional Bricks Components."
+          },
+          {
+            "category": "New",
+            "text": "WordPress updates from GitHub, optional deckerweb plugin catalog and German translations."
+          }
+        ],
+        "de": [
+          {
+            "category": "Neu",
+            "text": "Shopware-Produkte und Varianten lesend in nativen Gutenberg-Blöcken und Bricks-Elementen anzeigen."
+          },
+          {
+            "category": "Neu",
+            "text": "Produktgalerie, Beschreibungen, Datenblätter, Hersteller, Shopware-Preise und Verfügbarkeit."
+          },
+          {
+            "category": "Neu",
+            "text": "Passende Artikelprodukte, dynamische Produktraster, Produktbuttons und optionale Schnellansicht."
+          },
+          {
+            "category": "Neu",
+            "text": "Konfigurierbare Shop-Verbindung, Cache, Diagnose und optionale Bricks Components."
+          },
+          {
+            "category": "Neu",
+            "text": "WordPress-Updates von GitHub, optionaler deckerweb-Plugin-Katalog und deutsche Übersetzungen."
+          }
+        ]
+      }
+    }
+  ],
+  "readme_faq": {
+    "en": [
+      {
+        "q": "Does WordPress calculate prices?",
+        "a": "No. Shopware supplies prices and discounts; WordPress displays them."
+      },
+      {
+        "q": "What does the cache duration mean?",
+        "a": "Data is reused for 15, 30 or 60 minutes. The next request after expiry fetches fresh data."
+      },
+      {
+        "q": "Do I need Bricks Components?",
+        "a": "No. Native elements work directly; Components are optional reusable layouts."
+      },
+      {
+        "q": "Can I connect several shops?",
+        "a": "Configure one shop per WordPress site. Each shop needs its own matching server-side key."
+      },
+      {
+        "q": "Does the plugin work in Multisite?",
+        "a": "Yes. Each site configures its own shop, cache and article assignments. Library settings are shared per network."
+      },
+      {
+        "q": "What happens when I deactivate or uninstall?",
+        "a": "Settings, article assignments and Components remain. Uninstall clears temporary Connector data; shared Library data follows its own settings."
+      },
+      {
+        "q": "How do I obtain updates?",
+        "a": "Stable GitHub releases appear in the normal WordPress update system. Automatic updates remain your choice."
+      }
+    ],
+    "de": [
+      {
+        "q": "Berechnet WordPress Preise?",
+        "a": "Nein. Shopware liefert Preise und Rabatte; WordPress stellt sie dar."
+      },
+      {
+        "q": "Was bedeutet die Cache-Dauer?",
+        "a": "Daten werden 15, 30 oder 60 Minuten verwendet. Nach Ablauf lädt der nächste Abruf frische Daten."
+      },
+      {
+        "q": "Brauche ich Bricks Components?",
+        "a": "Nein. Native Elemente funktionieren direkt; Components sind optionale wiederverwendbare Layouts."
+      },
+      {
+        "q": "Kann ich mehrere Shops verbinden?",
+        "a": "Pro WordPress-Website wird ein Shop konfiguriert. Jeder Shop benötigt seinen passenden serverseitigen Schlüssel."
+      },
+      {
+        "q": "Funktioniert das Plugin in Multisite?",
+        "a": "Ja. Jede Website konfiguriert Shop, Cache und Artikelzuordnungen getrennt. Library-Einstellungen gelten je Netzwerk."
+      },
+      {
+        "q": "Was passiert bei Deaktivierung oder Deinstallation?",
+        "a": "Einstellungen, Artikelzuordnungen und Components bleiben erhalten. Deinstallation leert temporäre Connector-Daten; gemeinsame Library-Daten folgen ihren eigenen Einstellungen."
+      },
+      {
+        "q": "Wie erhalte ich Updates?",
+        "a": "Stabile GitHub-Releases erscheinen im normalen WordPress-Updatesystem. Automatische Updates bleiben deine Entscheidung."
+      }
+    ]
+  },
+  "glossary": [
+    [
+      "Product family",
+      "Produktfamilie",
+      "Produktfamilie"
+    ],
+    [
+      "Variant",
+      "Variante",
+      "Variante"
+    ],
+    [
+      "List price",
+      "Streichpreis",
+      "Streichpreis"
+    ],
+    [
+      "Reference price",
+      "Grundpreis",
+      "Grundpreis"
+    ],
+    [
+      "Availability",
+      "Verfügbarkeit",
+      "Verfügbarkeit"
+    ],
+    [
+      "Dynamic product group",
+      "Dynamische Produktgruppe",
+      "Dynamische Produktgruppe"
+    ],
+    [
+      "Clear cache",
+      "Cache leeren",
+      "Cache leeren"
+    ],
+    [
+      "Your shop. Your content. Connected.",
+      "Dein Shop. Deine Inhalte. Verbunden.",
+      "Ihr Shop. Ihre Inhalte. Verbunden."
+    ]
+  ]
+}

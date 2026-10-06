@@ -1,7 +1,16 @@
 <?php
 declare(strict_types=1);
 namespace Deckerweb\Shopware;
+/**
+ * Manage Connector settings, editor product assignments and the accessible footer.
+ */
 final class Admin {
+    /**
+     * Register the WordPress integration callbacks for this component.
+     *
+     * @since 1.0.0
+     * @return void No return value; effects are described above.
+     */
     public static function boot(): void {
         add_action('admin_menu',static function() {
             add_options_page('Connect for Shopware','Connect for Shopware','manage_options','dw-sw',[self::class,'page']);
@@ -13,7 +22,12 @@ final class Admin {
         });
         add_action('admin_post_dw_sw_refresh',static function() {
             if(!current_user_can('manage_options')) wp_die(esc_html__('Access denied.','connect-for-shopware'));
-            check_admin_referer('dw_sw_refresh');(new TransientCache())->refresh();do_action('dw_sw_cache_refreshed');
+            check_admin_referer('dw_sw_refresh');(new TransientCache())->refresh();/**
+             * Notify site-scoped cache integrations after a manual refresh or shop change.
+             *
+             * @since 1.0.0
+             */
+            do_action('dw_sw_cache_refreshed');
             wp_safe_redirect(admin_url('options-general.php?page=dw-sw&refreshed=1'));exit;
         });
         add_action('add_meta_boxes',static function() {
@@ -22,7 +36,18 @@ final class Admin {
         add_action('save_post',[self::class,'save']);
         add_action('admin_enqueue_scripts',[self::class,'assets']);
     }
+    /**
+     * Enqueue and localize settings/editor assets only on supported admin screens.
+     *
+     * @since 1.0.0
+     * @param string $hook WordPress admin screen identifier.
+     * @return void No return value; effects are described above.
+     */
     public static function assets(string $hook): void {
+        if(in_array($hook,['post.php','post-new.php'],true)){
+            $screen=function_exists('get_current_screen')?get_current_screen():null;
+            if(!$screen||!in_array($screen->post_type,Plugin::postTypes(),true))return;
+        }
         if(in_array($hook,['post.php','post-new.php','settings_page_dw-sw'],true)) {
             wp_enqueue_style('dw-sw-admin',DW_SW_URL.'assets/admin.css',[],DW_SW_VERSION);
             wp_enqueue_script('dw-sw-admin',DW_SW_URL.'assets/admin.js',[],DW_SW_VERSION,true);
@@ -35,12 +60,26 @@ final class Admin {
                     'error'=>__('Shop data unavailable.','connect-for-shopware'),'empty'=>__('No products found.','connect-for-shopware')]]);
         }
     }
+    /**
+     * Output the ordered article product selector and its save nonce.
+     *
+     * @since 1.0.0
+     * @param \WP_Post $post Article being edited.
+     * @return void No return value; effects are described above.
+     */
     public static function metaBox($post): void {
         wp_nonce_field('dw_sw_products','dw_sw_products_nonce');
         $items=Presentation::associations(get_post_meta($post->ID,'_dw_sw_products',true));
         echo '<div class="dw-sw-association-editor"><input type="hidden" name="dw_sw_products" value="'.esc_attr(wp_json_encode($items)).'"><div class="dw-sw-association-mount"></div></div>';
         echo '<noscript>'.esc_html__('JavaScript is required to select products. Existing assignments are preserved.','connect-for-shopware').'</noscript>';
     }
+    /**
+     * Persist validated article assignments after capability, nonce and autosave checks.
+     *
+     * @since 1.0.0
+     * @param int $postId WordPress article or preview post ID.
+     * @return void No return value; effects are described above.
+     */
     public static function save(int $postId): void {
         if((defined('DOING_AUTOSAVE')&&DOING_AUTOSAVE)||wp_is_post_revision($postId)||!current_user_can('edit_post',$postId)) return;
         if(!in_array(get_post_type($postId),Plugin::postTypes(),true)) return;
@@ -49,6 +88,12 @@ final class Admin {
         $items=json_decode($raw,true);if(!is_array($items)) return;
         update_post_meta($postId,'_dw_sw_products',Presentation::associations($items));
     }
+    /**
+     * Output the last connection result and collapsible technical diagnostics.
+     *
+     * @since 1.0.0
+     * @return void No return value; effects are described above.
+     */
     private static function diagnostics(): void {
         $domain='connect-for-shopware';$state=(array)get_option('dw_sw_diagnostics',[]);$test=(array)get_option('dw_sw_connection_test',[]);
         echo '<section class="dw-sw-diagnostics"><h2>'.esc_html__('Connection and diagnostics',$domain).'</h2>';
@@ -56,6 +101,9 @@ final class Admin {
         echo '<form action="'.esc_url(admin_url('admin-post.php')).'" method="post"><input type="hidden" name="action" value="dw_sw_test">';wp_nonce_field('dw_sw_test');submit_button(__('Test connection now',$domain),'secondary');echo '</form>';
 
         echo '<details class="dw-sw-technical"><summary>'.esc_html__('Technical details',$domain).'</summary>';
+        global $wp_version;
+        $environment=['WordPress '.(string)$wp_version,'PHP '.PHP_VERSION];if(defined('BRICKS_VERSION'))$environment[]='Bricks '.(string)BRICKS_VERSION;
+        echo '<p><strong>'.esc_html__('Environment',$domain).':</strong> '.esc_html(implode(' · ',$environment)).'</p>';
         if(!empty($test['ok'])&&!empty($test['context'])) {$c=$test['context'];echo '<p>'.esc_html__('Sales Channel context','connect-for-shopware').': '.esc_html(implode(' · ',[(string)$c['salesChannelId'],(string)$c['locale'],(string)$c['currency'],(string)$c['taxState']])).'</p>';}
         echo '<dl><dt>'.esc_html__('Last successful shop request',$domain).'</dt><dd>'.esc_html(isset($state['lastSuccess'])?wp_date('d.m.Y H:i:s',(int)$state['lastSuccess']):__('Not recorded yet',$domain)).'</dd>';
         echo '<dt>'.esc_html__('Last request duration',$domain).'</dt><dd>'.esc_html(isset($state['durationMs'])?$state['durationMs'].' ms':'—').'</dd>';
@@ -66,6 +114,13 @@ final class Admin {
         echo '</dl><p>'.esc_html__('Detected page caches',$domain).': '.esc_html(implode(', ',Operations::detectedCaches())?:__('None detected. External/CDN caches must be managed separately.',$domain)).'</p>';
         echo '<p>'.esc_html__('During a shop outage, retained product content can be shown without expired prices or availability. Retry pauses last 60 seconds.',$domain).'</p></details></section>';
     }
+
+    /**
+     * Render settings, known connection status, optional Components and footer.
+     *
+     * @since 1.0.0
+     * @return void No return value; effects are described above.
+     */
     public static function page(): void {
         if(!current_user_can('manage_options')) return;
         $configured=Plugin::accessKey()!==''&&(string)get_option('dw_sw_shop_url','')!=='';

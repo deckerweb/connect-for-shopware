@@ -4,7 +4,7 @@
 
 ## Zweck und Voraussetzungen
 
-Shopware-Produkte ohne Produktimport in WordPress anzeigen. Shopware bleibt die Quelle für Produktdaten und Preise. Pro WordPress-Installation wird ein Shopware-6-Shop konfiguriert. Voraussetzungen: WordPress ab 6.6, PHP ab 8.1 und ein Sales Channel mit Shopware-6.7-Store-API. Gutenberg funktioniert ohne Bricks; optionale Bricks Components benötigen Bricks ab 2.4.2. Elementor-Seiten können WordPress-Ausgaben anzeigen; ein eigenes Elementor-Widget ist nicht enthalten.
+Shopware-Produkte ohne Produktimport in WordPress anzeigen. Shopware bleibt die Quelle für Produktdaten und Preise. Pro WordPress-Website wird ein Shopware-6-Shop konfiguriert. Voraussetzungen: WordPress ab 6.6, PHP ab 8.1 und ein Sales Channel mit Shopware-6.7-Store-API. Gutenberg funktioniert ohne Bricks; optionale Bricks Components benötigen Bricks ab 2.4.2. Elementor-Seiten können WordPress-Ausgaben anzeigen; ein eigenes Elementor-Widget ist nicht enthalten.
 
 ## Installation und Verbindung
 
@@ -17,6 +17,8 @@ Nach dem Speichern die Verbindung testen. Die Store-API-Adresse entspricht stand
 Die Vorgaben des anonymen Sales-Channel-Kontexts bestimmen Sprache, Währung und Steuerart. Ein Sprachpfad in der Shop-Adresse schaltet diesen Kontext nicht selbst um. Den angezeigten Kontext mit dem gewünschten Storefront-Kontext abgleichen. Preise und Rabatte kommen aus Shopware; WordPress berechnet sie nicht neu. Währungsformatierung und Netto-/Brutto-/Steuerfrei-Hinweise folgen Shopware.
 
 Ein Wechsel der Shop-/API-Adresse leert Connector-Cache und Diagnose und macht alte Schnellansicht-Tickets ungültig. Artikelzuordnungen und installierte Components bleiben erhalten; beim Katalogwechsel die Produktauswahl prüfen.
+
+In Multisite kann eine serverseitige Konstante `DW_SW_ACCESS_KEYS` die Schlüssel nach Website-ID zuordnen. Alternativ wird `DW_SW_ACCESS_KEY_<Website-ID>` aus der PHP-Umgebung gelesen. Diese gezielte Zuordnung hat Vorrang vor dem globalen Schlüssel; ohne Zuordnung gilt die bisherige globale Konstante/Umgebungsvariable. Unterschiedliche Shops benötigen jeweils einen passenden Sales-Channel-Schlüssel. Kein Schlüssel wird in WordPress-Optionen gespeichert.
 
 ## Einstellungen
 
@@ -63,5 +65,25 @@ Der optionale gemeinsame deckerweb-Plugin-Katalog ist unter Plugins → Installi
 | `dw_sw_post_types` | Unterstützte redaktionelle Inhaltstypen filtern; Standard: Beiträge und Seiten. |
 | `dw_sw_cache_refreshed` | Aktion nach manuellem Connector-Cache-Refresh. |
 | `dw_sw_page_cache_purge_requested` | Aktion für zusätzliche Seiten-Cache-Anbindungen. |
+
+
+## Berechtigungen, Multisite und Daten
+
+Shop-Einstellungen und manueller Cache-Refresh benötigen manage_options; Produktauswahl benötigt redaktionelle Rechte und bei gespeicherten Zuordnungen edit_post. Die Components-Installation prüft zusätzlich die nativen Bricks-Berechtigungen.
+
+Jede Website eines Netzwerks speichert Shop-Adresse, Cache-Dauer, Artikelzuordnungen und Diagnose getrennt. Neu angelegte Websites starten ohne konfigurierten Shop. Die Library-Einstellungen gelten je Netzwerk; der Einführungshinweis je Nutzer. Bei gemeinsam genutzten Bricks Components bleibt die Installation auf die Hauptsite begrenzt.
+
+Deaktivierung erhält Einstellungen, Inhalte und Components. Deinstallation entfernt temporäre Connector-Daten, Caches und Sperren auf den Websites des Netzwerks. Shop-Einstellungen, Produktzuordnungen und installierte Components bleiben erhalten. Es gibt keine zusätzliche Löschoption für redaktionelle Inhalte. Die Library berücksichtigt auch deaktivierte andere Hosts und bereinigt gemeinsam benötigte Daten erst beim letzten Host nach ihren eigenen Einstellungen.
+
+## Externe Verbindungen und Datenschutz
+
+Die Einrichtung autorisiert lesende Store-API-Abfragen an den gewählten Shop. Übertragen werden der serverseitige Sales-Channel-Schlüssel, ein anonymer Kontext-Token und notwendige Produkt-IDs, Suchtexte, Sortierungen und Seitenparameter. Es werden keine Kundenkonten oder WordPress-Nutzerprofile übertragen. Shopserver sehen die IP-Adresse der WordPress-Installation. Diagnosen enthalten keine Schlüssel oder Kontext-Tokens.
+
+Bilder laden im Browser von den vom Shop gelieferten Medienadressen. Produkt-, Dokument- und Herstellerlinks führen zu ihren Zieladressen; externe Videos werden nicht automatisch eingebettet. GitHub-Updateprüfungen und Downloads kontaktieren GitHub. Die optionalen Online-Katalogabfragen der Library folgen deren Einstellungen und sind zunächst ausgeschaltet. Kein Telemetrie-System ist eingebaut.
+
+## Release-Regeln
+
+Kompatible Fehlerkorrekturen erhöhen die Patch-Version, neue Funktionen die Minor-Version. Inkompatible Schnittstellen-/Datenänderungen benötigen eine Major-Version und einen dokumentierten Umstellungsweg. Höhere Mindestanforderungen werden in den Release-Hinweisen ausdrücklich genannt. Veröffentlichte Releases und Tags dienen als feste Referenz.
+
 
 © 2026 [David Decker – DECKERWEB](https://github.com/deckerweb). GPL v2 or later · SPDX GPL-2.0-or-later.

@@ -3,24 +3,108 @@
 declare(strict_types=1);
 namespace Deckerweb\Shopware;
 
-interface ReadClient { public function read(string $route, ?array $criteria = null): array; }
+/**
+ * Expose read-only catalog operations independently of WordPress transport.
+ */
+interface ReadClient {
+    /**
+     * Read an allowlisted Store API route with optional read-only criteria.
+     *
+     * @since 1.0.0
+     * @param string $route Allowlisted Store API resource route.
+     * @param array|null $criteria Optional read criteria; never an administrative write payload.
+     * @return array Normalized result data for the documented operation.
+     */
+    public function read(string $route, ?array $criteria = null): array; }
+/**
+ * Define reusable product data storage and explicit invalidation.
+ */
 interface Cache {
+    /**
+     * Read reusable product data, returning null on a cache miss.
+     *
+     * @since 1.0.0
+     * @param string $key Connector-owned cache or operation identifier.
+     * @return ?array Result data, or null when no cached value exists.
+     */
     public function get(string $key): ?array;
+    /**
+     * Persist product data for the requested lifetime and retain an outage backup.
+     *
+     * @since 1.0.0
+     * @param string $key Connector-owned cache or operation identifier.
+     * @param array $value Mapped catalog value to retain.
+     * @param int $ttl Reusable data lifetime in seconds.
+     * @return void No return value; effects are described above.
+     */
     public function set(string $key, array $value, int $ttl): void;
+    /**
+     * Invalidate current cache generation without altering catalog assignments.
+     *
+     * @since 1.0.0
+     * @return void No return value; effects are described above.
+     */
     public function refresh(): void;
 }
 
+/**
+ * Signal a temporary transport, budget or upstream failure.
+ */
 final class ShopUnavailable extends \RuntimeException {}
+/**
+ * Signal an explicitly missing resource that must not retain stale output.
+ */
 final class ResourceMissing extends \RuntimeException {}
+/**
+ * Extend cache storage with outage backups and regeneration ownership.
+ */
 interface RecoverableCache extends Cache {
+    /**
+     * Read retained content intended for a temporary shop outage.
+     *
+     * @since 1.0.0
+     * @param string $key Connector-owned cache or operation identifier.
+     * @return ?array Result data, or null when no cached value exists.
+     */
     public function stale(string $key): ?array;
+    /**
+     * Remove a backup when Shopware explicitly reports the resource missing.
+     *
+     * @since 1.0.0
+     * @param string $key Connector-owned cache or operation identifier.
+     * @return void No return value; effects are described above.
+     */
     public function forgetStale(string $key): void;
+    /**
+     * Atomically claim regeneration ownership for one cache key.
+     *
+     * @since 1.0.0
+     * @param string $key Connector-owned cache or operation identifier.
+     * @return bool Whether the operation is allowed or successfully completed.
+     */
     public function acquire(string $key): bool;
+    /**
+     * Release only the regeneration lock owned by this instance.
+     *
+     * @since 1.0.0
+     * @param string $key Connector-owned cache or operation identifier.
+     * @return void No return value; effects are described above.
+     */
     public function release(string $key): void;
 }
 
-/** HTTPS endpoints only; both Store API and public links retain configured installation paths. */
+/**
+ * Normalize and validate public HTTPS storefront and API endpoints.
+ */
 final class ShopUrl {
+    /**
+     * Reject unsupported or nonpublic endpoints and return a normalized HTTPS URL.
+     *
+     * @since 1.0.0
+     * @param string $url Public HTTPS endpoint or repository metadata URL.
+     * @return string Validated string, label or escaped HTML for the documented operation.
+     * @throws \InvalidArgumentException When the endpoint, identifier, route or lifetime is unsupported.
+     */
     public static function normalize(string $url): string {
         $url=trim($url);$parts=parse_url($url);
         if(!is_array($parts)||strtolower($parts['scheme']??'')!=='https'||empty($parts['host'])||isset($parts['user'],$parts['pass'])||isset($parts['user'])||isset($parts['pass'])||isset($parts['query'])||isset($parts['fragment'])||(isset($parts['port'])&&$parts['port']!==443)) throw new \InvalidArgumentException('Invalid shop URL');
@@ -32,19 +116,47 @@ final class ShopUrl {
         return 'https://'.$host.rtrim($path,'/');
     }
 }
+/**
+ * Read anonymous Store API data through a bounded transport callable.
+ */
 final class StoreApiClient implements ReadClient {
     private $transport;
     private string $token='';
     private ?array $session=null;
     private string $apiBase;
+    /**
+     * Initialize the validated dependencies used by this component.
+     *
+     * @since 1.0.0
+     * @param string $accessKey Server-side Sales Channel credential; never output or logged.
+     * @param callable $transport Callable accepting method, URL, headers and serialized read criteria.
+     * @param string $shopUrl Public storefront base URL.
+     * @param string $apiUrl Optional complete Store API base URL.
+     * @return void No return value; effects are described above.
+     */
     public function __construct(private string $accessKey, callable $transport,string $shopUrl,string $apiUrl='') {
         $this->transport=$transport;
         $this->apiBase=$apiUrl!==''?ShopUrl::normalize($apiUrl):ShopUrl::normalize($shopUrl).'/store-api';
     }
+    /**
+     * Return the lazy anonymous Sales Channel currency, language and tax context.
+     *
+     * @since 1.0.0
+     * @return array Normalized result data for the documented operation.
+     */
     public function context(): array {
         if($this->session===null) $this->read('context');
         return $this->session;
     }
+    /**
+     * Resolve an allowlisted anonymous Store API read and validate its response.
+     *
+     * @since 1.0.0
+     * @param string $route Allowlisted Store API resource route.
+     * @param array|null $criteria Optional read criteria; never an administrative write payload.
+     * @return array Normalized result data for the documented operation.
+     * @throws \InvalidArgumentException When the endpoint, identifier, route or lifetime is unsupported.
+     */
     public function read(string $route, ?array $criteria=null): array {
         if(!preg_match('~^(context|media|category|product-listing/[a-f0-9]{32}|search|product(?:/[a-f0-9]{32})?)$~D',$route)) throw new \InvalidArgumentException('Read route not allowed');
         if($route==='context'&&$criteria!==null) throw new \InvalidArgumentException('Context mutation forbidden');
@@ -64,16 +176,41 @@ final class StoreApiClient implements ReadClient {
     }
 }
 
+/**
+ * Map Sales Channel entities to a frontend-neutral product projection.
+ */
 final class ProductMapper {
     private $contextProvider;
     private string $shopUrl;
+    /**
+     * Initialize the validated dependencies used by this component.
+     *
+     * @since 1.0.0
+     * @param string $shopUrl Public storefront base URL.
+     * @param callable $contextProvider Callable returning the anonymous Sales Channel formatting context.
+     * @return void No return value; effects are described above.
+     */
     public function __construct(string $shopUrl,callable $contextProvider) {$this->shopUrl=ShopUrl::normalize($shopUrl);$this->contextProvider=$contextProvider;}
 
+    /**
+     * Normalize available manufacturer data and safe links.
+     *
+     * @since 1.0.0
+     * @param array $m Manufacturer entity from the Sales Channel response.
+     * @return array Normalized result data for the documented operation.
+     */
     private function manufacturer(array $m): array {
         $t=$m['translated']??[];
         return ['name'=>$t['name']??$m['name']??'', 'descriptionHtml'=>$t['description']??$m['description']??'',
             'url'=>$t['link']??$m['link']??'', 'logo'=>$m['media']['url']??''];
     }
+    /**
+     * Map inherited product fields, calculated prices, media and context-matching SEO URLs.
+     *
+     * @since 1.0.0
+     * @param array $p Sales Channel product entity including inherited fields.
+     * @return array Normalized result data for the documented operation.
+     */
     public function map(array $p): array {
         $context=($this->contextProvider)();
         $translated = $p['translated'] ?? [];
@@ -148,11 +285,34 @@ final class ProductMapper {
     }
 }
 
+
+/**
+ * Resolve catalog selections with context-scoped cache and safe outage fallback.
+ */
 final class ProductRepository {
+
+    /**
+     * Initialize the validated dependencies used by this component.
+     *
+     * @since 1.0.0
+     * @param ReadClient $client Read-only Store API client.
+     * @param Cache $cache Reusable and optionally recoverable cache implementation.
+     * @param ProductMapper $mapper Frontend-neutral product field mapper.
+     * @param string $contextFingerprint Anonymous shop/credential cache namespace fingerprint.
+     * @param int $ttl Reusable data lifetime in seconds.
+     * @return void No return value; effects are described above.
+     */
     public function __construct(private ReadClient $client, private Cache $cache,
         private ProductMapper $mapper, private string $contextFingerprint, private int $ttl = 1800) {
         if ($ttl < 900 || $ttl > 3600) throw new \InvalidArgumentException('TTL must be 15–60 minutes');
     }
+
+    /**
+     * Define the catalog associations needed by the shared product projection.
+     *
+     * @since 1.0.0
+     * @return array Normalized result data for the documented operation.
+     */
     public static function associations(): array {
         return ['cover' => ['associations' => ['media' => new \stdClass()]],
             'media' => ['associations' => ['media' => new \stdClass()]],
@@ -160,17 +320,51 @@ final class ProductRepository {
             'manufacturer' => ['associations' => ['media' => new \stdClass()]],
             'seoUrls' => new \stdClass(), 'unit' => new \stdClass(), 'deliveryTime' => new \stdClass()];
     }
+
+    /**
+     * Reject product or category identifiers outside the Shopware UUID format.
+     *
+     * @since 1.0.0
+     * @param string $id Shopware product or category UUID.
+     * @return void No return value; effects are described above.
+     * @throws \InvalidArgumentException When the endpoint, identifier, route or lifetime is unsupported.
+     */
     private function uuid(string $id): void {
         if (!preg_match('/^[a-f0-9]{32}$/D', $id)) throw new \InvalidArgumentException('Invalid product ID');
     }
+
+    /**
+     * Scope a cache operation to the anonymous shop/context fingerprint.
+     *
+     * @since 1.0.0
+     * @param string $operation Cache operation name and read criteria fingerprint.
+     * @return string Validated string, label or escaped HTML for the documented operation.
+     */
     private function cacheKey(string $operation): string {
         return hash('sha256','mapping-v5|'.$this->contextFingerprint.'|'.$operation);
     }
+
+    /**
+     * Read a cached product without making a transport request.
+     *
+     * @since 1.0.0
+     * @param string $id Shopware product or category UUID.
+     * @param string $mode Selection mode: family or variant.
+     * @return ?array Result data, or null when no cached value exists.
+     */
     public function cachedProduct(string $id,string $mode='variant'): ?array {
         $this->uuid($id);
         if(!in_array($mode,['family','variant'],true)) throw new \InvalidArgumentException('Invalid mode');
         return $this->cache->get($this->cacheKey("product|$mode|$id"));
     }
+
+    /**
+     * Remove expired prices and availability from retained product content.
+     *
+     * @since 1.0.0
+     * @param array $value Retained product content with potentially expired price data.
+     * @return array Normalized result data for the documented operation.
+     */
     public static function safeFallback(array $value): array {
         $value['_stale']=true;
         if(isset($value['items'])) $value['items']=array_map([self::class,'safeFallback'],$value['items']);
@@ -180,6 +374,15 @@ final class ProductRepository {
         }
         return $value;
     }
+
+    /**
+     * Resolve cache data under a regeneration lock and apply safe outage fallback.
+     *
+     * @since 1.0.0
+     * @param string $operation Cache operation name and read criteria fingerprint.
+     * @param callable $load Callable loading fresh data on a cache miss.
+     * @return array Normalized result data for the documented operation.
+     */
     private function cached(string $operation,callable $load): array {
         $key=$this->cacheKey($operation);$hit=$this->cache->get($key);
         if($hit!==null) return $hit;
@@ -207,6 +410,15 @@ final class ProductRepository {
             if($recover) $this->cache->release($key);
         }
     }
+
+    /**
+     * Resolve a product family or exact variant and load its presentation data.
+     *
+     * @since 1.0.0
+     * @param string $id Shopware product or category UUID.
+     * @param string $mode Selection mode: family or variant.
+     * @return array Normalized result data for the documented operation.
+     */
     public function product(string $id, string $mode = 'variant'): array {
         $this->uuid($id);
         if (!in_array($mode, ['variant', 'family'], true)) throw new \InvalidArgumentException('Invalid mode');
@@ -244,6 +456,15 @@ final class ProductRepository {
             return $this->mapper->map($p);
         });
     }
+
+    /**
+     * Search products by name or number using bounded catalog pagination.
+     *
+     * @since 1.0.0
+     * @param string $term Product search text.
+     * @param int $page One-based result page.
+     * @return array Normalized result data for the documented operation.
+     */
     public function search(string $term, int $page = 1): array {
         $term = trim($term);
         if ($term === '' || strlen($term) > 200 || $page < 1) throw new \InvalidArgumentException('Invalid search');
@@ -254,6 +475,13 @@ final class ProductRepository {
                 'items' => array_map([$this->mapper, 'map'], $r['elements'] ?? [])];
         });
     }
+
+    /**
+     * Return active categories backed by Shopware dynamic product groups.
+     *
+     * @since 1.0.0
+     * @return array Normalized result data for the documented operation.
+     */
     public function categories(): array {
         return $this->cached('dynamic-categories',function(): array {
             $items=[];$page=1;
@@ -273,6 +501,17 @@ final class ProductRepository {
             return array_values($items);
         });
     }
+
+    /**
+     * Read a category listing with server-side sorting, limits and pagination.
+     *
+     * @since 1.0.0
+     * @param string $categoryId Active dynamic category UUID.
+     * @param int $limit Maximum products requested per result page.
+     * @param int $page One-based result page.
+     * @param string $order Shopware sorting key or empty string for the shop default.
+     * @return array Normalized result data for the documented operation.
+     */
     public function listing(string $categoryId,int $limit=6,int $page=1,string $order=''): array {
         $this->uuid($categoryId);
         if($limit<1||$limit>48||$page<1||$page>1000||strlen($order)>100) throw new \InvalidArgumentException('Invalid listing settings');
@@ -299,6 +538,14 @@ final class ProductRepository {
                 'items'=>array_map([$this->mapper,'map'],$r['elements']??[])];
         });
     }
+
+    /**
+     * Read available variants and their option labels for a product family.
+     *
+     * @since 1.0.0
+     * @param string $parentId Product family UUID used to enumerate variants.
+     * @return array Normalized result data for the documented operation.
+     */
     public function variants(string $parentId): array {
         $this->uuid($parentId);
         return $this->cached('variants|' . $parentId, function() use ($parentId): array {

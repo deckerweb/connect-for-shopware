@@ -1,20 +1,22 @@
 <?php
 /**
  * Plugin Name: Connect for Shopware
+ * Plugin URI: https://github.com/deckerweb/connect-for-shopware
  * Description: Read-only Shopware products for Gutenberg and native Bricks elements.
- * Version: 1.0.0
+ * Version: 1.0.1
  * Requires at least: 6.6
  * Requires PHP: 8.1
  * Author: David Decker – DECKERWEB
  * Author URI: https://github.com/deckerweb
- * Plugin URI: https://github.com/deckerweb/connect-for-shopware
- * Update URI: https://github.com/deckerweb/connect-for-shopware
- * GitHub Plugin URI: https://github.com/deckerweb/connect-for-shopware
- * SPDX-License-Identifier: GPL-2.0-or-later
  * License: GPL v2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: connect-for-shopware
  * Domain Path: /languages/
+ * Update URI: https://github.com/deckerweb/connect-for-shopware
+ * GitHub Plugin URI: https://github.com/deckerweb/connect-for-shopware
+ *
+ * Copyright © 2026 David Decker – DECKERWEB.
+ * SPDX-License-Identifier: GPL-2.0-or-later
  */
 defined('ABSPATH') || exit;
 // Preserve existing data names; never load beside the legacy development plugin.
@@ -23,10 +25,10 @@ if(in_array('deckerweb-shopware-connector/deckerweb-shopware-connector.php',(arr
     return;
 }
 define('DW_SW_FILE',__FILE__);
-define('DW_SW_VERSION','1.0.0');
+define('DW_SW_VERSION','1.0.1');
 define('DW_SW_DIR',__DIR__.'/');
 define('DW_SW_URL',plugin_dir_url(__FILE__));
-foreach(['Core','WordPressBridge','Presentation','Extras','Operations','Configuration','Components','GitHubUpdates','Plugin','Admin','Rest'] as $file) require_once DW_SW_DIR.'src/'.$file.'.php';
+foreach(['Core','Lifecycle','WordPressBridge','Presentation','Extras','Operations','Configuration','Components','GitHubUpdates','Plugin','Admin','Rest'] as $file) require_once DW_SW_DIR.'src/'.$file.'.php';
 require_once DW_SW_DIR.'src/deckerweb-changelog-v1.php';
 add_action('plugins_loaded',[Deckerweb\Shopware\Plugin::class,'boot']);
 

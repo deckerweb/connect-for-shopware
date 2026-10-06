@@ -1,8 +1,23 @@
 <?php
 declare(strict_types=1);
 namespace Deckerweb\Shopware;
+/**
+ * Expose capability-checked editor endpoints and native Bricks AJAX selectors.
+ */
 final class Rest {
+    /**
+     * Check the editorial capability required by private editor endpoints.
+     *
+     * @since 1.0.0
+     * @return bool Whether the operation is allowed or successfully completed.
+     */
     public static function permission(): bool {return current_user_can('edit_posts');}
+    /**
+     * Register the scoped routes or WordPress hooks for this component.
+     *
+     * @since 1.0.0
+     * @return void No return value; effects are described above.
+     */
     public static function register(): void {
         QuickView::register();
         $base='deckerweb-shopware/v1';
@@ -36,15 +51,34 @@ final class Rest {
             'callback'=>static fn($r)=>self::respond(static fn()=>['html'=>Plugin::related((int)$r->get_param('postId'),(array)$r->get_param('settings'),(array)$r->get_param('products'))])]);
         register_rest_route($base,'/cache/refresh',['methods'=>'POST','permission_callback'=>static fn()=>current_user_can('manage_options'),
             'callback'=>static function() {
-                (new TransientCache())->refresh();do_action('dw_sw_cache_refreshed');
+                (new TransientCache())->refresh();/**
+             * Notify site-scoped cache integrations after a manual refresh or shop change.
+             *
+             * @since 1.0.0
+             */
+            do_action('dw_sw_cache_refreshed');
                 return new \WP_REST_Response(['refreshed'=>true],200,['Cache-Control'=>'no-store']);
             }]);
     }
+    /**
+     * Convert a catalog operation to a safe REST result or a neutral error.
+     *
+     * @since 1.0.0
+     * @param callable $action Callable performing a read-only catalog operation.
+     * @return mixed Operation result or a safe WordPress REST error.
+     */
     private static function respond(callable $action): mixed {
         try {return new \WP_REST_Response($action(),200,['Cache-Control'=>'no-store']);}
         catch(\InvalidArgumentException $e) {return new \WP_Error('dw_sw_invalid',__('Invalid product selection.','connect-for-shopware'),['status'=>400]);}
         catch(\Throwable $e) {return new \WP_Error('dw_sw_unavailable',__('Shop data unavailable. Check the connector configuration.','connect-for-shopware'),['status'=>503]);}
     }
+    /**
+     * Return the product fields permitted in editor-facing JSON responses.
+     *
+     * @since 1.0.0
+     * @param array $p Mapped product to expose to authorized editors.
+     * @return array Normalized result data for the documented operation.
+     */
     public static function dto(array $p): array {
         $p['title']=sanitize_text_field($p['title']);$p['summary']=sanitize_text_field($p['summary']);
         $p['descriptionHtml']=wp_kses_post($p['descriptionHtml']);
@@ -68,17 +102,46 @@ final class Rest {
         },$p['gallery']??[]);
         return $p;
     }
+    /**
+     * Read bounded editor product search results through the shared repository.
+     *
+     * @since 1.0.0
+     * @param string $term Product search text.
+     * @param int $page One-based result page.
+     * @return array Normalized result data for the documented operation.
+     */
     public static function search(string $term,int $page=1): array {
         $r=Plugin::repository()->search($term,$page);$r['items']=array_map([self::class,'dto'],$r['items']);return $r;
     }
+    /**
+     * Require the native Bricks nonce and editorial capability before an AJAX selector.
+     *
+     * @since 1.0.0
+     * @return void No return value; effects are described above.
+     */
     private static function bricksAuth(): void {
         if(!current_user_can('edit_posts')||!check_ajax_referer('bricks-nonce-builder','nonce',false)) {
             wp_send_json_error(['message'=>__('Access denied.','connect-for-shopware')],403);
         }
     }
+    /**
+     * Format a sanitized product selector label with mode, title and options.
+     *
+     * @since 1.0.0
+     * @param array $p Mapped product used by the native selector.
+     * @param string $mode Selection mode: family or variant.
+     * @return string Validated string, label or escaped HTML for the documented operation.
+     */
     private static function label(array $p,string $mode): string {
         return sanitize_text_field(($mode==='family'?__('Product family','connect-for-shopware'):__('Product / variant','connect-for-shopware')).' · '.$p['title'].' · '.$p['productNumber'].($p['variantText']?' · '.$p['variantText']:''));
     }
+
+    /**
+     * Return native category selector options after permissions and bounded filtering.
+     *
+     * @since 1.0.0
+     * @return void No return value; effects are described above.
+     */
     public static function bricksCategories(): void {
         self::bricksAuth();
         try {
@@ -90,6 +153,13 @@ final class Rest {
             wp_send_json_success($options);
         } catch(\Throwable $e) {wp_send_json_error(['message'=>__('Shop data unavailable.','connect-for-shopware')],503);}
     }
+
+    /**
+     * Return available Shopware sorting options for the selected category.
+     *
+     * @since 1.0.0
+     * @return void No return value; effects are described above.
+     */
     public static function bricksSortings(): void {
         self::bricksAuth();
         try {
@@ -99,6 +169,13 @@ final class Rest {
             wp_send_json_success($options);
         } catch(\Throwable $e) {wp_send_json_error(['message'=>__('Shop data unavailable.','connect-for-shopware')],503);}
     }
+
+    /**
+     * Return native product/family selector options and retain selected values.
+     *
+     * @since 1.0.0
+     * @return void No return value; effects are described above.
+     */
     public static function bricksProducts(): void {
         self::bricksAuth();$options=[];
         try {
@@ -122,6 +199,13 @@ final class Rest {
             wp_send_json_success($options);
         } catch(\Throwable $e) {wp_send_json_error(['message'=>__('Shop data unavailable.','connect-for-shopware')],503);}
     }
+
+    /**
+     * Return matching variant selector options for the selected product family.
+     *
+     * @since 1.0.0
+     * @return void No return value; effects are described above.
+     */
     public static function bricksVariants(): void {
         self::bricksAuth();
         try {

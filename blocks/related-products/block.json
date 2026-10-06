@@ -126,9 +126,10 @@
     }
   },
   "editorScript": "dw-sw-editor",
-  "style": "dw-sw-product",
   "usesContext": [
     "postId",
     "postType"
-  ]
+  ],
+  "editorStyle": "dw-sw-product",
+  "viewStyle": "dw-sw-product"
 }

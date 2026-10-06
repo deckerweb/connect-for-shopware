@@ -1,5 +1,5 @@
 msgid ""
-msgstr "Project-Id-Version: Connect for Shopware 1.0.1\nLanguage: de_DE\nContent-Type: text/plain; charset=UTF-8\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
+msgstr "Project-Id-Version: Connect for Shopware 1.0.1\nLanguage: de_DE_formal\nContent-Type: text/plain; charset=UTF-8\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "%d minutes"
 msgstr "%d Minuten"
@@ -230,7 +230,7 @@ msgid "Install this bundled version as an additional copy for existing component
 msgstr "Diese mitgelieferte Version bei bestehenden Components als zusätzliche Kopie installieren"
 
 msgid "Installation could not be completed. You can safely retry."
-msgstr "Die Installation konnte nicht abgeschlossen werden. Du kannst sie sicher erneut versuchen."
+msgstr "Die Installation konnte nicht abgeschlossen werden. Sie können sie sicher erneut versuchen."
 
 msgid "Installed: %d · Existing: %d · Example templates: %d"
 msgstr "Installiert: %d · Vorhanden: %d · Beispielvorlagen: %d"
@@ -482,7 +482,7 @@ msgid "Section heading"
 msgstr "Bereichsüberschrift"
 
 msgid "See the release on GitHub."
-msgstr "Sieh dir den Release auf GitHub an."
+msgstr "Sehen Sie sich das Release auf GitHub an."
 
 msgid "Select a Shopware product in the block settings."
 msgstr "Ein Shopware-Produkt in den Blockeinstellungen wählen."
@@ -497,7 +497,7 @@ msgid "Select a product and a matching variant."
 msgstr "Ein Produkt und eine dazu passende Variante auswählen."
 
 msgid "Select a product family or a concrete product. Search by name or number."
-msgstr "Eine Produktfamilie oder ein konkretes Produkt wählen. Suche nach Name oder Artikelnummer."
+msgstr "Wählen Sie eine Produktfamilie oder ein konkretes Produkt. Suchen Sie nach Name oder Artikelnummer."
 
 msgid "Select product / variant"
 msgstr "Produkt / Variante wählen"
@@ -593,19 +593,19 @@ msgid "The package identity or version does not match a newer Connect for Shopwa
 msgstr "Identität oder Version des Pakets entsprechen keiner neueren Veröffentlichung von Connect for Shopware."
 
 msgid "The package version differs from the offered update. Please check for updates again."
-msgstr "Die Paketversion weicht vom angebotenen Update ab. Bitte prüfe erneut auf Updates."
+msgstr "Die Paketversion weicht vom angebotenen Update ab. Bitte prüfen Sie erneut auf Updates."
 
 msgid "The plugin must be installed in a stable slug directory."
 msgstr "Das Plugin muss in einem Verzeichnis mit einem festen Slug installiert sein."
 
 msgid "The private update could not be authorized. Check the repository credentials and refresh updates."
-msgstr "Das private Update konnte nicht autorisiert werden. Prüfe die Repository-Zugangsdaten und suche erneut nach Updates."
+msgstr "Das private Update konnte nicht autorisiert werden. Prüfen Sie die Repository-Zugangsdaten und suchen Sie erneut nach Updates."
 
 msgid "The private update download failed. Check credentials and try again."
-msgstr "Der Download des privaten Updates ist fehlgeschlagen. Prüfe die Zugangsdaten und versuche es erneut."
+msgstr "Der Download des privaten Updates ist fehlgeschlagen. Prüfen Sie die Zugangsdaten und versuchen Sie es erneut."
 
 msgid "The update filesystem is unavailable. Please try again."
-msgstr "Das Dateisystem für das Update ist nicht verfügbar. Bitte versuche es erneut."
+msgstr "Das Dateisystem für das Update ist nicht verfügbar. Bitte versuchen Sie es erneut."
 
 msgid "The update package could not be checked."
 msgstr "Das Updatepaket konnte nicht geprüft werden."
@@ -623,7 +623,7 @@ msgid "Title"
 msgstr "Titel"
 
 msgid "Update the other active deckerweb plugins to use translated shared update messages."
-msgstr "Aktualisiere die anderen aktiven deckerweb-Plugins, damit die gemeinsamen Update-Meldungen übersetzt werden."
+msgstr "Aktualisieren Sie die anderen aktiven deckerweb-Plugins, damit die gemeinsamen Update-Meldungen übersetzt werden."
 
 msgid "Uses Shopware products assigned to the current article. For a Single template, select a preview article with assignments."
 msgstr "Verwendet Shopware-Produkte, die dem aktuellen Artikel zugeordnet sind. Für ein Single-Template einen Vorschauartikel mit Zuordnungen wählen."
@@ -641,7 +641,7 @@ msgid "Watch video on %s"
 msgstr "Video auf %s ansehen"
 
 msgid "Your shop. Your content. Connected."
-msgstr "Dein Shop. Deine Inhalte. Verbunden."
+msgstr "Ihr Shop. Ihre Inhalte. Verbunden."
 
 msgctxt "block title"
 msgid "Shopware Product"

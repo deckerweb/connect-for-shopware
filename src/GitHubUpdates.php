@@ -9,21 +9,39 @@ namespace Deckerweb\Shopware;
 
 defined( 'ABSPATH' ) || exit;
 
-/** Configure shared update artwork and isolate plugin-specific safeguards. */
+/**
+ * Adapt the shared updater with local artwork and package identity checks.
+ */
 final class GitHubUpdates {
 	/** Public release repository; never taken from user input. */
 	private const REPOSITORY = 'https://github.com/deckerweb/connect-for-shopware';
 
-	/** Register after WordPress initializes translations. @return void */
+	/**
+	 * Register the scoped routes or WordPress hooks for this component.
+	 *
+	 * @since 1.0.0
+	 * @return void No return value; effects are described above.
+	 */
 	public function register(): void {
 		add_action( 'init', array( $this, 'boot' ) );
 	}
 
-	/** Load the shared versioned class once, including beside other deckerweb plugins. @return void */
+	/**
+	 * Register the WordPress integration callbacks for this component.
+	 *
+	 * @since 1.0.0
+	 * @return void No return value; effects are described above.
+	 */
 	public function boot(): void {
 		if ( ! class_exists( '\Deckerweb\GitHubReleaseUpdater\V2\Updater' ) ) {
 			require_once DW_SW_DIR . 'includes/deckerweb-github-release-updater-v2.php';
 		}
+		if ( ! defined( '\\Deckerweb\\GitHubReleaseUpdater\\V2\\Updater::SUPPORTS_HOST_TRANSLATIONS' ) ) {
+            add_action('admin_notices',static function(): void {
+                $screen=function_exists('get_current_screen')?get_current_screen():null;
+                if(current_user_can('update_plugins')&&$screen&&$screen->id==='settings_page_dw-sw')echo '<div class="notice notice-info"><p>'.esc_html__('Update the other active deckerweb plugins to use translated shared update messages.','connect-for-shopware').'</p></div>';
+            });
+        }
 		try {
 			$updater = new \Deckerweb\GitHubReleaseUpdater\V2\Updater(
 				DW_SW_FILE,
@@ -43,9 +61,10 @@ final class GitHubUpdates {
 	}
 
 	/**
-	 * Provide bundled artwork matching the current administrator's language.
+	 * Return local translated icons and banners with versioned asset URLs.
 	 *
-	 * @return array<string,array<string,string>> WordPress icon and banner maps.
+	 * @since 1.0.0
+	 * @return array Normalized result data for the documented operation.
 	 */
 	public function artwork(): array {
 		$language = str_starts_with(determine_locale(), 'de') ? 'de-' : '';
@@ -64,11 +83,12 @@ final class GitHubUpdates {
 	}
 
 	/**
-	 * Bound only this repository's metadata requests; do not change package downloads.
+	 * Apply HTTP limits only to this repository metadata endpoint.
 	 *
-	 * @param array  $args WordPress HTTP arguments.
-	 * @param string $url Requested URL.
-	 * @return array
+	 * @since 1.0.0
+	 * @param array $args WordPress HTTP request arguments.
+	 * @param string $url Public HTTPS endpoint or repository metadata URL.
+	 * @return array Normalized result data for the documented operation.
 	 */
 	public function request_limits( array $args, string $url ): array {
 		if ( 'https://api.github.com/repos/deckerweb/connect-for-shopware/releases/latest' === $url ) {
@@ -82,14 +102,14 @@ final class GitHubUpdates {
 	}
 
 	/**
-	 * Validate the actual candidate before WordPress removes the installed plugin.
-	 * Requirements in installed headers cannot describe a future release reliably.
+	 * Validate package identity, offered version and platform requirements before replacement.
 	 *
-	 * @param mixed $source Normalized directory or WP_Error from the shared updater.
-	 * @param mixed $remote_source Unused extraction root.
-	 * @param mixed $upgrader Unused WordPress upgrader instance.
-	 * @param array $hook_extra Upgrade context.
-	 * @return mixed Original source or localized WP_Error.
+	 * @since 1.0.0
+	 * @param string|\WP_Error $source Extracted package directory or an existing WordPress error.
+	 * @param string $remote_source Core extraction root, retained for the filter contract.
+	 * @param object|null $upgrader WordPress upgrader instance used to validate update context.
+	 * @param array $hook_extra Core plugin/update context identifying the intended target.
+	 * @return string|\WP_Error Checked package directory, or a localized WordPress error.
 	 */
 	public function validate_source( $source, $remote_source, $upgrader, array $hook_extra ) {
 		if ( ( $hook_extra['plugin'] ?? '' ) !== plugin_basename( DW_SW_FILE ) || ( $hook_extra['type'] ?? '' ) !== 'plugin' || ( $hook_extra['action'] ?? '' ) !== 'update' ) {

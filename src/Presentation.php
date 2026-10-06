@@ -1,19 +1,41 @@
 <?php
 declare(strict_types=1);
 namespace Deckerweb\Shopware;
+/**
+ * Normalize product selections and shared Gutenberg/Bricks display controls.
+ */
 final class Presentation {
     public const FLAGS = ['showImage','showTitle','showText','showPrice','showListPrice','showAvailability','showVariant','showButton','showTabs','showDescriptionTab','showDocumentsTab','showManufacturerTab','showQuickView'];
+    /**
+     * Return conservative shared product display defaults.
+     *
+     * @since 1.0.0
+     * @return array Normalized result data for the documented operation.
+     */
     public static function defaults(): array {
         return ['showImage'=>true,'showTitle'=>true,'showText'=>false,'showPrice'=>true,
             'showListPrice'=>true,'showAvailability'=>true,'showVariant'=>true,'showButton'=>true,
             'showQuickView'=>false,'showTabs'=>false,'showDescriptionTab'=>true,'showDocumentsTab'=>true,'showManufacturerTab'=>true,
             'infoPosition'=>'right','imageMode'=>'cover','buttonText'=>'','buttonUrl'=>'','textMode'=>'summary','customText'=>'','linkStyle'=>'link','linkTarget'=>'same','headingTag'=>'h3'];
     }
+    /**
+     * Return reusable compact, description and details presentation presets.
+     *
+     * @since 1.0.0
+     * @return array Normalized result data for the documented operation.
+     */
     public static function presets(): array {
         return ['compact'=>['showText'=>false,'showTabs'=>false,'infoPosition'=>'below','imageMode'=>'cover','linkStyle'=>'button'],
             'description'=>['showText'=>true,'textMode'=>'description','showTabs'=>false,'infoPosition'=>'right','imageMode'=>'cover'],
             'details'=>['showText'=>false,'showTabs'=>true,'infoPosition'=>'right','imageMode'=>'gallery','linkStyle'=>'button']];
     }
+    /**
+     * Validate and normalize display controls from blocks or builder instances.
+     *
+     * @since 1.0.0
+     * @param array $input Untrusted presentation controls to normalize.
+     * @return array Normalized result data for the documented operation.
+     */
     public static function settings(array $input): array {
         $input=array_replace(self::presets()[$input['preset']??'']??[],$input);
         $settings=self::defaults();
@@ -33,10 +55,24 @@ final class Presentation {
         $settings['headingTag']=in_array($tag,['h2','h3','h4','h5','h6','p'],true)?$tag:'h3';
         return $settings;
     }
+    /**
+     * Decode a family/variant selection reference without accepting arbitrary IDs.
+     *
+     * @since 1.0.0
+     * @param string $value Encoded family:UUID or variant:UUID reference.
+     * @return array Normalized result data for the documented operation.
+     */
     public static function reference(string $value): array {
         if(!preg_match('/^(family|variant):([a-f0-9]{32})$/D',$value,$m)) throw new \InvalidArgumentException('Invalid reference');
         return ['productId'=>$m[2],'selectionMode'=>$m[1]];
     }
+    /**
+     * Normalize ordered article product assignments and remove invalid duplicates.
+     *
+     * @since 1.0.0
+     * @param mixed $items Ordered product assignments supplied by metadata or editor controls.
+     * @return array Normalized result data for the documented operation.
+     */
     public static function associations(mixed $items): array {
         $result=[];
         foreach(is_array($items)?array_slice($items,0,50):[] as $item) {
@@ -48,14 +84,34 @@ final class Presentation {
         return array_values($result);
     }
 }
+/**
+ * Render escaped product cards, galleries, details and shop actions.
+ */
 final class ProductRenderer {
+    /**
+     * Format a supplied Shopware amount using the context currency and precision.
+     *
+     * @since 1.0.0
+     * @param float $amount Calculated Shopware amount to format without recalculation.
+     * @param array $product Mapped product with currency, precision and tax context.
+     * @return string Validated string, label or escaped HTML for the documented operation.
+     */
     private function money(float $amount,array $product): string {
         $decimals=max(0,min(8,(int)($product['currencyDecimals']??2)));
         $symbol=(string)($product['currencySymbol']??$product['currency']??'');
         return number_format_i18n($amount,$decimals).' '.$symbol;
     }
 
+    /**
+     * Render a product projection with safe media, calculated prices and selected controls.
+     *
+     * @since 1.0.0
+     * @param array $p Mapped product projection from the shared repository.
+     * @param array $input Untrusted presentation controls to normalize.
+     * @return string Validated string, label or escaped HTML for the documented operation.
+     */
     public function render(array $p,array $input=[]): string {
+        wp_enqueue_style('dw-sw-product');
         $s=Presentation::settings($input);
         if(!empty($p['_stale'])) {$s['showPrice']=false;$s['showAvailability']=false;}
         $html='';$media='';$text='';$domain='connect-for-shopware';
@@ -118,7 +174,17 @@ final class ProductRenderer {
         wp_enqueue_script('dw-sw-product');
         return $html;
     }
+
+    /**
+     * Render the selected text link or native-style button with safe target relations.
+     *
+     * @since 1.0.0
+     * @param array $p Mapped product or category shop-link projection.
+     * @param array $input Untrusted presentation controls to normalize.
+     * @return string Validated string, label or escaped HTML for the documented operation.
+     */
     public function button(array $p,array $input=[]): string {
+        wp_enqueue_style('dw-sw-product');
         $s=Presentation::settings($input);$button=$s['linkStyle']==='button';$bricks=($input['_builder']??'')==='bricks';
         $classes='dw-sw-button '.($button?($bricks?'bricks-button':'wp-block-button__link wp-element-button dw-sw-theme-button'):'dw-sw-text-link');
         $target=$s['linkTarget']==='new'?' target="_blank" rel="noopener noreferrer"':'';
@@ -129,6 +195,15 @@ final class ProductRenderer {
         }
         wp_enqueue_style('dw-sw-product');return $link;
     }
+
+    /**
+     * Render available description, PDF and manufacturer panels with unique IDs.
+     *
+     * @since 1.0.0
+     * @param array $p Mapped product containing available details/documents/manufacturer.
+     * @param array $s Normalized shared presentation controls.
+     * @return string Validated string, label or escaped HTML for the documented operation.
+     */
     private function tabs(array $p,array $s): string {
         $domain='connect-for-shopware';$tabs=[];
         if($s['showDescriptionTab']&&!empty($p['descriptionHtml'])) $tabs[__('Description',$domain)]=wp_kses_post($p['descriptionHtml']);

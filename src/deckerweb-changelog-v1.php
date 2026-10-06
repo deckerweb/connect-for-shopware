@@ -2,8 +2,17 @@
 /** Shared deckerweb footer standard: escaped, structured release history. GPL-2.0-or-later. */
 defined( 'ABSPATH' ) || exit;
 if ( ! class_exists( 'Deckerweb_Changelog_Renderer_V1', false ) ) {
+	/**
+	 * Render local categorized changelogs as escaped accessible HTML.
+	 */
 	final class Deckerweb_Changelog_Renderer_V1 {
-		/** Parse only release headings and list items; source HTML is always escaped. */
+		/**
+		 * Convert categorized local history to escaped headings, badges and lists.
+		 *
+		 * @since 1.0.0
+		 * @param string $text Local changelog text.
+		 * @return string Validated string, label or escaped HTML for the documented operation.
+		 */
 		public static function render( string $text ): string {
 			if ( strlen( $text ) > 262144 ) { return ''; }
 			if ( preg_match( '/^== Changelog ==\s*\R(.*?)(?=^== [^\r\n]+ ==\s*$|\z)/ms', $text, $match ) ) { $text = $match[1]; }
@@ -28,7 +37,15 @@ if ( ! class_exists( 'Deckerweb_Changelog_Renderer_V1', false ) ) {
 			}
 			return $html;
 		}
-		private static function inline( string $text ): string {
+
+    /**
+     * Escape inline changelog text while retaining supported emphasis.
+     *
+     * @since 1.0.0
+     * @param string $text Local changelog text.
+     * @return string Validated string, label or escaped HTML for the documented operation.
+     */
+    private static function inline( string $text ): string {
 			// Escape first; only literal code spans become fixed markup.
 			return preg_replace( '/`([^`]+)`/', '<code>$1</code>', esc_html( $text ) );
 		}

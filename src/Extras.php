@@ -1,11 +1,31 @@
 <?php
 declare(strict_types=1);
 namespace Deckerweb\Shopware;
+/**
+ * Build independent, bounded pagination links for product grids.
+ */
 final class Pagination {
+    /**
+     * Derive a stable grid identifier used to isolate pagination parameters.
+     *
+     * @since 1.0.0
+     * @param array $settings Shared presentation and catalog selection controls.
+     * @return string Validated string, label or escaped HTML for the documented operation.
+     */
     public static function identity(array $settings): string {
         $id=(string)($settings['gridId']??'');
         return substr(hash('sha256',$id!==''?$id:wp_json_encode([$settings['categoryId']??'',$settings['limit']??6,$settings['order']??''])),0,12);
     }
+    /**
+     * Render bounded links while preserving only other Connector grid parameters.
+     *
+     * @since 1.0.0
+     * @param int $pages Total available page count.
+     * @param int $current Current one-based result page.
+     * @param string $query Scoped query-string key for this grid.
+     * @param string $root Stable rendered grid identifier.
+     * @return string Validated string, label or escaped HTML for the documented operation.
+     */
     public static function render(int $pages,int $current,string $query,string $root): string {
         $url=get_permalink(Plugin::contextPostId());
         if(!$url) $url=home_url('/');
@@ -27,12 +47,34 @@ final class Pagination {
         return $html.'</nav>';
     }
 }
+
+/**
+ * Serve on-demand product details using signed tickets and rate limits.
+ */
 final class QuickView {
+
+    /**
+     * Sign a product selection, shop fingerprint and bounded expiry timestamp.
+     *
+     * @since 1.0.0
+     * @param string $id Shopware product or category UUID.
+     * @param string $mode Selection mode: family or variant.
+     * @param int|null $expires Absolute ticket expiry timestamp, or null for the bounded default.
+     * @return string Validated string, label or escaped HTML for the documented operation.
+     */
     public static function ticket(string $id,string $mode,?int $expires=null): string {
         // Daily bucket keeps cached markup reusable; tickets expire after at most seven days.
         $expires??=(int)(floor(time()/DAY_IN_SECONDS)*DAY_IN_SECONDS+7*DAY_IN_SECONDS);
         return $expires.'.'.hash_hmac('sha256',Configuration::identity().'|'.$id.'|'.$mode.'|'.$expires,wp_salt('nonce'));
     }
+
+    /**
+     * Validate the requested UUID, mode, expiry and constant-time ticket signature.
+     *
+     * @since 1.0.0
+     * @param \WP_REST_Request $request Incoming WordPress REST request.
+     * @return bool Whether the operation is allowed or successfully completed.
+     */
     public static function allowed($request): bool {
         $id=$request->get_param('id');$mode=$request->get_param('mode');$ticket=$request->get_param('ticket');
         if(!is_string($id)||!is_string($mode)||!is_string($ticket)) return false;
@@ -40,11 +82,26 @@ final class QuickView {
         $expires=(int)$m[1];
         return $expires>=time()&&$expires<=time()+7*DAY_IN_SECONDS&&hash_equals(self::ticket($id,$mode,$expires),$ticket);
     }
+
+    /**
+     * Render the progressively enhanced Quick View trigger with a signed read ticket.
+     *
+     * @since 1.0.0
+     * @param array $p Mapped product used to build a signed on-demand trigger.
+     * @return string Validated string, label or escaped HTML for the documented operation.
+     */
     public static function trigger(array $p): string {
         wp_enqueue_style('wp-block-buttons');wp_enqueue_style('wp-block-button');
         $mode=$p['isFamily']?'family':'variant';
         return '<button type="button" hidden class="dw-sw-quick-view" data-dw-sw-quick data-product="'.esc_attr($p['id']).'" data-mode="'.$mode.'" data-ticket="'.esc_attr(self::ticket($p['id'],$mode)).'" data-shop-url="'.esc_url($p['url']).'">'.esc_html__('Quick view','connect-for-shopware').'</button>';
     }
+
+    /**
+     * Atomically enforce a per-site, hashed-client request allowance.
+     *
+     * @since 1.0.0
+     * @return bool Whether the operation is allowed or successfully completed.
+     */
     private static function rateAllowed(): bool {
         // IP is hashed with a site secret; neither raw IP nor credentials are stored.
         $key='dw_sw_quick_rate_'.substr(hash_hmac('sha256',(string)($_SERVER['REMOTE_ADDR']??'local'),wp_salt('auth')),0,32);
@@ -54,9 +111,16 @@ final class QuickView {
             $state=(array)get_transient($key);$now=time();
             if(($state['until']??0)<=$now) $state=['until'=>$now+60,'count'=>0];
             if(($state['count']??0)>=60) return false;
-            $state['count']++;set_transient($key,$state,max(1,$state['until']-$now));return true;
+            $state['count']++;RuntimeCache::set($key,$state,max(1,$state['until']-$now));return true;
         } finally {$cache->release($key);}
     }
+
+    /**
+     * Register the scoped routes or WordPress hooks for this component.
+     *
+     * @since 1.0.0
+     * @return void No return value; effects are described above.
+     */
     public static function register(): void {
         register_rest_route('deckerweb-shopware/v1','/quick-view',['methods'=>'POST','permission_callback'=>[self::class,'allowed'],
             'args'=>['id'=>['required'=>true,'type'=>'string','pattern'=>'^[a-f0-9]{32}$'],

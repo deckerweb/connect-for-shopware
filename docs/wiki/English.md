@@ -4,7 +4,7 @@
 
 ## Purpose and requirements
 
-Display Shopware products in WordPress without importing them. Shopware remains the source for product data and prices. Configure one Shopware 6 shop per WordPress installation. Requirements: WordPress 6.6+, PHP 8.1+ and a Shopware 6.7 Store API Sales Channel. Gutenberg works without Bricks; optional Bricks Components require Bricks 2.4.2+. Elementor pages can display WordPress output; there is no separate Elementor widget.
+Display Shopware products in WordPress without importing them. Shopware remains the source for product data and prices. Configure one Shopware 6 shop per WordPress site. Requirements: WordPress 6.6+, PHP 8.1+ and a Shopware 6.7 Store API Sales Channel. Gutenberg works without Bricks; optional Bricks Components require Bricks 2.4.2+. Elementor pages can display WordPress output; there is no separate Elementor widget.
 
 ## Installation and connection
 
@@ -18,6 +18,8 @@ The anonymous Sales Channel defaults determine language, currency and tax state.
 
 Changing shop/API URL clears the Connector cache and diagnostics and invalidates previous Quick View tickets. Existing article selections and installed Components are retained; review them when switching catalogs.
 
+In Multisite, a server-side `DW_SW_ACCESS_KEYS` constant can map site IDs to credentials. Alternatively, PHP may expose `DW_SW_ACCESS_KEY_<site-ID>`. An explicit site credential takes precedence over the global key; otherwise the existing global constant/environment fallback applies. Different shops each require the matching Sales Channel key. Credentials are never stored in WordPress options.
+
 ## Settings
 
 ![Connection, cache and diagnostics](https://raw.githubusercontent.com/deckerweb/connect-for-shopware/main/assets/screenshots/settings-en.png)
@@ -26,7 +28,7 @@ The compact status area shows the shop address and last known successful request
 
 ## Products and presentation
 
-Search by product name or number in a Gutenberg block or native Bricks element. Select a product family or an exact variant/size/colour. Changing the family clears the variant; the server also validates that relationship. Product cards can display image/gallery, title, summary/description/custom text, variant label, current price, list price, discount, reference price, availability and a shop link. Family prices are marked “from”.
+Search by product name or number in a Gutenberg block or native Bricks element. Select a product family or an exact variant/size/color. Changing the family clears the variant; the server also validates that relationship. Product cards can display image/gallery, title, summary/description/custom text, variant label, current price, list price, discount, reference price, availability and a shop link. Family prices are marked “from”.
 
 Arrange image and main product information left, right or below. Description and tabs follow the main information. Choose the cover image or available product gallery. Video previews link to their provider without loading an external player automatically. Optional tabs show description, available PDF documents and manufacturer data. Images and documents depend on Sales Channel data; inherited covers may show a different size.
 
@@ -63,5 +65,25 @@ The optional shared deckerweb plugin catalog is available under Plugins → Add 
 | `dw_sw_post_types` | Filter supported editorial post types; defaults to posts and pages. |
 | `dw_sw_cache_refreshed` | Action after manual Connector cache refresh. |
 | `dw_sw_page_cache_purge_requested` | Action for additional page-cache integrations. |
+
+
+## Permissions, Multisite and data
+
+Shop settings and manual refresh require manage_options. Product selection requires editorial permissions; saved assignments additionally require edit_post. Component installation checks native Bricks permissions.
+
+Each network site stores its shop URL, cache lifetime, article assignments and diagnostics separately. New sites start without a configured shop. Library settings apply per network; its introduction status applies per user. Shared Bricks Components are installed on the main site.
+
+Deactivation preserves settings, content and Components. Uninstall removes temporary Connector data, caches and locks across network sites. Shop settings, article assignments and installed Components remain. There is no additional deletion option for editorial content. The Library also detects other inactive hosts and cleans shared data only after the last host is removed, according to its own settings.
+
+## External connections and privacy
+
+Configuration authorizes read-only Store API requests to the selected shop. Requests send the server-side Sales Channel key, an anonymous context token and necessary product IDs, search terms, sorting and page parameters. No customer accounts or WordPress user profiles are transmitted. The shop server sees the WordPress server IP. Diagnostics omit keys and context tokens.
+
+The browser loads images from media URLs supplied by the shop. Product, document and manufacturer links open their target addresses; external video players are not automatically embedded. GitHub update checks and downloads contact GitHub. Optional online Library catalog requests follow its settings and start disabled. No telemetry system is included.
+
+## Release rules
+
+Compatible corrections increase the patch version; new features increase the minor version. Incompatible API/data changes require a major release and a documented migration path. Higher platform requirements are explicitly stated in release notes. Published releases and tags serve as fixed references.
+
 
 © 2026 [David Decker – DECKERWEB](https://github.com/deckerweb). GPL v2 or later · SPDX GPL-2.0-or-later.

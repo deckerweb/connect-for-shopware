@@ -2,10 +2,25 @@
 namespace Deckerweb\Shopware\Bricks;
 use Deckerweb\Shopware\Plugin;
 defined('ABSPATH') || exit;
+/**
+ * Provide native category-backed Bricks product grids and pagination.
+ */
 class ProductGrid extends RelatedProducts {
     public $name='dw-shopware-product-grid';
     public $icon='ti-layout-grid2';
+    /**
+     * Return the translated native Bricks element name.
+     *
+     * @since 1.0.0
+     * @return string Validated string, label or escaped HTML for the documented operation.
+     */
     public function get_label() {return esc_html__('Shopware Product Grid','connect-for-shopware');}
+    /**
+     * Declare the native Bricks controls used by this element.
+     *
+     * @since 1.0.0
+     * @return void No return value; effects are described above.
+     */
     public function set_controls() {
         parent::set_controls();
         foreach(['showPagination'=>__('Pagination','connect-for-shopware'),'showShopLink'=>__('More products link','connect-for-shopware')] as $key=>$label) $this->controls[$key]=['group'=>'product','type'=>'checkbox','label'=>$label];
@@ -22,6 +37,12 @@ class ProductGrid extends RelatedProducts {
             'optionsAjax'=>['action'=>'dw_sw_sort_options','categoryId'=>'{{categoryId}}'],
             'description'=>__('Leave empty to use Shopware default sorting.','connect-for-shopware')];
     }
+    /**
+     * Output the category grid inside native Bricks root attributes.
+     *
+     * @since 1.0.0
+     * @return void No return value; effects are described above.
+     */
     public function render() {
         $content=Plugin::grid(array_merge($this->settings,['_builder'=>'bricks','gridId'=>$this->id]));
         if($content==='') return;

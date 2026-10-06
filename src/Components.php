@@ -3,12 +3,27 @@
 declare(strict_types=1);
 namespace Deckerweb\Shopware;
 defined('ABSPATH') || exit;
+/**
+ * Install optional native Bricks Components without replacing existing designs.
+ */
 final class Components {
     private const VERSION='1.1.0';
+    /**
+     * Check the installed Bricks API, version and required editor permissions.
+     *
+     * @since 1.0.0
+     * @return bool Whether the operation is allowed or successfully completed.
+     */
     public static function available(): bool {
         if(is_multisite() && defined('BRICKS_MULTISITE_USE_MAIN_SITE_COMPONENTS') && BRICKS_MULTISITE_USE_MAIN_SITE_COMPONENTS && get_current_blog_id()!==get_main_site_id()) return false;
         return defined('BRICKS_VERSION') && version_compare(BRICKS_VERSION,'2.4.2','>=') && class_exists('Bricks\\Component_Repository') && class_exists('Bricks\\Helpers') && defined('BRICKS_DB_TEMPLATE_SLUG');
     }
+    /**
+     * Register the WordPress integration callbacks for this component.
+     *
+     * @since 1.0.0
+     * @return void No return value; effects are described above.
+     */
     public static function boot(): void {
         add_action('admin_post_dw_sw_components',static function(): void {
             if(!current_user_can('manage_options') || !current_user_can('edit_posts')) wp_die(esc_html__('Access denied.','connect-for-shopware'));
@@ -19,12 +34,26 @@ final class Components {
             wp_safe_redirect(admin_url('options-general.php?page=dw-sw'));exit;
         });
     }
+    /**
+     * Read the bundled locale-specific Component definitions.
+     *
+     * @since 1.0.0
+     * @return array Normalized result data for the documented operation.
+     */
     private static function catalog(): array {
         $lang=str_starts_with(determine_locale(),'de')?'de':'en';
         $data=json_decode((string)file_get_contents(DW_SW_DIR.'components/components-'.$lang.'.json'),true);
         return is_array($data['components']??null)?$data['components']:[];
     }
-    /** Local, explicit installation; never contacts Shopware or imports remote media. */
+    /**
+     * Install selected Components and optional starters while preserving existing definitions.
+     *
+     * @since 1.0.0
+     * @param array $selection Bundled Component IDs selected for installation.
+     * @param bool $examples Whether to create starter templates without catalog selections.
+     * @param bool $copies Whether to add versioned copies of existing Components.
+     * @return array Normalized result data for the documented operation.
+     */
     public static function install(array $selection,bool $examples=false,bool $copies=false): array {
         $result=['installed'=>0,'skipped'=>0,'templates'=>0,'failed'=>false];
         if(!self::available()||!current_user_can('manage_options')||!current_user_can('edit_posts')||!\Bricks\Builder_Permissions::user_has_permission('create_components')||($examples&&!\Bricks\Builder_Permissions::user_has_permission('create_templates'))) {$result['failed']=true;return $result;}
@@ -86,9 +115,25 @@ final class Components {
         }
         return $result;
     }
+
+    /**
+     * Recursively replace Component and slot references for an additional version copy.
+     *
+     * @since 1.0.0
+     * @param array $data Nested Component definition containing element references.
+     * @param array $map Original-to-copy element identifier map.
+     * @return array Normalized result data for the documented operation.
+     */
     private static function remap(array $data,array $map): array {
         $out=[];foreach($data as $key=>$value) {$key=is_string($key)?($map[$key]??$key):$key;$out[$key]=is_array($value)?self::remap($value,$map):(is_string($value)?($map[$value]??$value):$value);}return $out;
     }
+
+    /**
+     * Render the optional Components installer when the required Bricks APIs are available.
+     *
+     * @since 1.0.0
+     * @return void No return value; effects are described above.
+     */
     public static function panel(): void {
         if(!self::available()) return;
         $domain='connect-for-shopware';

@@ -3,17 +3,46 @@
 declare(strict_types=1);
 namespace Deckerweb\Shopware;
 defined('ABSPATH') || exit;
+/**
+ * Validate shop endpoints and isolate shop-specific runtime state.
+ */
 final class Configuration {
+    /**
+     * Return the validated configured storefront URL.
+     *
+     * @since 1.0.0
+     * @return string Validated string, label or escaped HTML for the documented operation.
+     */
     public static function shopUrl(): string {
         return ShopUrl::normalize((string)get_option('dw_sw_shop_url',''));
     }
+    /**
+     * Return the explicit API URL or the storefront URL with the Store API suffix.
+     *
+     * @since 1.0.0
+     * @return string Validated string, label or escaped HTML for the documented operation.
+     */
     public static function apiUrl(): string {
         $value=(string)get_option('dw_sw_api_url','');
         return $value!==''?ShopUrl::normalize($value):self::shopUrl().'/store-api';
     }
+    /**
+     * Fingerprint anonymous shop endpoints and credentials without exposing the key.
+     *
+     * @since 1.0.0
+     * @return string Validated string, label or escaped HTML for the documented operation.
+     */
     public static function identity(): string {
         return hash('sha256',self::shopUrl().'|'.self::apiUrl().'|anonymous|'.hash('sha256',Plugin::accessKey()));
     }
+    /**
+     * Validate an endpoint setting while preserving its previous value on failure.
+     *
+     * @since 1.0.0
+     * @param mixed $value Untrusted endpoint setting value.
+     * @param string $option Registered endpoint option name.
+     * @return string Validated string, label or escaped HTML for the documented operation.
+     */
     public static function sanitize($value,string $option): string {
         $previous=(string)get_option($option,'');
         if(!is_string($value)) return $previous;
@@ -27,6 +56,12 @@ final class Configuration {
             return $previous;
         }
     }
+    /**
+     * Register the WordPress integration callbacks for this component.
+     *
+     * @since 1.0.0
+     * @return void No return value; effects are described above.
+     */
     public static function boot(): void {
         add_action('admin_init',static function(): void {
             foreach(['dw_sw_shop_url','dw_sw_api_url'] as $option) register_setting('dw_sw',$option,['type'=>'string','default'=>'','sanitize_callback'=>static fn($value)=>self::sanitize($value,$option)]);
@@ -36,12 +71,31 @@ final class Configuration {
             add_action('add_option_'.$option,static function(): void {self::changed('',true);});
         }
     }
+    /**
+     * Invalidate shop-scoped runtime data after an endpoint setting changes.
+     *
+     * @since 1.0.0
+     * @param mixed $old Previously stored option value.
+     * @param mixed $new Replacement option value.
+     * @return void No return value; effects are described above.
+     */
     public static function changed($old,$new): void {
         if($old===$new) return;
         (new TransientCache())->refresh();
         delete_option('dw_sw_connection_test');delete_option('dw_sw_diagnostics');
-        do_action('dw_sw_cache_refreshed');
+        /**
+             * Notify site-scoped cache integrations after a manual refresh or shop change.
+             *
+             * @since 1.0.0
+             */
+            do_action('dw_sw_cache_refreshed');
     }
+    /**
+     * Render the shop URL and optional advanced API endpoint controls.
+     *
+     * @since 1.0.0
+     * @return void No return value; effects are described above.
+     */
     public static function fields(): void {
         $domain='connect-for-shopware';
         echo '<h2>'.esc_html__('Shop connection',$domain).'</h2><p><label for="dw-sw-shop-url">'.esc_html__('Shopware shop URL',$domain).'</label><br><input class="regular-text" type="url" id="dw-sw-shop-url" name="dw_sw_shop_url" value="'.esc_attr((string)get_option('dw_sw_shop_url','')).'" placeholder="https://shop.example.org"></p>';

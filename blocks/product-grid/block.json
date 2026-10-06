@@ -158,5 +158,6 @@
     }
   },
   "editorScript": "dw-sw-editor",
-  "style": "dw-sw-product"
+  "editorStyle": "dw-sw-product",
+  "viewStyle": "dw-sw-product"
 }

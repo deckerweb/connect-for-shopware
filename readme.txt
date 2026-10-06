@@ -4,49 +4,65 @@ Tags: shopware, gutenberg, bricks, products
 Requires at least: 6.6
 Tested up to: 7.1.2
 Requires PHP: 8.1
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Display Shopware products directly in Gutenberg and Bricks.
-
-Contents: Description · Installation · Usage · FAQ · Screenshots · Changelog
+Display Shopware products in your WordPress content using native Gutenberg blocks and Bricks elements. Shopware supplies the product data and prices.
 
 == Description ==
 
-Products/variants, gallery, description, data sheets, manufacturer, Shopware prices, dynamic categories, related products, CTA and Quick View. Shared Core with cache and diagnostics. No cart/checkout or duplicate product maintenance.
+- Products and exact variants, gallery, descriptions, data sheets and manufacturer.
+- Shopware prices, reference/list prices, availability and direct product links.
+- Article-related products, dynamic groups, standalone buttons and optional Quick View.
+- Shared display controls for Gutenberg and Bricks; optional Bricks Components.
+- Site-scoped connection, diagnostics and 15/30/60-minute cache.
 
-== Requirements ==
-
-WordPress ≥ 6.6 · PHP ≥ 8.1 · Bricks Components ≥ 2.4.2 · Shopware 6.7 Store API.
+**Version:** 1.0.1 · WordPress ≥ 6.6 · PHP ≥ 8.1 · Bricks Components ≥ 2.4.2 · Shopware 6.7 Store API.
 
 == Installation ==
 
-Download the plugin ZIP from the latest GitHub release, upload it under Plugins → Add New → Upload Plugin and activate it. Save the public HTTPS shop address under Settings → Connect for Shopware. Provide DW_SW_ACCESS_KEY server-side in wp-config.php or the PHP environment, then test the connection. Updates preserve settings and product assignments.
-
-== Usage ==
-
-Select products in the editor. Optionally install Bricks Components and examples in Settings → Connect for Shopware. Existing Components remain untouched.
+1. Download the plugin ZIP from the latest release: https://github.com/deckerweb/connect-for-shopware/releases/latest and upload it under Plugins → Add New → Upload Plugin.
+2. Save the public HTTPS shop URL under Settings → Connect for Shopware.
+3. Provide DW_SW_ACCESS_KEY through wp-config.php or the PHP environment and test the connection.
 
 == Frequently Asked Questions ==
 
 = Does WordPress calculate prices? =
-No. Shopware supplies all prices and discounts.
+No. Shopware supplies prices and discounts; WordPress displays them.
+
+= What does the cache duration mean? =
+Data is reused for 15, 30 or 60 minutes. The next request after expiry fetches fresh data.
 
 = Do I need Bricks Components? =
-No. Native elements work immediately; Components are optional.
+No. Native elements work directly; Components are optional reusable layouts.
 
-= Do updates overwrite component designs? =
-No. Existing definitions are skipped; version copies are optional.
+= Can I connect several shops? =
+Configure one shop per WordPress site. Each shop needs its own matching server-side key.
+
+= Does the plugin work in Multisite? =
+Yes. Each site configures its own shop, cache and article assignments. Library settings are shared per network.
+
+= What happens when I deactivate or uninstall? =
+Settings, article assignments and Components remain. Uninstall clears temporary Connector data; shared Library data follows its own settings.
 
 = How do I obtain updates? =
-Install the ZIP from the GitHub release. Published stable updates appear in the normal WordPress update system. Automatic updates remain your choice.
+Stable GitHub releases appear in the normal WordPress update system. Automatic updates remain your choice.
+
+Complete FAQ by topic: https://github.com/deckerweb/connect-for-shopware/wiki/FAQ-English
 
 == Screenshots ==
 
-1. Settings: shop connection, cache and diagnostics.
+1. Settings: connection, cache, diagnostics and optional Bricks Components.
 
 == Changelog ==
+
+= 1.0.1 · 2026-10-06 =
+* Improved: Load product styles only for rendered blocks and elements.
+* Fixed: Complete German formal translations for settings, editor controls and update messages.
+* Fixed: Remove Connector temporary caches and locks on uninstall while preserving settings, assigned products and installed Components.
+* Fixed: Resolve explicit server-side credentials per Multisite site while retaining the global-key fallback.
+* Misc: Complete bilingual documentation, release metadata and shared component integration.
 
 = 1.0.0 · 2026-10-06 =
 * New: Read-only Shopware products and variants in native Gutenberg blocks and Bricks elements.
@@ -56,6 +72,14 @@ Install the ZIP from the GitHub release. Published stable updates appear in the 
 * New: WordPress updates from GitHub, optional deckerweb plugin catalog and German translations.
 
 
-Author: David Decker – DECKERWEB · https://github.com/deckerweb
-Hooks: dw_sw_post_types, dw_sw_cache_refreshed, dw_sw_page_cache_purge_requested.
-German translation included. Full documentation: docs/wiki/Deutsch.md / docs/wiki/English.md.
+== Credits ==
+
+David Decker – DECKERWEB. Shared deckerweb Updater and Plugin Library: GPL-2.0-or-later. Artwork: David Decker – DECKERWEB.
+
+== Support ==
+
+https://github.com/deckerweb/connect-for-shopware/issues
+https://github.com/deckerweb/connect-for-shopware/security/advisories/new
+https://ko-fi.com/deckerweb
+https://buymeacoffee.com/daveshine
+https://paypal.me/deckerweb

@@ -1,0 +1,663 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8\n"
+
+msgid "%d minutes"
+msgstr ""
+
+msgid "%d products · %d dynamic grids"
+msgstr ""
+
+msgid "Access denied."
+msgstr ""
+
+msgid "Add"
+msgstr ""
+
+msgid "Advanced connection settings"
+msgstr ""
+
+msgid "After expiry, the next request fetches fresh data. This is not a scheduled refresh."
+msgstr ""
+
+msgid "Already installed"
+msgstr ""
+
+msgid "Also install starter templates without product selections"
+msgstr ""
+
+msgid "Apply a preset, then adjust individual settings."
+msgstr ""
+
+msgid "Automatic"
+msgstr ""
+
+msgid "Availability"
+msgstr ""
+
+msgid "Available"
+msgstr ""
+
+msgid "Back to search results"
+msgstr ""
+
+msgid "Below image"
+msgstr ""
+
+msgid "Bricks Components"
+msgstr ""
+
+msgid "Button"
+msgstr ""
+
+msgid "Button background"
+msgstr ""
+
+msgid "Button border"
+msgstr ""
+
+msgid "Button padding"
+msgstr ""
+
+msgid "Button text"
+msgstr ""
+
+msgid "Cache and refresh"
+msgstr ""
+
+msgid "Changelog"
+msgstr ""
+
+msgid "Changing the shop clears the Connector cache and connection diagnostics. Existing product selections are retained; choose products from the new shop where necessary."
+msgstr ""
+
+msgid "Check connector configuration."
+msgstr ""
+
+msgid "Choose variant"
+msgstr ""
+
+msgid "Clear detected page caches on manual connector refresh (entire site)."
+msgstr ""
+
+msgid "Clear selection"
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "Columns"
+msgstr ""
+
+msgid "Compact recommendation"
+msgstr ""
+
+msgid "Connection and diagnostics"
+msgstr ""
+
+msgid "Connection interrupted."
+msgstr ""
+
+msgid "Connection needs attention"
+msgstr ""
+
+msgid "Connection status"
+msgstr ""
+
+msgid "Connector cache cleared. Products will reload on the next request."
+msgstr ""
+
+msgid "Content"
+msgstr ""
+
+msgid "Could not access the update filesystem."
+msgstr ""
+
+msgid "Could not create the update download file."
+msgstr ""
+
+msgid "Could not prepare the GitHub release package."
+msgstr ""
+
+msgid "Cover image"
+msgstr ""
+
+msgid "Current tab"
+msgstr ""
+
+msgid "Currently unavailable"
+msgstr ""
+
+msgid "Custom button URL (optional)"
+msgstr ""
+
+msgid "Custom text"
+msgstr ""
+
+msgid "Data sheets"
+msgstr ""
+
+msgid "Data sheets tab"
+msgstr ""
+
+msgid "Deactivate the legacy deckerweb Shopware Connector before activating Connect for Shopware. Existing settings and product assignments are preserved."
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+msgid "Description tab"
+msgstr ""
+
+msgid "Detected page caches"
+msgstr ""
+
+msgid "Display preset"
+msgstr ""
+
+msgid "Documentation"
+msgstr ""
+
+msgid "During a shop outage, retained product content can be shown without expired prices or availability. Retry pauses last 60 seconds."
+msgstr ""
+
+msgid "Dynamic Shopware category"
+msgstr ""
+
+msgid "Dynamic product listing unavailable. Check the category and connector configuration."
+msgstr ""
+
+msgid "Enter a public HTTPS shop URL without credentials, query parameters or fragments. The optional API URL must end in /store-api."
+msgstr ""
+
+msgid "Enter the public storefront base URL, including an installation or language path when required. No shop is preconfigured."
+msgstr ""
+
+msgid "Enter your shop URL below to get started."
+msgstr ""
+
+msgid "Environment"
+msgstr ""
+
+msgid "Excluding VAT; shipping costs apply in the shop."
+msgstr ""
+
+msgid "From"
+msgstr ""
+
+msgid "Full product details"
+msgstr ""
+
+msgid "Full-page or CDN caches can retain rendered prices longer. Configure their expiry and purge integration before customer use."
+msgstr ""
+
+msgid "GitHub release does not contain the plugin main file."
+msgstr ""
+
+msgid "Grid gap"
+msgstr ""
+
+msgid "Heading tag"
+msgstr ""
+
+msgid "Hide"
+msgstr ""
+
+msgid "Image"
+msgstr ""
+
+msgid "Image border"
+msgstr ""
+
+msgid "Image maximum height"
+msgstr ""
+
+msgid "Image width"
+msgstr ""
+
+msgid "Images"
+msgstr ""
+
+msgid "Including VAT; shipping costs apply in the shop."
+msgstr ""
+
+msgid "Install selected components"
+msgstr ""
+
+msgid "Install selected reusable components. Existing definitions and customizations are preserved."
+msgstr ""
+
+msgid "Install this bundled version as an additional copy for existing components"
+msgstr ""
+
+msgid "Installation could not be completed. You can safely retry."
+msgstr ""
+
+msgid "Installed: %d · Existing: %d · Example templates: %d"
+msgstr ""
+
+msgid "Invalid GitHub repository URL."
+msgstr ""
+
+msgid "Invalid authentication provider."
+msgstr ""
+
+msgid "Invalid product selection."
+msgstr ""
+
+msgid "Invalid shop response."
+msgstr ""
+
+msgid "JavaScript is required to select products. Existing assignments are preserved."
+msgstr ""
+
+msgid "Last connection error"
+msgstr ""
+
+msgid "Last connection successful"
+msgstr ""
+
+msgid "Last connection test failed."
+msgstr ""
+
+msgid "Last connection test successful."
+msgstr ""
+
+msgid "Last request duration"
+msgstr ""
+
+msgid "Last successful shop request"
+msgstr ""
+
+msgid "Leave empty to append /store-api to the shop URL. Set this only when the API uses a different base path or host. HTTPS with the standard port is required; redirects are not followed."
+msgstr ""
+
+msgid "Leave empty to use Shopware default sorting."
+msgstr ""
+
+msgid "Left of image"
+msgstr ""
+
+msgid "List price"
+msgstr ""
+
+msgid "Loading product…"
+msgstr ""
+
+msgid "Manufacturer"
+msgstr ""
+
+msgid "Manufacturer tab"
+msgstr ""
+
+msgid "Manufacturer website"
+msgstr ""
+
+msgid "Matching products for this article"
+msgstr ""
+
+msgid "Maximum products"
+msgstr ""
+
+msgid "More products in the shop"
+msgstr ""
+
+msgid "More products link"
+msgstr ""
+
+msgid "More products link text"
+msgstr ""
+
+msgid "Move down"
+msgstr ""
+
+msgid "Move up"
+msgstr ""
+
+msgid "New tab"
+msgstr ""
+
+msgid "Next page"
+msgstr ""
+
+msgid "Next results"
+msgstr ""
+
+msgid "No active dynamic categories found. Assign a product group to an active category in Shopware."
+msgstr ""
+
+msgid "No products assigned to the current article."
+msgstr ""
+
+msgid "No products assigned yet. Select this block and add products in its settings, then save the article."
+msgstr ""
+
+msgid "No products currently match this selection."
+msgstr ""
+
+msgid "No products found."
+msgstr ""
+
+msgid "None detected. External/CDN caches must be managed separately."
+msgstr ""
+
+msgid "Not configured"
+msgstr ""
+
+msgid "Not recorded yet"
+msgstr ""
+
+msgid "Only active categories using a dynamic product group are available. Rules remain in Shopware."
+msgstr ""
+
+msgid "Open product link in"
+msgstr ""
+
+msgid "Optional: select a complete size and colour combination. Clear this when changing the main product."
+msgstr ""
+
+msgid "Pagination"
+msgstr ""
+
+msgid "Please check current prices and availability in the shop."
+msgstr ""
+
+msgid "Please try again shortly."
+msgstr ""
+
+msgid "Plugin website"
+msgstr ""
+
+msgid "Previous page"
+msgstr ""
+
+msgid "Previous results"
+msgstr ""
+
+msgid "Price"
+msgstr ""
+
+msgid "Private mode must be boolean."
+msgstr ""
+
+msgid "Product"
+msgstr ""
+
+msgid "Product / variant"
+msgstr ""
+
+msgid "Product data is being refreshed."
+msgstr ""
+
+msgid "Product description"
+msgstr ""
+
+msgid "Product details"
+msgstr ""
+
+msgid "Product details tabs"
+msgstr ""
+
+msgid "Product display"
+msgstr ""
+
+msgid "Product family"
+msgstr ""
+
+msgid "Product gallery"
+msgstr ""
+
+msgid "Product information position"
+msgstr ""
+
+msgid "Product link style"
+msgstr ""
+
+msgid "Product pages"
+msgstr ""
+
+msgid "Product source"
+msgstr ""
+
+msgid "Product styling"
+msgstr ""
+
+msgid "Product unavailable. Check the selection and connector configuration."
+msgstr ""
+
+msgid "Products matching in Shopware: %d"
+msgstr ""
+
+msgid "Provide a production Sales Channel key server-side via DW_SW_ACCESS_KEY in wp-config.php or the environment. The key is never displayed here."
+msgstr ""
+
+msgid "Quick view"
+msgstr ""
+
+msgid "Quick view unavailable. Please open the product in the shop."
+msgstr ""
+
+msgid "Read-only Shopware products for Gutenberg and native Bricks elements."
+msgstr ""
+
+msgid "Ready to test"
+msgstr ""
+
+msgid "Reference price"
+msgstr ""
+
+msgid "Refresh cached products"
+msgstr ""
+
+msgid "Refresh product cache"
+msgstr ""
+
+msgid "Related products"
+msgstr ""
+
+msgid "Remove"
+msgstr ""
+
+msgid "Request time budget reached."
+msgstr ""
+
+msgid "Reuse Shopware data for"
+msgstr ""
+
+msgid "Right of image"
+msgstr ""
+
+msgid "SEO summary"
+msgstr ""
+
+msgid "Sales Channel context"
+msgstr ""
+
+msgid "Sales Channel key rejected."
+msgstr ""
+
+msgid "Search products"
+msgstr ""
+
+msgid "Section heading"
+msgstr ""
+
+msgid "See the release on GitHub."
+msgstr ""
+
+msgid "Select a Shopware product in the block settings."
+msgstr ""
+
+msgid "Select a category"
+msgstr ""
+
+msgid "Select a dynamic Shopware category."
+msgstr ""
+
+msgid "Select a product and a matching variant."
+msgstr ""
+
+msgid "Select a product family or a concrete product. Search by name or number."
+msgstr ""
+
+msgid "Select product / variant"
+msgstr ""
+
+msgid "Select product family"
+msgstr ""
+
+msgid "Shipping costs apply in the shop."
+msgstr ""
+
+msgid "Shop access denied."
+msgstr ""
+
+msgid "Shop connection"
+msgstr ""
+
+msgid "Shop data unavailable."
+msgstr ""
+
+msgid "Shop data unavailable. Check the connector configuration."
+msgstr ""
+
+msgid "Shop resource unavailable."
+msgstr ""
+
+msgid "Shop temporarily unavailable."
+msgstr ""
+
+msgid "Shopware Product"
+msgstr ""
+
+msgid "Shopware Product Button"
+msgstr ""
+
+msgid "Shopware Product Grid"
+msgstr ""
+
+msgid "Shopware Related Products"
+msgstr ""
+
+msgid "Shopware default"
+msgstr ""
+
+msgid "Shopware products"
+msgstr ""
+
+msgid "Shopware shop URL"
+msgstr ""
+
+msgid "Shopware sorting"
+msgstr ""
+
+msgid "Show"
+msgstr ""
+
+msgid "Show image %d"
+msgstr ""
+
+msgid "Show video"
+msgstr ""
+
+msgid "Starter templates have no shop-specific selections. Choose products and categories through the native element controls inside each slot."
+msgstr ""
+
+msgid "Store API URL (optional)"
+msgstr ""
+
+msgid "Tax-free; shipping costs apply in the shop."
+msgstr ""
+
+msgid "Technical details"
+msgstr ""
+
+msgid "Test connection now"
+msgstr ""
+
+msgid "Text"
+msgstr ""
+
+msgid "Text link"
+msgstr ""
+
+msgid "Text source"
+msgstr ""
+
+msgid "The GitHub package could not be prepared. The installed version has been kept."
+msgstr ""
+
+msgid "The GitHub package does not contain the Connect for Shopware plugin file."
+msgstr ""
+
+msgid "The package identity or version does not match a newer Connect for Shopware release."
+msgstr ""
+
+msgid "The package version differs from the offered update. Please check for updates again."
+msgstr ""
+
+msgid "The plugin must be installed in a stable slug directory."
+msgstr ""
+
+msgid "The private update could not be authorized. Check the repository credentials and refresh updates."
+msgstr ""
+
+msgid "The private update download failed. Check credentials and try again."
+msgstr ""
+
+msgid "The update filesystem is unavailable. Please try again."
+msgstr ""
+
+msgid "The update package could not be checked."
+msgstr ""
+
+msgid "The update package has missing or invalid WordPress/PHP requirements."
+msgstr ""
+
+msgid "These assignments feed Related Products in your Single template."
+msgstr ""
+
+msgid "This release requires a newer WordPress or PHP version. The installed version has been kept."
+msgstr ""
+
+msgid "Title"
+msgstr ""
+
+msgid "Update the other active deckerweb plugins to use translated shared update messages."
+msgstr ""
+
+msgid "Uses Shopware products assigned to the current article. For a Single template, select a preview article with assignments."
+msgstr ""
+
+msgid "Variant text"
+msgstr ""
+
+msgid "Video"
+msgstr ""
+
+msgid "View product"
+msgstr ""
+
+msgid "Watch video on %s"
+msgstr ""
+
+msgid "Your shop. Your content. Connected."
+msgstr ""
+
+msgctxt "block title"
+msgid "Shopware Product"
+msgstr ""
+
+msgctxt "block title"
+msgid "Shopware Product Button"
+msgstr ""
+
+msgctxt "block title"
+msgid "Shopware Product Grid"
+msgstr ""
+
+msgctxt "block title"
+msgid "Shopware Related Products"
+msgstr ""
+
+msgid "discount"
+msgstr ""

@@ -1,3 +1,8 @@
 * text=auto
 *.png binary
 *.mo binary
+
+/tools export-ignore
+/assets/designs export-ignore
+/docs/content.json export-ignore
+/languages/messages.json export-ignore

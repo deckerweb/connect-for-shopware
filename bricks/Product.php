@@ -2,16 +2,37 @@
 namespace Deckerweb\Shopware\Bricks;
 use Deckerweb\Shopware\{Plugin,Presentation};
 defined('ABSPATH') || exit;
+/**
+ * Provide the native Bricks product element and shared presentation controls.
+ */
 class Product extends \Bricks\Element {
     public $category='general';
     public $name='dw-shopware-product';
     public $icon='ti-package';
+    /**
+     * Return the translated native Bricks element name.
+     *
+     * @since 1.0.0
+     * @return string Validated string, label or escaped HTML for the documented operation.
+     */
     public function get_label() {return esc_html__('Shopware Product','connect-for-shopware');}
+    /**
+     * Group native Bricks content and presentation controls.
+     *
+     * @since 1.0.0
+     * @return void No return value; effects are described above.
+     */
     public function set_control_groups() {
         $this->control_groups['product']=['title'=>esc_html__('Product','connect-for-shopware'),'tab'=>'content'];
         $this->control_groups['content']=['title'=>esc_html__('Content','connect-for-shopware'),'tab'=>'content'];
         $this->control_groups['parts']=['title'=>esc_html__('Product styling','connect-for-shopware'),'tab'=>'content'];
     }
+    /**
+     * Declare the native Bricks controls used by this element.
+     *
+     * @since 1.0.0
+     * @return void No return value; effects are described above.
+     */
     public function set_controls() {
         $this->controls['productRef']=['group'=>'product','type'=>'select','label'=>esc_html__('Search products','connect-for-shopware'),
             'searchable'=>true,'clearOnChange'=>['variantRef'],'optionsAjax'=>['action'=>'dw_sw_product_options'],
@@ -22,6 +43,12 @@ class Product extends \Bricks\Element {
             'description'=>esc_html__('Optional: select a complete size and colour combination. Clear this when changing the main product.','connect-for-shopware')];
         $this->presentationControls();
     }
+    /**
+     * Declare shared native styling, gallery, price, tab and link controls.
+     *
+     * @since 1.0.0
+     * @return void No return value; effects are described above.
+     */
     protected function presentationControls(): void {
         $this->controls['preset']=['group'=>'content','type'=>'select','label'=>__('Display preset','connect-for-shopware'),
             'options'=>['compact'=>__('Compact recommendation','connect-for-shopware'),'description'=>__('Product description','connect-for-shopware'),'details'=>__('Full product details','connect-for-shopware')],
@@ -63,10 +90,41 @@ class Product extends \Bricks\Element {
         $this->controls['buttonBorder']=['group'=>'parts','type'=>'border','label'=>__('Button border','connect-for-shopware'),
             'css'=>[['property'=>'border','selector'=>'.dw-sw-button']]];
     }
+    /**
+     * Return the semantic wrapper tag for this element.
+     *
+     * @since 1.0.0
+     * @return string Validated string, label or escaped HTML for the documented operation.
+     */
     protected function containerTag(): string {return 'article';}
+    /**
+     * Return the scoped CSS class for this element wrapper.
+     *
+     * @since 1.0.0
+     * @return string Validated string, label or escaped HTML for the documented operation.
+     */
     protected function containerClass(): string {return 'dw-sw-product';}
+    /**
+     * Render the selected product using this element instance settings.
+     *
+     * @since 1.0.0
+     * @param array $ref Normalized product selection used by the native element.
+     * @return string Validated string, label or escaped HTML for the documented operation.
+     */
     protected function productContent(array $ref): string {return Plugin::product($ref,array_merge($this->settings,['_builder'=>'bricks']));}
+    /**
+     * Enqueue the registered stylesheet for this rendered Bricks element.
+     *
+     * @since 1.0.0
+     * @return void No return value; effects are described above.
+     */
     public function enqueue_scripts() {wp_enqueue_style('dw-sw-product');}
+    /**
+     * Output the selected product inside native Bricks root attributes.
+     *
+     * @since 1.0.0
+     * @return void No return value; effects are described above.
+     */
     public function render() {
         try {
             $ref=Presentation::reference((string)($this->settings['productRef']??''));

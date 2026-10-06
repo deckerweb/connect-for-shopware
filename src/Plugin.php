@@ -1,9 +1,18 @@
 <?php
 declare(strict_types=1);
 namespace Deckerweb\Shopware;
+/**
+ * Register shared Core, native blocks, Bricks elements and presentation entry points.
+ */
 final class Plugin {
     private static ?ProductRepository $repository=null;
     private static string $repositoryIdentity="";
+    /**
+     * Register the WordPress integration callbacks for this component.
+     *
+     * @since 1.0.0
+     * @return void No return value; effects are described above.
+     */
     public static function boot(): void {
         add_action('init',[self::class,'init']);
         add_action('rest_api_init',[Rest::class,'register']);
@@ -20,9 +29,14 @@ final class Plugin {
         add_action('wp_ajax_dw_sw_category_options',[Rest::class,'bricksCategories']);
         add_action('wp_ajax_dw_sw_sort_options',[Rest::class,'bricksSortings']);
         add_action('wp_ajax_dw_sw_variant_options',[Rest::class,'bricksVariants']);
-        add_action('wp_enqueue_scripts',static function(): void { wp_enqueue_style('dw-sw-product'); });
         add_action('enqueue_block_editor_assets',[self::class,'editorAssets']);
     }
+    /**
+     * Load translations and register shared assets, blocks and article metadata.
+     *
+     * @since 1.0.0
+     * @return void No return value; effects are described above.
+     */
     public static function init(): void {
         load_plugin_textdomain('connect-for-shopware',false,dirname(plugin_basename(DW_SW_DIR.'connect-for-shopware.php')).'/languages');
         wp_register_style('dw-sw-product',DW_SW_URL.'assets/product.css',[],DW_SW_VERSION);
@@ -48,12 +62,55 @@ final class Plugin {
                     'selectionMode'=>['type'=>'string','enum'=>['family','variant']]]]]]]);
         }
     }
+
+    /**
+     * Return existing editorial types selected by the public post-type filter.
+     *
+     * @since 1.0.0
+     * @return array Normalized result data for the documented operation.
+     */
     public static function postTypes(): array {
-        return array_values(array_filter((array)apply_filters('dw_sw_post_types',['post','page']),
+        return array_values(array_filter((array)/**
+         * Filter the editorial post types that support Shopware product assignments.
+         *
+         * @since 1.0.0
+         * @param string[] $post_types Existing registered post-type names to return.
+         */
+        apply_filters('dw_sw_post_types' ,['post','page']),
             static fn($type)=>is_string($type)&&post_type_exists($type)));
     }
+
+    /**
+     * Enqueue the translated block editor script and shared presentation presets.
+     *
+     * @since 1.0.0
+     * @return void No return value; effects are described above.
+     */
     public static function editorAssets(): void {wp_enqueue_script('dw-sw-editor');wp_add_inline_script('dw-sw-editor','window.dwSwEditor='.wp_json_encode(['postTypes'=>self::postTypes(),'presets'=>Presentation::presets()]).';','before');}
-    public static function accessKey(): string {if(defined('DW_SW_ACCESS_KEY')&&(string)constant('DW_SW_ACCESS_KEY')!=='') return (string)constant('DW_SW_ACCESS_KEY');return (string)getenv('DW_SW_ACCESS_KEY');}
+
+    /**
+     * Resolve explicit site credentials or the global constant/environment without persisting them.
+     *
+     * @since 1.0.0
+     * @return string Validated string, label or escaped HTML for the documented operation.
+     */
+    public static function accessKey(): string {
+        if(is_multisite()){
+            $site=get_current_blog_id();$map=defined('DW_SW_ACCESS_KEYS')?constant('DW_SW_ACCESS_KEYS'):[];
+            if(is_array($map)&&isset($map[$site])&&is_string($map[$site])&&$map[$site]!=='')return $map[$site];
+            $specific=getenv('DW_SW_ACCESS_KEY_'.$site);if(is_string($specific)&&$specific!=='')return $specific;
+        }
+        $constant=defined('DW_SW_ACCESS_KEY')?constant('DW_SW_ACCESS_KEY'):'';
+        if(is_string($constant)&&$constant!=='')return $constant;
+        return (string)getenv('DW_SW_ACCESS_KEY');
+    }
+
+    /**
+     * Create or reuse the repository for the current shop/credential fingerprint.
+     *
+     * @since 1.0.0
+     * @return ProductRepository Repository for the current anonymous shop context.
+     */
     public static function repository(): ProductRepository {
         $key=self::accessKey();
         if($key==='') throw new \RuntimeException('Connector not configured');
@@ -65,6 +122,15 @@ final class Plugin {
         self::$repository=new ProductRepository($client,new TransientCache(),new ProductMapper(Configuration::shopUrl(),[$client,'context']),$identity,$ttl);
         return self::$repository;
     }
+
+    /**
+     * Render one product selection or a safe editor-only unavailable message.
+     *
+     * @since 1.0.0
+     * @param array $reference Normalized product UUID and family/variant mode.
+     * @param array $settings Shared presentation and catalog selection controls.
+     * @return string Validated string, label or escaped HTML for the documented operation.
+     */
     public static function product(array $reference,array $settings=[]): string {
         if(empty($reference['productId'])) return '';
         try {
@@ -74,26 +140,65 @@ final class Plugin {
             return self::isEditor()?'<p class="dw-sw-error">'.esc_html__('Product unavailable. Check the selection and connector configuration.','connect-for-shopware').'</p>':'';
         }
     }
+
+    /**
+     * Detect Gutenberg REST preview or supported Bricks editor rendering.
+     *
+     * @since 1.0.0
+     * @return bool Whether the operation is allowed or successfully completed.
+     */
     public static function isEditor(): bool {
         return current_user_can('edit_posts')&&(is_admin()||(defined('REST_REQUEST')&&REST_REQUEST)
             ||(function_exists('bricks_is_builder')&&bricks_is_builder())
             ||(function_exists('bricks_is_builder_call')&&bricks_is_builder_call()));
     }
+
+    /**
+     * Render a Gutenberg product with native wrapper attributes.
+     *
+     * @since 1.0.0
+     * @param array $attributes Gutenberg block attributes.
+     * @return string Validated string, label or escaped HTML for the documented operation.
+     */
     public static function blockProduct(array $attributes): string {
         $content=self::product($attributes,$attributes);
         if($content==='') return '';
         return '<article '.get_block_wrapper_attributes(['class'=>'dw-sw-product']).'>'.$content.'</article>';
     }
+
+    /**
+     * Render a standalone shop action for a selected family or variant.
+     *
+     * @since 1.0.0
+     * @param array $reference Normalized product UUID and family/variant mode.
+     * @param array $settings Shared presentation and catalog selection controls.
+     * @return string Validated string, label or escaped HTML for the documented operation.
+     */
     public static function button(array $reference,array $settings=[]): string {
         try {
             $p=self::repository()->product((string)($reference['productId']??''),(string)($reference['selectionMode']??'variant'));
             return (new ProductRenderer())->button($p,array_replace(['linkStyle'=>'button'],$settings));
         } catch(\Throwable $e) {return self::isEditor()?'<p>'.esc_html__('Product unavailable. Check the selection and connector configuration.','connect-for-shopware').'</p>':'';}
     }
+
+    /**
+     * Render the Gutenberg standalone product button wrapper.
+     *
+     * @since 1.0.0
+     * @param array $attributes Gutenberg block attributes.
+     * @return string Validated string, label or escaped HTML for the documented operation.
+     */
     public static function blockButton(array $attributes): string {
         $content=self::button($attributes,$attributes);
         return $content===''?'':'<div '.get_block_wrapper_attributes(['class'=>'dw-sw-cta']).'>'.$content.'</div>';
     }
+
+    /**
+     * Resolve the current article or supported template preview article.
+     *
+     * @since 1.0.0
+     * @return int Resolved integer identifier.
+     */
     public static function contextPostId(): int {
         $id=(int)get_the_ID();
         if($id&&get_post_type($id)!=='bricks_template') return $id;
@@ -104,6 +209,16 @@ final class Plugin {
         $id=(int)get_queried_object_id();
         return $id&&get_post_type($id)!=='bricks_template'?$id:0;
     }
+
+    /**
+     * Render assigned article products with shared cards and an optional preview selection.
+     *
+     * @since 1.0.0
+     * @param int $postId WordPress article or preview post ID.
+     * @param array $settings Shared presentation and catalog selection controls.
+     * @param array|null $previewItems Optional authorized editor assignments not yet saved to the article.
+     * @return string Validated string, label or escaped HTML for the documented operation.
+     */
     public static function related(int $postId,array $settings=[],?array $previewItems=null): string {
         $items=Presentation::associations($previewItems??get_post_meta($postId,'_dw_sw_products',true));$cards='';
         foreach($items as $item) {
@@ -115,6 +230,14 @@ final class Plugin {
         if($heading==='') $heading=__('Matching products for this article','connect-for-shopware');
         return '<h2 class="dw-sw-related-heading">'.esc_html($heading).'</h2><div class="dw-sw-grid">'.$cards.'</div>';
     }
+
+    /**
+     * Render a rule-backed category grid with independent pagination and optional shop link.
+     *
+     * @since 1.0.0
+     * @param array $settings Shared presentation and catalog selection controls.
+     * @return string Validated string, label or escaped HTML for the documented operation.
+     */
     public static function grid(array $settings=[]): string {
         $id=(string)($settings['categoryId']??'');
         if($id==='') return self::isEditor()?'<p class="dw-sw-error">'.esc_html__('Select a dynamic Shopware category.','connect-for-shopware').'</p>':'';
@@ -155,10 +278,28 @@ final class Plugin {
             return self::isEditor()?'<p class="dw-sw-error">'.esc_html__('Dynamic product listing unavailable. Check the category and connector configuration.','connect-for-shopware').'</p>':'';
         }
     }
+
+    /**
+     * Wrap the category grid in native Gutenberg block attributes.
+     *
+     * @since 1.0.0
+     * @param array $attributes Gutenberg block attributes.
+     * @return string Validated string, label or escaped HTML for the documented operation.
+     */
     public static function blockGrid(array $attributes): string {
         $html=self::grid($attributes);
         return $html===''?'':'<section '.get_block_wrapper_attributes(['class'=>'dw-sw-related dw-sw-dynamic-grid']).'>'.$html.'</section>';
     }
+
+    /**
+     * Resolve the block article context and render its assigned products.
+     *
+     * @since 1.0.0
+     * @param array $attributes Gutenberg block attributes.
+     * @param string $content Saved block content; dynamic rendering resolves its product data.
+     * @param \WP_Block $block Current WordPress block instance and article context.
+     * @return string Validated string, label or escaped HTML for the documented operation.
+     */
     public static function blockRelated(array $attributes,string $content,$block): string {
         $postId=(int)($block->context['postId']??self::contextPostId());
         $html=$postId?self::related($postId,$attributes):'';
