@@ -1,80 +1,67 @@
 # Connect for Shopware · Anleitung
 
-[English](English.md) · [FAQ](FAQ-Deutsch.md) · [Changelog](Changelog-Deutsch.md)
+[English](English.md) · [FAQ](FAQ-Deutsch.md) · [Änderungsverlauf](Changelog-Deutsch.md)
 
 ## Zweck und Voraussetzungen
 
-Version 1.0.0 zeigt Shopware-Produkte in WordPress ohne Produktimport. Pro WordPress-Installation einen Shopware-6-Shop konfigurieren. Keine Domain, kein Sales Channel, keine Währung und kein Kundenprodukt sind voreingestellt. Die API-Anbindung wird gegen Shopware 6.7 geprüft. WordPress ab 6.6, PHP ab 8.1 und die Store API sind erforderlich. Die vorherige Fassung ist vom Nutzer unter PHP 8.3.x bestätigt; lokal wird PHP 8.4.5 getestet. Die native Bricks-Anbindung wird mit 2.4.2 geprüft. Gutenberg funktioniert ohne Bricks. Elementor-Seiten können WordPress-Ausgaben anzeigen; ein eigenes Elementor-Widget ist nicht enthalten.
+Shopware-Produkte ohne Produktimport in WordPress anzeigen. Shopware bleibt die Quelle für Produktdaten und Preise. Pro WordPress-Installation wird ein Shopware-6-Shop konfiguriert. Voraussetzungen: WordPress ab 6.6, PHP ab 8.1 und ein Sales Channel mit Shopware-6.7-Store-API. Gutenberg funktioniert ohne Bricks; optionale Bricks Components benötigen Bricks ab 2.4.2. Elementor-Seiten können WordPress-Ausgaben anzeigen; ein eigenes Elementor-Widget ist nicht enthalten.
 
-## Installation und Umstellung
+## Installation und Verbindung
 
-Zuerst das alte deckerweb Shopware Connector deaktivieren. Das neue ZIP connect-for-shopware installieren und aktivieren. Beide Einstiegsdateien dürfen nicht gleichzeitig laufen; das Plugin schützt gegen das aktive Altplugin. DW_SW_ACCESS_KEY, Einstellungen, Artikelzuordnungen, native Bricks-Elementnamen und vorhandene Gutenberg-Blockkennungen bleiben kompatibel. Das inaktive Altplugin anschließend entfernen. Keine Deinstallationsroutine löscht Inhalte.
+Das Plugin-ZIP aus dem [aktuellen GitHub-Release](https://github.com/deckerweb/connect-for-shopware/releases/latest) unter Plugins → Installieren → Plugin hochladen installieren und aktivieren. Unter Einstellungen → Connect for Shopware die öffentliche HTTPS-Shop-Adresse speichern. Kein Shop ist voreingestellt.
 
-Den Sales-Channel-Key serverseitig in wp-config.php als DW_SW_ACCESS_KEY oder als gleichnamige Umgebungsvariable setzen. Niemals im Block oder Template hinterlegen. Einstellungen → Connect for Shopware zeigt den Konfigurationsstatus ohne Schlüsselanzeige. Dort die Verbindung testen. Der anonyme Kontext muss zur gewünschten Währung, Sprache und Besteuerung passen.
+Den Sales-Channel-Schlüssel serverseitig als `DW_SW_ACCESS_KEY` bereitstellen: Konstante in wp-config.php definieren oder eine gleichnamige PHP-Umgebungsvariable einrichten. Eine nicht leere Konstante hat Vorrang. Das Plugin lädt keine .env-Dateien, speichert den Schlüssel nicht in WordPress-Optionen und zeigt ihn nicht in den Einstellungen an. Eine ausdrücklich eingebundene geheime PHP-Datei außerhalb des Webverzeichnisses kann dieselbe Konstante definieren. Zugangsdaten nicht in Blöcken, Templates oder öffentlichen Dateien hinterlegen.
+
+Nach dem Speichern die Verbindung testen. Die Store-API-Adresse entspricht standardmäßig der Shop-Adresse plus /store-api. Bei Sprachpfaden oder einem anderen API-Host unter Erweiterte Verbindungseinstellungen die vollständige API-Basisadresse eintragen. Beide Adressen benötigen öffentliches HTTPS mit Standardport, ohne Zugangsdaten, Query-Parameter oder Fragmente. Weiterleitungen und private/lokale HTTP-Ziele werden nicht unterstützt.
+
+Die Vorgaben des anonymen Sales-Channel-Kontexts bestimmen Sprache, Währung und Steuerart. Ein Sprachpfad in der Shop-Adresse schaltet diesen Kontext nicht selbst um. Den angezeigten Kontext mit dem gewünschten Storefront-Kontext abgleichen. Preise und Rabatte kommen aus Shopware; WordPress berechnet sie nicht neu. Währungsformatierung und Netto-/Brutto-/Steuerfrei-Hinweise folgen Shopware.
+
+Ein Wechsel der Shop-/API-Adresse leert Connector-Cache und Diagnose und macht alte Schnellansicht-Tickets ungültig. Artikelzuordnungen und installierte Components bleiben erhalten; beim Katalogwechsel die Produktauswahl prüfen.
+
+## Einstellungen
+
+![Verbindung, Cache und Diagnose](https://raw.githubusercontent.com/deckerweb/connect-for-shopware/main/assets/screenshots/settings-de.png)
+
+Der kompakte Statusbereich zeigt Shop-Adresse und letzten bekannten erfolgreichen Abruf. Es gibt keine laufende Live-Überwachung: Für den aktuellen Zustand die Verbindung testen. API-Sonderfälle und technische Diagnose sind aufklappbar. Verbindung, Cache und optionale Bricks Components besitzen getrennte Bereiche.
 
 ## Produkte und Darstellung
 
-Im Gutenberg-Block oder nativen Bricks-Element nach Name oder Produktnummer suchen. Produktfamilie oder konkrete Variante mit Gebinde/Farbe auswählen. Ein Familienwechsel leert die Variantenauswahl; der Server prüft zusätzlich die Familienzugehörigkeit. Die Produktkarte kann Bild/Galerie, Titel, Kurztext/Beschreibung/eigenen Text, Variantentext, aktuellen Preis, Listenpreis, Rabatt, Grundpreis, Verfügbarkeit und Shop-Link zeigen. Preise und Rabatte liefert Shopware; WordPress rechnet sie niemals neu. Familienpreise tragen die Kennzeichnung „ab“.
+Im Gutenberg-Block oder nativen Bricks-Element nach Produktname oder Artikelnummer suchen. Eine Produktfamilie oder eine konkrete Variante mit Gebindegröße/Farbe wählen. Ein Familienwechsel leert die Variante; der Server prüft die Zuordnung zusätzlich. Produktkarten können Bild/Galerie, Titel, Kurztext/Beschreibung/eigenen Text, Variantentext, aktuellen Preis, Streichpreis, Rabatt, Grundpreis, Verfügbarkeit und Shop-Link zeigen. Familienpreise sind mit „ab“ gekennzeichnet.
 
-Bild und wichtigste Produktangaben sind links, rechts oder darunter anordbar. Beschreibung und Tabs folgen diesen Angaben. Cover oder vollständige verfügbare Galerie sind optional. Video-Vorschaubilder verlinken zum Anbieter, ohne automatisch einen fremden Player zu laden. Tabs zeigen wahlweise Beschreibung, verfügbare PDF-Datenblätter und Herstellerdaten. Medien und Dokumente hängen von den Associations und tatsächlichen Daten des Sales Channels ab. Vererbte Cover können eine andere Gebindegröße zeigen.
+Bild und Hauptangaben links, rechts oder untereinander anordnen. Beschreibung und Tabs folgen den Hauptangaben. Coverbild oder vorhandene Galerie wählen. Videovorschauen führen zum Anbieter, ohne automatisch einen externen Player zu laden. Optionale Tabs zeigen Beschreibung, vorhandene PDF-Dokumente und Herstellerdaten. Bilder und Dokumente hängen von den Sales-Channel-Daten ab; geerbte Cover können eine andere Gebindegröße zeigen.
 
-Textlink oder nativ gestalteten Button sowie bestehenden/neuen Tab wählen. Neue Tabs erhalten noopener noreferrer. Produkt-URLs bevorzugen Shopware-SEO-URLs; fehlen diese, wird ein technischer Produktlink verwendet. Die optionale Schnellansicht lädt Details erst beim Öffnen, mit signiertem Lese-Ticket und Abruflimit. Escape schließt den Dialog, der Fokus kehrt zum Auslöser zurück. Der Shop-Link bleibt nutzbar, wenn die Schnellansicht nicht lädt.
+Textlink oder gestalteten Button sowie bestehenden/neuen Tab wählen. Links in neuen Tabs verwenden noopener noreferrer. Produktlinks bevorzugen Shopware-SEO-Adressen und nutzen ersatzweise technische Produktadressen. Die optionale Schnellansicht lädt Details bei Bedarf und unterstützt Escape sowie Fokusrückgabe. Shop-Links bleiben bei einem Ladefehler nutzbar.
 
 ## Artikelprodukte und dynamische Raster
 
-Geordnete Produkte im Dokumentbereich Shopware-Produkte oder im Inspector des passenden Blocks zuordnen; den Artikel für die Frontend-Ausgabe speichern. Passende Produkte liest diese Zuordnungen. Im Bricks-Single-Template einen zugeordneten Beitrag als Vorschau wählen. Produktbutton gibt einen eigenständigen Shop-CTA aus.
+Produkte geordnet im Dokumentbereich Shopware-Produkte oder im Inspector des Blocks Passende Produkte zuordnen; den Artikel für die Frontend-Ausgabe speichern. Passende Produkte liest diese Zuordnungen. Im Bricks-Single-Template einen Vorschauartikel mit zugeordneten Produkten wählen. Produktbutton stellt einen eigenständigen Shop-CTA bereit.
 
-Dynamische Raster wählen eine aktive Shopware-Kategorie mit dynamischer Produktgruppe. Die Regeln wertet Shopware aus; WordPress kopiert sie nicht. Maximale Anzahl und verfügbare Shopware-Sortierung wählen; ohne Sortierauswahl gilt der Shop-Standard. Seitenzahlen und Kategorie-Shop-Link sind optional. Mehrere Raster behalten unabhängige Seitenparameter. Kompakt-, Beschreibungs- und Detail-Vorlagen sind in Gutenberg und Bricks gemeinsam verfügbar.
+Für ein dynamisches Raster eine aktive Shopware-Kategorie mit dynamischer Produktgruppe auswählen. Shopware wertet deren Regeln aus. Produktanzahl und verfügbare Sortierung wählen; eine leere Sortierung verwendet den Shop-Standard. Seitennavigation und Kategorie-Shop-Link sind optional. Mehrere Raster behalten getrennte Seitenparameter. Darstellungsvorgaben werden von Gutenberg und Bricks gemeinsam genutzt.
 
-## Freiwillige Bricks Components
+## Optionale Bricks Components
 
-Bei aktivem Bricks ab 2.4.2 erscheint der Components-Installer in den Einstellungen. Einzelne Components auswählen: Produktkarte, Produktdetails, passende Produkte, dynamisches Raster und Produktbutton. Optionale Startvorlagen mit nativen Elementen ohne Produktauswahl machen Slots sofort nutzbar. Es wird nichts automatisch installiert.
+Mit aktivem Bricks ab 2.4.2 lassen sich Components für Produktkarte, Produktdetails, passende Produkte, dynamisches Raster und Produktbutton einzeln installieren. Optionale Startvorlagen enthalten native Elemente ohne Katalogauswahl. Es wird nichts automatisch installiert. Vorhandene Definitionen und Vorlagen bleiben erhalten; zusätzliche Versionskopien erlauben das separate Ausprobieren mitgelieferter Designs. Wiederholen derselben Version erzeugt keine doppelten Kopien.
 
-Bestehende Komponenten-IDs werden übersprungen. Bearbeitete Definitionen und Beispielvorlagen bleiben erhalten. Zum separaten Ausprobieren einer mitgelieferten Version die zusätzliche Versionskopie wählen. Dieselbe Version erzeugt bei wiederholter Installation keine weiteren Kopien. Plugin-Updates ersetzen keine installierten Definitionen. Beim Kopieren werden Root-/Slot-Verweise angepasst. Der Installer respektiert Bricks-Berechtigungen für Components/Vorlagen und native Importsperren. Bei Multisite mit gemeinsamen Hauptseiten-Components ist die Installation nur auf der Hauptseite verfügbar.
+Den Component-Slot in der Strukturansicht aufklappen und sein natives Shopware-Element für die Produkt-/Kategoriensuche auswählen. Ein leerer Slot benötigt ein Element; Startvorlagen enthalten bereits eines. Wrapper-Einstellungen sind gemeinsam, Einstellungen der Slot-Elemente gehören zur jeweiligen Instanz. Passende Produkte stellt Überschrift, Buttontext und Ziel als verbundene Eigenschaften bereit. Der Installer berücksichtigt Bricks-Berechtigungen und Import-Sperren. Bei Multisite mit gemeinsamen Hauptsite-Components auf der Hauptsite installieren.
 
-Vier Definitionen verwenden native Slots. Im Strukturbaum den Slot öffnen und sein Shopware-Element auswählen, um die normale Produktsuche/Kategoriesuche zu nutzen. Ein neu eingefügter leerer Slot benötigt ein Element; alternativ eine installierte Startvorlage einsetzen und ihr Produkt auswählen. Gemeinsame Rahmen-Einstellungen werden zentral gepflegt; die Einstellungen des Slot-Elements gehören zur Instanz. Passende Produkte stellt Überschrift, Buttontext und Linkziel als verbundene Komponenten-Eigenschaften bereit. Startvorlagen enthalten keine Produkt-/Kategorie-IDs. Die Auswahl aus dem eigenen Shop vornehmen.
+## Cache und Verfügbarkeit
 
-## Cache, Diagnose und Sicherheit
+Die Cache-Dauer beträgt standardmäßig 30 Minuten; wählbar sind 15, 30 oder 60 Minuten. Nach Ablauf lädt der nächste Abruf frische Daten. Es gibt keine Aktualisierung nach Zeitplan. Ein manueller Refresh leert den Connector-Cache. Optional werden die Seiten-Caches der gesamten Website von erkanntem WP Rocket, LiteSpeed Cache, WP Super Cache oder W3 Total Cache geleert. Ablaufzeiten von Server-/CDN-Caches separat abstimmen, damit dargestellte Preise nicht länger als vorgesehen gespeichert bleiben.
 
-Standard sind 30 Minuten Cache; auswählbar sind 15/30/60. Nach Ablauf fragt der nächste Zugriff frische Daten ab. Es gibt keinen zeitgesteuerten Hintergrundabruf. Manueller Refresh leert den Connector-Cache. Die optionale Anbindung leert den Seiten-Cache der gesamten Website bei erkanntem WP Rocket, LiteSpeed, WP Super Cache oder W3 Total Cache. Ohne diese Plugins wird kein Seiten-Cache geleert. Server-/CDN-Caches separat abstimmen, damit sichtbare Preise nicht länger als gewünscht zwischengespeichert bleiben.
+Bei einer vorübergehenden Shop-Störung können gespeicherte Produktinhalte ohne veraltete Preise oder Verfügbarkeit erscheinen. Ohne gespeicherte Daten wird keine Produktkarte ausgegeben. Eine Wiederholpause von 60 Sekunden und Abrufgrenzen schützen beide Systeme. Die Diagnose enthält Status und Dauer ohne rohe Zugangsdaten oder Kontext-Tokens. Produktimport, Shopware-Erweiterung, schreibende Shop-Abfragen, WordPress-Warenkorb oder Checkout sind nicht erforderlich.
 
-Der Core verwendet Abruflimits pro Anfrage, atomare Sperren für Cache-Erneuerung, 60 Sekunden Pause nach Fehlern und vorübergehend gespeicherte Inhalte bei Ausfällen. Solche Inhalte zeigen keine alten Preise oder Verfügbarkeiten; ein ausdrücklich fehlendes Produkt entfernt seine Sicherung. Diagnose speichert neutrale Statuswerte und Dauer, keine Schlüssel, Kontext-Tokens oder rohen Fehlermeldungen. Kein WordPress-Warenkorb/Checkout, kein Produktimport, keine schreibende Shop-Anfrage und keine Shopware-Erweiterung sind erforderlich.
+## Updates, Übersetzungen und Plugin-Katalog
 
-## Dokumentation, Updates und Erweiterungs-Hooks
+Stabile GitHub-Releases erscheinen im regulären WordPress-Updatesystem. Automatische Updates bleiben deine Entscheidung. Einstellungen, Artikelzuordnungen und installierte Components bleiben beim Update erhalten. Englische Oberfläche und deutsche Übersetzungen sind enthalten. Der Footer verlinkt die Anleitung in der Adminsprache und öffnet den strukturierten lokalen Änderungsverlauf; ohne JavaScript führt der Link zur Textdatei.
 
-Englische Quelltexte und deutsche PHP-/JavaScript-Übersetzung sind enthalten. Der Standard-Footer öffnet den vollständigen lokalen strukturierten Changelog; ohne JavaScript führt der Link zur lokalen Textdatei. Dokumentationslinks folgen der Adminsprache.
+Der optionale gemeinsame deckerweb-Plugin-Katalog ist unter Plugins → Installieren → deckerweb erreichbar. Seine Einstellungen werden mit anderen installierten Library-Hosts geteilt. Der Connector läuft unabhängig von anderen deckerweb-Plugins. Öffentliche Updates benötigen keine GitHub-Zugangsdaten.
 
-Das öffentliche Repository ist https://github.com/deckerweb/connect-for-shopware. Stabile Releases mit installierbarem ZIP stehen auf GitHub bereit; die zweisprachige Anleitung und FAQ liegen im Wiki. Der gemeinsame GitHub-Updater V2.1.0 bindet an das reguläre WordPress-Updatesystem an. Identität, angebotene Version und WordPress-/PHP-Anforderungen werden vor Ersetzen geprüft. Automatische Updates aktiviert das Plugin nicht.
+## Erweiterungs-Hooks
 
-Öffentliche Hooks: dw_sw_post_types filtert unterstützte Inhaltstypen (Standard Beitrag/Seite); dw_sw_cache_refreshed signalisiert manuellen Cache-Refresh; dw_sw_page_cache_purge_requested ermöglicht zusätzliche Seiten-Cache-Anbindungen. Vorhandene Hook-Namen bleiben kompatibel.
-
-## Prüfung und verbleibende Abnahme
-
-Lokale Mapping-, WordPress-/Bricks-Ausgabe-, AJAX-Rechte-, Cache-Ausfall-, Galerie-/Tab-, CTA-, Pagination- und Schnellansicht-Tests bestanden. Components-Installation, Wiederholung, Erhalt eigener Anpassungen, Versionskopien, Beispiel-Verweise und externe CSS-Erzeugung sind lokal geprüft. Admin-Installationsablauf sowie Escape/Fokusrückgabe des Changelogs wurden im Browser getestet. Vollständige Bearbeitung im lizenzierten Bricks-Builder und responsive Sichtprüfung bleiben Schritte auf der Testseite. PHP 8.3 wurde für diese Fassung nicht lokal ausgeführt. Keine Kundeninstallation oder Shopänderung wurde vorgenommen.
+| Hook | Zweck |
+| --- | --- |
+| `dw_sw_post_types` | Unterstützte redaktionelle Inhaltstypen filtern; Standard: Beiträge und Seiten. |
+| `dw_sw_cache_refreshed` | Aktion nach manuellem Connector-Cache-Refresh. |
+| `dw_sw_page_cache_purge_requested` | Aktion für zusätzliche Seiten-Cache-Anbindungen. |
 
 © 2026 [David Decker – DECKERWEB](https://github.com/deckerweb). GPL v2 or later · SPDX GPL-2.0-or-later.
-
-## Nutzerabnahme vom 6. Oktober 2026
-
-Der Nutzer bestätigt erfolgreiche Installation und volle Funktion von 0.4.0-dev unter PHP 8.3.x sowie die Deaktivierung des Altplugins. Die zuvor offene PHP-8.3-Abnahme ist damit durch den Nutzer bestätigt; ein lokaler PHP-8.3-Test wurde weiterhin nicht durchgeführt. Einzelne Bricks-Builder-/responsive Prüfschritte wurden nicht gesondert beschrieben.
-
-## Shop-URL und serverseitiger Schlüssel ab 0.5.0
-
-Nach dem Update die öffentliche Shop-URL unter Einstellungen → Connect for Shopware eintragen. Auch bestehende Installationen müssen dies einmal tun; es gibt keine alte Domain als Rückfallwert. Speichern, danach Verbindung testen. Shop-URL und Sales-Channel-Key sind beide erforderlich. Standardmäßig ist die Store-API-URL die Shop-URL plus /store-api. Bei Sprachpfaden wie /en oder separatem API-Host im optionalen Feld die tatsächlich vollständige API-Basisadresse angeben. Beide URLs benötigen öffentliches HTTPS auf dem Standardport, ohne Zugangsdaten, Query-Parameter oder Fragment. Lokale/private HTTP-Ziele und Weiterleitungen werden nicht unterstützt; der sichere WordPress-HTTP-Transport prüft das Ziel beim Abruf.
-
-Die anonymen Sales-Channel-Standardwerte bestimmen Sprache, Währung und Steuerart. Die Shop-URL oder ihr Sprachpfad schaltet diesen Kontext nicht selbst um. Den gemeldeten Kontext mit der gewünschten Shop-Darstellung abgleichen. Produkt-/Suchabrufe bleiben ausschließlich lesend; kein Kontext-PATCH und keine Kundenanmeldung. Die Formatierung verwendet Währungssymbol und Dezimalstellen aus Shopware; Netto-/steuerfrei-/Bruttohinweise folgen der tatsächlichen Steuerart. Ohne bekannte SEO-Sprachkennung wird der technische Produktlink verwendet, statt die URL einer anderen Sprache zu wählen.
-
-Ein Wechsel der Shop-/API-URL leert Connector-Cache und Diagnose und entwertet bisherige Schnellansicht-Tickets. Die optionale Leerung erkannter Seiten-Caches läuft ebenfalls. Produktzuordnungen und installierte Components bleiben bewusst erhalten; beim Wechsel des Katalogs die Auswahl prüfen. Shop und Schlüssel-Fingerprint trennen Cache-Einträge. Bearbeitete Components werden nie heimlich geändert; mitgelieferte Components 1.1.0 bieten neutrale Startvorlagen als optionale Zusatzkopien.
-
-DW_SW_ACCESS_KEY ist auf zwei unterstützten Wegen möglich: als WordPress-Konstante, normalerweise in wp-config.php definiert, oder als PHP-Umgebungsvariable vom Hosting/Server. Eine nicht leere Konstante hat Vorrang. Der Hoster muss die Variable an PHP weiterreichen; eine beliebige .env-Datei reicht nicht aus und wird vom Plugin nicht geladen. Optional kann eine außerhalb des öffentlichen Webverzeichnisses liegende PHP-Datei dieselbe Konstante definieren und ausdrücklich von wp-config.php eingebunden werden. Zugriffsrechte einschränken. Dies ist Serverkonfiguration, kein vom Plugin verwalteter Schlüsselspeicher. Der Key wird weder in WordPress-Optionen gespeichert noch im Admin angezeigt. Keine Variante schützt vor einem offengelegten Server oder Backup; Zugriffe entsprechend absichern. Ein Secret-Manager kann dieselbe Konstante/Umgebungsvariable bereitstellen.
-
-[Shopware: Preise und Steuerkontext](https://developer.shopware.com/frontends/frontends-recipes/catalog/prices.html)
-
-## Freigegebene Grafiken ab 0.5.1
-
-Der Nutzer hat Signal in Mattblau gewählt. Passende echte SVG-/PNG-Icons und deutsche/englische Banner sind lokal enthalten und werden in Readmes und Updater verwendet. Diese Fassung ändert Grafik-/Versionsdokumentation; Shop-Konfiguration und Connector-Verhalten bleiben gleich. Banner wurden mit dem integrierten Imagegen-Werkzeug ausgearbeitet und übersetzt. Das Icon wurde als Vektor rekonstruiert; Rastergrößen wurden aus diesen Quellen exportiert.
-
-
-## Connect-Einstellungen
-
-Kompakter Kopf und Statusbereich zeigen die Shop-Adresse und den letzten erfolgreichen Abruf. Der Status beschreibt den zuletzt bekannten Zustand, keine laufende Live-Prüfung. Verbindung manuell testen, wenn du den aktuellen Zustand prüfen möchtest. API-Sonderfälle und technische Diagnosedaten sind aufklappbar. Cache, Verbindung und optionale Bricks Components besitzen getrennte Bereiche. Die gemeinsame deckerweb Plugin Library ergänzt den zentralen Katalog; der Connector bleibt unabhängig von anderen deckerweb-Plugins. Shopware-Schlüssel bleibt serverseitig. Das Updater-Update verwendet den öffentlichen Repository-Modus; keine zusätzlichen GitHub-Zugangsdaten erforderlich.

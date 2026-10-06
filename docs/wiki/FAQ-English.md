@@ -20,11 +20,11 @@
 
 **Do updates overwrite my design?** No. Existing definitions/examples are preserved; extra version copies are optional.
 
-## Installation
+## Installation and updates
 
-**How do I migrate?** Deactivate the old plugin, install and activate the new ZIP, then remove the old plugin. Data is preserved.
+**How do I install the plugin?** Upload the plugin ZIP from the latest GitHub release under Plugins → Add New → Upload Plugin, then activate it.
 
-**Are GitHub updates available?** After repository publication and a matching release. Until then, update using the local ZIP.
+**How do I obtain updates?** Stable releases appear in the normal WordPress update system. Automatic updates remain your choice.
 
 ## Shop setup and credentials
 

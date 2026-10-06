@@ -20,11 +20,11 @@
 
 **Überschreibt ein Update meine Gestaltung?** Nein. Vorhandene Definitionen/Beispiele werden erhalten; zusätzliche Versionskopien sind optional.
 
-## Installation
+## Installation und Updates
 
-**Wie wechsel ich vom alten Namen?** Altplugin deaktivieren, neues ZIP installieren und aktivieren. Danach Altplugin löschen; die Daten bleiben erhalten.
+**Wie installiere ich das Plugin?** Das Plugin-ZIP aus dem aktuellen GitHub-Release unter Plugins → Installieren → Plugin hochladen installieren und aktivieren.
 
-**Sind GitHub-Updates schon verfügbar?** Erst nach Veröffentlichung des Repositorys und eines passenden Releases. Derzeit dient das lokale ZIP als Update.
+**Wie erhalte ich Updates?** Stabile Releases erscheinen im normalen WordPress-Updatesystem. Automatische Updates bleiben deine Entscheidung.
 
 ## Shop-Zuordnung und Schlüssel
 
