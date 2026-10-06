@@ -44,7 +44,7 @@ The Core uses per-request network limits, atomic regeneration locks, a 60-second
 
 English source UI and a bundled German PHP/JavaScript translation are included. The standard footer opens the complete local structured changelog; without JavaScript its link opens the local text file. Documentation links follow the administrator language.
 
-The intended repository is https://github.com/deckerweb/connect-for-shopware. This local delivery does not publish that repository, wiki or a release. Until publication, use these bundled wiki sources and ZIP updates. Once a public release exists, the shared GitHub updater V2 integrates with normal WordPress updates. Candidate identity, offered version and WordPress/PHP requirements are validated before replacement. Automatic updates are not enabled by the plugin.
+The public repository is https://github.com/deckerweb/connect-for-shopware. Stable releases include an installable ZIP on GitHub; bilingual documentation and FAQs are published in the Wiki. The shared GitHub updater V2.1.0 integrates with normal WordPress updates. Candidate identity, offered version and WordPress/PHP requirements are validated before replacement. Automatic updates are not enabled by the plugin.
 
 Public hooks: dw_sw_post_types filters supported editorial types (post/page by default); dw_sw_cache_refreshed signals manual cache refresh; dw_sw_page_cache_purge_requested supports additional page-cache adapters. Existing hook names remain compatible.
 

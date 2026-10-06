@@ -44,7 +44,7 @@ Der Core verwendet Abruflimits pro Anfrage, atomare Sperren für Cache-Erneuerun
 
 Englische Quelltexte und deutsche PHP-/JavaScript-Übersetzung sind enthalten. Der Standard-Footer öffnet den vollständigen lokalen strukturierten Changelog; ohne JavaScript führt der Link zur lokalen Textdatei. Dokumentationslinks folgen der Adminsprache.
 
-Das vorgesehene Repository ist https://github.com/deckerweb/connect-for-shopware. Diese lokale Lieferung veröffentlicht weder Repository noch Wiki oder Release. Bis dahin gelten die mitgelieferten Wiki-Quellen und ZIP-Updates. Nach einem öffentlichen Release bindet der gemeinsame GitHub-Updater V2 an das reguläre WordPress-Updatesystem an. Identität, angebotene Version und WordPress-/PHP-Anforderungen werden vor Ersetzen geprüft. Automatische Updates aktiviert das Plugin nicht.
+Das öffentliche Repository ist https://github.com/deckerweb/connect-for-shopware. Stabile Releases mit installierbarem ZIP stehen auf GitHub bereit; die zweisprachige Anleitung und FAQ liegen im Wiki. Der gemeinsame GitHub-Updater V2.1.0 bindet an das reguläre WordPress-Updatesystem an. Identität, angebotene Version und WordPress-/PHP-Anforderungen werden vor Ersetzen geprüft. Automatische Updates aktiviert das Plugin nicht.
 
 Öffentliche Hooks: dw_sw_post_types filtert unterstützte Inhaltstypen (Standard Beitrag/Seite); dw_sw_cache_refreshed signalisiert manuellen Cache-Refresh; dw_sw_page_cache_purge_requested ermöglicht zusätzliche Seiten-Cache-Anbindungen. Vorhandene Hook-Namen bleiben kompatibel.
 
