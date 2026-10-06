@@ -30,10 +30,11 @@ final class GitHubUpdates {
 				self::REPOSITORY,
 				'Connect for Shopware',
 				__( 'Read-only Shopware products for Gutenberg and native Bricks elements.', 'connect-for-shopware' ),
-				$this->artwork()
+				$this->artwork(),
+				defined( '\\Deckerweb\\GitHubReleaseUpdater\\V2\\Updater::SUPPORTS_HOST_TRANSLATIONS' ) ? [ 'translate' => require DW_SW_DIR . 'includes/updater-translations.php' ] : []
 			);
 		} catch ( \InvalidArgumentException $error ) {
-			// An unsupported installation directory must not break verse rendering.
+			// An unsupported installation directory must not break product rendering.
 			return;
 		}
 		$updater->register();

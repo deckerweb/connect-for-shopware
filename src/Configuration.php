@@ -46,8 +46,8 @@ final class Configuration {
         $domain='connect-for-shopware';
         echo '<h2>'.esc_html__('Shop connection',$domain).'</h2><p><label for="dw-sw-shop-url">'.esc_html__('Shopware shop URL',$domain).'</label><br><input class="regular-text" type="url" id="dw-sw-shop-url" name="dw_sw_shop_url" value="'.esc_attr((string)get_option('dw_sw_shop_url','')).'" placeholder="https://shop.example.org"></p>';
         echo '<p>'.esc_html__('Enter the public storefront base URL, including an installation or language path when required. No shop is preconfigured.',$domain).'</p>';
-        echo '<p><label for="dw-sw-api-url">'.esc_html__('Store API URL (optional)',$domain).'</label><br><input class="regular-text" type="url" id="dw-sw-api-url" name="dw_sw_api_url" value="'.esc_attr((string)get_option('dw_sw_api_url','')).'" placeholder="https://shop.example.org/store-api"></p>';
+        echo '<details class="dw-sw-technical"><summary>'.esc_html__('Advanced connection settings',$domain).'</summary><p><label for="dw-sw-api-url">'.esc_html__('Store API URL (optional)',$domain).'</label><br><input class="regular-text" type="url" id="dw-sw-api-url" name="dw_sw_api_url" value="'.esc_attr((string)get_option('dw_sw_api_url','')).'" placeholder="https://shop.example.org/store-api"></p>';
         echo '<p>'.esc_html__('Leave empty to append /store-api to the shop URL. Set this only when the API uses a different base path or host. HTTPS with the standard port is required; redirects are not followed.',$domain).'</p>';
-        echo '<p>'.esc_html__('Changing the shop clears the Connector cache and connection diagnostics. Existing product selections are retained; choose products from the new shop where necessary.',$domain).'</p>';
+        echo '</details><p class="description">'.esc_html__('Changing the shop clears the Connector cache and connection diagnostics. Existing product selections are retained; choose products from the new shop where necessary.',$domain).'</p>';
     }
 }

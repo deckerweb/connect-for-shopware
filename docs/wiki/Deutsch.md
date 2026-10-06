@@ -4,7 +4,7 @@
 
 ## Zweck und Voraussetzungen
 
-Version 0.5.1-dev zeigt Shopware-Produkte in WordPress ohne Produktimport. Pro WordPress-Installation einen Shopware-6-Shop konfigurieren. Keine Domain, kein Sales Channel, keine Währung und kein Kundenprodukt sind voreingestellt. Die API-Anbindung wird gegen Shopware 6.7 geprüft. WordPress ab 6.6, PHP ab 8.1 und die Store API sind erforderlich. Die vorherige Fassung ist vom Nutzer unter PHP 8.3.x bestätigt; lokal wird PHP 8.4.5 getestet. Die native Bricks-Anbindung wird mit 2.4.2 geprüft. Gutenberg funktioniert ohne Bricks. Elementor-Seiten können WordPress-Ausgaben anzeigen; ein eigenes Elementor-Widget ist nicht enthalten.
+Version 1.0.0 zeigt Shopware-Produkte in WordPress ohne Produktimport. Pro WordPress-Installation einen Shopware-6-Shop konfigurieren. Keine Domain, kein Sales Channel, keine Währung und kein Kundenprodukt sind voreingestellt. Die API-Anbindung wird gegen Shopware 6.7 geprüft. WordPress ab 6.6, PHP ab 8.1 und die Store API sind erforderlich. Die vorherige Fassung ist vom Nutzer unter PHP 8.3.x bestätigt; lokal wird PHP 8.4.5 getestet. Die native Bricks-Anbindung wird mit 2.4.2 geprüft. Gutenberg funktioniert ohne Bricks. Elementor-Seiten können WordPress-Ausgaben anzeigen; ein eigenes Elementor-Widget ist nicht enthalten.
 
 ## Installation und Umstellung
 
@@ -73,3 +73,8 @@ DW_SW_ACCESS_KEY ist auf zwei unterstützten Wegen möglich: als WordPress-Konst
 ## Freigegebene Grafiken ab 0.5.1
 
 Der Nutzer hat Signal in Mattblau gewählt. Passende echte SVG-/PNG-Icons und deutsche/englische Banner sind lokal enthalten und werden in Readmes und Updater verwendet. Diese Fassung ändert Grafik-/Versionsdokumentation; Shop-Konfiguration und Connector-Verhalten bleiben gleich. Banner wurden mit dem integrierten Imagegen-Werkzeug ausgearbeitet und übersetzt. Das Icon wurde als Vektor rekonstruiert; Rastergrößen wurden aus diesen Quellen exportiert.
+
+
+## Connect-Einstellungen
+
+Kompakter Kopf und Statusbereich zeigen die Shop-Adresse und den letzten erfolgreichen Abruf. Der Status beschreibt den zuletzt bekannten Zustand, keine laufende Live-Prüfung. Verbindung manuell testen, wenn du den aktuellen Zustand prüfen möchtest. API-Sonderfälle und technische Diagnosedaten sind aufklappbar. Cache, Verbindung und optionale Bricks Components besitzen getrennte Bereiche. Die gemeinsame deckerweb Plugin Library ergänzt den zentralen Katalog; der Connector bleibt unabhängig von anderen deckerweb-Plugins. Shopware-Schlüssel bleibt serverseitig. Das Updater-Update verwendet den öffentlichen Repository-Modus; keine zusätzlichen GitHub-Zugangsdaten erforderlich.

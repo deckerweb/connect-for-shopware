@@ -4,7 +4,7 @@ Tags: shopware, gutenberg, bricks, products
 Requires at least: 6.6
 Tested up to: 7.1.2
 Requires PHP: 8.1
-Stable tag: 0.5.1-dev
+Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,9 +40,24 @@ No. Native elements work immediately; Components are optional.
 No. Existing definitions are skipped; version copies are optional.
 
 = How do I obtain updates? =
-Use the installable ZIP for now. GitHub release updates are prepared; publication and a live update have not been verified in this delivery.
+Install the ZIP from the GitHub release. Published stable updates appear in the normal WordPress update system. Automatic updates remain your choice.
 
 == Changelog ==
+
+= 1.0.0 · 2026-10-06 =
+* New: First stable release: shared read-only Shopware Core for native Gutenberg blocks and Bricks elements, optional Bricks Components and configurable shop URLs.
+* Improved: Compact Connect settings, connection status, collapsible technical details and approved matte-blue vector artwork.
+* Improved: Original stable deckerweb Updater V2.1.0 and latest deckerweb Plugin Library 0.6.0 runtime integrated.
+* Misc: Bilingual documentation and FAQ, installable stable-slug ZIP, complete changelogs and release checks; existing settings and product assignments preserved.
+
+
+= 0.6.0-dev · 2026-10-06 =
+* New: Bundled original deckerweb Plugin Library 0.6.0 with shared host registration.
+* Improved: Compact Connect admin header, visible connection status and separate connection, cache and Bricks sections.
+* Improved: Advanced connection settings and technical diagnostics collapse on demand; native controls and restrained matte-blue accents.
+* Improved: Shared updater V2.1.0-dev.3 with translated host messages and existing package safeguards.
+* Misc: Existing Shopware settings, product assignments, blocks and native Bricks elements retained.
+
 
 = 0.5.1-dev · 2026-10-06 =
 * Improved: User-approved Signal artwork in matte blue, with a lighter headline and paired German/English banners.
@@ -66,26 +81,6 @@ Use the installable ZIP for now. GitHub release updates are prepared; publicatio
 * Fixed: Preserve existing components, assignments, settings and Gutenberg block identifiers during migration.
 * Fixed: Bricks external CSS is generated once; avoid a second pass removing styles through selector deduplication.
 * Misc: deckerweb standards audit and local migration/installer regression checks.
-
-
-= 0.3.0-dev · 2026-10-05 =
-* New: Connection test and safe diagnostics with last success, duration and neutral failure status.
-* New: Optional detected page-cache purge on manual refresh for WP Rocket, LiteSpeed Cache, WP Super Cache and W3 Total Cache.
-* New: Network-free product column in post/page lists and shared Gutenberg/Bricks presentation presets.
-* New: Standalone Shopware Product Button Gutenberg block and native Bricks element.
-* New: Optional category shop link and pagination for dynamic grids.
-* New: Optional Quick View with gallery, tabs, shop button, signed read tickets and request limit.
-* Improved: Outage fallback, 60-second retry pause, network budget and atomic cache locks; retained content hides expired prices and availability.
-* Fixed: Gallery/tab IDs stay unique in dynamically loaded dialogs.
-* Misc: Bilingual setup, cache behavior, limits and FAQ; expanded local regression checks.
-
-
-= 0.2.0-dev · 2026-10-04 =
-* New: Gutenberg Product Grid block and native Bricks element for dynamic product groups through active Shopware categories.
-* New: Category selection, maximum product count, Shopware sorting, heading and responsive columns.
-* New: Protected editor API and native Bricks AJAX category/sorting selectors.
-* Improved: Shared repository and card rendering; Shopware evaluates rules and prices without duplicate rule maintenance.
-* Misc: Dynamic categories verified, including pagination and price sorting. Implementation and setup documented in both languages.
 
 
 

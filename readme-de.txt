@@ -4,7 +4,7 @@ Tags: shopware, gutenberg, bricks, products
 Requires at least: 6.6
 Tested up to: 7.1.2
 Requires PHP: 8.1
-Stable tag: 0.5.1-dev
+Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,9 +40,24 @@ Nein. Native Elemente funktionieren sofort; Components sind freiwillig.
 Nein. Bestehende Definitionen werden übersprungen; Versionskopien sind optional.
 
 = Wie erhalte ich Updates? =
-Derzeit das installierbare ZIP verwenden. GitHub-Release-Updates sind vorbereitet; Veröffentlichung und ein echtes Online-Update wurden in dieser Lieferung nicht verifiziert.
+Das ZIP aus dem GitHub-Release installieren. Veröffentlichte stabile Updates erscheinen im normalen WordPress-Updatesystem. Automatische Updates bleiben deine Entscheidung.
 
 == Changelog ==
+
+= 1.0.0 · 2026-10-06 =
+* Neu: Erstes stabiles Release: gemeinsamer lesender Shopware-Core für native Gutenberg-Blöcke und Bricks-Elemente, optionale Bricks Components und konfigurierbare Shop-Adressen.
+* Verbessert: Kompakte Connect-Einstellungen, Verbindungsstatus, aufklappbare technische Details und freigegebene mattblaue Vektorgrafiken.
+* Verbessert: Unveränderter stabiler deckerweb Updater V2.1.0 und letztgültige deckerweb Plugin Library 0.6.0 integriert.
+* Sonstiges: Zweisprachige Dokumentation und FAQ, installierbares ZIP mit stabilem Slug, vollständige Changelogs und Release-Prüfungen; bestehende Einstellungen und Produktzuordnungen erhalten.
+
+
+= 0.6.0-dev · 2026-10-06 =
+* Neu: Unveränderte deckerweb Plugin Library 0.6.0 mit gemeinsamer Host-Registrierung integriert.
+* Verbessert: Kompakter Connect-Kopf, sichtbarer Verbindungsstatus und getrennte Bereiche für Verbindung, Cache und Bricks.
+* Verbessert: Erweiterte Verbindungseinstellungen und technische Diagnose aufklappbar; native Bedienelemente und dezente mattblaue Akzente.
+* Verbessert: Gemeinsamer Updater V2.1.0-dev.3 mit übersetzten Host-Meldungen und bisherigen Paketprüfungen.
+* Sonstiges: Bestehende Shopware-Einstellungen, Produktzuordnungen, Blöcke und native Bricks-Elemente erhalten.
+
 
 = 0.5.1-dev · 2026-10-06 =
 * Verbessert: Vom Nutzer freigegebene Signal-Gestaltung in Mattblau, mit dezenterem Titel und passenden deutschen/englischen Bannern.
@@ -66,26 +81,6 @@ Derzeit das installierbare ZIP verwenden. GitHub-Release-Updates sind vorbereite
 * Behoben: Bestehende Komponenten, Zuordnungen, Einstellungen und Gutenberg-Blocknamen bei der Umstellung erhalten.
 * Behoben: Externe Bricks-CSS-Dateien nur einmal erzeugen; ein zweiter Durchlauf entfernt keine Styles durch Selektor-Deduplizierung.
 * Sonstiges: Prüfung der deckerweb-Vorgaben und lokale Umstellungs-/Installer-Tests.
-
-
-= 0.3.0-dev · 2026-10-05 =
-* Neu: Verbindungstest und sichere Diagnose mit letztem Erfolg, Dauer und neutralem Fehlerstatus.
-* Neu: Automatische, abschaltbare Seiten-Cache-Erkennung beim manuellen Refresh für WP Rocket, LiteSpeed Cache, WP Super Cache und W3 Total Cache.
-* Neu: Produktspalte in Beitrags-/Seitenlisten ohne zusätzliche Shop-Abfragen und gemeinsame Darstellungsvorlagen für Gutenberg/Bricks.
-* Neu: Eigenständiger Shopware-Produktbutton in Gutenberg und als natives Bricks-Element.
-* Neu: Optionaler Kategorie-Shop-Link und Seitenzahlen im dynamischen Raster.
-* Neu: Zuschaltbare Schnellansicht mit Galerie, Tabs, Shop-Button, signierten Lese-Tickets und Abruflimit.
-* Verbessert: Ausfallschutz mit 60-Sekunden-Pause, Netzwerklimit und atomaren Cache-Sperren; vorhandene Inhalte ohne abgelaufene Preise oder Verfügbarkeit.
-* Behoben: Galerie-/Tab-Kennungen bleiben auch in nachgeladenen Modals eindeutig.
-* Sonstiges: Einrichtung, Cache-Verhalten, Grenzen und FAQ zweisprachig dokumentiert; lokale Regressionstests erweitert.
-
-
-= 0.2.0-dev · 2026-10-04 =
-* Neu: Gutenberg-Block „Shopware-Produktraster“ und natives Bricks-Element für dynamische Produktgruppen über aktive Shopware-Kategorien.
-* Neu: Kategorieauswahl, maximale Produktanzahl, Shopware-Sortierung, Überschrift und responsive Spalten.
-* Neu: Geschützte Editor-API und native Bricks-AJAX-Auswahl für Kategorien und Sortierungen.
-* Verbessert: Gemeinsames Repository und Karten-Rendering; Shopware wertet Regeln und Preise aus, keine doppelte Regelpflege.
-* Sonstiges: Dynamische Kategorien geprüft; Pagination und Preis-Sortierung erfolgreich. Umsetzung und Einrichtung zweisprachig dokumentiert.
 
 
 

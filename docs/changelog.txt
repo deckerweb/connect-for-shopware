@@ -1,5 +1,18 @@
 == Changelog ==
 
+= 1.0.0 · 2026-10-06 =
+* New: First stable release: shared read-only Shopware Core for native Gutenberg blocks and Bricks elements, optional Bricks Components and configurable shop URLs.
+* Improved: Compact Connect settings, connection status, collapsible technical details and approved matte-blue vector artwork.
+* Improved: Original stable deckerweb Updater V2.1.0 and latest deckerweb Plugin Library 0.6.0 runtime integrated.
+* Misc: Bilingual documentation and FAQ, installable stable-slug ZIP, complete changelogs and release checks; existing settings and product assignments preserved.
+
+= 0.6.0-dev · 2026-10-06 =
+* New: Bundled original deckerweb Plugin Library 0.6.0 with shared host registration.
+* Improved: Compact Connect admin header, visible connection status and separate connection, cache and Bricks sections.
+* Improved: Advanced connection settings and technical diagnostics collapse on demand; native controls and restrained matte-blue accents.
+* Improved: Shared updater V2.1.0-dev.3 with translated host messages and existing package safeguards.
+* Misc: Existing Shopware settings, product assignments, blocks and native Bricks elements retained.
+
 = 0.5.1-dev · 2026-10-06 =
 * Improved: User-approved Signal artwork in matte blue, with a lighter headline and paired German/English banners.
 * Improved: Genuine reconstructed SVG icon and matching PNG icons in 128/256 pixels; banners in 772×250 and 1544×500 pixels.

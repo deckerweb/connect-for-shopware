@@ -54,6 +54,8 @@ final class Admin {
         echo '<section class="dw-sw-diagnostics"><h2>'.esc_html__('Connection and diagnostics',$domain).'</h2>';
         if($test) echo '<p>'.esc_html(!empty($test['ok'])?__('Last connection test successful.',$domain):__('Last connection test failed.',$domain)).' '.esc_html(wp_date('d.m.Y H:i:s',(int)$test['checkedAt'])).'</p>';
         echo '<form action="'.esc_url(admin_url('admin-post.php')).'" method="post"><input type="hidden" name="action" value="dw_sw_test">';wp_nonce_field('dw_sw_test');submit_button(__('Test connection now',$domain),'secondary');echo '</form>';
+
+        echo '<details class="dw-sw-technical"><summary>'.esc_html__('Technical details',$domain).'</summary>';
         if(!empty($test['ok'])&&!empty($test['context'])) {$c=$test['context'];echo '<p>'.esc_html__('Sales Channel context','connect-for-shopware').': '.esc_html(implode(' · ',[(string)$c['salesChannelId'],(string)$c['locale'],(string)$c['currency'],(string)$c['taxState']])).'</p>';}
         echo '<dl><dt>'.esc_html__('Last successful shop request',$domain).'</dt><dd>'.esc_html(isset($state['lastSuccess'])?wp_date('d.m.Y H:i:s',(int)$state['lastSuccess']):__('Not recorded yet',$domain)).'</dd>';
         echo '<dt>'.esc_html__('Last request duration',$domain).'</dt><dd>'.esc_html(isset($state['durationMs'])?$state['durationMs'].' ms':'—').'</dd>';
@@ -62,28 +64,35 @@ final class Admin {
             echo '<dt>'.esc_html__('Last connection error',$domain).'</dt><dd>'.esc_html($labels[$state['errorCode']]??__('Check connector configuration.',$domain)).' · '.esc_html(wp_date('d.m.Y H:i:s',(int)$state['lastError'])).'</dd>';
         }
         echo '</dl><p>'.esc_html__('Detected page caches',$domain).': '.esc_html(implode(', ',Operations::detectedCaches())?:__('None detected. External/CDN caches must be managed separately.',$domain)).'</p>';
-        echo '<p>'.esc_html__('During a shop outage, retained product content can be shown without expired prices or availability. Retry pauses last 60 seconds.',$domain).'</p></section>';
+        echo '<p>'.esc_html__('During a shop outage, retained product content can be shown without expired prices or availability. Retry pauses last 60 seconds.',$domain).'</p></details></section>';
     }
     public static function page(): void {
         if(!current_user_can('manage_options')) return;
         $configured=Plugin::accessKey()!==''&&(string)get_option('dw_sw_shop_url','')!=='';
-        echo '<div class="wrap dw-sw-settings"><h1>Connect for Shopware <small>'.esc_html(DW_SW_VERSION).'</small></h1>';
-        echo '<p>'.esc_html__('Shopware remains the source of all product data. This connector reads products and links to the shop.','connect-for-shopware').'</p>';
-        echo '<p><strong>'.esc_html__('Connection configuration','connect-for-shopware').':</strong> '.esc_html($configured?__('Configured','connect-for-shopware'):__('Not configured','connect-for-shopware')).'</p>';
-        echo '<p>'.esc_html__('Provide a production Sales Channel key server-side via DW_SW_ACCESS_KEY in wp-config.php or the environment. The key is never displayed here.','connect-for-shopware').'</p>';
-        $shop=(string)get_option('dw_sw_shop_url','');if($shop!=='') echo '<p><a href="'.esc_url($shop).'">'.esc_html($shop).'</a></p>';
+        $domain='connect-for-shopware';$shop=(string)get_option('dw_sw_shop_url','');
+        $test=(array)get_option('dw_sw_connection_test',[]);$state=(array)get_option('dw_sw_diagnostics',[]);
+        $lastSuccess=(int)($state['lastSuccess']??0);
+        if(!empty($test['ok'])) $lastSuccess=max($lastSuccess,(int)($test['checkedAt']??0));
+        $failed=$configured&&((!empty($test)&&empty($test['ok'])&&(int)($test['checkedAt']??0)>=$lastSuccess)||(!empty($state['lastError'])&&((int)$state['lastError']>$lastSuccess||(!empty($state['currentError'])&&(int)$state['lastError']===$lastSuccess))));
+        $status=!$configured?__('Not configured',$domain):($failed?__('Connection needs attention',$domain):($lastSuccess?__('Last connection successful',$domain):__('Ready to test',$domain)));
+        $tone=!$configured?'neutral':($failed?'warning':($lastSuccess?'success':'neutral'));
+        echo '<div class="wrap dw-sw-settings"><header class="dw-sw-header"><img src="'.esc_url(DW_SW_URL.'assets/brand/icon.svg').'" width="44" height="44" alt=""><div><h1>Connect for Shopware</h1><p>'.esc_html__('Your shop. Your content. Connected.',$domain).'</p></div></header>';
+        echo '<section class="dw-sw-status" aria-label="'.esc_attr__('Connection status',$domain).'"><div><strong class="dw-sw-status-label dw-sw-status-'.$tone.'">'.esc_html($status).'</strong>';
+        if($shop!=='') echo '<p><a href="'.esc_url($shop).'">'.esc_html($shop).'</a></p>';
+        else echo '<p>'.esc_html__('Enter your shop URL below to get started.',$domain).'</p>';
+        echo '</div><div><span>'.esc_html__('Last successful shop request',$domain).'</span><p>'.esc_html($lastSuccess?wp_date('d.m.Y H:i',$lastSuccess):__('Not recorded yet',$domain)).'</p></div></section>';
         if(isset($_GET['refreshed'])) echo '<div class="notice notice-success"><p>'.esc_html__('Connector cache cleared. Products will reload on the next request.','connect-for-shopware').'</p></div>';
-        echo '<form action="options.php" method="post">';settings_fields('dw_sw');settings_errors('dw_sw');Configuration::fields();
+        echo '<form action="options.php" method="post">';settings_fields('dw_sw');settings_errors('dw_sw');echo '<section class="dw-sw-panel">';Configuration::fields();echo '<p class="description">'.esc_html__('Provide a production Sales Channel key server-side via DW_SW_ACCESS_KEY in wp-config.php or the environment. The key is never displayed here.',$domain).'</p></section><section class="dw-sw-panel"><h2>'.esc_html__('Cache and refresh',$domain).'</h2>';
         $ttl=(int)get_option('dw_sw_cache_ttl',1800);$times=[900,1800,3600];if(!in_array($ttl,$times,true)) $times[]=$ttl;
         echo '<label for="dw-sw-ttl">'.esc_html__('Reuse Shopware data for','connect-for-shopware').'</label> <select id="dw-sw-ttl" name="dw_sw_cache_ttl">';
         foreach($times as $seconds) echo '<option value="'.esc_attr((string)$seconds).'" '.selected($seconds,$ttl,false).'>'.esc_html(sprintf(__('%d minutes','connect-for-shopware'),(int)round($seconds/60))).'</option>';
         echo '</select><p>'.esc_html__('After expiry, the next request fetches fresh data. This is not a scheduled refresh.','connect-for-shopware').'</p>';
         echo '<input type="hidden" name="dw_sw_purge_pages" value="0"><label><input type="checkbox" name="dw_sw_purge_pages" value="1" '.checked((bool)get_option('dw_sw_purge_pages',true),true,false).'> '.esc_html__('Clear detected page caches on manual connector refresh (entire site).','connect-for-shopware').'</label>';
-        submit_button();echo '</form>';
+        echo '</section>';submit_button();echo '</form>';
         self::diagnostics();
-        Components::panel();
-        echo '<form action="'.esc_url(admin_url('admin-post.php')).'" method="post"><input type="hidden" name="action" value="dw_sw_refresh">';wp_nonce_field('dw_sw_refresh');submit_button(__('Refresh product cache','connect-for-shopware'),'secondary');echo '</form>';
-        echo '<p>'.esc_html__('Full-page or CDN caches can retain rendered prices longer. Configure their expiry and purge integration before customer use.','connect-for-shopware').'</p>';
+        echo '<section class="dw-sw-panel">';Components::panel();echo '</section>';
+        echo '<section class="dw-sw-panel dw-sw-refresh"><h2>'.esc_html__('Refresh cached products',$domain).'</h2><form action="'.esc_url(admin_url('admin-post.php')).'" method="post"><input type="hidden" name="action" value="dw_sw_refresh">';wp_nonce_field('dw_sw_refresh');submit_button(__('Refresh product cache','connect-for-shopware'),'secondary');echo '</form>';
+        echo '<p>'.esc_html__('Full-page or CDN caches can retain rendered prices longer. Configure their expiry and purge integration before customer use.','connect-for-shopware').'</p></section>';
         $lang=str_starts_with(determine_locale(),'de')?'de':'en';
         $history=\Deckerweb_Changelog_Renderer_V1::render((string)file_get_contents(DW_SW_DIR.'docs/changelog'.($lang==='de'?'-de':'').'.txt'));
         $repo='https://github.com/deckerweb/connect-for-shopware';

@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Connect for Shopware
  * Description: Read-only Shopware products for Gutenberg and native Bricks elements.
- * Version: 0.5.1-dev
+ * Version: 1.0.0
  * Requires at least: 6.6
  * Requires PHP: 8.1
  * Author: David Decker – DECKERWEB
@@ -23,9 +23,12 @@ if(in_array('deckerweb-shopware-connector/deckerweb-shopware-connector.php',(arr
     return;
 }
 define('DW_SW_FILE',__FILE__);
-define('DW_SW_VERSION','0.5.1-dev');
+define('DW_SW_VERSION','1.0.0');
 define('DW_SW_DIR',__DIR__.'/');
 define('DW_SW_URL',plugin_dir_url(__FILE__));
 foreach(['Core','WordPressBridge','Presentation','Extras','Operations','Configuration','Components','GitHubUpdates','Plugin','Admin','Rest'] as $file) require_once DW_SW_DIR.'src/'.$file.'.php';
 require_once DW_SW_DIR.'src/deckerweb-changelog-v1.php';
 add_action('plugins_loaded',[Deckerweb\Shopware\Plugin::class,'boot']);
+
+require_once DW_SW_DIR.'includes/deckerweb-plugin-library/bootstrap.php';
+deckerweb_library_register_v2(DW_SW_FILE,[],DW_SW_DIR.'includes/deckerweb-plugin-library');

@@ -14,11 +14,14 @@ Display Shopware products directly in Gutenberg and Bricks.
 
 Products/variants, gallery, description, data sheets, manufacturer, Shopware prices, dynamic categories, related products, CTA and Quick View. Shared Core with cache and diagnostics. No cart/checkout or duplicate product maintenance.
 
+Compact Connect settings with a visible connection status, collapsible technical details and the shared deckerweb Plugin Library 0.6.0.
+
+
 <a id="1"></a>
 
 ## Requirements
 
-WordPress ≥ 6.6 · PHP ≥ 8.1 (Kunde/customer 8.3.x) · Bricks Components ≥ 2.4.2 · Shopware 6.7 Store API.
+WordPress ≥ 6.6 · PHP ≥ 8.1 · Bricks Components ≥ 2.4.2 · Shopware 6.7 Store API.
 
 <a id="2"></a>
 
@@ -36,11 +39,26 @@ Select products in the editor. Optionally install Bricks Components and examples
 
 ## FAQ
 
-**Local pricing?** No. **Components required?** No. **Updates overwrite designs?** No. **Updates?** Through WordPress after a stable GitHub release is published. Development releases are installed using the ZIP.
+**Local pricing?** No. **Components required?** No. **Updates overwrite designs?** No. **Updates?** Published stable releases appear in WordPress updates. Development releases are installed using the ZIP.
 
 <a id="5"></a>
 
 ## Changelog
+
+### 1.0.0 · 2026-10-06
+- **New:** First stable release: shared read-only Shopware Core for native Gutenberg blocks and Bricks elements, optional Bricks Components and configurable shop URLs.
+- **Improved:** Compact Connect settings, connection status, collapsible technical details and approved matte-blue vector artwork.
+- **Improved:** Original stable deckerweb Updater V2.1.0 and latest deckerweb Plugin Library 0.6.0 runtime integrated.
+- **Misc:** Bilingual documentation and FAQ, installable stable-slug ZIP, complete changelogs and release checks; existing settings and product assignments preserved.
+
+
+### 0.6.0-dev · 2026-10-06
+- **New:** Bundled original deckerweb Plugin Library 0.6.0 with shared host registration.
+- **Improved:** Compact Connect admin header, visible connection status and separate connection, cache and Bricks sections.
+- **Improved:** Advanced connection settings and technical diagnostics collapse on demand; native controls and restrained matte-blue accents.
+- **Improved:** Shared updater V2.1.0-dev.3 with translated host messages and existing package safeguards.
+- **Misc:** Existing Shopware settings, product assignments, blocks and native Bricks elements retained.
+
 
 ### 0.5.1-dev · 2026-10-06
 - **Improved:** User-approved Signal artwork in matte blue, with a lighter headline and paired German/English banners.
@@ -64,26 +82,6 @@ Select products in the editor. Optionally install Bricks Components and examples
 - **Fixed:** Preserve existing components, assignments, settings and Gutenberg block identifiers during migration.
 - **Fixed:** Bricks external CSS is generated once; avoid a second pass removing styles through selector deduplication.
 - **Misc:** deckerweb standards audit and local migration/installer regression checks.
-
-
-### 0.3.0-dev · 2026-10-05
-- **New:** Connection test and safe diagnostics with last success, duration and neutral failure status.
-- **New:** Optional detected page-cache purge on manual refresh for WP Rocket, LiteSpeed Cache, WP Super Cache and W3 Total Cache.
-- **New:** Network-free product column in post/page lists and shared Gutenberg/Bricks presentation presets.
-- **New:** Standalone Shopware Product Button Gutenberg block and native Bricks element.
-- **New:** Optional category shop link and pagination for dynamic grids.
-- **New:** Optional Quick View with gallery, tabs, shop button, signed read tickets and request limit.
-- **Improved:** Outage fallback, 60-second retry pause, network budget and atomic cache locks; retained content hides expired prices and availability.
-- **Fixed:** Gallery/tab IDs stay unique in dynamically loaded dialogs.
-- **Misc:** Bilingual setup, cache behavior, limits and FAQ; expanded local regression checks.
-
-
-### 0.2.0-dev · 2026-10-04
-- **New:** Gutenberg Product Grid block and native Bricks element for dynamic product groups through active Shopware categories.
-- **New:** Category selection, maximum product count, Shopware sorting, heading and responsive columns.
-- **New:** Protected editor API and native Bricks AJAX category/sorting selectors.
-- **Improved:** Shared repository and card rendering; Shopware evaluates rules and prices without duplicate rule maintenance.
-- **Misc:** Dynamic categories verified, including pagination and price sorting. Implementation and setup documented in both languages.
 
 
 

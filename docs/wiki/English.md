@@ -4,7 +4,7 @@
 
 ## Purpose and requirements
 
-Version 0.5.1-dev displays Shopware products in WordPress without importing them. Configure one Shopware 6 shop per WordPress installation. No domain, Sales Channel, currency or customer product is preconfigured. Project API compatibility is tested against Shopware 6.7. WordPress 6.6+, PHP 8.1+ and the Store API are required. The previous release was user-confirmed on PHP 8.3.x; local tests use PHP 8.4.5. Native Bricks integrations are tested with 2.4.2. Gutenberg works without Bricks. Elementor pages can host WordPress output; no separate Elementor widget is included.
+Version 1.0.0 displays Shopware products in WordPress without importing them. Configure one Shopware 6 shop per WordPress installation. No domain, Sales Channel, currency or customer product is preconfigured. Project API compatibility is tested against Shopware 6.7. WordPress 6.6+, PHP 8.1+ and the Store API are required. The previous release was user-confirmed on PHP 8.3.x; local tests use PHP 8.4.5. Native Bricks integrations are tested with 2.4.2. Gutenberg works without Bricks. Elementor pages can host WordPress output; no separate Elementor widget is included.
 
 ## Installation and migration
 
@@ -73,3 +73,8 @@ DW_SW_ACCESS_KEY can be supplied in two supported ways: a WordPress constant, us
 ## Approved artwork since 0.5.1
 
 The user selected Signal in matte blue. Matching genuine SVG/PNG icons and German/English banners are bundled locally and used by the readmes and updater. This release changes artwork/version documentation only; shop configuration and Connector behavior are unchanged. Banner originals were refined/localized with the built-in imagegen tool. The icon was reconstructed as a vector; required raster sizes were exported from these sources.
+
+
+## Connect settings
+
+A compact header and status area show the shop address and last successful request. Status reflects the last known result, not continuous live monitoring. Run the connection test to check the current state. API overrides and technical diagnostics are collapsible. Connection, cache and optional Bricks Components use separate sections. The shared deckerweb Plugin Library adds the central catalog; the Connector remains independent of other deckerweb plugins. Shopware credentials stay server-side. The updated updater uses the public repository mode; no additional GitHub credentials are required.
