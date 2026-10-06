@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640" role="img" aria-labelledby="title desc">
+<title id="title">Connect for Shopware</title><desc id="desc">Produkte aus dem Shop. Direkt im Content. — by deckerweb. Matte blue Signal artwork.</desc>
+<defs>
+<linearGradient id="bg" x2="1" y2="1"><stop stop-color="#304652"/><stop offset="1" stop-color="#213540"/></linearGradient>
+<radialGradient id="light"><stop stop-color="#708595" stop-opacity=".13"/><stop offset="1" stop-color="#708595" stop-opacity="0"/></radialGradient>
+<linearGradient id="accent" x2="1" y2="1"><stop stop-color="#8aaac5"/><stop offset="1" stop-color="#7697b1"/></linearGradient>
+<linearGradient id="photo" x2="1" y2="1"><stop stop-color="#8d8e8c"/><stop offset="1" stop-color="#6b6e6d"/></linearGradient>
+<linearGradient id="cubeFace" x2="1" y2="1"><stop stop-color="#c0c1bd"/><stop offset="1" stop-color="#9d9f9c"/></linearGradient>
+<radialGradient id="shadow"><stop stop-color="#272c2e" stop-opacity=".5"/><stop offset="1" stop-color="#272c2e" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="1280" height="640" fill="url(#bg)"/><ellipse cx="576.0" cy="256.0" rx="896.0" ry="512.0" fill="url(#light)"/>
+<g transform="translate(0 105) scale(0.829)" font-family="Arial, Helvetica, sans-serif" fill="#f2f0eb">
+<path d="M1038 0V500 M940 89H1544 M860 412H1544" fill="none" stroke="#b6c1c7" stroke-width="1" opacity=".65"/>
+<text x="64" y="193" font-size="102" font-weight="600" letter-spacing="-3.5">Connect</text>
+<text x="64" y="283" font-size="98" font-weight="300" letter-spacing="-3.5">for <tspan font-weight="600">Shopware</tspan></text>
+<text x="70" y="353" font-size="32" font-weight="400" letter-spacing="-.5">Produkte aus dem Shop. Direkt im Content.</text>
+<path d="M70 408H110" stroke="#f2f0eb" opacity=".8"/><text x="70" y="441" font-size="20">by deckerweb</text>
+<path d="M814 132H996V324H814Z M852 169V287H958V169Z" fill="url(#accent)" fill-rule="evenodd"/>
+<path d="M934 185H1087V374H904V224Z" fill="#263a46"/>
+<path d="M934 185H1087V374H904V224Z M940 223V337H1050V223Z" fill="#f2f0eb" fill-rule="evenodd"/>
+<text x="1126" y="55" font-size="14" letter-spacing="3">SHOP</text><path d="M1186 50H1246 M1298 50H1358" stroke="#b6c1c7"/><text x="1262" y="55" font-size="14" letter-spacing="3">TO</text><text x="1375" y="55" font-size="14" letter-spacing="3">CONTENT</text>
+<rect x="1135" y="90" width="264" height="322" rx="18" fill="none" stroke="#e5e9e7" stroke-width="2"/>
+<rect x="1161" y="122" width="211" height="171" fill="url(#photo)"/>
+<ellipse cx="1278" cy="264" rx="85" ry="19" fill="url(#shadow)"/>
+<path d="M1223 177L1285 159L1338 174L1277 193Z" fill="#cacbc7"/>
+<path d="M1223 177L1277 193V275L1223 255Z" fill="url(#cubeFace)"/>
+<path d="M1277 193L1338 174V254L1277 275Z" fill="#777b79"/>
+<path d="M1223 177L1277 193L1338 174" fill="none" stroke="#d5d5d0" opacity=".45"/>
+<rect x="1161" y="312" width="149" height="10" fill="#a1aaad"/><rect x="1161" y="336" width="123" height="10" fill="#a1aaad"/><rect x="1161" y="361" width="103" height="23" fill="url(#accent)"/>
+<rect x="1421" y="90" width="264" height="322" rx="18" fill="none" stroke="#e5e9e7" stroke-width="2"/>
+<rect x="1447" y="122" width="211" height="171" fill="url(#photo)"/>
+<path d="M1500 187V244C1500 261 1580 261 1580 244V187" fill="#353a3b"/><ellipse cx="1540" cy="187" rx="40" ry="12" fill="#464b4c"/>
+<rect x="1447" y="312" width="149" height="10" fill="#879399"/><rect x="1447" y="336" width="123" height="10" fill="#879399"/><rect x="1447" y="361" width="70" height="23" fill="#647582"/>
+<text x="1088" y="451" font-size="13" letter-spacing="2.5">PRODUKTE — IN NEUEN KONTEXTEN</text>
+</g>
+</svg>

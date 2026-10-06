@@ -1,0 +1,11 @@
+theme: jekyll-theme-cayman
+title: Connect for Shopware
+description: Your shop. Your content. Connected.
+url: https://deckerweb.github.io
+baseurl: /connect-for-shopware
+show_downloads: false
+exclude:
+  - content.json
+  - wiki
+  - changelog.txt
+  - changelog-de.txt
