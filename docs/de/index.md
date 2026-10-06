@@ -34,4 +34,4 @@ WordPress ab 6.6, PHP ab 8.1, Shopware-6.7-Store-API. Optionale Bricks Component
 
 [Ko-fi](https://ko-fi.com/deckerweb) · [Buy Me a Coffee](https://buymeacoffee.com/daveshine) · [PayPal](https://paypal.me/deckerweb)
 
-Von [David Decker – DECKERWEB](https://github.com/deckerweb). © 2026 · GPL-2.0-or-later. Das Cayman-Theme steht unter MIT-Lizenz.
+Von [David Decker – DECKERWEB](https://github.com/deckerweb). © 2026 · GPL-2.0-or-later. Das Cayman-Theme steht unter CC0-1.0.

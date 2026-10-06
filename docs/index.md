@@ -4,7 +4,7 @@ lang: en
 ---
 ![Connect for Shopware](assets/brand/banner-github-1280x640.png)
 
-[Deutsch](de/) · [Documentation](https://github.com/deckerweb/connect-for-shopware/wiki/English) · [Questions by topic](https://github.com/deckerweb/connect-for-shopware/wiki/FAQ-English)
+[Deutsch](de/) · [Documentation](https://github.com/deckerweb/connect-for-shopware/wiki/English) · [FAQ by topic](https://github.com/deckerweb/connect-for-shopware/wiki/FAQ-English)
 
 # Shopware products in your WordPress content
 
@@ -34,4 +34,4 @@ WordPress 6.6+, PHP 8.1+, Shopware 6.7 Store API. Optional Bricks Components req
 
 [Ko-fi](https://ko-fi.com/deckerweb) · [Buy Me a Coffee](https://buymeacoffee.com/daveshine) · [PayPal](https://paypal.me/deckerweb)
 
-By [David Decker – DECKERWEB](https://github.com/deckerweb). © 2026 · GPL-2.0-or-later. The Cayman theme is MIT-licensed.
+By [David Decker – DECKERWEB](https://github.com/deckerweb). © 2026 · GPL-2.0-or-later. The Cayman theme is CC0-1.0.
