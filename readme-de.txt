@@ -72,9 +72,9 @@ Vollständige Fragen nach Themen: https://github.com/deckerweb/connect-for-shopw
 * Neu: WordPress-Updates von GitHub, optionaler deckerweb-Plugin-Katalog und deutsche Übersetzungen.
 
 
-== Credits ==
+== Herkunft und Lizenzen ==
 
-David Decker – DECKERWEB. Shared deckerweb Updater and Plugin Library: GPL-2.0-or-later. Artwork: David Decker – DECKERWEB.
+© 2026 David Decker – DECKERWEB. Gemeinsamer deckerweb Updater und Plugin Library sowie aktive Grafiken: GPL-2.0-or-later.
 
 == Support ==
 
