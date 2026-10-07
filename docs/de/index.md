@@ -122,6 +122,16 @@ Connect for Shopware wird von [David Decker – DECKERWEB](https://github.com/de
 
 Das Projekt unterstützen: [Ko-fi](https://ko-fi.com/deckerweb) · [Buy Me a Coffee](https://buymeacoffee.com/daveshine) · [PayPal](https://paypal.me/deckerweb)
 
+<a id="trademark"></a>
+
+## Markenhinweis und technische Abgrenzung
+
+„Shopware“ ist eine eingetragene Marke der shopware AG. Connect for Shopware ist ein unabhängig entwickeltes WordPress-Plugin von deckerweb. Es wird weder von der shopware AG herausgegeben noch von ihr unterstützt oder empfohlen. Die Bezeichnung „Shopware“ dient ausschließlich dazu, die unterstützte Integration zu beschreiben.
+
+Das Plugin wird ausschließlich in WordPress installiert. Es nutzt die öffentlich dokumentierte Shopware Store API mit dem vom Shopbetreiber bereitgestellten Sales-Channel-Zugriffsschlüssel, um die im jeweiligen Verkaufskanal verfügbaren Produktdaten abzurufen und in WordPress darzustellen.
+
+Das Plugin verändert keine Produktdaten, Einstellungen oder Programmdateien des angebundenen Shopware-Shops und installiert dort keine Erweiterung. Produktpflege, Preisberechnung, Warenkorb und Checkout verbleiben in Shopware.
+
 © 2026 David Decker – DECKERWEB · GPL v2 or later · SPDX GPL-2.0-or-later.
 
 [Herkunft und Lizenzen](https://github.com/deckerweb/connect-for-shopware/blob/main/docs/CREDITS-de.md).

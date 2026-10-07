@@ -36,11 +36,15 @@ for locale in ['en','de']:
  section('support','[Issues]('+repo+'/issues) · [Discussions]('+repo+'/discussions) · ['+('Private Sicherheitsmeldung' if de else 'Private security reporting')+']('+repo+'/security/advisories/new)\n\n['+('Das Projekt unterstützen' if de else 'Support the project')+']: [Ko-fi](https://ko-fi.com/deckerweb) · [Buy Me a Coffee](https://buymeacoffee.com/daveshine) · [PayPal](https://paypal.me/deckerweb)')
  # Correct the intentionally plain support lead-in; only URLs form Markdown links.
  parts[-1]=parts[-1].replace('['+('Das Projekt unterstützen' if de else 'Support the project')+']: ',('Das Projekt unterstützen' if de else 'Support the project')+': ')
+ notice=source['notices']['shopware_trademark'][locale]
+ parts.extend(['<a id="trademark"></a>', '## '+notice['title'], '\n\n'.join(notice['paragraphs'])])
+ (root/'docs'/('TRADEMARK-de.md' if de else 'TRADEMARK.md')).write_text('# '+notice['title']+'\n\n'+'\n\n'.join(notice['paragraphs'])+'\n')
  parts+=['© 2026 David Decker – DECKERWEB · GPL v2 or later · SPDX GPL-2.0-or-later.','['+('Herkunft und Lizenzen' if de else 'Credits and licenses')+'](docs/'+('CREDITS-de.md' if de else 'CREDITS.md')+').']
  (root/('README-de.md' if de else 'README.md')).write_text('\n\n'.join(parts)+'\n')
  txt=['=== '+meta['name']+' ===','Contributors: daveshine','Tags: shopware, gutenberg, bricks, products','Requires at least: '+meta['wp'],'Tested up to: 7.1.2','Requires PHP: '+meta['php'],'Stable tag: '+version,'License: GPLv2 or later','License URI: https://www.gnu.org/licenses/gpl-2.0.html','',w['about'],'','== Description ==','', '\n'.join('- '+x for x in glance[locale]),'',requirements,'','== Installation ==','',re.sub(r'\[([^]]+)\]\(([^)]+)\)',r'\1: \2',introduction).replace('`',''),'','== Frequently Asked Questions ==','']
  for q in faq:txt+=['= '+q['q']+' =',q['a'],'']
  txt+= [('Vollständige Fragen nach Themen: ' if de else 'Complete FAQ by topic: ')+repo+'/wiki/'+faqName,'','== Screenshots ==','', '1. '+('Einstellungen: Verbindung, Cache, Diagnose und optionale Bricks Components.' if de else 'Settings: connection, cache, diagnostics and optional Bricks Components.'),'','== Changelog ==','',shortHistory,'',('== Herkunft und Lizenzen ==' if de else '== Credits and licenses =='),'',('© 2026 David Decker – DECKERWEB. Gemeinsamer deckerweb Updater und Plugin Library sowie aktive Grafiken: GPL-2.0-or-later.' if de else '© 2026 David Decker – DECKERWEB. Shared deckerweb Updater, Plugin Library and active artwork: GPL-2.0-or-later.'),'', '== Support ==','',repo+'/issues',repo+'/security/advisories/new','https://ko-fi.com/deckerweb','https://buymeacoffee.com/daveshine','https://paypal.me/deckerweb']
+ txt+=['','== '+notice['title']+' ==','','\n\n'.join(notice['paragraphs'])]
  (root/('readme-de.txt' if de else 'readme.txt')).write_text('\n'.join(txt)+'\n')
  c=source['content'][locale]
  (root/'docs/wiki'/(guide+'.md')).write_text(c['guide'])
@@ -73,6 +77,8 @@ Produkte und Varianten in nativen Gutenberg-Blöcken und Bricks-Elementen. Shopw
 
 [Downloads](https://github.com/deckerweb/connect-for-shopware/releases/latest) · [Issues](https://github.com/deckerweb/connect-for-shopware/issues) · [Private security reporting / Sicherheitsmeldung](https://github.com/deckerweb/connect-for-shopware/security/advisories/new)
 ''')
+home=root/'docs/wiki/Home.md'
+home.write_text(home.read_text()+'\n\n'+'\n\n'.join('## '+source['notices']['shopware_trademark'][locale]['title']+'\n\n'+'\n\n'.join(source['notices']['shopware_trademark'][locale]['paragraphs']) for locale in ['en','de'])+'\n')
 (root/'docs/wiki/_Sidebar.md').write_text('''[Home](Home)
 
 ### English
