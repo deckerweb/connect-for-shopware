@@ -47,6 +47,24 @@ interface Cache {
     public function refresh(): void;
 }
 
+/** Allow precise cache invalidation without requiring it from third-party cache adapters. */
+interface ScopedCache extends Cache {
+    /** Identify full-cache refreshes for request-only memoization.
+     * @return string Site and current cache generation.
+     */
+    public function requestGeneration(): string;
+    /** Resolve the current site and selection generation.
+     * @param string $scope Internal resource scope.
+     * @return string Current generation used in repository keys.
+     */
+    public function generation(string $scope): string;
+    /** Invalidate a single resource scope.
+     * @param string $scope Internal resource scope.
+     * @return void Old entries expire naturally; other scopes remain reusable.
+     */
+    public function invalidateScope(string $scope): void;
+}
+
 /**
  * Signal a temporary transport, budget or upstream failure.
  */
@@ -214,7 +232,12 @@ final class ProductMapper {
     public function map(array $p): array {
         $context=($this->contextProvider)();
         $translated = $p['translated'] ?? [];
-        $options = array_map(static function(array $o): array {
+        $options = array_map(/**
+ * Project a product option and its group into presentation data.
+ *
+ * @param array $o Shopware option entity.
+ * @return array Result for the documented callback.
+ */ static function(array $o): array {
             return ['id' => $o['id'], 'name' => $o['translated']['name'] ?? $o['name'] ?? '',
                 'groupId' => $o['groupId'],
                 'group' => $o['group']['translated']['name'] ?? $o['group']['name'] ?? ''];
@@ -290,6 +313,34 @@ final class ProductMapper {
  * Resolve catalog selections with context-scoped cache and safe outage fallback.
  */
 final class ProductRepository {
+    /** @var array<string,array> Fresh mapped results reused within this repository request. */
+    private array $memo=[];
+
+    /** Derive a bounded resource scope from an internal repository operation.
+     * @param string $operation Repository operation identifier.
+     * @return string Product, category or shared metadata scope.
+     */
+    private function scope(string $operation): string {
+        $parts=explode('|',$operation);
+        if($parts[0]==='product')return 'product|'.($parts[2]??'');
+        if($parts[0]==='media')return 'product|'.($parts[1]??'');
+        if($parts[0]==='listing')return 'category|'.($parts[1]??'');
+        return $parts[0];
+    }
+    /** Invalidate one selected product or dynamic category, including its local memo.
+     * @param string $kind Supported selection kind: product or category.
+     * @param string $id Shopware resource identifier.
+     * @return void Does not purge other product selections or full-page caches.
+     * @throws \InvalidArgumentException When the kind or identifier is unsupported.
+     */
+    public function refreshSelection(string $kind,string $id): void {
+        $this->uuid($id);
+        if(!in_array($kind,['product','category'],true)||!$this->cache instanceof ScopedCache)throw new \InvalidArgumentException('Unsupported scoped refresh');
+        $this->cache->invalidateScope($kind.'|'.$id);
+        if($kind==='category')$this->cache->invalidateScope('dynamic-categories');
+        $this->memo=[];
+    }
+
 
     /**
      * Initialize the validated dependencies used by this component.
@@ -341,7 +392,8 @@ final class ProductRepository {
      * @return string Validated string, label or escaped HTML for the documented operation.
      */
     private function cacheKey(string $operation): string {
-        return hash('sha256','mapping-v5|'.$this->contextFingerprint.'|'.$operation);
+        $generation=$this->cache instanceof ScopedCache?$this->cache->generation($this->scope($operation)):'';
+        return hash('sha256','mapping-v6|'.$this->contextFingerprint.'|'.$generation.'|'.$operation);
     }
 
     /**
@@ -384,8 +436,11 @@ final class ProductRepository {
      * @return array Normalized result data for the documented operation.
      */
     private function cached(string $operation,callable $load): array {
-        $key=$this->cacheKey($operation);$hit=$this->cache->get($key);
-        if($hit!==null) return $hit;
+        $key=$this->cacheKey($operation);
+        $memoKey=$key.'|'.($this->cache instanceof ScopedCache?$this->cache->requestGeneration():'');
+        if($this->cache instanceof ScopedCache&&isset($this->memo[$memoKey]))return $this->memo[$memoKey];
+        $hit=$this->cache->get($key);
+        if($hit!==null)return $this->memo[$memoKey]=$hit;
         $recover=$this->cache instanceof RecoverableCache;
         $fallbackAllowed=str_starts_with($operation,'product|')||str_starts_with($operation,'listing|');
         if($recover&&!$this->cache->acquire($key)) {
@@ -395,10 +450,10 @@ final class ProductRepository {
         }
         try {
             // A previous worker may have finished between the first read and our lock.
-            if($recover&&($hit=$this->cache->get($key))!==null) return $hit;
+            if($recover&&($hit=$this->cache->get($key))!==null)return $this->memo[$memoKey]=$hit;
             $value=$load();
             $this->cache->set($key,$value,$this->ttl);
-            return $value;
+            return $this->memo[$memoKey]=$value;
         } catch(ShopUnavailable $e) {
             $old=$recover&&$fallbackAllowed?$this->cache->stale($key):null;
             if($old!==null) return self::safeFallback($old);
@@ -422,7 +477,11 @@ final class ProductRepository {
     public function product(string $id, string $mode = 'variant'): array {
         $this->uuid($id);
         if (!in_array($mode, ['variant', 'family'], true)) throw new \InvalidArgumentException('Invalid mode');
-        return $this->cached("product|$mode|$id", function() use ($id, $mode): array {
+        return $this->cached("product|$mode|$id",/**
+ * Load the selected product and its available document references.
+ *
+ * @return array Result for the documented callback.
+ */  function() use ($id, $mode): array {
             if ($mode === 'family') {
                 // Detail route resolves parent requests to a variant in Shopware 6.7.10.2.
                 $result = $this->client->read('product', ['ids' => [$id], 'associations' => self::associations()]);
@@ -443,7 +502,11 @@ final class ProductRepository {
             if($ids) {
                 // Document failure must not hide otherwise usable product data.
                 try {
-                    $media=$this->cached('media|'.implode('|',$ids),fn()=> $this->client->read('media',['ids'=>array_values(array_unique($ids))]));
+                    $media=$this->cached('media|'.$id.'|'.implode('|',$ids),/**
+ * Read only the selected public document media identifiers.
+ *
+ * @return array Result for the documented callback.
+ */ fn()=> $this->client->read('media',['ids'=>array_values(array_unique($ids))]));
                     $byId=[];
                     foreach($media as $m) if(is_array($m)&&!empty($m['id'])) $byId[$m['id']]=$m;
                     foreach(array_unique($ids) as $id) {
@@ -468,7 +531,11 @@ final class ProductRepository {
     public function search(string $term, int $page = 1): array {
         $term = trim($term);
         if ($term === '' || strlen($term) > 200 || $page < 1) throw new \InvalidArgumentException('Invalid search');
-        return $this->cached('search|' . $page . '|' . $term, function() use ($term, $page): array {
+        return $this->cached('search|' . $page . '|' . $term,/**
+ * Fetch and map one bounded search result page.
+ *
+ * @return array Result for the documented callback.
+ */  function() use ($term, $page): array {
             $r = $this->client->read('search', ['search' => $term, 'limit' => 20, 'page' => $page,
                 'total-count-mode' => 1, 'associations' => self::associations()]);
             return ['total' => $r['total'] ?? 0, 'page' => $page,
@@ -483,7 +550,11 @@ final class ProductRepository {
      * @return array Normalized result data for the documented operation.
      */
     public function categories(): array {
-        return $this->cached('dynamic-categories',function(): array {
+        return $this->cached('dynamic-categories',/**
+ * Read active dynamic categories with bounded pagination.
+ *
+ * @return array Result for the documented callback.
+ */ function(): array {
             $items=[];$page=1;
             do {
                 $r=$this->client->read('category',['limit'=>100,'page'=>$page++,
@@ -515,7 +586,11 @@ final class ProductRepository {
     public function listing(string $categoryId,int $limit=6,int $page=1,string $order=''): array {
         $this->uuid($categoryId);
         if($limit<1||$limit>48||$page<1||$page>1000||strlen($order)>100) throw new \InvalidArgumentException('Invalid listing settings');
-        return $this->cached('listing|'.$categoryId.'|'.$limit.'|'.$page.'|'.$order,function() use($categoryId,$limit,$page,$order): array {
+        return $this->cached('listing|'.$categoryId.'|'.$limit.'|'.$page.'|'.$order,/**
+ * Resolve a category listing using shop-owned sorting rules.
+ *
+ * @return array Result for the documented callback.
+ */ function() use($categoryId,$limit,$page,$order): array {
             $category=null;
             foreach($this->categories() as $c) if($c['id']===$categoryId) {$category=$c;break;}
             if(!$category) throw new ResourceMissing('category');
@@ -548,7 +623,11 @@ final class ProductRepository {
      */
     public function variants(string $parentId): array {
         $this->uuid($parentId);
-        return $this->cached('variants|' . $parentId, function() use ($parentId): array {
+        return $this->cached('variants|' . $parentId,/**
+ * Enumerate available variants with a pagination safety limit.
+ *
+ * @return array Result for the documented callback.
+ */  function() use ($parentId): array {
             $items = []; $page = 1;
             do {
                 $r = $this->client->read('product', ['limit' => 100, 'page' => $page++,

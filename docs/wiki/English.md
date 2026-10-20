@@ -22,9 +22,13 @@ In Multisite, a server-side `DW_SW_ACCESS_KEYS` constant can map site IDs to cre
 
 ## Settings
 
+The Settings and Product usage tabs share one admin page. Each tab has its own URL and loads only its own contents. Existing usage bookmarks open the Product usage tab.
+
 ![Connection, cache and diagnostics](https://raw.githubusercontent.com/deckerweb/connect-for-shopware/main/assets/screenshots/settings-en.png)
 
 The compact status area shows the shop address and last known successful request. This is not continuous live monitoring: run the connection test to check the current state. API overrides and technical diagnostics are collapsible. Connection, cache and optional Bricks Components have separate sections.
+
+The trademark and integration notice appears below the settings, immediately before the footer.
 
 ## Products and presentation
 
@@ -87,3 +91,18 @@ Compatible corrections increase the patch version; new features increase the min
 
 
 © 2026 [David Decker – DECKERWEB](https://github.com/deckerweb). GPL v2 or later · SPDX GPL-2.0-or-later.
+
+## Product usage and everyday tools
+
+Settings → Connect for Shopware → Product usage lists saved article assignments, native Shopware blocks, reusable block references and saved native Bricks selections on the current site. Open the editing link to replace a selection. The overview makes no shop requests until Check saved selections is pressed. Checks run in small batches and distinguish a missing Sales Channel resource from a temporary connection failure. They never delete or replace selections. Global Bricks Component definitions and runtime dynamic values are not expanded. Reusable definitions are followed with a cycle guard and a maximum of 128 source documents per item.
+
+In Gutenberg, use Refresh this selection for the selected product or dynamic grid. Article assignments also have individual refresh controls, including in the classic editor. Only the resource cache is invalidated; full-page/CDN caches remain separate. Refresh the selected native Bricks element by rendering it again after refreshing the corresponding selection or use the existing full cache refresh in settings. Preview images, product numbers and family/variant labels help identify products in the Gutenberg and classic selectors. Bricks retains its native text selector labels.
+
+Reset product display returns the plugin display controls to their defaults. Product/category selection, custom text, button text/URLs and native WordPress block styles remain intact. Buttons keep their normal button default. No saved content is discarded.
+
+The setup checklist uses saved settings and the last explicit connection test; it is not live monitoring. Check the reported language, currency and tax state against the intended Sales Channel.
+
+Transfer connection settings exports only shop/API URLs, cache lifetime and the page-cache purge preference. Keys, article assignments, Components and Library settings are excluded. Paste the JSON into settings and review the current/imported values before applying. A preview expires after ten minutes and is bound to the current user, site and unchanged settings. If any of these change, generate a new preview. Provide the destination shop key separately on the server, then test the connection.
+
+Product results are reused within one repository/page request as well as through the existing persistent cache. Scoped refreshes and site switches use separate generations so a memo cannot retain a previous selection after refresh.
+

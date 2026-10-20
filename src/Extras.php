@@ -33,7 +33,13 @@ final class Pagination {
         $other=[];
         foreach($_GET as $key=>$value) if(is_string($key)&&preg_match('/^dw_sw_page_[a-f0-9]{12}$/D',$key)&&is_scalar($value)) $other[$key]=max(1,min(1000,(int)$value));
         $url=add_query_arg($other,$url);
-        $link=static function(int $page,string $label) use($url,$query,$root): string {
+        $link=/**
+ * Build an escaped page link preserving other Connector grids.
+ *
+ * @param int $page Destination result page.
+ * @param string $label Visible page label.
+ * @return string Result for the documented callback.
+ */ static function(int $page,string $label) use($url,$query,$root): string {
             return '<a href="'.esc_url(add_query_arg($query,$page,$url).'#dw-sw-grid-'.$root).'">'.esc_html($label).'</a>';
         };
         $html='<nav class="dw-sw-pagination" aria-label="'.esc_attr__('Product pages','connect-for-shopware').'">';
@@ -126,7 +132,12 @@ final class QuickView {
             'args'=>['id'=>['required'=>true,'type'=>'string','pattern'=>'^[a-f0-9]{32}$'],
                 'mode'=>['required'=>true,'type'=>'string','enum'=>['family','variant']],
                 'ticket'=>['required'=>true,'type'=>'string','maxLength'=>75]],
-            'callback'=>static function($r) {
+            'callback'=>/**
+ * Rate-limit and render the signed public Quick View request.
+ *
+ * @param \WP_REST_Request $r Validated current REST request.
+ * @return \WP_REST_Response|\WP_Error Result for the documented callback.
+ */ static function($r) {
                 if(!self::rateAllowed()) return new \WP_Error('dw_sw_rate',__('Please try again shortly.','connect-for-shopware'),['status'=>429]);
                 try {
                     $p=Plugin::repository()->product($r['id'],$r['mode']);

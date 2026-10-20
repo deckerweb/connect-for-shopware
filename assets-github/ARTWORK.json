@@ -1,0 +1,17 @@
+{
+  "design": "Signal \u00b7 matte blue",
+  "revision": "2026-10-19",
+  "source": "Existing blue SVG composition; Inter outlines replace system-font text.",
+  "svg": {
+    "native_vectors": true,
+    "outlined_type": true,
+    "gradients": true,
+    "filters": false,
+    "raster_images": false,
+    "external_resources": false
+  },
+  "license": "GPL-2.0-or-later",
+  "font": "Inter / SIL OFL 1.1",
+  "crop": "All WP banners are centered proportional crops of the GitHub SVG master.",
+  "icon": "Existing approved icon, unchanged vector source."
+}

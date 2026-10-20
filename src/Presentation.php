@@ -117,7 +117,12 @@ final class ProductRenderer {
         $html='';$media='';$text='';$domain='connect-for-shopware';
         if($s['showImage']&&!empty($p['images'])) {
             $items=$s['imageMode']==='gallery'?($p['gallery']??[]):[['type'=>'image']+$p['images'][0]];
-            if(!$items) $items=array_map(static fn($m)=>['type'=>'image']+$m,$p['images']);
+            if(!$items) $items=array_map(/**
+ * Add the image media type to the gallery projection.
+ *
+ * @param array $m Mapped media item.
+ * @return array Result for the documented callback.
+ */ static fn($m)=>['type'=>'image']+$m,$p['images']);
             $media='<div class="dw-sw-media">';
             $uid='dw-sw-gallery-'.wp_generate_uuid4().'-';
             foreach($items as $i=>$m) {

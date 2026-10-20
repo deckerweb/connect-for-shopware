@@ -63,12 +63,25 @@ final class Configuration {
      * @return void No return value; effects are described above.
      */
     public static function boot(): void {
-        add_action('admin_init',static function(): void {
-            foreach(['dw_sw_shop_url','dw_sw_api_url'] as $option) register_setting('dw_sw',$option,['type'=>'string','default'=>'','sanitize_callback'=>static fn($value)=>self::sanitize($value,$option)]);
+        add_action('admin_init',/**
+ * Register the storefront and optional API endpoint settings.
+ *
+ * @return void No return value.
+ */ static function(): void {
+            foreach(['dw_sw_shop_url','dw_sw_api_url'] as $option) register_setting('dw_sw',$option,['type'=>'string','default'=>'','sanitize_callback'=>/**
+ * Validate one endpoint while retaining its previous value on errors.
+ *
+ * @param mixed $value Submitted endpoint value.
+ * @return string Result for the documented callback.
+ */ static fn($value)=>self::sanitize($value,$option)]);
         });
         foreach(['dw_sw_shop_url','dw_sw_api_url'] as $option) {
             add_action('update_option_'.$option,[self::class,'changed'],10,2);
-            add_action('add_option_'.$option,static function(): void {self::changed('',true);});
+            add_action('add_option_'.$option,/**
+ * Invalidate runtime state when an endpoint is first configured.
+ *
+ * @return void No return value.
+ */ static function(): void {self::changed('',true);});
         }
     }
     /**

@@ -4,7 +4,7 @@
 
 Display Shopware products in your WordPress content using native Gutenberg blocks and Bricks elements. Shopware supplies the product data and prices.
 
-**Version:** 1.0.1 · WordPress ≥ 6.6 · PHP ≥ 8.1 · Bricks Components ≥ 2.4.2 · Shopware 6.7 Store API.
+**Version:** 1.1.0 · WordPress ≥ 6.6 · PHP ≥ 8.1 · Bricks Components ≥ 2.4.2 · Shopware 6.7 Store API.
 
 [Deutsch](README-de.md) · [Guide](https://github.com/deckerweb/connect-for-shopware/wiki/English) · [FAQ by topic](https://github.com/deckerweb/connect-for-shopware/wiki/FAQ-English)
 
@@ -87,6 +87,24 @@ Stable GitHub releases appear in the normal WordPress update system. Automatic u
 <a id="history"></a>
 
 ## Changelog
+
+### 1.1.0 · 2026-10-20
+
+- **New:** Find saved product selections in the Product usage tab, open their source content and check availability without changing assignments.
+- **New:** Refresh individual products and dynamic grids in Gutenberg and the classic article selector without clearing unrelated product caches.
+- **New:** Export shop URLs and cache preferences without secrets; review and confirm changes before importing them.
+- **New:** Use the setup checklist to review connection settings and the last tested Sales Channel context.
+- **Improved:** Manage settings and product usage on one admin page with directly linkable tabs and clearer spacing. Existing usage bookmarks remain supported.
+- **Improved:** Identify products in Gutenberg and the classic selector using preview images, article numbers and family or variant labels.
+- **Improved:** Reset Gutenberg display controls while preserving product selections, custom content and native block styles.
+- **Improved:** Reuse product results within each page request to avoid repeated cache reads and shop requests.
+- **Improved:** Update the embedded Plugin Library to 1.0.0 and improve shared-data cleanup during batch uninstall.
+- **Improved:** Include a permanently visible trademark notice in settings and matching local notice documents.
+- **Improved:** Provide blue vector artwork with consistent banner crops and locally available assets.
+- **Fixed:** Validate plugin identity and platform requirements during bulk updates.
+- **Fixed:** Keep dialogs closed until opened and provide keyboard, close and documentation fallbacks.
+- **Fixed:** Load classic product search and variant previews correctly with plain WordPress permalinks.
+- **Fixed:** Hide the empty Components panel when the required Bricks integration is unavailable.
 
 ### 1.0.1 · 2026-10-06
 

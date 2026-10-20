@@ -1,19 +1,26 @@
 (function () {
     'use strict';
+    if (window.dwSwProductController) return;
+    window.dwSwProductController = true;
     let dialog, content, opener, controller, sequence = 0;
+    function closeDialog() {
+        try {HTMLDialogElement.prototype.close.call(dialog);} catch (error) {dialog.removeAttribute('open');}
+        dialog.hidden = true;
+    }
     function createDialog() {
         if (dialog) return;
         const config = window.dwSwProduct;
-        dialog = document.createElement('dialog');dialog.className = 'dw-sw-modal';
+        dialog = document.createElement('dialog');dialog.className = 'dw-sw-modal';dialog.hidden = true;
         dialog.setAttribute('aria-label', config.title);
         const close = document.createElement('button');close.type = 'button';close.className = 'dw-sw-modal-close';close.textContent = config.close;
-        close.addEventListener('click', () => dialog.close());
+        close.addEventListener('click', closeDialog);
         content = document.createElement('div');content.className = 'dw-sw-modal-content';
         dialog.append(close, content);document.body.append(dialog);
-        dialog.addEventListener('close', () => {sequence++;if (controller) controller.abort();if (opener?.isConnected) opener.focus();});
+        dialog.addEventListener('cancel', event => {event.preventDefault();closeDialog();});
+        dialog.addEventListener('close', () => {dialog.hidden = true;sequence++;if (controller) controller.abort();if (opener?.isConnected) opener.focus();});
         dialog.addEventListener('click', event => {
             const rect = dialog.getBoundingClientRect();
-            if (event.target === dialog && (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom)) dialog.close();
+            if (event.target === dialog && (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom)) closeDialog();
         });
     }
     async function openQuickView(button) {
@@ -25,7 +32,11 @@
         const status = document.createElement('p');status.setAttribute('role', 'status');status.textContent = config.loading;
         const shop = document.createElement('a');shop.href = button.dataset.shopUrl;shop.textContent = config.error;
         content.append(status);
-        dialog.showModal();dialog.querySelector('.dw-sw-modal-close').focus();
+        try {
+            dialog.hidden = false;HTMLDialogElement.prototype.showModal.call(dialog);
+            if (!dialog.open) throw new Error('Dialog did not open');
+        } catch (error) {dialog.hidden = true;window.location.assign(button.dataset.shopUrl);return;}
+        dialog.querySelector('.dw-sw-modal-close').focus();
         const timeout = setTimeout(() => abort.abort(), 12000);
         try {
             const response = await fetch(config.endpoint, {method: 'POST', credentials: 'omit', headers: {'Content-Type': 'application/json'}, signal: abort.signal,

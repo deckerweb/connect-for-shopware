@@ -5,9 +5,17 @@ import json,re,struct
 root=Path(__file__).resolve().parents[1]
 domain='connect-for-shopware'
 source=json.loads((root/'languages/messages.json').read_text())
+editorial=json.loads((root/'docs/content.json').read_text())
+for locale,catalog in source.items():
+ for release in editorial['history']:
+  for en,de in zip(release['entries']['en'],release['entries']['de']):
+   catalog[en['category']]=de['category'];catalog[en['text']]=de['text']
+ en=editorial['notices']['shopware_trademark']['en'];de=editorial['notices']['shopware_trademark']['de']
+ catalog[en['title']]=de['title']
+ catalog.update(dict(zip(en['paragraphs'],de['paragraphs'])))
 version=re.search(r'Version:\s*(\S+)',(root/'connect-for-shopware.php').read_text())[1]
 strings=set()
-for p in list((root/'src').glob('*.php'))+list((root/'bricks').glob('*.php'))+list((root/'assets').glob('*.js'))+[root/'connect-for-shopware.php',root/'includes/updater-translations.php']:
+for p in list((root/'src').glob('*.php'))+list((root/'bricks').glob('*.php'))+list((root/'assets').glob('*.js'))+[root/'connect-for-shopware.php',root/'includes/updater-translations.php',root/'includes/admin-content.php']:
  for m in re.finditer(r"(?:__|esc_html__|esc_attr__)\(\s*'((?:[^'\\]|\\.)*)'",p.read_text()):strings.add(m[1])
 for p in (root/'blocks').glob('*/block.json'):strings.add('block title\x04'+json.loads(p.read_text())['title'])
 for locale,catalog in source.items():
@@ -27,7 +35,7 @@ for locale,catalog in source.items():
   else:msgid=key
   entries.append(context+'msgid '+json.dumps(msgid,ensure_ascii=False)+'\nmsgstr '+json.dumps(messages[key],ensure_ascii=False))
  (root/'languages'/f'{domain}-{locale}.po').write_text('\n\n'.join(entries)+'\n')
- jed={'translation-revision-date':'2026-10-06 00:00+0000','generator':'DECKERWEB','domain':domain,'locale_data':{'messages':{'':{'domain':domain,'lang':locale,'plural-forms':'nplurals=2; plural=(n != 1);'},**{s:[catalog[s]] for s in sorted(strings)}}}}
+ jed={'translation-revision-date':'2026-10-19 00:00+0000','generator':'DECKERWEB','domain':domain,'locale_data':{'messages':{'':{'domain':domain,'lang':locale,'plural-forms':'nplurals=2; plural=(n != 1);'},**{s:[catalog[s]] for s in sorted(strings)}}}}
  (root/'languages'/f'{domain}-{locale}-dw-sw-editor.json').write_text(json.dumps(jed,ensure_ascii=False)+'\n')
 entries=['msgid ""\nmsgstr "Content-Type: text/plain; charset=UTF-8\\n"']
 for key in sorted(strings):

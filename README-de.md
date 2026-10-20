@@ -4,7 +4,7 @@
 
 Shopware-Produkte mit nativen Gutenberg-Blöcken und Bricks-Elementen in WordPress-Inhalten anzeigen. Shopware liefert Produktdaten und Preise.
 
-**Version:** 1.0.1 · WordPress ≥ 6.6 · PHP ≥ 8.1 · Bricks Components ≥ 2.4.2 · Shopware 6.7 Store API.
+**Version:** 1.1.0 · WordPress ≥ 6.6 · PHP ≥ 8.1 · Bricks Components ≥ 2.4.2 · Shopware 6.7 Store API.
 
 [English](README.md) · [Anleitung](https://github.com/deckerweb/connect-for-shopware/wiki/Deutsch) · [Fragen nach Themen](https://github.com/deckerweb/connect-for-shopware/wiki/FAQ-Deutsch)
 
@@ -87,6 +87,24 @@ Stabile GitHub-Releases erscheinen im normalen WordPress-Updatesystem. Automatis
 <a id="history"></a>
 
 ## Änderungsverlauf
+
+### 1.1.0 · 2026-10-20
+
+- **Neu:** Gespeicherte Produktauswahlen im Tab Produktverwendung finden, ihren Ursprungsinhalt öffnen und die Abrufbarkeit prüfen, ohne Zuordnungen zu verändern.
+- **Neu:** Einzelne Produkte und dynamische Raster in Gutenberg sowie der klassischen Artikelzuordnung aktualisieren, ohne andere Produkt-Caches zu leeren.
+- **Neu:** Shop-Adressen und Cache-Einstellungen ohne Geheimnisse exportieren; Änderungen vor dem Import prüfen und bestätigen.
+- **Neu:** Mit der Einrichtungscheckliste die Verbindungseinstellungen und den zuletzt geprüften Verkaufskanal-Kontext überblicken.
+- **Verbessert:** Einstellungen und Produktverwendung auf einer Adminseite mit direkt verlinkbaren Tabs und klareren Abständen verwalten. Bestehende Verwendungs-Lesezeichen funktionieren weiterhin.
+- **Verbessert:** Produkte in Gutenberg und der klassischen Auswahl anhand von Vorschaubildern, Artikelnummern und Kennzeichnung als Familie oder Variante erkennen.
+- **Verbessert:** Gutenberg-Darstellung zurücksetzen; Produktauswahl, eigene Inhalte und native Block-Stile erhalten.
+- **Verbessert:** Produktdaten innerhalb eines Seitenaufrufs wiederverwenden, um wiederholte Cache- und Shop-Abfragen zu vermeiden.
+- **Verbessert:** Eingebettete Plugin Library auf 1.0.0 aktualisieren und gemeinsame Daten bei Sammeldeinstallation zuverlässiger bereinigen.
+- **Verbessert:** Dauerhaft sichtbaren Markenhinweis in den Einstellungen und passende lokale Hinweisdokumente ergänzen.
+- **Verbessert:** Blaue Vektorgrafiken mit einheitlichen Bannerzuschnitten und lokal verfügbaren Dateien bereitstellen.
+- **Behoben:** Paketidentität und Systemanforderungen auch bei Sammelupdates prüfen.
+- **Behoben:** Dialoge bis zum Öffnen geschlossen halten und Tastaturbedienung, Schließen sowie Dokumentationslinks absichern.
+- **Behoben:** Klassische Produktsuche und Variantenvorschau mit einfachen WordPress-Permalinks korrekt laden.
+- **Behoben:** Leere Components-Box ausblenden, wenn die erforderliche Bricks-Integration nicht verfügbar ist.
 
 ### 1.0.1 · 2026-10-06
 

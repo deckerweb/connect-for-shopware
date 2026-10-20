@@ -22,9 +22,13 @@ In Multisite kann eine serverseitige Konstante `DW_SW_ACCESS_KEYS` die Schlüsse
 
 ## Einstellungen
 
+Die Tabs Einstellungen und Produktverwendung liegen auf einer gemeinsamen Adminseite. Jeder Tab hat eine eigene URL und lädt nur seinen Inhalt. Bestehende Lesezeichen zur Verwendung öffnen den Tab Produktverwendung.
+
 ![Verbindung, Cache und Diagnose](https://raw.githubusercontent.com/deckerweb/connect-for-shopware/main/assets/screenshots/settings-de.png)
 
 Der kompakte Statusbereich zeigt Shop-Adresse und letzten bekannten erfolgreichen Abruf. Es gibt keine laufende Live-Überwachung: Für den aktuellen Zustand die Verbindung testen. API-Sonderfälle und technische Diagnose sind aufklappbar. Verbindung, Cache und optionale Bricks Components besitzen getrennte Bereiche.
+
+Der Markenhinweis zur Integration steht unterhalb der Einstellungen direkt vor dem Footer.
 
 ## Produkte und Darstellung
 
@@ -87,3 +91,18 @@ Kompatible Fehlerkorrekturen erhöhen die Patch-Version, neue Funktionen die Min
 
 
 © 2026 [David Decker – DECKERWEB](https://github.com/deckerweb). GPL v2 or later · SPDX GPL-2.0-or-later.
+
+## Produktverwendung und Alltagshilfen
+
+Einstellungen → Connect for Shopware → Produktverwendung zeigt gespeicherte Artikelzuordnungen, native Shopware-Blöcke, Referenzen auf wiederverwendbare Blöcke und gespeicherte native Bricks-Auswahlen dieser Website. Über den Bearbeitungslink lässt sich eine Zuordnung ersetzen. Die Übersicht fragt den Shop erst nach „Gespeicherte Auswahl prüfen“ ab. Die Prüfung läuft in kleinen Schritten und unterscheidet fehlende Verkaufskanal-Daten von vorübergehenden Verbindungsfehlern. Zuordnungen werden niemals automatisch gelöscht oder ersetzt. Globale Bricks-Component-Definitionen und dynamische Laufzeitwerte werden nicht aufgelöst. Wiederverwendbare Definitionen werden mit Zyklusschutz über höchstens 128 Quelldokumente je Eintrag verfolgt.
+
+In Gutenberg aktualisiert „Diese Auswahl aktualisieren“ das gewählte Produkt oder dynamische Raster. Auch Artikelzuordnungen haben einzelne Aktualisieren-Aktionen, einschließlich im klassischen Editor. Nur der betroffene Daten-Cache wird ungültig; Seiten- und CDN-Caches bleiben separat. Ein natives Bricks-Element nach Aktualisierung der entsprechenden Auswahl erneut darstellen lassen oder die vorhandene vollständige Cache-Aktualisierung in den Einstellungen verwenden. Vorschaubilder, Artikelnummern und die Kennzeichnung als Familie oder Variante helfen in den Gutenberg- und klassischen Selektoren. Bricks behält seine nativen Textauswahllisten.
+
+„Produktdarstellung zurücksetzen“ stellt die Plugin-Anzeigevorgaben wieder her. Produkt-/Kategorieauswahl, eigener Text, Buttontext/-Adresse und native WordPress-Blockstile bleiben erhalten. Produktbuttons behalten ihre normale Button-Vorgabe. Gespeicherte Inhalte werden nicht verworfen.
+
+Die Einrichtungscheckliste verwendet gespeicherte Einstellungen und den letzten ausdrücklichen Verbindungstest; sie ist keine Live-Überwachung. Sprache, Währung und Steuerdarstellung mit dem gewünschten Verkaufskanal vergleichen.
+
+Die Übertragung exportiert nur Shop-/API-Adresse, Cache-Dauer und die Option zur Seiten-Cache-Leerung. Schlüssel, Artikelzuordnungen, Components und Library-Einstellungen bleiben ausgeschlossen. JSON in den Einstellungen einfügen, aktuelle und importierte Werte prüfen und erst danach übernehmen. Die Vorschau gilt zehn Minuten und ist an Benutzer, Website und unveränderte Einstellungen gebunden. Bei Änderungen eine neue Vorschau erstellen. Den passenden Schlüssel auf dem Zielserver getrennt bereitstellen und anschließend die Verbindung testen.
+
+Produktdaten werden zusätzlich zum vorhandenen Cache innerhalb eines Repository-/Seitenaufrufs wiederverwendet. Gezielte Aktualisierungen und Website-Wechsel haben getrennte Generationen, damit keine vorherige Auswahl im Arbeitsspeicher weiterverwendet wird.
+

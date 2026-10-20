@@ -90,7 +90,36 @@ final class WordPressTransport {
 /**
  * Store scoped product data, outage backups and atomic regeneration locks.
  */
-final class TransientCache implements RecoverableCache {
+final class TransientCache implements RecoverableCache, ScopedCache {
+    /** @var array<string,string> Site-scoped generation values read in this request. */
+    private array $scopes=[];
+    /** @var array<string,string> Scoped invalidations shared by cache instances in this request. */
+    private static array $scopeChanges=[];
+    /** Resolve site, full-cache and per-selection generations without repeated transient reads.
+     * @param string $scope Internal resource scope.
+     * @return string Generation identifying this site's current resource data.
+     */
+    public function generation(string $scope): string {
+        $site=(string)get_current_blog_id();$key=$site.'|'.$scope;
+        if(isset(self::$scopeChanges[$key]))return self::$scopeChanges[$key];
+        if(!isset($this->scopes[$key]))$this->scopes[$key]=$site.'|'.(string)get_transient('dw_sw_scope_'.substr(hash('sha256',$scope),0,40));
+        return $this->scopes[$key];
+    }
+    /** Identify full refreshes without changing the persistent outage backup keys.
+     * @return string Current site and full cache generation.
+     */
+    public function requestGeneration(): string {return get_current_blog_id().'|'.(string)get_option('dw_sw_cache_generation','1');}
+    /** Expire only one selected resource namespace while keeping other data reusable.
+     * @param string $scope Internal product, category or category-index scope.
+     * @return void The generation outlives the maximum product and backup TTLs.
+     */
+    public function invalidateScope(string $scope): void {
+        $token=wp_generate_uuid4();
+        RuntimeCache::set('dw_sw_scope_'.substr(hash('sha256',$scope),0,40),$token,2*DAY_IN_SECONDS);
+        self::$scopeChanges[get_current_blog_id().'|'.$scope]=get_current_blog_id().'|'.$token;
+        $this->scopes=[];
+    }
+
     private array $owners=[];
     /**
      * Prefix a cache operation with the current site cache generation.

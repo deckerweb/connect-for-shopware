@@ -37,7 +37,11 @@ final class GitHubUpdates {
 			require_once DW_SW_DIR . 'includes/deckerweb-github-release-updater-v2.php';
 		}
 		if ( ! defined( '\\Deckerweb\\GitHubReleaseUpdater\\V2\\Updater::SUPPORTS_HOST_TRANSLATIONS' ) ) {
-            add_action('admin_notices',static function(): void {
+            add_action('admin_notices',/**
+ * Explain an older shared updater capability on this settings page.
+ *
+ * @return void No return value.
+ */ static function(): void {
                 $screen=function_exists('get_current_screen')?get_current_screen():null;
                 if(current_user_can('update_plugins')&&$screen&&$screen->id==='settings_page_dw-sw')echo '<div class="notice notice-info"><p>'.esc_html__('Update the other active deckerweb plugins to use translated shared update messages.','connect-for-shopware').'</p></div>';
             });
@@ -68,7 +72,12 @@ final class GitHubUpdates {
 	 */
 	public function artwork(): array {
 		$language = str_starts_with(determine_locale(), 'de') ? 'de-' : '';
-		$asset = static fn( string $path ): string => add_query_arg( 'ver', DW_SW_VERSION, plugins_url( $path, DW_SW_FILE ) );
+		$asset = /**
+ * Version a bundled artwork URL for browser cache invalidation.
+ *
+ * @param string $path Bundled artwork path relative to the plugin.
+ * @return string Result for the documented callback.
+ */ static fn( string $path ): string => add_query_arg( 'ver', DW_SW_VERSION, plugins_url( $path, DW_SW_FILE ) );
 		return array(
 			'icons'   => array(
 				'svg' => $asset( 'assets/brand/icon.svg' ),
@@ -112,7 +121,11 @@ final class GitHubUpdates {
 	 * @return string|\WP_Error Checked package directory, or a localized WordPress error.
 	 */
 	public function validate_source( $source, $remote_source, $upgrader, array $hook_extra ) {
-		if ( ( $hook_extra['plugin'] ?? '' ) !== plugin_basename( DW_SW_FILE ) || ( $hook_extra['type'] ?? '' ) !== 'plugin' || ( $hook_extra['action'] ?? '' ) !== 'update' ) {
+		if ( ( $hook_extra['plugin'] ?? '' ) !== plugin_basename( DW_SW_FILE )
+            || ( isset( $hook_extra['type'] ) && 'plugin' !== $hook_extra['type'] )
+            || ( isset( $hook_extra['action'] ) && 'update' !== $hook_extra['action'] )
+            || ( ! isset( $hook_extra['type'], $hook_extra['action'] )
+                && ! ( $upgrader instanceof \Plugin_Upgrader && true === $upgrader->bulk ) ) ) {
 			return $source;
 		}
 		if ( is_wp_error( $source ) ) {

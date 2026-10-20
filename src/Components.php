@@ -16,7 +16,7 @@ final class Components {
      */
     public static function available(): bool {
         if(is_multisite() && defined('BRICKS_MULTISITE_USE_MAIN_SITE_COMPONENTS') && BRICKS_MULTISITE_USE_MAIN_SITE_COMPONENTS && get_current_blog_id()!==get_main_site_id()) return false;
-        return defined('BRICKS_VERSION') && version_compare(BRICKS_VERSION,'2.4.2','>=') && class_exists('Bricks\\Component_Repository') && class_exists('Bricks\\Helpers') && defined('BRICKS_DB_TEMPLATE_SLUG');
+        return defined('BRICKS_VERSION') && version_compare(BRICKS_VERSION,'2.4.2','>=') && class_exists('Bricks\\Component_Repository') && class_exists('Bricks\\Helpers') && class_exists('Bricks\\Builder_Permissions') && class_exists('Bricks\\Components') && defined('BRICKS_DB_TEMPLATE_SLUG');
     }
     /**
      * Register the WordPress integration callbacks for this component.
@@ -25,12 +25,16 @@ final class Components {
      * @return void No return value; effects are described above.
      */
     public static function boot(): void {
-        add_action('admin_post_dw_sw_components',static function(): void {
+        add_action('admin_post_dw_sw_components',/**
+ * Authorize and run the selected optional Components installation.
+ *
+ * @return void No return value.
+ */ static function(): void {
             if(!current_user_can('manage_options') || !current_user_can('edit_posts')) wp_die(esc_html__('Access denied.','connect-for-shopware'));
             check_admin_referer('dw_sw_components');
             $selection=isset($_POST['components'])&&is_array($_POST['components'])?array_map('sanitize_key',array_filter(wp_unslash($_POST['components']),'is_string')):[];
             $result=self::install($selection,!empty($_POST['examples']),!empty($_POST['copies']));
-            set_transient('dw_sw_components_result_'.get_current_user_id(),$result,60);
+            RuntimeCache::set('dw_sw_components_result_'.get_current_user_id(),$result,60);
             wp_safe_redirect(admin_url('options-general.php?page=dw-sw'));exit;
         });
     }

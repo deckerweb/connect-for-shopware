@@ -46,3 +46,9 @@
 **Does uninstall remove article assignments?** No. Shop settings, product assignments and installed Components remain; temporary Connector data is cleaned.
 
 **What happens to the shared Library?** Other installed hosts, including inactive hosts, retain data they still need. After the last host is removed, the Library data-removal setting applies.
+
+## Usage and configuration transfer
+
+**Does checking remove unavailable products?** No. Checks report missing resources separately from temporary failures. Edit the linked article to replace a selection.
+
+**Can an export contain the key?** No. Only four allowlisted connection/cache settings are exported; unknown or secret fields are rejected on import.

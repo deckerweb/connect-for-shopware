@@ -11,6 +11,72 @@
     const reference = (p) => ({productId: p.id, selectionMode: p.isFamily ? 'family' : 'variant'});
     const label = (p) => [p.title, p.productNumber, p.variantText].filter(Boolean).join(' · ');
 
+    // Preview revisions are transient UI state, never saved block attributes.
+    /** Track refresh events for the current selections without saving attributes. */
+    function useSelectionRevision(refs) {
+        const [revision, setRevision] = useState(0);
+        const identity = JSON.stringify(refs);
+        useEffect(() => {
+            const onRefresh = event => {if (refs.some(ref => ref.kind === event.detail.kind && ref.id === event.detail.id)) setRevision(value => value + 1);};
+            window.addEventListener('dw-sw-selection-refreshed', onRefresh);
+            return () => window.removeEventListener('dw-sw-selection-refreshed', onRefresh);
+        }, [identity]);
+        return revision;
+    }
+    /** Render an authenticated scoped refresh action and its result. */
+    function RefreshSelection({kind, id}) {
+        const [busy, setBusy] = useState(false), [message, setMessage] = useState('');
+        if (!id) return null;
+        return e('div', {className: 'dw-sw-refresh-selection'},
+            e(Button, {variant: 'secondary', disabled: busy, onClick: async () => {
+                setBusy(true);setMessage('');
+                try {
+                    await wp.apiFetch({path: '/deckerweb-shopware/v1/selection/refresh', method: 'POST', data: {kind, id}});
+                    window.dispatchEvent(new CustomEvent('dw-sw-selection-refreshed', {detail: {kind, id}}));
+                    setMessage(__('Selection refreshed. Full-page caches may still need clearing.', domain));
+                } catch (error) {setMessage(__('Selection could not be refreshed. Check the connection.', domain));}
+                finally {setBusy(false);}
+            }}, busy ? __('Refreshing…', domain) : __('Refresh this selection', domain)),
+            e('p', {role: 'status'}, message));
+    }
+    /** Render a readable product preview with the server-projected media and labels. */
+    function ProductSummary({product}) {
+        return e('div', {className: 'dw-sw-picker-summary'},
+            product.images?.[0]?.url && e('img', {src: product.images[0].url, alt: '', width: 48, height: 48, loading: 'lazy', onError: event => {event.currentTarget.hidden = true;}}),
+            e('div', null, e('strong', null, product.title),
+                e('div', null, product.isFamily ? __('Product family', domain) : __('Product / variant', domain)),
+                e('small', null, [product.productNumber, product.variantText].filter(Boolean).join(' · '))));
+    }
+    /** Load and display the selected product with cancellation on selection changes. */
+    function SelectedProduct({id, mode, revision}) {
+        const [product, setProduct] = useState(null);
+        useEffect(() => {let active = true;setProduct(null);if (id) api('products/' + id + '?mode=' + mode).then(value => {if (active) setProduct(value);}).catch(() => {});return () => {active = false;};}, [id, mode, revision]);
+        return product ? e(ProductSummary, {product}) : null;
+    }
+    /** Reset presentation controls while retaining editorial content and selections. */
+    function ResetDisplay({attributes: current, setAttributes, button = false}) {
+        return e(Button, {variant: 'secondary', onClick: () => {
+            const defaults = window.dwSwEditor.defaults;
+            const preserve = ['buttonText', 'buttonUrl', 'customText'];
+            const next = Object.fromEntries(Object.entries(defaults).filter(([key]) => !preserve.includes(key) && (!button || ['linkStyle','linkTarget'].includes(key))));
+            if (button) next.linkStyle = 'button';
+            setAttributes(next);
+        }}, __('Reset product display', domain));
+    }
+    /** Compose the native product or button block editor. */
+    function ProductEdit(props) {
+        const a = props.attributes;
+        const revision = useSelectionRevision([{kind: 'product', id: a.productId}]);
+        const name = props.button ? 'deckerweb/shopware-product-button' : 'deckerweb/shopware-product';
+        return e(Fragment, null, e(InspectorControls, null,
+            e(PanelBody, {title: __('Product', domain)},
+                e(SelectedProduct, {id: a.productId, mode: a.selectionMode, revision}),
+                e(ProductPicker, {onChoose: ref => props.setAttributes(ref)}),
+                a.productId && e(RefreshSelection, {kind: 'product', id: a.productId}),
+                a.productId && e(Button, {isDestructive: true, onClick: () => props.setAttributes({productId: ''})}, __('Clear selection', domain))),
+            props.button ? e(ButtonControls, props) : e(Controls, props)),
+            e('div', useBlockProps(), a.productId ? e(ServerSideRender, {key: revision, block: name, attributes: a, httpMethod: 'POST'}) : e('p', null, __('Select a Shopware product in the block settings.', domain))));
+    }
     function ProductPicker({onChoose}) {
         const [term, setTerm] = useState('');
         const [page, setPage] = useState(1);
@@ -49,7 +115,7 @@
             variants && e(Button, {variant: 'secondary', onClick: () => {sequence.current++;setVariants(null);setBusy(false);}}, __('Back to search results', domain)),
             e('div', {'aria-live': 'polite'}, !busy && term && !items.length && !error ? __('No products found.', domain) : ''),
             e('ul', {style: {padding: 0, listStyle: 'none', maxHeight: '360px', overflow: 'auto'}}, items.map(p => e('li', {key: p.id, style: {padding: '10px 0', borderBottom: '1px solid #ddd'}},
-                e('div', null, label(p)),
+                e(ProductSummary, {product: p}),
                 e(Button, {variant: 'secondary', onClick: () => onChoose(reference(p))}, p.isFamily ? __('Select product family', domain) : __('Select product / variant', domain)),
                 !variants && p.parentId && e(Button, {variant: 'tertiary', onClick: () => onChoose({productId: p.parentId, selectionMode: 'family'})}, __('Select product family', domain)),
                 !variants && (p.parentId || p.isFamily) && e(Button, {variant: 'tertiary', onClick: () => loadVariants(p)}, __('Choose variant', domain))
@@ -67,6 +133,8 @@
     function Controls({attributes, setAttributes}) {
         return e(PanelBody, {title: __('Product display', domain), initialOpen: true},
             e('p', null, __('Apply a preset, then adjust individual settings.', domain)),
+            e(ResetDisplay, {attributes, setAttributes}),
+            e('p', {className: 'description'}, __('Reset keeps product selections, custom text, button text and button URLs.', domain)),
             [['compact', __('Compact recommendation', domain)], ['description', __('Product description', domain)], ['details', __('Full product details', domain)]].map(([key, title]) =>
                 e(Button, {key, variant: 'secondary', onClick: () => setAttributes(window.dwSwEditor.presets[key])}, title)),
             Object.entries(flags).map(([key, title]) => e(ToggleControl, {key, label: __(title, domain), checked: !!attributes[key], onChange: value => setAttributes({[key]: value})})),
@@ -88,14 +156,7 @@
     wp.blocks.registerBlockType('deckerweb/shopware-product', {
         apiVersion: 3, title: __('Shopware Product', domain), icon: 'products', category: 'widgets', supports,
         attributes: {...attributes, productId: {type: 'string', default: ''}, selectionMode: {type: 'string', default: 'variant', enum: ['family', 'variant']}},
-        edit: props => e(Fragment, null,
-            e(InspectorControls, null,
-                e(PanelBody, {title: __('Product', domain)}, e(ProductPicker, {onChoose: ref => props.setAttributes(ref)}),
-                    props.attributes.productId && e(Button, {isDestructive: true, onClick: () => props.setAttributes({productId: ''})}, __('Clear selection', domain))),
-                e(Controls, props)),
-            e('div', useBlockProps(), props.attributes.productId
-                ? e(ServerSideRender, {block: 'deckerweb/shopware-product', attributes: props.attributes, httpMethod: 'POST'})
-                : e('p', null, __('Select a Shopware product in the block settings.', domain)))),
+        edit: ProductEdit,
         save: () => null
     });
     wp.blocks.registerBlockType('deckerweb/shopware-related-products', {
@@ -106,6 +167,7 @@
     });
     function ButtonControls({attributes, setAttributes}) {
         return e(PanelBody, {title: __('Product display', domain)},
+            e(ResetDisplay, {attributes, setAttributes, button: true}),
             e(SelectControl, {label: __('Product link style', domain), value: attributes.linkStyle, options: [{value: 'link', label: __('Text link', domain)}, {value: 'button', label: __('Button', domain)}], onChange: linkStyle => setAttributes({linkStyle})}),
             e(SelectControl, {label: __('Open product link in', domain), value: attributes.linkTarget, options: [{value: 'same', label: __('Current tab', domain)}, {value: 'new', label: __('New tab', domain)}], onChange: linkTarget => setAttributes({linkTarget})}),
             e(TextControl, {label: __('Button text', domain), value: attributes.buttonText, onChange: buttonText => setAttributes({buttonText})}),
@@ -115,13 +177,11 @@
         apiVersion: 3, title: __('Shopware Product Button', domain), icon: 'button', category: 'widgets', supports,
         attributes: {productId: {type: 'string', default: ''}, selectionMode: {type: 'string', default: 'variant'},
             buttonText: {type: 'string', default: ''}, buttonUrl: {type: 'string', default: ''}, linkStyle: {type: 'string', default: 'button'}, linkTarget: {type: 'string', default: 'same'}},
-        edit: props => e(Fragment, null,
-            e(InspectorControls, null, e(PanelBody, {title: __('Product', domain)}, e(ProductPicker, {onChoose: ref => props.setAttributes(ref)}),
-                props.attributes.productId && e(Button, {isDestructive: true, onClick: () => props.setAttributes({productId: ''})}, __('Clear selection', domain))), e(ButtonControls, props)),
-            e('div', useBlockProps(), props.attributes.productId ? e(ServerSideRender, {block: 'deckerweb/shopware-product-button', attributes: props.attributes, httpMethod: 'POST'}) : e('p', null, __('Select a Shopware product in the block settings.', domain)))),
+        edit: props => e(ProductEdit, {...props, button: true}),
         save: () => null
     });
     function GridEdit(props) {
+        const revision = useSelectionRevision([{kind: 'category', id: props.attributes.categoryId}]);
         const duplicateId = wp.data.useSelect(select => {
             if (!props.attributes.gridId) return false;
             let first = '';
@@ -152,7 +212,7 @@
                 .then(result => {if (active) setListing(result);})
                 .catch(() => {if (active) setError(__('Dynamic product listing unavailable. Check the category and connector configuration.', domain));});
             return () => {active = false;};
-        }, [props.attributes.categoryId, props.attributes.limit]);
+        }, [props.attributes.categoryId, props.attributes.limit, revision]);
         return e(Fragment, null,
             e(InspectorControls, null,
                 e(PanelBody, {title: __('Product source', domain), initialOpen: true},
@@ -173,12 +233,13 @@
                         options: [{value: '0', label: __('Automatic', domain)}, ...[1,2,3,4,5,6].map(n => ({value: String(n), label: String(n)}))],
                         onChange: gridColumns => props.setAttributes({gridColumns: Number(gridColumns)})}),
                     e(TextControl, {label: __('Section heading', domain), value: props.attributes.heading, onChange: heading => props.setAttributes({heading})}),
+                    props.attributes.categoryId && e(RefreshSelection, {kind: 'category', id: props.attributes.categoryId}),
                     listing && e('p', null, sprintf(__('Products matching in Shopware: %d', domain), listing.total))),
                 e(Controls, props)),
             e('div', useBlockProps({className: 'dw-sw-related dw-sw-dynamic-grid'}),
                 error && e(Notice, {status: 'error', isDismissible: false}, error),
                 props.attributes.categoryId
-                    ? e(ServerSideRender, {block: 'deckerweb/shopware-product-grid', attributes: props.attributes, httpMethod: 'POST'})
+                    ? e(ServerSideRender, {key: revision, block: 'deckerweb/shopware-product-grid', attributes: props.attributes, httpMethod: 'POST'})
                     : e('p', null, __('Select a dynamic Shopware category.', domain))));
     }
     wp.blocks.registerBlockType('deckerweb/shopware-product-grid', {
@@ -188,14 +249,9 @@
         edit: GridEdit, save: () => null
     });
     function AssociationRow({item, index, count, onMove, onRemove}) {
-        const [title, setTitle] = useState(item.productId);
-        useEffect(() => {
-            let active = true;
-            api('products/' + item.productId + '?mode=' + item.selectionMode)
-                .then(p => {if (active) setTitle(label(p));}).catch(() => {if (active) setTitle(item.productId);});
-            return () => {active = false;};
-        }, [item.productId, item.selectionMode]);
-        return e('li', {style: {overflowWrap: 'anywhere'}}, e('p', null, title),
+        const revision = useSelectionRevision([{kind: 'product', id: item.productId}]);
+        return e('li', {style: {overflowWrap: 'anywhere'}}, e(SelectedProduct, {id: item.productId, mode: item.selectionMode, revision}), e('small', null, item.productId),
+            e(RefreshSelection, {kind: 'product', id: item.productId}),
             e(Button, {disabled: index === 0, onClick: () => onMove(index, -1), 'aria-label': __('Move up', domain)}, '↑'),
             e(Button, {disabled: index === count - 1, onClick: () => onMove(index, 1), 'aria-label': __('Move down', domain)}, '↓'),
             e(Button, {isDestructive: true, onClick: () => onRemove(index)}, __('Remove', domain)));
@@ -228,7 +284,8 @@
         const [html, setHtml] = useState('');
         const [error, setError] = useState('');
         const [loading, setLoading] = useState(false);
-        const identity = JSON.stringify([assignments.postId, assignments.items, props.attributes]);
+        const revision = useSelectionRevision(assignments.items.map(item => ({kind: 'product', id: item.productId})));
+        const identity = JSON.stringify([assignments.postId, assignments.items, props.attributes, revision]);
         useEffect(() => {
             let active = true;
             setHtml(''); setError('');

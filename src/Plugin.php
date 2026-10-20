@@ -16,8 +16,12 @@ final class Plugin {
     public static function boot(): void {
         add_action('init',[self::class,'init']);
         add_action('rest_api_init',[Rest::class,'register']);
-        Admin::boot();Operations::boot();Configuration::boot();Components::boot();(new GitHubUpdates())->register();
-        add_action('init',function(): void {
+        Admin::boot();EditorialTools::boot();SetupTools::boot();Operations::boot();Configuration::boot();Components::boot();(new GitHubUpdates())->register();
+        add_action('init',/**
+ * Register native elements after the optional Bricks API becomes available.
+ *
+ * @return void No return value.
+ */ function(): void {
             if(class_exists('Bricks\\Elements')) {
                 \Bricks\Elements::register_element(DW_SW_DIR.'bricks/Product.php','','Deckerweb\\Shopware\\Bricks\\Product');
                 \Bricks\Elements::register_element(DW_SW_DIR.'bricks/ProductButton.php','','Deckerweb\\Shopware\\Bricks\\ProductButton');
@@ -55,7 +59,14 @@ final class Plugin {
         foreach(self::postTypes() as $type) {
             register_post_meta($type,'_dw_sw_products',['type'=>'array','single'=>true,'default'=>[],
                 'sanitize_callback'=>[Presentation::class,'associations'],
-                'auth_callback'=>static fn($allowed,$key,$postId)=>current_user_can('edit_post',(int)$postId),
+                'auth_callback'=>/**
+ * Authorize metadata changes against the particular article.
+ *
+ * @param bool $allowed Previous metadata authorization result.
+ * @param string $key Metadata key being authorized.
+ * @param int $postId Article whose metadata would change.
+ * @return bool Result for the documented callback.
+ */ static fn($allowed,$key,$postId)=>current_user_can('edit_post',(int)$postId),
                 'show_in_rest'=>['schema'=>['type'=>'array','maxItems'=>50,'items'=>['type'=>'object',
                     'additionalProperties'=>false,'required'=>['productId','selectionMode'],
                     'properties'=>['productId'=>['type'=>'string','pattern'=>'^[a-f0-9]{32}$'],
@@ -77,7 +88,12 @@ final class Plugin {
          * @param string[] $post_types Existing registered post-type names to return.
          */
         apply_filters('dw_sw_post_types' ,['post','page']),
-            static fn($type)=>is_string($type)&&post_type_exists($type)));
+            /**
+ * Keep only existing registered editorial post types.
+ *
+ * @param mixed $type Candidate editorial post-type name.
+ * @return bool Result for the documented callback.
+ */ static fn($type)=>is_string($type)&&post_type_exists($type)));
     }
 
     /**
@@ -86,7 +102,7 @@ final class Plugin {
      * @since 1.0.0
      * @return void No return value; effects are described above.
      */
-    public static function editorAssets(): void {wp_enqueue_script('dw-sw-editor');wp_add_inline_script('dw-sw-editor','window.dwSwEditor='.wp_json_encode(['postTypes'=>self::postTypes(),'presets'=>Presentation::presets()]).';','before');}
+    public static function editorAssets(): void {wp_enqueue_script('dw-sw-editor');wp_add_inline_script('dw-sw-editor','window.dwSwEditor='.wp_json_encode(['postTypes'=>self::postTypes(),'presets'=>Presentation::presets(),'defaults'=>Presentation::defaults()]).';','before');}
 
     /**
      * Resolve explicit site credentials or the global constant/environment without persisting them.
@@ -265,8 +281,8 @@ final class Plugin {
             $heading=sanitize_text_field((string)($settings['heading']??''));
             if($heading==='') $heading=$listing['category']['name'];
             $columns=max(0,min(6,(int)($settings['gridColumns']??0)));
-            $style=$columns?' style="--dw-sw-grid-columns:'.$columns.'"':'';
-            $html='<div id="dw-sw-grid-'.esc_attr($root).'"><h2 class="dw-sw-related-heading">'.esc_html($heading).'</h2><div class="dw-sw-grid'.($columns?' dw-sw-fixed-columns':'').'"'.$style.'>'.$cards.'</div>';
+            
+            $html='<div id="dw-sw-grid-'.esc_attr($root).'"><h2 class="dw-sw-related-heading">'.esc_html($heading).'</h2><div class="dw-sw-grid'.($columns?' dw-sw-fixed-columns dw-sw-columns-'.$columns:'').'">'.$cards.'</div>';
             if($pagination&&$pages>1) $html.=Pagination::render($pages,$page,$query,$root);
             if(filter_var($settings['showShopLink']??false,FILTER_VALIDATE_BOOLEAN)) {
                 $url=Configuration::shopUrl().'/navigation/'.$id;

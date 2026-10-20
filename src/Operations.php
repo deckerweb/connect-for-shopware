@@ -13,14 +13,27 @@ final class Operations {
      */
     public static function boot(): void {
         add_action('dw_sw_cache_refreshed',[self::class,'purgePages']);
-        add_action('admin_post_dw_sw_test',static function(): void {
+        add_action('admin_post_dw_sw_test',/**
+ * Authorize and store a connection probe before redirecting to settings.
+ *
+ * @return void No return value.
+ */ static function(): void {
             if(!current_user_can('manage_options')) wp_die(esc_html__('Access denied.','connect-for-shopware'));
             check_admin_referer('dw_sw_test');self::testConnection();
             wp_safe_redirect(admin_url('options-general.php?page=dw-sw&tested=1'));exit;
         });
-        add_action('init',static function(): void {
+        add_action('init',/**
+ * Add product overview columns to supported editorial lists.
+ *
+ * @return void No return value.
+ */ static function(): void {
             foreach(Plugin::postTypes() as $type) {
-                add_filter('manage_'.$type.'_posts_columns',static function($columns): array {
+                add_filter('manage_'.$type.'_posts_columns',/**
+ * Append the Shopware assignment column to an editorial list.
+ *
+ * @param array $columns Existing editorial column labels.
+ * @return array Result for the documented callback.
+ */ static function($columns): array {
                     $columns['dw_sw_products']=__('Shopware products','connect-for-shopware');return $columns;
                 });
                 add_action('manage_'.$type.'_posts_custom_column',[self::class,'column'],10,2);
@@ -99,10 +112,15 @@ final class Operations {
      */
     public static function references(int $postId): array {
         $refs=Presentation::associations(get_post_meta($postId,'_dw_sw_products',true));$groups=[];
-        $walk=static function(array $blocks) use(&$walk,&$refs,&$groups): void {
+        $walk=/**
+ * Collect assigned product and category references recursively.
+ *
+ * @param array $blocks Parsed WordPress blocks to inspect.
+ * @return void No return value.
+ */ static function(array $blocks) use(&$walk,&$refs,&$groups): void {
             foreach($blocks as $block) {
                 $name=$block['blockName']??'';$a=$block['attrs']??[];
-                if(in_array($name,['deckerweb/shopware-product','deckerweb/shopware-product-button'],true)) $refs[]=$a;
+                if(in_array($name,['deckerweb/shopware-product','deckerweb/shopware-product-button'],true)) $refs[]=array_replace(['selectionMode'=>'variant'],$a);
                 if($name==='deckerweb/shopware-product-grid'&&!empty($a['categoryId'])) $groups[]=$a['categoryId'];
                 if(!empty($block['innerBlocks'])) $walk($block['innerBlocks']);
             }

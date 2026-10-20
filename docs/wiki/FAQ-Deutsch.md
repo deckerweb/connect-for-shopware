@@ -46,3 +46,9 @@
 **Werden Artikelzuordnungen bei Deinstallation entfernt?** Nein. Shop-Einstellungen, Produktzuordnungen und installierte Components bleiben erhalten; temporäre Connector-Daten werden bereinigt.
 
 **Was geschieht mit der gemeinsamen Library?** Andere installierte Hosts, auch deaktivierte, erhalten ihre gemeinsam benötigten Daten. Beim letzten Host gelten die Library-Einstellungen zur Datenlöschung.
+
+## Verwendung und Einstellungsübertragung
+
+**Entfernt die Prüfung nicht verfügbare Produkte?** Nein. Fehlende Daten werden von Verbindungsfehlern unterschieden. Zum Ersetzen den verlinkten Artikel bearbeiten.
+
+**Kann der Export einen Schlüssel enthalten?** Nein. Nur vier erlaubte Verbindungs-/Cache-Einstellungen werden exportiert; unbekannte Felder oder Schlüssel werden beim Import abgewiesen.

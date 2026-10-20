@@ -13,3 +13,20 @@
 @media(max-width:600px){.dw-sw-settings{padding-right:6px}.dw-sw-panel,.dw-sw-diagnostics,.dw-sw-status{padding:16px}.dw-sw-header{gap:10px}.dw-sw-header h1{font-size:22px}.dw-sw-status{display:block}.dw-sw-status>div+div{margin-top:14px}.dw-sw-technical dl{display:block}.dw-sw-technical dd{margin:4px 0 14px}.dw-sw-panel label{overflow-wrap:anywhere}}
 /* WordPress may insert third-party notices after h1: keep them below the identity. */
 .dw-sw-header{display:grid;grid-template-columns:44px minmax(0,1fr);column-gap:14px;row-gap:4px}.dw-sw-header>div{display:contents}.dw-sw-header img{grid-column:1;grid-row:1 / span 2;align-self:center}.dw-sw-header h1{grid-column:2;grid-row:1}.dw-sw-header>div>p{grid-column:2;grid-row:2;margin:0}.dw-sw-header .notice,.dw-sw-header .updated,.dw-sw-header .error{grid-column:1 / -1;margin:14px 0 0}
+
+/* Keep a closed dialog hidden even when another admin extension styles dialogs. */
+#dw-sw-history[hidden],#dw-sw-history:not([open]){display:none!important;visibility:hidden!important}
+#dw-sw-history[open]:not([hidden]){display:block;visibility:visible}
+#dw-sw-history form{display:flex;justify-content:flex-end;margin-bottom:1rem}
+.dw-sw-settings :is(a,button,summary):focus-visible{outline:2px solid #2271b1;outline-offset:3px}
+
+.dw-sw-trademark{color:#50575e}.dw-sw-trademark p{max-width:90ch;line-height:1.65}
+
+.dw-sw-picker-summary{display:flex;align-items:flex-start;gap:10px;margin:10px 0;overflow-wrap:anywhere}.dw-sw-picker-summary img,.dw-sw-picker-image{object-fit:contain;flex:none;background:#fff;border:1px solid #dcdcde;border-radius:4px}.dw-sw-picker-image{float:left;margin:0 8px 8px 0}.dw-sw-result{display:flow-root}.dw-sw-refresh-selection{margin:10px 0}.dw-sw-checklist li{margin:.6em 0}.dw-sw-usage td{vertical-align:top;overflow-wrap:anywhere}.dw-sw-usage td:first-child{min-width:150px}.dw-sw-usage ul{margin-top:0}.dw-sw-transfer textarea{max-width:100%}.dw-sw-transfer-preview{overflow-x:auto}.dw-sw-transfer-preview th{text-align:left}.dw-sw-transfer-status{margin:10px 0}
+
+.dw-sw-settings .dw-sw-tabs{margin:20px 0 0}.dw-sw-settings .dw-sw-tab-content{padding-top:20px}.dw-sw-settings .dw-sw-tabs .nav-tab:focus-visible{outline:2px solid currentColor;outline-offset:2px}
+
+.dw-sw-usage-scroll{max-width:100%;overflow-x:auto}.dw-sw-usage-scroll:focus-visible{outline:2px solid currentColor;outline-offset:2px}.dw-sw-usage-scroll .dw-sw-usage{min-width:640px}
+
+/* Separate explanatory copy from the table and the shared legal panel. */
+.dw-sw-settings .dw-sw-usage-help{margin:24px 0 32px;line-height:1.65}.dw-sw-settings .dw-sw-trademark{margin-top:32px}

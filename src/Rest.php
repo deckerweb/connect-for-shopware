@@ -22,20 +22,69 @@ final class Rest {
         QuickView::register();
         $base='deckerweb-shopware/v1';
         register_rest_route($base,'/products',['methods'=>'GET','permission_callback'=>[self::class,'permission'],
-            'callback'=>static fn($r)=>self::respond(static fn()=>self::search((string)$r->get_param('search'),max(1,(int)$r->get_param('page')))),
+            'callback'=>/**
+ * Wrap an authorized editor search in a safe REST response.
+ *
+ * @param \WP_REST_Request $r Validated current REST request.
+ * @return \WP_REST_Response|\WP_Error Result for the documented callback.
+ */ static fn($r)=>self::respond(/**
+ * Read the requested search page through the repository.
+ *
+ * @return array Result for the documented callback.
+ */ static fn()=>self::search((string)$r->get_param('search'),max(1,(int)$r->get_param('page')))),
             'args'=>['search'=>['required'=>true,'type'=>'string','minLength'=>1,'maxLength'=>200],
                 'page'=>['type'=>'integer','minimum'=>1,'maximum'=>1000,'default'=>1]]]);
         register_rest_route($base,'/products/(?P<id>[a-f0-9]{32})',['methods'=>'GET','permission_callback'=>[self::class,'permission'],
-            'callback'=>static fn($r)=>self::respond(static fn()=>self::dto(Plugin::repository()->product($r['id'],$r->get_param('mode')?:'variant'))),
+            'callback'=>/**
+ * Wrap a selected product lookup in a safe REST response.
+ *
+ * @param \WP_REST_Request $r Validated current REST request.
+ * @return \WP_REST_Response|\WP_Error Result for the documented callback.
+ */ static fn($r)=>self::respond(/**
+ * Project the requested family or variant for the editor.
+ *
+ * @return array Result for the documented callback.
+ */ static fn()=>self::dto(Plugin::repository()->product($r['id'],$r->get_param('mode')?:'variant'))),
             'args'=>['mode'=>['type'=>'string','enum'=>['family','variant'],'default'=>'variant']]]);
         register_rest_route($base,'/products/(?P<id>[a-f0-9]{32})/variants',['methods'=>'GET','permission_callback'=>[self::class,'permission'],
-            'callback'=>static fn($r)=>self::respond(static fn()=>array_map([self::class,'dto'],Plugin::repository()->variants($r['id'])))]);
+            'callback'=>/**
+ * Wrap variant lookup in a safe REST response.
+ *
+ * @param \WP_REST_Request $r Validated current REST request.
+ * @return \WP_REST_Response|\WP_Error Result for the documented callback.
+ */ static fn($r)=>self::respond(/**
+ * Project available variants for an authorized editor.
+ *
+ * @return array Result for the documented callback.
+ */ static fn()=>array_map([self::class,'dto'],Plugin::repository()->variants($r['id'])))]);
         register_rest_route($base,'/categories',['methods'=>'GET','permission_callback'=>[self::class,'permission'],
-            'callback'=>static fn()=>self::respond(static fn()=>array_map(static fn($c)=>['id'=>$c['id'],'name'=>sanitize_text_field($c['name'])],Plugin::repository()->categories()))]);
+            'callback'=>/**
+ * Wrap dynamic category lookup in a safe REST response.
+ *
+ * @return \WP_REST_Response|\WP_Error Result for the documented callback.
+ */ static fn()=>self::respond(/**
+ * Read dynamic categories and sanitize their public names.
+ *
+ * @return array Result for the documented callback.
+ */ static fn()=>array_map(/**
+ * Project only a category identifier and sanitized name.
+ *
+ * @param array $c Mapped category entity.
+ * @return array Result for the documented callback.
+ */ static fn($c)=>['id'=>$c['id'],'name'=>sanitize_text_field($c['name'])],Plugin::repository()->categories()))]);
         register_rest_route($base,'/categories/(?P<id>[a-f0-9]{32})/listing',['methods'=>'GET','permission_callback'=>[self::class,'permission'],
             'args'=>['limit'=>['type'=>'integer','minimum'=>1,'maximum'=>48,'default'=>6],
                 'order'=>['type'=>'string','maxLength'=>100,'default'=>'']],
-            'callback'=>static fn($r)=>self::respond(static function() use($r): array {
+            'callback'=>/**
+ * Wrap an editor listing lookup in a safe REST response.
+ *
+ * @param \WP_REST_Request $r Validated current REST request.
+ * @return \WP_REST_Response|\WP_Error Result for the documented callback.
+ */ static fn($r)=>self::respond(/**
+ * Project listing products and sanitize category and sorting labels.
+ *
+ * @return array Result for the documented callback.
+ */ static function() use($r): array {
                 $listing=Plugin::repository()->listing($r['id'],(int)$r->get_param('limit'),1,(string)$r->get_param('order'));
                 $listing['items']=array_map([self::class,'dto'],$listing['items']);
                 foreach($listing['sortings'] as &$sorting) $sorting['label']=sanitize_text_field($sorting['label']);
@@ -43,14 +92,36 @@ final class Rest {
                 return $listing;
             })]);
         register_rest_route($base,'/related-preview',['methods'=>'POST',
-            'permission_callback'=>static fn($r)=>current_user_can('edit_post',(int)$r->get_param('postId')),
+            'permission_callback'=>/**
+ * Authorize related-product preview against its article.
+ *
+ * @param \WP_REST_Request $r Validated current REST request.
+ * @return bool Result for the documented callback.
+ */ static fn($r)=>current_user_can('edit_post',(int)$r->get_param('postId')),
             'args'=>['postId'=>['required'=>true,'type'=>'integer','minimum'=>1],
                 'products'=>['required'=>true,'type'=>'array','maxItems'=>50,'items'=>['type'=>'object','required'=>['productId','selectionMode'],
                     'properties'=>['productId'=>['type'=>'string','pattern'=>'^[a-f0-9]{32}$'],'selectionMode'=>['type'=>'string','enum'=>['family','variant']]]]],
                 'settings'=>['type'=>'object','default'=>new \stdClass()]],
-            'callback'=>static fn($r)=>self::respond(static fn()=>['html'=>Plugin::related((int)$r->get_param('postId'),(array)$r->get_param('settings'),(array)$r->get_param('products'))])]);
-        register_rest_route($base,'/cache/refresh',['methods'=>'POST','permission_callback'=>static fn()=>current_user_can('manage_options'),
-            'callback'=>static function() {
+            'callback'=>/**
+ * Wrap an article preview in a safe REST response.
+ *
+ * @param \WP_REST_Request $r Validated current REST request.
+ * @return \WP_REST_Response|\WP_Error Result for the documented callback.
+ */ static fn($r)=>self::respond(/**
+ * Render an authorized preview with unsaved product assignments.
+ *
+ * @return array Result for the documented callback.
+ */ static fn()=>['html'=>Plugin::related((int)$r->get_param('postId'),(array)$r->get_param('settings'),(array)$r->get_param('products'))])]);
+        register_rest_route($base,'/cache/refresh',['methods'=>'POST','permission_callback'=>/**
+ * Restrict cache refresh to site administrators.
+ *
+ * @return bool Result for the documented callback.
+ */ static fn()=>current_user_can('manage_options'),
+            'callback'=>/**
+ * Invalidate Connector caches and notify page-cache integrations.
+ *
+ * @return \WP_REST_Response Result for the documented callback.
+ */ static function() {
                 (new TransientCache())->refresh();/**
              * Notify site-scoped cache integrations after a manual refresh or shop change.
              *
@@ -84,20 +155,45 @@ final class Rest {
         $p['descriptionHtml']=wp_kses_post($p['descriptionHtml']);
         // Mapper already excludes custom fields, stock counts and context credentials.
         // Media projection avoids exposing raw translated/custom field metadata.
-        $p['images']=array_map(static function(array $m): array {
+        $p['images']=array_map(/**
+ * Strip raw media metadata from an editor image projection.
+ *
+ * @param array $m Mapped media item.
+ * @return array Result for the documented callback.
+ */ static function(array $m): array {
             return ['id'=>$m['id'],'url'=>esc_url_raw($m['url']),'alt'=>sanitize_text_field($m['alt']),
-                'thumbnails'=>array_map(static fn($t)=>['url'=>esc_url_raw($t['url']??''),'width'=>(int)($t['width']??0),'height'=>(int)($t['height']??0)],$m['thumbnails'])];
+                'thumbnails'=>array_map(/**
+ * Project safe thumbnail URLs and numeric dimensions.
+ *
+ * @param array $t Thumbnail metadata.
+ * @return array Result for the documented callback.
+ */ static fn($t)=>['url'=>esc_url_raw($t['url']??''),'width'=>(int)($t['width']??0),'height'=>(int)($t['height']??0)],$m['thumbnails'])];
         },$p['images']);
         if(isset($p['manufacturer'])) {
             $p['manufacturer']['name']=sanitize_text_field($p['manufacturer']['name']);
             $p['manufacturer']['descriptionHtml']=wp_kses_post($p['manufacturer']['descriptionHtml']);
             foreach(['url','logo'] as $key) $p['manufacturer'][$key]=esc_url_raw($p['manufacturer'][$key],['http','https']);
         }
-        $p['documents']=array_map(static fn($d)=>['id'=>$d['id'],'url'=>esc_url_raw($d['url'],['http','https']),'title'=>sanitize_text_field($d['title']),'fileSize'=>(int)$d['fileSize']],$p['documents']??[]);
-        $p['gallery']=array_map(static function($item): array {
+        $p['documents']=array_map(/**
+ * Project public document metadata without custom fields.
+ *
+ * @param array $d Public document metadata.
+ * @return array Result for the documented callback.
+ */ static fn($d)=>['id'=>$d['id'],'url'=>esc_url_raw($d['url'],['http','https']),'title'=>sanitize_text_field($d['title']),'fileSize'=>(int)$d['fileSize']],$p['documents']??[]);
+        $p['gallery']=array_map(/**
+ * Sanitize a supported gallery item before editor exposure.
+ *
+ * @param array $item Mapped gallery item.
+ * @return array Result for the documented callback.
+ */ static function($item): array {
             foreach(['url','poster'] as $key) if(isset($item[$key])) $item[$key]=esc_url_raw($item[$key],['http','https']);
             $item['alt']=sanitize_text_field($item['alt']??'');
-            if(isset($item['thumbnails'])) $item['thumbnails']=array_map(static fn($t)=>['url'=>esc_url_raw($t['url']??''),'width'=>(int)($t['width']??0),'height'=>(int)($t['height']??0)],$item['thumbnails']);
+            if(isset($item['thumbnails'])) $item['thumbnails']=array_map(/**
+ * Project safe gallery thumbnails and numeric dimensions.
+ *
+ * @param array $t Thumbnail metadata.
+ * @return array Result for the documented callback.
+ */ static fn($t)=>['url'=>esc_url_raw($t['url']??''),'width'=>(int)($t['width']??0),'height'=>(int)($t['height']??0)],$item['thumbnails']);
             return $item;
         },$p['gallery']??[]);
         return $p;
