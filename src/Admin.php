@@ -104,7 +104,7 @@ final class Admin {
      * @return string The usage section or the default settings section.
      */
     public static function tab(): string {
-        return isset($_GET['tab'])&&is_string($_GET['tab'])&&wp_unslash($_GET['tab'])==='usage'?'usage':'settings';
+        return isset($_GET['tab'])&&is_string($_GET['tab'])&&sanitize_key(wp_unslash($_GET['tab']))==='usage'?'usage':'settings';
     }
     /** Build a current-site section link without carrying unrelated request parameters.
      * @param string $tab Requested section; unknown values select settings.
@@ -118,7 +118,7 @@ final class Admin {
      */
     public static function legacyUsage(): void {
         global $pagenow;
-        if($pagenow!=='options-general.php'||($_SERVER['REQUEST_METHOD']??'GET')!=='GET'||!isset($_GET['page'])||!is_string($_GET['page'])||wp_unslash($_GET['page'])!=='dw-sw-usage'||!current_user_can('manage_options'))return;
+        if($pagenow!=='options-general.php'||sanitize_key(wp_unslash($_SERVER['REQUEST_METHOD']??'GET'))!=='get'||!isset($_GET['page'])||!is_string($_GET['page'])||sanitize_key(wp_unslash($_GET['page']))!=='dw-sw-usage'||!current_user_can('manage_options'))return;
         $page=isset($_GET['usage_page'])&&is_scalar($_GET['usage_page'])?max(1,min(10000,absint($_GET['usage_page']))):1;
         wp_safe_redirect(add_query_arg('usage_page',$page,self::tabUrl('usage')));exit;
     }
@@ -157,7 +157,7 @@ final class Admin {
         if((defined('DOING_AUTOSAVE')&&DOING_AUTOSAVE)||wp_is_post_revision($postId)||!current_user_can('edit_post',$postId)) return;
         if(!in_array(get_post_type($postId),Plugin::postTypes(),true)) return;
         if(!isset($_POST['dw_sw_products_nonce'],$_POST['dw_sw_products'])||!wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['dw_sw_products_nonce'])),'dw_sw_products')) return;
-        $raw=wp_unslash($_POST['dw_sw_products']);if(!is_string($raw)||strlen($raw)>16384) return;
+        $raw=is_string($_POST['dw_sw_products'])?sanitize_text_field(wp_unslash($_POST['dw_sw_products'])):null;if(!is_string($raw)||strlen($raw)>16384) return;
         $items=json_decode($raw,true);if(!is_array($items)) return;
         update_post_meta($postId,'_dw_sw_products',Presentation::associations($items));
     }
@@ -168,24 +168,24 @@ final class Admin {
      * @return void No return value; effects are described above.
      */
     private static function diagnostics(): void {
-        $domain='connect-for-shopware';$state=(array)get_option('dw_sw_diagnostics',[]);$test=(array)get_option('dw_sw_connection_test',[]);
-        echo '<section class="dw-sw-diagnostics"><h2>'.esc_html__('Connection and diagnostics',$domain).'</h2>';
-        if($test) echo '<p>'.esc_html(!empty($test['ok'])?__('Last connection test successful.',$domain):__('Last connection test failed.',$domain)).' '.esc_html(wp_date('d.m.Y H:i:s',(int)$test['checkedAt'])).'</p>';
-        echo '<form action="'.esc_url(admin_url('admin-post.php')).'" method="post"><input type="hidden" name="action" value="dw_sw_test">';wp_nonce_field('dw_sw_test');submit_button(__('Test connection now',$domain),'secondary');echo '</form>';
+        $state=(array)get_option('dw_sw_diagnostics',[]);$test=(array)get_option('dw_sw_connection_test',[]);
+        echo '<section class="dw-sw-diagnostics"><h2>'.esc_html__('Connection and diagnostics','connect-for-shopware').'</h2>';
+        if($test) echo '<p>'.esc_html(!empty($test['ok'])?__('Last connection test successful.','connect-for-shopware'):__('Last connection test failed.','connect-for-shopware')).' '.esc_html(wp_date('d.m.Y H:i:s',(int)$test['checkedAt'])).'</p>';
+        echo '<form action="'.esc_url(admin_url('admin-post.php')).'" method="post"><input type="hidden" name="action" value="dw_sw_test">';wp_nonce_field('dw_sw_test');submit_button(__('Test connection now','connect-for-shopware'),'secondary');echo '</form>';
 
-        echo '<details class="dw-sw-technical"><summary>'.esc_html__('Technical details',$domain).'</summary>';
+        echo '<details class="dw-sw-technical"><summary>'.esc_html__('Technical details','connect-for-shopware').'</summary>';
         global $wp_version;
         $environment=['WordPress '.(string)$wp_version,'PHP '.PHP_VERSION];if(defined('BRICKS_VERSION'))$environment[]='Bricks '.(string)BRICKS_VERSION;
-        echo '<p><strong>'.esc_html__('Environment',$domain).':</strong> '.esc_html(implode(' · ',$environment)).'</p>';
+        echo '<p><strong>'.esc_html__('Environment','connect-for-shopware').':</strong> '.esc_html(implode(' · ',$environment)).'</p>';
         if(!empty($test['ok'])&&!empty($test['context'])) {$c=$test['context'];echo '<p>'.esc_html__('Sales Channel context','connect-for-shopware').': '.esc_html(implode(' · ',[(string)$c['salesChannelId'],(string)$c['locale'],(string)$c['currency'],(string)$c['taxState']])).'</p>';}
-        echo '<dl><dt>'.esc_html__('Last successful shop request',$domain).'</dt><dd>'.esc_html(isset($state['lastSuccess'])?wp_date('d.m.Y H:i:s',(int)$state['lastSuccess']):__('Not recorded yet',$domain)).'</dd>';
-        echo '<dt>'.esc_html__('Last request duration',$domain).'</dt><dd>'.esc_html(isset($state['durationMs'])?$state['durationMs'].' ms':'—').'</dd>';
+        echo '<dl><dt>'.esc_html__('Last successful shop request','connect-for-shopware').'</dt><dd>'.esc_html(isset($state['lastSuccess'])?wp_date('d.m.Y H:i:s',(int)$state['lastSuccess']):__('Not recorded yet','connect-for-shopware')).'</dd>';
+        echo '<dt>'.esc_html__('Last request duration','connect-for-shopware').'</dt><dd>'.esc_html(isset($state['durationMs'])?$state['durationMs'].' ms':'—').'</dd>';
         if(!empty($state['errorCode'])) {
             $labels=Diagnostics::labels();
-            echo '<dt>'.esc_html__('Last connection error',$domain).'</dt><dd>'.esc_html($labels[$state['errorCode']]??__('Check connector configuration.',$domain)).' · '.esc_html(wp_date('d.m.Y H:i:s',(int)$state['lastError'])).'</dd>';
+            echo '<dt>'.esc_html__('Last connection error','connect-for-shopware').'</dt><dd>'.esc_html($labels[$state['errorCode']]??__('Check connector configuration.','connect-for-shopware')).' · '.esc_html(wp_date('d.m.Y H:i:s',(int)$state['lastError'])).'</dd>';
         }
-        echo '</dl><p>'.esc_html__('Detected page caches',$domain).': '.esc_html(implode(', ',Operations::detectedCaches())?:__('None detected. External/CDN caches must be managed separately.',$domain)).'</p>';
-        echo '<p>'.esc_html__('During a shop outage, retained product content can be shown without expired prices or availability. Retry pauses last 60 seconds.',$domain).'</p></details></section>';
+        echo '</dl><p>'.esc_html__('Detected page caches','connect-for-shopware').': '.esc_html(implode(', ',Operations::detectedCaches())?:__('None detected. External/CDN caches must be managed separately.','connect-for-shopware')).'</p>';
+        echo '<p>'.esc_html__('During a shop outage, retained product content can be shown without expired prices or availability. Retry pauses last 60 seconds.','connect-for-shopware').'</p></details></section>';
     }
 
     /**
@@ -196,8 +196,8 @@ final class Admin {
      */
     public static function page(): void {
         if(!current_user_can('manage_options')) return;
-        $domain='connect-for-shopware';$tab=self::tab();
-        echo '<div class="wrap dw-sw-settings"><header class="dw-sw-header"><img src="'.esc_url(DW_SW_URL.'assets/brand/icon.svg').'" width="44" height="44" alt=""><div><h1>Connect for Shopware</h1><p>'.esc_html__('Your shop. Your content. Connected.',$domain).'</p></div></header>';
+        $tab=self::tab();
+        echo '<div class="wrap dw-sw-settings"><header class="dw-sw-header"><img src="'.esc_url(DW_SW_URL.'assets/brand/icon.svg').'" width="44" height="44" alt=""><div><h1>Connect for Shopware</h1><p>'.esc_html__('Your shop. Your content. Connected.','connect-for-shopware').'</p></div></header>';
         self::tabs($tab);
         echo '<div class="dw-sw-tab-content" id="dw-sw-section-'.esc_attr($tab).'">';
         if($tab==='usage')EditorialTools::page();
@@ -210,22 +210,23 @@ final class Admin {
      */
     private static function settings(): void {
         $configured=Plugin::accessKey()!==''&&(string)get_option('dw_sw_shop_url','')!=='';
-        $domain='connect-for-shopware';$shop=(string)get_option('dw_sw_shop_url','');
+        $shop=(string)get_option('dw_sw_shop_url','');
         $test=(array)get_option('dw_sw_connection_test',[]);$state=(array)get_option('dw_sw_diagnostics',[]);
         $lastSuccess=(int)($state['lastSuccess']??0);
         if(!empty($test['ok'])) $lastSuccess=max($lastSuccess,(int)($test['checkedAt']??0));
         $failed=$configured&&((!empty($test)&&empty($test['ok'])&&(int)($test['checkedAt']??0)>=$lastSuccess)||(!empty($state['lastError'])&&((int)$state['lastError']>$lastSuccess||(!empty($state['currentError'])&&(int)$state['lastError']===$lastSuccess))));
-        $status=!$configured?__('Not configured',$domain):($failed?__('Connection needs attention',$domain):($lastSuccess?__('Last connection successful',$domain):__('Ready to test',$domain)));
+        $status=!$configured?__('Not configured','connect-for-shopware'):($failed?__('Connection needs attention','connect-for-shopware'):($lastSuccess?__('Last connection successful','connect-for-shopware'):__('Ready to test','connect-for-shopware')));
         $tone=!$configured?'neutral':($failed?'warning':($lastSuccess?'success':'neutral'));
         if(isset($_GET['dw_sw_imported']))echo '<div class="notice notice-success" role="status"><p>'.esc_html__('Settings imported. Test the connection with the server-side key on this site.','connect-for-shopware').'</p></div>';
-        echo '<section class="dw-sw-status" aria-label="'.esc_attr__('Connection status',$domain).'"><div><strong class="dw-sw-status-label dw-sw-status-'.$tone.'">'.esc_html($status).'</strong>';
+        echo '<section class="dw-sw-status" aria-label="'.esc_attr__('Connection status','connect-for-shopware').'"><div><strong class="dw-sw-status-label dw-sw-status-'.esc_attr($tone).'">'.esc_html($status).'</strong>';
         if($shop!=='') echo '<p><a href="'.esc_url($shop).'">'.esc_html($shop).'</a></p>';
-        else echo '<p>'.esc_html__('Enter your shop URL below to get started.',$domain).'</p>';
-        echo '</div><div><span>'.esc_html__('Last successful shop request',$domain).'</span><p>'.esc_html($lastSuccess?wp_date('d.m.Y H:i',$lastSuccess):__('Not recorded yet',$domain)).'</p></div></section>';
+        else echo '<p>'.esc_html__('Enter your shop URL below to get started.','connect-for-shopware').'</p>';
+        echo '</div><div><span>'.esc_html__('Last successful shop request','connect-for-shopware').'</span><p>'.esc_html($lastSuccess?wp_date('d.m.Y H:i',$lastSuccess):__('Not recorded yet','connect-for-shopware')).'</p></div></section>';
         if(isset($_GET['refreshed'])) echo '<div class="notice notice-success"><p>'.esc_html__('Connector cache cleared. Products will reload on the next request.','connect-for-shopware').'</p></div>';
-        echo '<form action="options.php" method="post">';settings_fields('dw_sw');echo '<section class="dw-sw-panel">';Configuration::fields();echo '<p class="description">'.esc_html__('Provide a production Sales Channel key server-side via DW_SW_ACCESS_KEY in wp-config.php or the environment. The key is never displayed here.',$domain).'</p></section><section class="dw-sw-panel"><h2>'.esc_html__('Cache and refresh',$domain).'</h2>';
+        echo '<form action="options.php" method="post">';settings_fields('dw_sw');echo '<section class="dw-sw-panel">';Configuration::fields();echo '<p class="description">'.esc_html__('Provide a production Sales Channel key server-side via DW_SW_ACCESS_KEY in wp-config.php or the environment. The key is never displayed here.','connect-for-shopware').'</p></section><section class="dw-sw-panel"><h2>'.esc_html__('Cache and refresh','connect-for-shopware').'</h2>';
         $ttl=(int)get_option('dw_sw_cache_ttl',1800);$times=[900,1800,3600];if(!in_array($ttl,$times,true)) $times[]=$ttl;
         echo '<label for="dw-sw-ttl">'.esc_html__('Reuse Shopware data for','connect-for-shopware').'</label> <select id="dw-sw-ttl" name="dw_sw_cache_ttl">';
+        /* translators: Placeholders identify the displayed product, image, duration or item counts in the order shown. */
         foreach($times as $seconds) echo '<option value="'.esc_attr((string)$seconds).'" '.selected($seconds,$ttl,false).'>'.esc_html(sprintf(__('%d minutes','connect-for-shopware'),(int)round($seconds/60))).'</option>';
         echo '</select><p>'.esc_html__('After expiry, the next request fetches fresh data. This is not a scheduled refresh.','connect-for-shopware').'</p>';
         echo '<input type="hidden" name="dw_sw_purge_pages" value="0"><label><input type="checkbox" name="dw_sw_purge_pages" value="1" '.checked((bool)get_option('dw_sw_purge_pages',true),true,false).'> '.esc_html__('Clear detected page caches on manual connector refresh (entire site).','connect-for-shopware').'</label>';
@@ -234,7 +235,7 @@ final class Admin {
         self::diagnostics();
         SetupTools::panel();
         if(Components::available()){echo '<section class="dw-sw-panel">';Components::panel();echo '</section>';}
-        echo '<section class="dw-sw-panel dw-sw-refresh"><h2>'.esc_html__('Refresh cached products',$domain).'</h2><form action="'.esc_url(admin_url('admin-post.php')).'" method="post"><input type="hidden" name="action" value="dw_sw_refresh">';wp_nonce_field('dw_sw_refresh');submit_button(__('Refresh product cache','connect-for-shopware'),'secondary');echo '</form>';
+        echo '<section class="dw-sw-panel dw-sw-refresh"><h2>'.esc_html__('Refresh cached products','connect-for-shopware').'</h2><form action="'.esc_url(admin_url('admin-post.php')).'" method="post"><input type="hidden" name="action" value="dw_sw_refresh">';wp_nonce_field('dw_sw_refresh');submit_button(__('Refresh product cache','connect-for-shopware'),'secondary');echo '</form>';
         echo '<p>'.esc_html__('Full-page or CDN caches can retain rendered prices longer. Configure their expiry and purge integration before customer use.','connect-for-shopware').'</p></section>';
     }
     /** Render the shared trademark notice and footer once after either section.
@@ -250,6 +251,6 @@ final class Admin {
         foreach($content['notice']['paragraphs'] as $paragraph) echo '<p>'.esc_html($paragraph).'</p>';
         echo '</section>';
         echo '<footer class="dw-sw-footer"><div><p><a href="'.esc_url($repo).'">Connect for Shopware</a> · <a href="'.esc_url($repo.'/releases').'">'.esc_html(DW_SW_VERSION).'</a> · <a href="'.esc_url($fallback).'" data-dw-sw-history>'.esc_html__('Changelog','connect-for-shopware').'</a> · <a href="'.esc_url($repo.'/wiki/'.($lang==='de'?'Deutsch':'English')).'">'.esc_html__('Documentation','connect-for-shopware').'</a></p><p>'.esc_html__('Your shop. Your content. Connected.','connect-for-shopware').'</p></div><div><p>© 2026 <a href="https://github.com/deckerweb">David Decker – DECKERWEB</a> · <a href="'.esc_url($repo).'">'.esc_html__('Plugin website','connect-for-shopware').'</a></p></div></footer>';
-        echo '<dialog id="dw-sw-history" hidden aria-labelledby="dw-sw-history-title"><div class="dw-sw-modal"><h2 id="dw-sw-history-title">'.esc_html__('Changelog','connect-for-shopware').'</h2><form method="dialog"><button type="submit" class="button" data-dw-sw-close>'.esc_html__('Close','connect-for-shopware').'</button></form>'.$history.'</div></dialog></div>';
+        echo '<dialog id="dw-sw-history" hidden aria-labelledby="dw-sw-history-title"><div class="dw-sw-modal"><h2 id="dw-sw-history-title">'.esc_html__('Changelog','connect-for-shopware').'</h2><form method="dialog"><button type="submit" class="button" data-dw-sw-close>'.esc_html__('Close','connect-for-shopware').'</button></form>'.wp_kses_post($history).'</div></dialog></div>';
     }
 }

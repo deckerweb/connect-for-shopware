@@ -263,7 +263,7 @@ final class Plugin {
             $pages=max(1,min(1000,(int)ceil($listing['total']/$limit)));
             $root=Pagination::identity($settings);$query='dw_sw_page_'.$root;
             $pagination=filter_var($settings['showPagination']??false,FILTER_VALIDATE_BOOLEAN);
-            $requested=(!self::isEditor()&&$pagination)?(int)($_GET[$query]??1):1;
+            $requested=(!self::isEditor()&&$pagination)?(isset($_GET[$query])&&is_scalar($_GET[$query])?absint(wp_unslash($_GET[$query])):1):1;
             $page=max(1,min($pages,$requested));
             if($page>1) $listing=self::repository()->listing($id,$limit,$page,(string)($settings['order']??''));
             $cards='';$renderer=new ProductRenderer();

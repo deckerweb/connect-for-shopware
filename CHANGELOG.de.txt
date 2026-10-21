@@ -1,3 +1,8 @@
+= 1.1.1 · 2026-10-22 =
+* Verbessert: Gemeinsamen Plugin-Katalog auf Library 1.1.0 und den GitHub-Updater auf 2.2.1 aktualisiert.
+* Behoben: Gebündelten Updater auch neben älteren Updater-Kopien zuverlässig laden und seinen Repository-Cache bei Deinstallation bereinigen.
+* Behoben: Admin-Übersetzungen einheitlich erfassbar gemacht und Eingabe- sowie Ausgabebehandlung verbessert; gespeicherte Auswahlen bleiben erhalten.
+
 = 1.1.0 · 2026-10-20 =
 * Neu: Gespeicherte Produktauswahlen im Tab Produktverwendung finden, ihren Ursprungsinhalt öffnen und die Abrufbarkeit prüfen, ohne Zuordnungen zu verändern.
 * Neu: Einzelne Produkte und dynamische Raster in Gutenberg sowie der klassischen Artikelzuordnung aktualisieren, ohne andere Produkt-Caches zu leeren.

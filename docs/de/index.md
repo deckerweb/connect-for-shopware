@@ -8,7 +8,7 @@ lang: de
 
 Shopware-Produkte mit nativen Gutenberg-Blöcken und Bricks-Elementen in WordPress-Inhalten anzeigen. Shopware liefert Produktdaten und Preise.
 
-**Version:** 1.1.0 · WordPress ≥ 6.6 · PHP ≥ 8.1 · Bricks Components ≥ 2.4.2 · Shopware 6.7 Store API.
+**Version:** 1.1.1 · WordPress ≥ 6.6 · PHP ≥ 8.1 · Bricks Components ≥ 2.4.2 · Shopware 6.7 Store API.
 
 [English](../) · [Anleitung](https://github.com/deckerweb/connect-for-shopware/wiki/Deutsch) · [Fragen nach Themen](https://github.com/deckerweb/connect-for-shopware/wiki/FAQ-Deutsch)
 
@@ -91,6 +91,12 @@ Stabile GitHub-Releases erscheinen im normalen WordPress-Updatesystem. Automatis
 <a id="history"></a>
 
 ## Änderungsverlauf
+
+### 1.1.1 · 2026-10-22
+
+- **Verbessert:** Gemeinsamen Plugin-Katalog auf Library 1.1.0 und den GitHub-Updater auf 2.2.1 aktualisiert.
+- **Behoben:** Gebündelten Updater auch neben älteren Updater-Kopien zuverlässig laden und seinen Repository-Cache bei Deinstallation bereinigen.
+- **Behoben:** Admin-Übersetzungen einheitlich erfassbar gemacht und Eingabe- sowie Ausgabebehandlung verbessert; gespeicherte Auswahlen bleiben erhalten.
 
 ### 1.1.0 · 2026-10-20
 

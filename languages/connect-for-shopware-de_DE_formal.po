@@ -1,11 +1,11 @@
 msgid ""
-msgstr "Project-Id-Version: Connect for Shopware 1.1.0\nLanguage: de_DE_formal\nContent-Type: text/plain; charset=UTF-8\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
+msgstr "Project-Id-Version: Connect for Shopware 1.1.1\nLanguage: de_DE_formal\nContent-Type: text/plain; charset=UTF-8\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "%1$d products · %2$d dynamic grids"
+msgstr "%1$d Produkte · %2$d dynamische Raster"
 
 msgid "%d minutes"
 msgstr "%d Minuten"
-
-msgid "%d products · %d dynamic grids"
-msgstr "%d Produkte · %d dynamische Raster"
 
 msgid "Access denied."
 msgstr "Zugriff verweigert."
@@ -202,6 +202,9 @@ msgstr "Erkannte Seiten-Caches"
 msgid "Disabled"
 msgstr "Deaktiviert"
 
+msgid "Dismiss this notice"
+msgstr "Diesen Hinweis ausblenden"
+
 msgid "Display preset"
 msgstr "Darstellungsvorlage"
 
@@ -262,6 +265,9 @@ msgstr "Ausführliche Produktdetails"
 msgid "Full-page or CDN caches can retain rendered prices longer. Configure their expiry and purge integration before customer use."
 msgstr "Seiten- oder CDN-Caches können dargestellte Preise länger speichern. Ablaufzeiten und Leerung vor dem Kundeneinsatz abstimmen."
 
+msgid "Git Updater is active. If a deckerweb installation or update fails, temporarily deactivate Git Updater and retry. Reactivate it afterwards if other plugins or themes need it. Only leave it disabled when those extensions have another reliable update provider."
+msgstr "Git Updater ist aktiv. Wenn eine deckerweb-Installation oder ein Update fehlschlägt, deaktivieren Sie Git Updater vorübergehend und versuchen Sie es erneut. Aktivieren Sie ihn danach wieder, wenn andere Plugins oder Themes ihn benötigen. Lassen Sie ihn nur dauerhaft deaktiviert, wenn diese Erweiterungen einen anderen zuverlässigen Updateweg besitzen."
+
 msgid "GitHub release does not contain the plugin main file."
 msgstr "Der GitHub-Release enthält nicht die Hauptdatei des Plugins."
 
@@ -319,8 +325,8 @@ msgstr "Diese mitgelieferte Version bei bestehenden Components als zusätzliche 
 msgid "Installation could not be completed. You can safely retry."
 msgstr "Die Installation konnte nicht abgeschlossen werden. Sie können sie sicher erneut versuchen."
 
-msgid "Installed: %d · Existing: %d · Example templates: %d"
-msgstr "Installiert: %d · Vorhanden: %d · Beispielvorlagen: %d"
+msgid "Installed: %1$d · Existing: %2$d · Example templates: %3$d"
+msgstr "Installiert: %1$d · Vorhanden: %2$d · Beispielvorlagen: %3$d"
 
 msgid "Invalid GitHub repository URL."
 msgstr "Ungültige GitHub-Repository-URL."
@@ -384,6 +390,12 @@ msgstr "Produkt-Styles nur für dargestellte Blöcke und Elemente laden."
 
 msgid "Loading product…"
 msgstr "Produkt wird geladen …"
+
+msgid "Made admin translations consistently extractable and tightened input and output handling without changing saved selections."
+msgstr "Admin-Übersetzungen einheitlich erfassbar gemacht und Eingabe- sowie Ausgabebehandlung verbessert; gespeicherte Auswahlen bleiben erhalten."
+
+msgid "Manage installed plugins"
+msgstr "Installierte Plugins verwalten"
 
 msgid "Manage settings and product usage on one admin page with directly linkable tabs and clearer spacing. Existing usage bookmarks remain supported."
 msgstr "Einstellungen und Produktverwendung auf einer Adminseite mit direkt verlinkbaren Tabs und klareren Abständen verwalten. Bestehende Verwendungs-Lesezeichen funktionieren weiterhin."
@@ -481,6 +493,9 @@ msgstr "Seitenzahlen"
 msgid "Paste exported settings JSON"
 msgstr "Exportierte Einstellungen als JSON einfügen"
 
+msgid "Permission denied."
+msgstr "Zugriff verweigert."
+
 msgid "Please check current prices and availability in the shop."
 msgstr "Aktuelle Preise und Verfügbarkeit bitte im Shop prüfen."
 
@@ -567,6 +582,9 @@ msgstr "Einen Produktionsschlüssel des Sales Channels serverseitig über DW_SW_
 
 msgid "Provide blue vector artwork with consistent banner crops and locally available assets."
 msgstr "Blaue Vektorgrafiken mit einheitlichen Bannerzuschnitten und lokal verfügbaren Dateien bereitstellen."
+
+msgid "Public catalog callbacks require both providers and cannot be used in private mode."
+msgstr "Öffentliche Katalog-Callbacks benötigen beide Anbieter und können nicht im Private-Modus verwendet werden."
 
 msgid "Quick view"
 msgstr "Schnellansicht"
@@ -659,7 +677,7 @@ msgid "Section heading"
 msgstr "Bereichsüberschrift"
 
 msgid "See the release on GitHub."
-msgstr "Sehen Sie sich das Release auf GitHub an."
+msgstr "Sehen Sie sich den Release auf GitHub an."
 
 msgid "Select a Shopware product in the block settings."
 msgstr "Ein Shopware-Produkt in den Blockeinstellungen wählen."
@@ -796,6 +814,12 @@ msgstr "Das GitHub-Paket konnte nicht vorbereitet werden. Die installierte Versi
 msgid "The GitHub package does not contain the Connect for Shopware plugin file."
 msgstr "Das GitHub-Paket enthält nicht die Plugin-Datei von Connect for Shopware."
 
+msgid "The approved release changed. Refresh updates first."
+msgstr "Die freigegebene Version hat sich geändert. Suchen Sie zuerst erneut nach Updates."
+
+msgid "The approved release could not be verified."
+msgstr "Die freigegebene Version konnte nicht geprüft werden."
+
 msgid "The package identity or version does not match a newer Connect for Shopware release."
 msgstr "Identität oder Version des Pakets entsprechen keiner neueren Veröffentlichung von Connect for Shopware."
 
@@ -850,11 +874,14 @@ msgstr "Ohne Titel"
 msgid "Update the embedded Plugin Library to 1.0.0 and improve shared-data cleanup during batch uninstall."
 msgstr "Eingebettete Plugin Library auf 1.0.0 aktualisieren und gemeinsame Daten bei Sammeldeinstallation zuverlässiger bereinigen."
 
-msgid "Update the other active deckerweb plugins to use translated shared update messages."
-msgstr "Aktualisieren Sie die anderen aktiven deckerweb-Plugins, damit die gemeinsamen Update-Meldungen übersetzt werden."
+msgid "Updated the shared plugin catalog to Library 1.1.0 and the GitHub updater to 2.2.1."
+msgstr "Gemeinsamen Plugin-Katalog auf Library 1.1.0 und den GitHub-Updater auf 2.2.1 aktualisiert."
 
 msgid "Use Test connection now below to check the shop. Verify the reported language, currency and tax context against the intended Sales Channel. This checklist is not live monitoring."
 msgstr "Prüfen Sie den Shop unten mit „Verbindung jetzt testen“. Vergleichen Sie die gemeldete Sprache, Währung und Steuerdarstellung mit dem gewünschten Verkaufskanal. Diese Checkliste ist keine Live-Überwachung."
+
+msgid "Use the bundled updater reliably alongside older updater copies and clean its repository cache during uninstall."
+msgstr "Gebündelten Updater auch neben älteren Updater-Kopien zuverlässig laden und seinen Repository-Cache bei Deinstallation bereinigen."
 
 msgid "Use the setup checklist to review connection settings and the last tested Sales Channel context."
 msgstr "Mit der Einrichtungscheckliste die Verbindungseinstellungen und den zuletzt geprüften Verkaufskanal-Kontext überblicken."

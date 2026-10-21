@@ -114,7 +114,7 @@ final class ProductRenderer {
         wp_enqueue_style('dw-sw-product');
         $s=Presentation::settings($input);
         if(!empty($p['_stale'])) {$s['showPrice']=false;$s['showAvailability']=false;}
-        $html='';$media='';$text='';$domain='connect-for-shopware';
+        $html='';$media='';$text='';
         if($s['showImage']&&!empty($p['images'])) {
             $items=$s['imageMode']==='gallery'?($p['gallery']??[]):[['type'=>'image']+$p['images'][0]];
             if(!$items) $items=array_map(/**
@@ -130,17 +130,19 @@ final class ProductRenderer {
                 if($m['type']==='video') {
                     $media.='<div id="'.$id.'" data-gallery-item class="dw-sw-video">';
                     if(!empty($m['poster'])) $media.='<img class="dw-sw-image" loading="lazy" src="'.esc_url($m['poster']).'" alt="'.esc_attr($m['alt']).'">';
-                    $media.='<p><a href="'.esc_url($m['url']).'" target="_blank" rel="noopener noreferrer">'.esc_html(sprintf(__('Watch video on %s',$domain),$m['provider'])).'</a></p></div>';
+                    /* translators: Placeholders identify the displayed product, image, duration or item counts in the order shown. */
+                    $media.='<p><a href="'.esc_url($m['url']).'" target="_blank" rel="noopener noreferrer">'.esc_html(sprintf(__('Watch video on %s','connect-for-shopware'),$m['provider'])).'</a></p></div>';
                 } else $media.='<img id="'.$id.'" data-gallery-item class="dw-sw-image" loading="lazy" decoding="async" src="'.esc_url($m['url']).'" alt="'.esc_attr($m['alt']).'">';
             }
             if(count($items)>1) {
                 $media.='<div class="dw-sw-thumbnails">';
                 foreach($items as $i=>$m) {
                     $video=$m['type']==='video';$thumb=$video?($m['poster']??''):$m['url'];
-                    $label=$video?__('Show video',$domain):sprintf(__('Show image %d',$domain),$i+1);
+                    /* translators: Placeholders identify the displayed product, image, duration or item counts in the order shown. */
+                    $label=$video?__('Show video','connect-for-shopware'):sprintf(__('Show image %d','connect-for-shopware'),$i+1);
                     $media.='<a href="#'.esc_attr($uid.$i).'" data-gallery-index="'.$i.'" aria-label="'.esc_attr($label).'">';
                     if($thumb!=='') $media.='<img loading="lazy" src="'.esc_url($thumb).'" alt="">';
-                    if($video) $media.='<span class="dw-sw-video-label">'.esc_html__('Video',$domain).'</span>';
+                    if($video) $media.='<span class="dw-sw-video-label">'.esc_html__('Video','connect-for-shopware').'</span>';
                     $media.='</a>';
                 }
                 $media.='</div>';
@@ -152,13 +154,13 @@ final class ProductRenderer {
         if($s['showVariant']&&$p['variantText']!=='') $html.='<p class="dw-sw-variant">'.esc_html($p['variantText']).'</p>';
         $price=$p['displayPrice'];
         if($s['showPrice']&&isset($price['unitPrice'])) {
-            $label=$p['isFamily']?__('From',$domain).' ':'';
+            $label=$p['isFamily']?__('From','connect-for-shopware').' ':'';
             $html.='<p class="dw-sw-price">'.esc_html($label.$this->money((float)$price['unitPrice'],$p));
             if($s['showListPrice']&&isset($price['listPrice']['price'])) {
-                $html.=' <del class="dw-sw-list-price" aria-label="'.esc_attr__('List price',$domain).'">'.esc_html($this->money((float)$price['listPrice']['price'],$p)).'</del>';
-                if(isset($price['listPrice']['percentage'])) $html.=' <span class="dw-sw-discount">'.esc_html(number_format_i18n((float)$price['listPrice']['percentage'],2).' % '.__('discount',$domain)).'</span>';
+                $html.=' <del class="dw-sw-list-price" aria-label="'.esc_attr__('List price','connect-for-shopware').'">'.esc_html($this->money((float)$price['listPrice']['price'],$p)).'</del>';
+                if(isset($price['listPrice']['percentage'])) $html.=' <span class="dw-sw-discount">'.esc_html(number_format_i18n((float)$price['listPrice']['percentage'],2).' % '.__('discount','connect-for-shopware')).'</span>';
             }
-            $tax=match($p['taxState']??'') {'gross'=>__('Including VAT; shipping costs apply in the shop.',$domain),'net'=>__('Excluding VAT; shipping costs apply in the shop.',$domain),'free'=>__('Tax-free; shipping costs apply in the shop.',$domain),default=>__('Shipping costs apply in the shop.',$domain)};
+            $tax=match($p['taxState']??'') {'gross'=>__('Including VAT; shipping costs apply in the shop.','connect-for-shopware'),'net'=>__('Excluding VAT; shipping costs apply in the shop.','connect-for-shopware'),'free'=>__('Tax-free; shipping costs apply in the shop.','connect-for-shopware'),default=>__('Shipping costs apply in the shop.','connect-for-shopware')};
             $html.='</p><p class="dw-sw-tax">'.esc_html($tax).'</p>';
             if(isset($price['referencePrice']['price'])) {
                 $r=$price['referencePrice'];
@@ -166,7 +168,7 @@ final class ProductRenderer {
             }
         }
         if($s['showAvailability']&&$p['available']!==null) {
-            $html.='<p class="dw-sw-availability">'.esc_html($p['available']?__('Available',$domain):__('Currently unavailable',$domain));
+            $html.='<p class="dw-sw-availability">'.esc_html($p['available']?__('Available','connect-for-shopware'):__('Currently unavailable','connect-for-shopware'));
             if($p['available']&&$p['deliveryTime']!=='') $html.=' · '.esc_html($p['deliveryTime']);
             $html.='</p>';
         }
@@ -210,23 +212,23 @@ final class ProductRenderer {
      * @return string Validated string, label or escaped HTML for the documented operation.
      */
     private function tabs(array $p,array $s): string {
-        $domain='connect-for-shopware';$tabs=[];
-        if($s['showDescriptionTab']&&!empty($p['descriptionHtml'])) $tabs[__('Description',$domain)]=wp_kses_post($p['descriptionHtml']);
+        $tabs=[];
+        if($s['showDescriptionTab']&&!empty($p['descriptionHtml'])) $tabs[__('Description','connect-for-shopware')]=wp_kses_post($p['descriptionHtml']);
         if($s['showDocumentsTab']&&!empty($p['documents'])) {
             $list='<ul class="dw-sw-documents">';
             foreach($p['documents'] as $d) $list.='<li><a href="'.esc_url($d['url']).'">'.esc_html($d['title']).'</a> <span>(PDF)</span></li>';
-            $tabs[__('Data sheets',$domain)]=$list.'</ul>';
+            $tabs[__('Data sheets','connect-for-shopware')]=$list.'</ul>';
         }
         $m=$p['manufacturer']??[];
         if($s['showManufacturerTab']&&!empty($m['name'])) {
             $content='';
             if(!empty($m['logo'])) $content.='<img class="dw-sw-manufacturer-logo" loading="lazy" src="'.esc_url($m['logo']).'" alt="'.esc_attr($m['name']).'">';
             $content.='<h3>'.esc_html($m['name']).'</h3>'.wp_kses_post($m['descriptionHtml']??'');
-            if(!empty($m['url'])) $content.='<p><a href="'.esc_url($m['url']).'">'.esc_html__('Manufacturer website',$domain).'</a></p>';
-            $tabs[__('Manufacturer',$domain)]=$content;
+            if(!empty($m['url'])) $content.='<p><a href="'.esc_url($m['url']).'">'.esc_html__('Manufacturer website','connect-for-shopware').'</a></p>';
+            $tabs[__('Manufacturer','connect-for-shopware')]=$content;
         }
         if(!$tabs) return '';
-        $uid='dw-sw-tabs-'.wp_generate_uuid4().'-';$out='<div class="dw-sw-tabs"><div class="dw-sw-tablist" aria-label="'.esc_attr__('Product details',$domain).'">';$i=0;
+        $uid='dw-sw-tabs-'.wp_generate_uuid4().'-';$out='<div class="dw-sw-tabs"><div class="dw-sw-tablist" aria-label="'.esc_attr__('Product details','connect-for-shopware').'">';$i=0;
         foreach($tabs as $label=>$content) $out.='<a id="'.esc_attr($uid.'tab-'.$i).'" href="#'.esc_attr($uid.'panel-'.$i++).'">'.esc_html($label).'</a>';
         $out.='</div>';$i=0;
         foreach($tabs as $label=>$content) $out.='<section id="'.esc_attr($uid.'panel-'.$i).'" class="dw-sw-tabpanel" aria-labelledby="'.esc_attr($uid.'tab-'.$i++).'"><h3 class="dw-sw-tab-heading">'.esc_html($label).'</h3>'.$content.'</section>';

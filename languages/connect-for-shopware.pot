@@ -1,10 +1,10 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=UTF-8\n"
 
-msgid "%d minutes"
+msgid "%1$d products · %2$d dynamic grids"
 msgstr ""
 
-msgid "%d products · %d dynamic grids"
+msgid "%d minutes"
 msgstr ""
 
 msgid "Access denied."
@@ -202,6 +202,9 @@ msgstr ""
 msgid "Disabled"
 msgstr ""
 
+msgid "Dismiss this notice"
+msgstr ""
+
 msgid "Display preset"
 msgstr ""
 
@@ -262,6 +265,9 @@ msgstr ""
 msgid "Full-page or CDN caches can retain rendered prices longer. Configure their expiry and purge integration before customer use."
 msgstr ""
 
+msgid "Git Updater is active. If a deckerweb installation or update fails, temporarily deactivate Git Updater and retry. Reactivate it afterwards if other plugins or themes need it. Only leave it disabled when those extensions have another reliable update provider."
+msgstr ""
+
 msgid "GitHub release does not contain the plugin main file."
 msgstr ""
 
@@ -319,7 +325,7 @@ msgstr ""
 msgid "Installation could not be completed. You can safely retry."
 msgstr ""
 
-msgid "Installed: %d · Existing: %d · Example templates: %d"
+msgid "Installed: %1$d · Existing: %2$d · Example templates: %3$d"
 msgstr ""
 
 msgid "Invalid GitHub repository URL."
@@ -383,6 +389,12 @@ msgid "Load product styles only for rendered blocks and elements."
 msgstr ""
 
 msgid "Loading product…"
+msgstr ""
+
+msgid "Made admin translations consistently extractable and tightened input and output handling without changing saved selections."
+msgstr ""
+
+msgid "Manage installed plugins"
 msgstr ""
 
 msgid "Manage settings and product usage on one admin page with directly linkable tabs and clearer spacing. Existing usage bookmarks remain supported."
@@ -481,6 +493,9 @@ msgstr ""
 msgid "Paste exported settings JSON"
 msgstr ""
 
+msgid "Permission denied."
+msgstr ""
+
 msgid "Please check current prices and availability in the shop."
 msgstr ""
 
@@ -566,6 +581,9 @@ msgid "Provide a production Sales Channel key server-side via DW_SW_ACCESS_KEY i
 msgstr ""
 
 msgid "Provide blue vector artwork with consistent banner crops and locally available assets."
+msgstr ""
+
+msgid "Public catalog callbacks require both providers and cannot be used in private mode."
 msgstr ""
 
 msgid "Quick view"
@@ -796,6 +814,12 @@ msgstr ""
 msgid "The GitHub package does not contain the Connect for Shopware plugin file."
 msgstr ""
 
+msgid "The approved release changed. Refresh updates first."
+msgstr ""
+
+msgid "The approved release could not be verified."
+msgstr ""
+
 msgid "The package identity or version does not match a newer Connect for Shopware release."
 msgstr ""
 
@@ -850,10 +874,13 @@ msgstr ""
 msgid "Update the embedded Plugin Library to 1.0.0 and improve shared-data cleanup during batch uninstall."
 msgstr ""
 
-msgid "Update the other active deckerweb plugins to use translated shared update messages."
+msgid "Updated the shared plugin catalog to Library 1.1.0 and the GitHub updater to 2.2.1."
 msgstr ""
 
 msgid "Use Test connection now below to check the shop. Verify the reported language, currency and tax context against the intended Sales Channel. This checklist is not live monitoring."
+msgstr ""
+
+msgid "Use the bundled updater reliably alongside older updater copies and clean its repository cache during uninstall."
 msgstr ""
 
 msgid "Use the setup checklist to review connection settings and the last tested Sales Channel context."

@@ -138,9 +138,10 @@ final class Operations {
      */
     public static function column(string $column,int $postId): void {
         if($column!=='dw_sw_products') return;
-        $refs=self::references($postId);$domain='connect-for-shopware';
+        $refs=self::references($postId);
         if(!$refs['products']&&!$refs['groups']) {echo '—';return;}
-        echo '<a href="'.esc_url(get_edit_post_link($postId)).'">'.esc_html(sprintf(__('%d products · %d dynamic grids',$domain),count($refs['products']),count($refs['groups']))).'</a>';
+        /* translators: Placeholders identify the displayed product, image, duration or item counts in the order shown. */
+        echo '<a href="'.esc_url(get_edit_post_link($postId)).'">'.esc_html(sprintf(__('%1$d products · %2$d dynamic grids','connect-for-shopware'),count($refs['products']),count($refs['groups']))).'</a>';
         $labels=[];
         foreach(array_slice($refs['products'],0,4) as $ref) {
             try {$p=Plugin::repository()->cachedProduct($ref['productId'],$ref['selectionMode']);}

@@ -29,11 +29,11 @@ final class Diagnostics {
      * @return array Normalized result data for the documented operation.
      */
     public static function labels(): array {
-        $d='connect-for-shopware';
-        return ['network'=>__('Connection interrupted.',$d),'response'=>__('Invalid shop response.',$d),
-            'http_401'=>__('Sales Channel key rejected.',$d),'http_403'=>__('Shop access denied.',$d),
-            'http_404'=>__('Shop resource unavailable.',$d),'upstream'=>__('Shop temporarily unavailable.',$d),
-            'budget'=>__('Request time budget reached.',$d),'busy'=>__('Product data is being refreshed.',$d)];
+        
+        return ['network'=>__('Connection interrupted.','connect-for-shopware'),'response'=>__('Invalid shop response.','connect-for-shopware'),
+            'http_401'=>__('Sales Channel key rejected.','connect-for-shopware'),'http_403'=>__('Shop access denied.','connect-for-shopware'),
+            'http_404'=>__('Shop resource unavailable.','connect-for-shopware'),'upstream'=>__('Shop temporarily unavailable.','connect-for-shopware'),
+            'budget'=>__('Request time budget reached.','connect-for-shopware'),'busy'=>__('Product data is being refreshed.','connect-for-shopware')];
     }
 }
 /**

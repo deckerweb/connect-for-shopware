@@ -110,7 +110,7 @@ final class QuickView {
      */
     private static function rateAllowed(): bool {
         // IP is hashed with a site secret; neither raw IP nor credentials are stored.
-        $key='dw_sw_quick_rate_'.substr(hash_hmac('sha256',(string)($_SERVER['REMOTE_ADDR']??'local'),wp_salt('auth')),0,32);
+        $key='dw_sw_quick_rate_'.substr(hash_hmac('sha256',sanitize_text_field(wp_unslash($_SERVER['REMOTE_ADDR']??'local')),wp_salt('auth')),0,32);
         $cache=new TransientCache();
         if(!$cache->acquire($key)) return false;
         try {

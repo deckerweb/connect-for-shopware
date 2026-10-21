@@ -3,7 +3,7 @@
  * Plugin Name: Connect for Shopware
  * Plugin URI: https://github.com/deckerweb/connect-for-shopware
  * Description: Read-only Shopware products for Gutenberg and native Bricks elements.
- * Version: 1.1.0
+ * Version: 1.1.1
  * Requires at least: 6.6
  * Requires PHP: 8.1
  * Author: David Decker – DECKERWEB
@@ -35,10 +35,10 @@ if(in_array('deckerweb-shopware-connector/deckerweb-shopware-connector.php',(arr
     return;
 }
 define('DW_SW_FILE',__FILE__);
-define('DW_SW_VERSION','1.1.0');
+define('DW_SW_VERSION','1.1.1');
 define('DW_SW_DIR',__DIR__.'/');
 define('DW_SW_URL',plugin_dir_url(__FILE__));
-foreach(['Core','Lifecycle','WordPressBridge','Presentation','Extras','Operations','Configuration','Components','EditorialTools','SetupTools','GitHubUpdates','Plugin','Admin','Rest'] as $file) require_once DW_SW_DIR.'src/'.$file.'.php';
+foreach(['Core','Lifecycle','WordPressBridge','Presentation','Extras','Operations','Configuration','Components','EditorialTools','SetupTools','GitHubUpdates','Plugin','Admin','Rest'] as $dw_sw_source_file) require_once DW_SW_DIR.'src/'.$dw_sw_source_file.'.php';
 require_once DW_SW_DIR.'src/deckerweb-changelog-v1.php';
 add_action('plugins_loaded',[Deckerweb\Shopware\Plugin::class,'boot']);
 

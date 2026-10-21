@@ -1,5 +1,10 @@
 == Changelog ==
 
+= 1.1.1 · 2026-10-22 =
+* Improved: Updated the shared plugin catalog to Library 1.1.0 and the GitHub updater to 2.2.1.
+* Fixed: Use the bundled updater reliably alongside older updater copies and clean its repository cache during uninstall.
+* Fixed: Made admin translations consistently extractable and tightened input and output handling without changing saved selections.
+
 = 1.1.0 · 2026-10-20 =
 * New: Find saved product selections in the Product usage tab, open their source content and check availability without changing assignments.
 * New: Refresh individual products and dynamic grids in Gutenberg and the classic article selector without clearing unrelated product caches.

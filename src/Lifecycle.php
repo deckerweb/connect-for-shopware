@@ -81,6 +81,7 @@ final class Lifecycle {
      */
     public static function uninstall(): void {
         if(!defined('WP_UNINSTALL_PLUGIN')||WP_UNINSTALL_PLUGIN!=='connect-for-shopware/connect-for-shopware.php')return;
+        $updater_class = require DW_SW_DIR . 'includes/deckerweb-github-release-updater-v2.php';
         RuntimeCache::flush();
         if(is_multisite()){
             $offset=0;
@@ -90,13 +91,19 @@ final class Lifecycle {
                 $offset+=count($ids);
             }while(count($ids)===100);
             foreach(get_networks(['fields'=>'ids','number'=>0]) as $networkId){
-                $key='ddw_ghru_'.substr(md5('https://github.com/deckerweb/connect-for-shopware'),0,24);
-                delete_network_option((int)$networkId,'_site_transient_'.$key);
-                delete_network_option((int)$networkId,'_site_transient_timeout_'.$key);
-                wp_cache_delete($key,'site-transient');
+                // WordPress switches the blog, but not the network used by site transients.
+                $original_network=$GLOBALS['current_site'];
+                switch_to_blog((int)get_main_site_id((int)$networkId));
+                try {
+                    $GLOBALS['current_site']=get_network((int)$networkId);
+                    $updater_class::clear_repository_cache('https://github.com/deckerweb/connect-for-shopware');
+                } finally {
+                    $GLOBALS['current_site']=$original_network;
+                    restore_current_blog();
+                }
             }
         }else{
-            self::site();delete_site_transient('ddw_ghru_'.substr(md5('https://github.com/deckerweb/connect-for-shopware'),0,24));
+            self::site();$updater_class::clear_repository_cache('https://github.com/deckerweb/connect-for-shopware');
         }
     }
 

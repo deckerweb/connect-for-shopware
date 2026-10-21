@@ -266,7 +266,16 @@
     "Enabled": "Aktiviert",
     "Disabled": "Deaktiviert",
     "Product usage": "Produktverwendung",
-    "Plugin sections": "Plugin-Bereiche"
+    "Plugin sections": "Plugin-Bereiche",
+    "Git Updater is active. If a deckerweb installation or update fails, temporarily deactivate Git Updater and retry. Reactivate it afterwards if other plugins or themes need it. Only leave it disabled when those extensions have another reliable update provider.": "Git Updater ist aktiv. Wenn eine deckerweb-Installation oder ein Update fehlschlägt, deaktiviere Git Updater vorübergehend und versuche es erneut. Aktiviere ihn danach wieder, wenn andere Plugins oder Themes ihn benötigen. Lass ihn nur dauerhaft deaktiviert, wenn diese Erweiterungen einen anderen zuverlässigen Updateweg besitzen.",
+    "Manage installed plugins": "Installierte Plugins verwalten",
+    "Dismiss this notice": "Diesen Hinweis ausblenden",
+    "Permission denied.": "Zugriff verweigert.",
+    "Public catalog callbacks require both providers and cannot be used in private mode.": "Öffentliche Katalog-Callbacks benötigen beide Anbieter und können nicht im Private-Modus verwendet werden.",
+    "The approved release could not be verified.": "Die freigegebene Version konnte nicht geprüft werden.",
+    "The approved release changed. Refresh updates first.": "Die freigegebene Version hat sich geändert. Suche zuerst erneut nach Updates.",
+    "Installed: %1$d · Existing: %2$d · Example templates: %3$d": "Installiert: %1$d · Vorhanden: %2$d · Beispielvorlagen: %3$d",
+    "%1$d products · %2$d dynamic grids": "%1$d Produkte · %2$d dynamische Raster"
   },
   "de_DE_formal": {
     "%d minutes": "%d Minuten",
@@ -428,7 +437,7 @@
     "Sales Channel key rejected.": "Sales-Channel-Schlüssel wurde abgelehnt.",
     "Search products": "Produkte suchen",
     "Section heading": "Bereichsüberschrift",
-    "See the release on GitHub.": "Sehen Sie sich das Release auf GitHub an.",
+    "See the release on GitHub.": "Sehen Sie sich den Release auf GitHub an.",
     "Select a Shopware product in the block settings.": "Ein Shopware-Produkt in den Blockeinstellungen wählen.",
     "Select a category": "Kategorie auswählen",
     "Select a dynamic Shopware category.": "Eine dynamische Shopware-Kategorie auswählen.",
@@ -535,6 +544,15 @@
     "Enabled": "Aktiviert",
     "Disabled": "Deaktiviert",
     "Product usage": "Produktverwendung",
-    "Plugin sections": "Plugin-Bereiche"
+    "Plugin sections": "Plugin-Bereiche",
+    "Git Updater is active. If a deckerweb installation or update fails, temporarily deactivate Git Updater and retry. Reactivate it afterwards if other plugins or themes need it. Only leave it disabled when those extensions have another reliable update provider.": "Git Updater ist aktiv. Wenn eine deckerweb-Installation oder ein Update fehlschlägt, deaktivieren Sie Git Updater vorübergehend und versuchen Sie es erneut. Aktivieren Sie ihn danach wieder, wenn andere Plugins oder Themes ihn benötigen. Lassen Sie ihn nur dauerhaft deaktiviert, wenn diese Erweiterungen einen anderen zuverlässigen Updateweg besitzen.",
+    "Manage installed plugins": "Installierte Plugins verwalten",
+    "Dismiss this notice": "Diesen Hinweis ausblenden",
+    "Permission denied.": "Zugriff verweigert.",
+    "Public catalog callbacks require both providers and cannot be used in private mode.": "Öffentliche Katalog-Callbacks benötigen beide Anbieter und können nicht im Private-Modus verwendet werden.",
+    "The approved release could not be verified.": "Die freigegebene Version konnte nicht geprüft werden.",
+    "The approved release changed. Refresh updates first.": "Die freigegebene Version hat sich geändert. Suchen Sie zuerst erneut nach Updates.",
+    "Installed: %1$d · Existing: %2$d · Example templates: %3$d": "Installiert: %1$d · Vorhanden: %2$d · Beispielvorlagen: %3$d",
+    "%1$d products · %2$d dynamic grids": "%1$d Produkte · %2$d dynamische Raster"
   }
 }

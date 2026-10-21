@@ -3,6 +3,16 @@
 defined( 'ABSPATH' ) || exit;
 return [
     'history' =>
+        '= 1.1.1 · 2026-10-22 =
+' .
+        '* '.__( 'Improved', 'connect-for-shopware' ).': '.__( 'Updated the shared plugin catalog to Library 1.1.0 and the GitHub updater to 2.2.1.', 'connect-for-shopware' ).'
+' .
+        '* '.__( 'Fixed', 'connect-for-shopware' ).': '.__( 'Use the bundled updater reliably alongside older updater copies and clean its repository cache during uninstall.', 'connect-for-shopware' ).'
+' .
+        '* '.__( 'Fixed', 'connect-for-shopware' ).': '.__( 'Made admin translations consistently extractable and tightened input and output handling without changing saved selections.', 'connect-for-shopware' ).'
+' .
+        '
+' .
         '= 1.1.0 · 2026-10-20 =
 ' .
         '* '.__( 'New', 'connect-for-shopware' ).': '.__( 'Find saved product selections in the Product usage tab, open their source content and check availability without changing assignments.', 'connect-for-shopware' ).'

@@ -106,3 +106,7 @@ Transfer connection settings exports only shop/API URLs, cache lifetime and the 
 
 Product results are reused within one repository/page request as well as through the existing persistent cache. Scoped refreshes and site switches use separate generations so a memo cannot retain a previous selection after refresh.
 
+
+## Help and security
+
+Report reproducible non-security problems through [Issues](https://github.com/deckerweb/connect-for-shopware/issues) or use [Discussions](https://github.com/deckerweb/connect-for-shopware/discussions) for questions. Report vulnerabilities privately using the [security policy](https://github.com/deckerweb/connect-for-shopware/security/policy). Do not publish credentials or confidential shop data.

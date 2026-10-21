@@ -49,7 +49,7 @@ for locale in ['en','de']:
  c=source['content'][locale]
  (root/'docs/wiki'/(guide+'.md')).write_text(c['guide'])
  (root/'docs/wiki'/(faqName+'.md')).write_text(c['faq'])
- credits=('# Herkunft und Lizenzen\n\n[English](CREDITS.md)\n\nConnect for Shopware, Signet und aktive Grafiken: © 2026 David Decker – DECKERWEB, GPL-2.0-or-later.\n\nDie unverändert eingebetteten gemeinsamen Komponenten deckerweb Updater 2.1.0 und Plugin Library 1.0.0 stammen von David Decker – DECKERWEB und stehen unter GPL-2.0-or-later. Ihr Copyright und die beiliegende Library-Lizenz bleiben erhalten. Der gemeinsame lokale Changelog-Renderer stammt aus den deckerweb-Plugin-Komponenten und steht unter derselben Lizenz.\n\nBricks und Shopware werden über ihre Schnittstellen eingebunden; deren Anwendungscode wird nicht mitgeliefert. Die Banner verwenden Inter als Schriftpfade unter SIL Open Font License 1.1; die Lizenz liegt unter [OFL-Inter.txt](licenses/OFL-Inter.txt). Es werden keine Fontdateien ausgeliefert. Die Dokumentationswebsite verwendet das [Cayman-Theme](https://github.com/pages-themes/cayman) unter CC0-1.0; diese Website-Dateien sind nicht Teil des installierbaren Plugins.\n' if de else '# Credits and licenses\n\n[Deutsch](CREDITS-de.md)\n\nConnect for Shopware, its mark and active artwork: © 2026 David Decker – DECKERWEB, GPL-2.0-or-later.\n\nThe unchanged embedded deckerweb Updater 2.1.0 and Plugin Library 1.0.0 originate from David Decker – DECKERWEB and are GPL-2.0-or-later. Their copyright notices and included Library license are retained. The shared local changelog renderer comes from the deckerweb plugin components under the same license.\n\nBricks and Shopware are integrated through their APIs; their application code is not bundled. Banners use Inter font outlines under the SIL Open Font License 1.1; see [OFL-Inter.txt](licenses/OFL-Inter.txt). No font files are distributed. The documentation website uses the [Cayman theme](https://github.com/pages-themes/cayman) under CC0-1.0; website files are excluded from the installable plugin.\n')
+ credits=('# Herkunft und Lizenzen\n\n[English](CREDITS.md)\n\nConnect for Shopware, Signet und aktive Grafiken: © 2026 David Decker – DECKERWEB, GPL-2.0-or-later.\n\nDie unverändert eingebetteten gemeinsamen Komponenten deckerweb Updater 2.2.1 und Plugin Library 1.1.0 stammen von David Decker – DECKERWEB und stehen unter GPL-2.0-or-later. Ihre Copyright-Hinweise bleiben erhalten; die GPL-Lizenz liegt dem Plugin bei. Der gemeinsame lokale Changelog-Renderer stammt aus den deckerweb-Plugin-Komponenten und steht unter derselben Lizenz.\n\nBricks und Shopware werden über ihre Schnittstellen eingebunden; deren Anwendungscode wird nicht mitgeliefert. Die Banner verwenden Inter als Schriftpfade unter SIL Open Font License 1.1; die Lizenz liegt unter [OFL-Inter.txt](licenses/OFL-Inter.txt). Es werden keine Fontdateien ausgeliefert. Die Dokumentationswebsite verwendet das [Cayman-Theme](https://github.com/pages-themes/cayman) unter CC0-1.0; diese Website-Dateien sind nicht Teil des installierbaren Plugins.\n' if de else '# Credits and licenses\n\n[Deutsch](CREDITS-de.md)\n\nConnect for Shopware, its mark and active artwork: © 2026 David Decker – DECKERWEB, GPL-2.0-or-later.\n\nThe unchanged embedded deckerweb Updater 2.2.1 and Plugin Library 1.1.0 originate from David Decker – DECKERWEB and are GPL-2.0-or-later. Their copyright notices are retained; the plugin includes the GPL license. The shared local changelog renderer comes from the deckerweb plugin components under the same license.\n\nBricks and Shopware are integrated through their APIs; their application code is not bundled. Banners use Inter font outlines under the SIL Open Font License 1.1; see [OFL-Inter.txt](licenses/OFL-Inter.txt). No font files are distributed. The documentation website uses the [Cayman theme](https://github.com/pages-themes/cayman) under CC0-1.0; website files are excluded from the installable plugin.\n')
  (root/'docs'/('CREDITS-de.md' if de else 'CREDITS.md')).write_text(credits)
 (root/'docs/wiki/Home.md').write_text('''# Connect for Shopware
 
@@ -79,24 +79,31 @@ Produkte und Varianten in nativen Gutenberg-Blöcken und Bricks-Elementen. Shopw
 ''')
 home=root/'docs/wiki/Home.md'
 home.write_text(home.read_text()+'\n\n'+'\n\n'.join('## '+source['notices']['shopware_trademark'][locale]['title']+'\n\n'+'\n\n'.join(source['notices']['shopware_trademark'][locale]['paragraphs']) for locale in ['en','de'])+'\n')
-(root/'docs/wiki/_Sidebar.md').write_text('''[Home](Home)
+(root/'docs/wiki/_Sidebar.md').write_text("""## English
 
-### English
+- [Home](Home#english)
 - [Setup and guide](English)
 - [FAQ by topic](FAQ-English)
 - [Changelog](Changelog-English)
+- [Help and security](English#help-and-security)
 
-### Deutsch
+## Deutsch
+
+- [Startseite](Home#deutsch)
 - [Einrichtung und Anleitung](Deutsch)
 - [Fragen nach Themen](FAQ-Deutsch)
 - [Änderungsverlauf](Changelog-Deutsch)
+- [Hilfe und Sicherheit](Deutsch#hilfe-und-sicherheit)
+""")
+(root/'docs/wiki/_Footer.md').write_text("""**Connect for Shopware · Documentation / Dokumentation**
 
-### Project / Projekt
-- [Downloads](https://github.com/deckerweb/connect-for-shopware/releases/latest)
-- [Issues](https://github.com/deckerweb/connect-for-shopware/issues)
-- [Discussions](https://github.com/deckerweb/connect-for-shopware/discussions)
-- [Security / Sicherheit](https://github.com/deckerweb/connect-for-shopware/security/advisories/new)
-''')
+[Wiki home / Wiki-Startseite](Home) · [Repository](https://github.com/deckerweb/connect-for-shopware) · [Downloads & Releases](https://github.com/deckerweb/connect-for-shopware/releases)
+
+[Help & bugs / Hilfe & Fehler](https://github.com/deckerweb/connect-for-shopware/issues) · [Discussions / Austausch](https://github.com/deckerweb/connect-for-shopware/discussions) · [Security / Sicherheit](https://github.com/deckerweb/connect-for-shopware/security/policy)
+
+© 2026 David Decker – DECKERWEB.  
+Plugin: [GPL v2 or later / GPL v2 oder höher](https://www.gnu.org/licenses/gpl-2.0.html).
+""")
 # The same rendered content supplies the optional Pages site; no extra copy of facts.
 site=root/'docs' if (root/'docs/_config.yml').exists() else root/'docs/site';site.mkdir(exist_ok=True)
 for locale in ['en','de']:

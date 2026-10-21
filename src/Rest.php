@@ -287,7 +287,7 @@ final class Rest {
                     }
                 }
             }
-            foreach(array_slice((array)($_GET['include']??[]),0,10) as $ref) {
+            foreach(array_slice((array)map_deep(wp_unslash($_GET['include']??[]),'sanitize_text_field'),0,10) as $ref) {
                 if(!is_string($ref)) continue;
                 $r=Presentation::reference($ref);$p=Plugin::repository()->product($r['productId'],$r['selectionMode']);
                 $options[$ref]=self::label($p,$r['selectionMode']);

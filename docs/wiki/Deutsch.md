@@ -106,3 +106,7 @@ Die Übertragung exportiert nur Shop-/API-Adresse, Cache-Dauer und die Option zu
 
 Produktdaten werden zusätzlich zum vorhandenen Cache innerhalb eines Repository-/Seitenaufrufs wiederverwendet. Gezielte Aktualisierungen und Website-Wechsel haben getrennte Generationen, damit keine vorherige Auswahl im Arbeitsspeicher weiterverwendet wird.
 
+
+## Hilfe und Sicherheit
+
+Nachvollziehbare Probleme ohne Sicherheitsbezug unter [Issues](https://github.com/deckerweb/connect-for-shopware/issues) melden; für Fragen stehen [Discussions](https://github.com/deckerweb/connect-for-shopware/discussions) bereit. Sicherheitslücken vertraulich über die [Sicherheitsrichtlinie](https://github.com/deckerweb/connect-for-shopware/security/policy) melden. Keine Zugangsdaten oder vertraulichen Shop-Daten veröffentlichen.

@@ -32,7 +32,7 @@ final class Components {
  */ static function(): void {
             if(!current_user_can('manage_options') || !current_user_can('edit_posts')) wp_die(esc_html__('Access denied.','connect-for-shopware'));
             check_admin_referer('dw_sw_components');
-            $selection=isset($_POST['components'])&&is_array($_POST['components'])?array_map('sanitize_key',array_filter(wp_unslash($_POST['components']),'is_string')):[];
+            $selection=isset($_POST['components'])&&is_array($_POST['components'])?array_values(array_filter(map_deep(wp_unslash($_POST['components']),'sanitize_key'),'is_string')):[];
             $result=self::install($selection,!empty($_POST['examples']),!empty($_POST['copies']));
             RuntimeCache::set('dw_sw_components_result_'.get_current_user_id(),$result,60);
             wp_safe_redirect(admin_url('options-general.php?page=dw-sw'));exit;
@@ -140,15 +140,16 @@ final class Components {
      */
     public static function panel(): void {
         if(!self::available()) return;
-        $domain='connect-for-shopware';
-        echo '<section><h2>'.esc_html__('Bricks Components',$domain).'</h2><p>'.esc_html__('Install selected reusable components. Existing definitions and customizations are preserved.',$domain).'</p>';
+        
+        echo '<section><h2>'.esc_html__('Bricks Components','connect-for-shopware').'</h2><p>'.esc_html__('Install selected reusable components. Existing definitions and customizations are preserved.','connect-for-shopware').'</p>';
         $key='dw_sw_components_result_'.get_current_user_id();$result=get_transient($key);
-        if(is_array($result)) {delete_transient($key);echo '<p role="status">'.esc_html(sprintf(__('Installed: %d · Existing: %d · Example templates: %d',$domain),$result['installed'],$result['skipped'],$result['templates'])).'</p>';if($result['failed']) echo '<p>'.esc_html__('Installation could not be completed. You can safely retry.',$domain).'</p>';}
+        /* translators: Placeholders identify the displayed product, image, duration or item counts in the order shown. */
+        if(is_array($result)) {delete_transient($key);echo '<p role="status">'.esc_html(sprintf(__('Installed: %1$d · Existing: %2$d · Example templates: %3$d','connect-for-shopware'),$result['installed'],$result['skipped'],$result['templates'])).'</p>';if($result['failed']) echo '<p>'.esc_html__('Installation could not be completed. You can safely retry.','connect-for-shopware').'</p>';}
         $known=array_column(\Bricks\Component_Repository::get_all(),null,'id');
         echo '<form action="'.esc_url(admin_url('admin-post.php')).'" method="post"><input type="hidden" name="action" value="dw_sw_components">';wp_nonce_field('dw_sw_components');
-        foreach(self::catalog() as $component) echo '<p><label><input type="checkbox" name="components[]" value="'.esc_attr($component['id']).'"> '.esc_html($component['elements'][0]['label']).(isset($known[$component['id']])?' · '.esc_html__('Already installed',$domain):'').'</label></p>';
-        echo '<p><label><input type="checkbox" name="examples" value="1"> '.esc_html__('Also install starter templates without product selections',$domain).'</label></p><p><label><input type="checkbox" name="copies" value="1"> '.esc_html__('Install this bundled version as an additional copy for existing components',$domain).'</label></p>';
-        echo '<p>'.esc_html__('Starter templates have no shop-specific selections. Choose products and categories through the native element controls inside each slot.',$domain).'</p>';
-        submit_button(__('Install selected components',$domain),'secondary');echo '</form></section>';
+        foreach(self::catalog() as $component) echo '<p><label><input type="checkbox" name="components[]" value="'.esc_attr($component['id']).'"> '.esc_html($component['elements'][0]['label']).(isset($known[$component['id']])?' · '.esc_html__('Already installed','connect-for-shopware'):'').'</label></p>';
+        echo '<p><label><input type="checkbox" name="examples" value="1"> '.esc_html__('Also install starter templates without product selections','connect-for-shopware').'</label></p><p><label><input type="checkbox" name="copies" value="1"> '.esc_html__('Install this bundled version as an additional copy for existing components','connect-for-shopware').'</label></p>';
+        echo '<p>'.esc_html__('Starter templates have no shop-specific selections. Choose products and categories through the native element controls inside each slot.','connect-for-shopware').'</p>';
+        submit_button(__('Install selected components','connect-for-shopware'),'secondary');echo '</form></section>';
     }
 }

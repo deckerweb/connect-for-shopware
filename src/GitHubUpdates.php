@@ -33,27 +33,15 @@ final class GitHubUpdates {
 	 * @return void No return value; effects are described above.
 	 */
 	public function boot(): void {
-		if ( ! class_exists( '\Deckerweb\GitHubReleaseUpdater\V2\Updater' ) ) {
-			require_once DW_SW_DIR . 'includes/deckerweb-github-release-updater-v2.php';
-		}
-		if ( ! defined( '\\Deckerweb\\GitHubReleaseUpdater\\V2\\Updater::SUPPORTS_HOST_TRANSLATIONS' ) ) {
-            add_action('admin_notices',/**
- * Explain an older shared updater capability on this settings page.
- *
- * @return void No return value.
- */ static function(): void {
-                $screen=function_exists('get_current_screen')?get_current_screen():null;
-                if(current_user_can('update_plugins')&&$screen&&$screen->id==='settings_page_dw-sw')echo '<div class="notice notice-info"><p>'.esc_html__('Update the other active deckerweb plugins to use translated shared update messages.','connect-for-shopware').'</p></div>';
-            });
-        }
+		$updater_class = require DW_SW_DIR . 'includes/deckerweb-github-release-updater-v2.php';
 		try {
-			$updater = new \Deckerweb\GitHubReleaseUpdater\V2\Updater(
+			$updater = new $updater_class(
 				DW_SW_FILE,
 				self::REPOSITORY,
 				'Connect for Shopware',
 				__( 'Read-only Shopware products for Gutenberg and native Bricks elements.', 'connect-for-shopware' ),
 				$this->artwork(),
-				defined( '\\Deckerweb\\GitHubReleaseUpdater\\V2\\Updater::SUPPORTS_HOST_TRANSLATIONS' ) ? [ 'translate' => require DW_SW_DIR . 'includes/updater-translations.php' ] : []
+				array( 'translate' => require DW_SW_DIR . 'includes/updater-translations.php' )
 			);
 		} catch ( \InvalidArgumentException $error ) {
 			// An unsupported installation directory must not break product rendering.
