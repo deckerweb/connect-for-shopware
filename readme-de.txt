@@ -2,9 +2,9 @@
 Contributors: daveshine
 Tags: shopware, gutenberg, bricks, products
 Requires at least: 6.6
-Tested up to: 7.1.3
+Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 1.1.1
+Stable tag: 1.1.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,7 +18,7 @@ Shopware-Produkte mit nativen Gutenberg-Blöcken und Bricks-Elementen in WordPre
 - Gemeinsame Darstellung in Gutenberg und Bricks; optionale Bricks Components.
 - Websitebezogene Verbindung, Diagnose und Cache für 15/30/60 Minuten.
 
-**Version:** 1.1.1 · WordPress ≥ 6.6 · PHP ≥ 8.1 · Bricks Components ≥ 2.4.2 · Shopware 6.7 Store API.
+**Version:** 1.1.2 · WordPress ≥ 6.6 · PHP ≥ 8.1 · Bricks Components ≥ 2.4.2 · Shopware 6.7 Store API.
 
 == Installation ==
 
@@ -56,6 +56,9 @@ Vollständige Fragen nach Themen: https://github.com/deckerweb/connect-for-shopw
 1. Einstellungen: Verbindung, Cache, Diagnose und optionale Bricks Components.
 
 == Changelog ==
+
+= 1.1.2 · 2026-11-09 =
+* Behoben: deckerweb Library auf 1.3.0 und Updater auf 2.4.0 aktualisiert: normale Updates unabhängig vom Katalog, begrenzte Downloads und strengere Paketprüfung.
 
 = 1.1.1 · 2026-10-22 =
 * Verbessert: Gemeinsamen Plugin-Katalog auf Library 1.1.0 und den GitHub-Updater auf 2.2.1 aktualisiert.

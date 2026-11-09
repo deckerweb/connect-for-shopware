@@ -1,29 +1,89 @@
 msgid ""
-msgstr "Project-Id-Version: Connect for Shopware 1.1.1\nLanguage: de_DE_formal\nContent-Type: text/plain; charset=UTF-8\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
+msgstr "Project-Id-Version: Connect for Shopware 1.1.2\nLanguage: de_DE_formal\nContent-Type: text/plain; charset=UTF-8\nPlural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "%1$d products · %2$d dynamic grids"
 msgstr "%1$d Produkte · %2$d dynamische Raster"
 
+msgid "%1$s of %2$s plugins"
+msgstr "%1$s von %2$s Plugins"
+
 msgid "%d minutes"
 msgstr "%d Minuten"
+
+msgid "%d products · %d dynamic grids"
+msgstr "%d Produkte · %d dynamische Raster"
+
+msgid "%s is installed but inactive. Activate it first."
+msgstr "%s ist installiert, aber inaktiv. Bitte zuerst aktivieren."
+
+msgid "%s is missing. Install and activate it first."
+msgstr "%s fehlt. Bitte zuerst installieren und aktivieren."
+
+msgid "%s must be network activated first."
+msgstr "%s muss zuerst netzwerkweit aktiviert werden."
+
+msgid "%s supports activation per site only."
+msgstr "%s unterstützt nur die Aktivierung je Website."
 
 msgid "Access denied."
 msgstr "Zugriff verweigert."
 
+msgid "Action cancelled."
+msgstr "Vorgang abgebrochen."
+
+msgid "Activate"
+msgstr "Aktivieren"
+
+msgid "Activate Bricks QuickNav per site after selecting the Bricks parent or child theme."
+msgstr "Bricks QuickNav bitte je Website aktivieren, nachdem das Bricks-Theme oder ein Child-Theme ausgewählt wurde."
+
+msgid "Activating…"
+msgstr "Wird aktiviert…"
+
+msgid "Active"
+msgstr "Aktiv"
+
+msgid "Active filters: "
+msgstr "Aktive Filter: "
+
 msgid "Add"
 msgstr "Hinzufügen"
+
+msgid "Admin"
+msgstr "Administration"
 
 msgid "Advanced connection settings"
 msgstr "Erweiterte Verbindungseinstellungen"
 
+msgid "Affected features remain paused until their requirements are met."
+msgstr "Betroffene Funktionen pausieren, bis ihre Voraussetzungen erfüllt sind."
+
 msgid "After expiry, the next request fetches fresh data. This is not a scheduled refresh."
 msgstr "Nach Ablauf lädt der nächste Abruf frische Daten. Es gibt keine automatische Aktualisierung nach Zeitplan."
+
+msgid "All"
+msgstr "Alle"
+
+msgid "Already active"
+msgstr "Bereits aktiv"
 
 msgid "Already installed"
 msgstr "Bereits installiert"
 
+msgid "Already up to date."
+msgstr "Bereits aktuell."
+
 msgid "Also install starter templates without product selections"
 msgstr "Auch Startvorlagen ohne Produktauswahl installieren"
+
+msgid "Another action for this plugin is running. Please wait."
+msgstr "Für dieses Plugin läuft bereits eine Aktion. Bitte warten."
+
+msgid "Another component interrupted the request. If Git Updater is active, temporarily deactivate it and retry."
+msgstr "Eine andere Komponente hat die Anfrage unterbrochen. Falls Git Updater aktiv ist, deaktivieren Sie ihn vorübergehend und wiederholen Sie den Vorgang."
+
+msgid "Another updater provides a different release. Refresh updates before continuing."
+msgstr "Ein anderer Updater bietet einen abweichenden Release an. Bitte die Updateinformationen vor dem Fortfahren aktualisieren."
 
 msgid "Apply a preset, then adjust individual settings."
 msgstr "Eine Vorlage anwenden und die einzelnen Einstellungen bei Bedarf anpassen."
@@ -31,8 +91,32 @@ msgstr "Eine Vorlage anwenden und die einzelnen Einstellungen bei Bedarf anpasse
 msgid "Apply previewed settings"
 msgstr "Einstellungen aus der Vorschau übernehmen"
 
+msgid "Apr"
+msgstr "Apr"
+
+msgid "April"
+msgstr "April"
+
+msgid "Archive contains too many files."
+msgstr "Das Archiv enthält zu viele Dateien."
+
+msgid "Archive symlinks are not permitted."
+msgstr "Symbolische Verknüpfungen sind im Archiv nicht erlaubt."
+
+msgid "Archive verification"
+msgstr "Archivprüfung"
+
 msgid "Article-related products, dynamic product grids, product buttons and optional Quick View."
 msgstr "Passende Artikelprodukte, dynamische Produktraster, Produktbuttons und optionale Schnellansicht."
+
+msgid "As of "
+msgstr "Stand: "
+
+msgid "Aug"
+msgstr "Aug"
+
+msgid "August"
+msgstr "August"
 
 msgid "Automatic"
 msgstr "Automatisch"
@@ -46,6 +130,9 @@ msgstr "Verfügbar"
 msgid "Available in the Sales Channel"
 msgstr "Im Verkaufskanal abrufbar"
 
+msgid "Back to deckerweb"
+msgstr "Zurück zu deckerweb"
+
 msgid "Back to search results"
 msgstr "Zurück zu den Suchtreffern"
 
@@ -54,6 +141,12 @@ msgstr "Unter dem Bild"
 
 msgid "Bricks Components"
 msgstr "Bricks Components"
+
+msgid "Builder"
+msgstr "Builder"
+
+msgid "Bundled catalog"
+msgstr "Mitgelieferter Katalog"
 
 msgid "Button"
 msgstr "Schaltfläche"
@@ -76,6 +169,42 @@ msgstr "Cache und Aktualisierung"
 msgid "Cache lifetime in seconds"
 msgstr "Cache-Dauer in Sekunden"
 
+msgid "Cached or bundled catalog"
+msgstr "Gespeicherter oder mitgelieferter Katalog"
+
+msgid "Cannot create temporary file."
+msgstr "Temporäre Datei konnte nicht erstellt werden."
+
+msgid "Cannot create verified archive."
+msgstr "Geprüftes Archiv konnte nicht erstellt werden."
+
+msgid "Cannot finalize archive."
+msgstr "Archiv konnte nicht abgeschlossen werden."
+
+msgid "Cannot normalize archive."
+msgstr "Archiv konnte nicht aufbereitet werden."
+
+msgid "Cannot read archive entry."
+msgstr "Archiveintrag konnte nicht gelesen werden."
+
+msgid "Catalog URL"
+msgstr "Katalog-URL"
+
+msgid "Catalog approval"
+msgstr "Katalogfreigabe"
+
+msgid "Catalog diagnostics require a public catalog provider."
+msgstr "Die Katalogdiagnose benötigt einen öffentlichen Kataloganbieter."
+
+msgid "Catalog refreshed."
+msgstr "Katalog aktualisiert."
+
+msgid "Catalog retrieval does not limit updates of installed plugins. Those use their normal WordPress update provider."
+msgstr "Der Katalogabruf begrenzt keine Updates installierter Plugins. Diese verwenden ihren normalen WordPress-Updater."
+
+msgid "Catalog verification"
+msgstr "Katalogprüfung"
+
 msgid "Changelog"
 msgstr "Änderungsprotokoll"
 
@@ -94,8 +223,17 @@ msgstr "Connector-Konfiguration prüfen."
 msgid "Check saved selections"
 msgstr "Gespeicherte Auswahl prüfen"
 
+msgid "Check status"
+msgstr "Status prüfen"
+
 msgid "Checking saved selections…"
 msgstr "Gespeicherte Auswahl wird geprüft …"
+
+msgid "Checking status…"
+msgstr "Status wird geprüft…"
+
+msgid "Checksum verification"
+msgstr "Prüfsummenprüfung"
 
 msgid "Choose variant"
 msgstr "Variante wählen"
@@ -115,8 +253,14 @@ msgstr "Schließen"
 msgid "Columns"
 msgstr "Spalten"
 
+msgid "Commerce"
+msgstr "Commerce"
+
 msgid "Compact recommendation"
 msgstr "Kompakte Empfehlung"
+
+msgid "Compatible additions only"
+msgstr "Nur passende Ergänzungen"
 
 msgid "Complete"
 msgstr "Erledigt"
@@ -132,6 +276,9 @@ msgstr "Konfigurierbare Shop-Verbindung, Cache, Diagnose und optionale Bricks Co
 
 msgid "Connection and diagnostics"
 msgstr "Verbindung und Diagnose"
+
+msgid "Connection failed. Please try again later."
+msgstr "Die Verbindung ist fehlgeschlagen. Bitte später erneut versuchen."
 
 msgid "Connection interrupted."
 msgstr "Verbindung unterbrochen."
@@ -150,6 +297,12 @@ msgstr "Connector-Cache geleert. Produkte werden beim nächsten Abruf neu gelade
 
 msgid "Content"
 msgstr "Inhalte"
+
+msgid "Copied."
+msgstr "Kopiert."
+
+msgid "Copy diagnostic information"
+msgstr "Diagnoseinformationen kopieren"
 
 msgid "Could not access the update filesystem."
 msgstr "Auf das Dateisystem für das Update konnte nicht zugegriffen werden."
@@ -190,17 +343,38 @@ msgstr "Tab Datenblätter"
 msgid "Deactivate the legacy deckerweb Shopware Connector before activating Connect for Shopware. Existing settings and product assignments are preserved."
 msgstr "Vor der Aktivierung von Connect for Shopware das alte deckerweb Shopware Connector deaktivieren. Einstellungen und Produktzuordnungen bleiben erhalten."
 
+msgid "Dec"
+msgstr "Dez"
+
+msgid "December"
+msgstr "Dezember"
+
+msgid "Delete Library settings when removing the last host plugin"
+msgstr "Library-Einstellungen beim Entfernen des letzten Host-Plugins ebenfalls löschen"
+
 msgid "Description"
 msgstr "Beschreibung"
 
 msgid "Description tab"
 msgstr "Tab Beschreibung"
 
+msgid "Details & requirements"
+msgstr "Details & Voraussetzungen"
+
 msgid "Detected page caches"
 msgstr "Erkannte Seiten-Caches"
 
 msgid "Disabled"
 msgstr "Deaktiviert"
+
+msgid "Discover more plugins by deckerweb"
+msgstr "Weitere Plugins von deckerweb entdecken"
+
+msgid "Discover randomly"
+msgstr "Zufällig entdecken"
+
+msgid "Dismiss permanently"
+msgstr "Dauerhaft schließen"
 
 msgid "Dismiss this notice"
 msgstr "Diesen Hinweis ausblenden"
@@ -210,6 +384,9 @@ msgstr "Darstellungsvorlage"
 
 msgid "Documentation"
 msgstr "Dokumentation"
+
+msgid "Done. The plugin is active."
+msgstr "Erledigt. Das Plugin ist aktiv."
 
 msgid "Download settings"
 msgstr "Einstellungen herunterladen"
@@ -229,6 +406,9 @@ msgstr "Bearbeiten Sie den verlinkten Inhalt, um eine Auswahl zu ersetzen. Templ
 msgid "Enabled"
 msgstr "Aktiviert"
 
+msgid "Enter a catalog URL first."
+msgstr "Bitte zuerst eine Katalog-URL eintragen."
+
 msgid "Enter a public HTTPS shop URL without credentials, query parameters or fragments. The optional API URL must end in /store-api."
 msgstr "Eine öffentliche HTTPS-Shop-URL ohne Zugangsdaten, Query-Parameter oder Fragment eingeben. Die optionale API-URL muss mit /store-api enden."
 
@@ -244,17 +424,47 @@ msgstr "Umgebung"
 msgid "Excluding VAT; shipping costs apply in the shop."
 msgstr "Zuzüglich MwSt.; Versandkosten fallen im Shop an."
 
+msgid "Expanded archive is too large."
+msgstr "Das entpackte Archiv ist zu groß."
+
 msgid "Export shop URLs and cache preferences without secrets; review and confirm changes before importing them."
 msgstr "Shop-Adressen und Cache-Einstellungen ohne Geheimnisse exportieren; Änderungen vor dem Import prüfen und bestätigen."
 
 msgid "Export shop URLs and cache preferences. Access keys, product assignments, installed Components and Library settings are never included."
 msgstr "Shop-Adressen und Cache-Einstellungen exportieren. Zugriffsschlüssel, Produktzuordnungen, installierte Components und Library-Einstellungen sind niemals enthalten."
 
+msgid "F j, Y"
+msgstr "j. F Y"
+
+msgid "Feb"
+msgstr "Feb"
+
+msgid "February"
+msgstr "Februar"
+
+msgid "Filesystem credentials are required."
+msgstr "Zugangsdaten für das Dateisystem werden benötigt."
+
+msgid "Filesystem credentials are required. Use the catalog with JavaScript enabled or the native Plugins screen."
+msgstr "Dateisystem-Zugangsdaten sind erforderlich. Bitte den Katalog mit aktiviertem JavaScript oder die WordPress-Pluginverwaltung verwenden."
+
+msgid "Filter"
+msgstr "Filtern"
+
 msgid "Find saved product selections in the Product usage tab, open their source content and check availability without changing assignments."
 msgstr "Gespeicherte Produktauswahlen im Tab Produktverwendung finden, ihren Ursprungsinhalt öffnen und die Abrufbarkeit prüfen, ohne Zuordnungen zu verändern."
 
+msgid "Fits my installation"
+msgstr "Passt zu meiner Installation"
+
 msgid "Fixed"
 msgstr "Behoben"
+
+msgid "Fri"
+msgstr "Fr"
+
+msgid "Friday"
+msgstr "Freitag"
 
 msgid "From"
 msgstr "ab"
@@ -268,17 +478,26 @@ msgstr "Seiten- oder CDN-Caches können dargestellte Preise länger speichern. A
 msgid "Git Updater is active. If a deckerweb installation or update fails, temporarily deactivate Git Updater and retry. Reactivate it afterwards if other plugins or themes need it. Only leave it disabled when those extensions have another reliable update provider."
 msgstr "Git Updater ist aktiv. Wenn eine deckerweb-Installation oder ein Update fehlschlägt, deaktivieren Sie Git Updater vorübergehend und versuchen Sie es erneut. Aktivieren Sie ihn danach wieder, wenn andere Plugins oder Themes ihn benötigen. Lassen Sie ihn nur dauerhaft deaktiviert, wenn diese Erweiterungen einen anderen zuverlässigen Updateweg besitzen."
 
+msgid "GitHub Stars"
+msgstr "GitHub-Sterne"
+
 msgid "GitHub release does not contain the plugin main file."
 msgstr "Der GitHub-Release enthält nicht die Hauptdatei des Plugins."
 
 msgid "Grid gap"
 msgstr "Rasterabstand"
 
+msgid "HTTP status: %d."
+msgstr "HTTP-Status: %d."
+
 msgid "Heading tag"
 msgstr "Überschriften-Tag"
 
 msgid "Hide"
 msgstr "Ausblenden"
+
+msgid "Hide catalog"
+msgstr "Katalog ausblenden"
 
 msgid "Hide the empty Components panel when the required Bricks integration is unavailable."
 msgstr "Leere Components-Box ausblenden, wenn die erforderliche Bricks-Integration nicht verfügbar ist."
@@ -307,11 +526,23 @@ msgstr "Importierter Wert"
 msgid "Improved"
 msgstr "Verbessert"
 
+msgid "Inactive"
+msgstr "Inaktiv"
+
 msgid "Include a permanently visible trademark notice in settings and matching local notice documents."
 msgstr "Dauerhaft sichtbaren Markenhinweis in den Einstellungen und passende lokale Hinweisdokumente ergänzen."
 
 msgid "Including VAT; shipping costs apply in the shop."
 msgstr "inkl. MwSt., zzgl. Versandkosten im Shop"
+
+msgid "Install and activate this plugin in the network admin."
+msgstr "Dieses Plugin bitte im Netzwerk-Admin installieren und aktivieren."
+
+msgid "Install deckerweb plugin"
+msgstr "deckerweb-Plugin installieren"
+
+msgid "Install now"
+msgstr "Jetzt installieren"
 
 msgid "Install selected components"
 msgstr "Ausgewählte Components installieren"
@@ -322,17 +553,104 @@ msgstr "Ausgewählte wiederverwendbare Components installieren. Bestehende Defin
 msgid "Install this bundled version as an additional copy for existing components"
 msgstr "Diese mitgelieferte Version bei bestehenden Components als zusätzliche Kopie installieren"
 
+msgid "Installation cancelled."
+msgstr "Installation abgebrochen."
+
 msgid "Installation could not be completed. You can safely retry."
 msgstr "Die Installation konnte nicht abgeschlossen werden. Sie können sie sicher erneut versuchen."
+
+msgid "Installation failed."
+msgstr "Installation fehlgeschlagen."
+
+msgid "Installed"
+msgstr "Installiert"
+
+msgid "Installed plugin identity does not match the approved release."
+msgstr "Die Identität des installierten Plugins stimmt nicht mit dem freigegebenen Release überein."
+
+msgid "Installed plugins use their normal update provider. Reload the update information and try again."
+msgstr "Installierte Plugins verwenden ihren normalen Updater. Aktualisieren Sie die Updateinformationen und versuchen Sie es erneut."
+
+msgid "Installed · inactive"
+msgstr "Installiert · inaktiv"
+
+msgid "Installed: "
+msgstr "Installiert: "
 
 msgid "Installed: %1$d · Existing: %2$d · Example templates: %3$d"
 msgstr "Installiert: %1$d · Vorhanden: %2$d · Beispielvorlagen: %3$d"
 
+msgid "Installed: %d · Existing: %d · Example templates: %d"
+msgstr "Installiert: %d · Vorhanden: %d · Beispielvorlagen: %d"
+
+msgid "Installing…"
+msgstr "Wird installiert…"
+
 msgid "Invalid GitHub repository URL."
 msgstr "Ungültige GitHub-Repository-URL."
 
+msgid "Invalid ZIP archive."
+msgstr "Ungültiges ZIP-Archiv."
+
+msgid "Invalid approval flag."
+msgstr "Ungültige Freigabeangabe."
+
 msgid "Invalid authentication provider."
 msgstr "Ungültiger Authentifizierungsanbieter."
+
+msgid "Invalid catalog field: "
+msgstr "Ungültiges Katalogfeld: "
+
+msgid "Invalid catalog revision."
+msgstr "Ungültiger Katalogstand."
+
+msgid "Invalid catalog schema."
+msgstr "Ungültiges Katalogformat."
+
+msgid "Invalid catalog timestamp."
+msgstr "Ungültiger Katalogzeitpunkt."
+
+msgid "Invalid dependencies."
+msgstr "Ungültige Abhängigkeiten."
+
+msgid "Invalid dependency URL."
+msgstr "Ungültige URL einer Abhängigkeit."
+
+msgid "Invalid dependency metadata."
+msgstr "Ungültige Angaben zu Abhängigkeiten."
+
+msgid "Invalid display field."
+msgstr "Ungültiges Anzeigefeld."
+
+msgid "Invalid icon color."
+msgstr "Ungültige Icon-Farbe."
+
+msgid "Invalid icon label."
+msgstr "Ungültiges Icon-Kürzel."
+
+msgid "Invalid identity or release metadata."
+msgstr "Ungültige Plugin- oder Release-Angaben."
+
+msgid "Invalid local icon."
+msgstr "Ungültiges lokales Icon."
+
+msgid "Invalid network policy."
+msgstr "Ungültige Netzwerkregel."
+
+msgid "Invalid network requirement."
+msgstr "Ungültige Netzwerkanforderung."
+
+msgid "Invalid package cleanup provider."
+msgstr "Ungültiger Anbieter für die Paketbereinigung."
+
+msgid "Invalid platform version."
+msgstr "Ungültige Plattformversion."
+
+msgid "Invalid plugin series."
+msgstr "Ungültige Plugin-Serie."
+
+msgid "Invalid private download limits."
+msgstr "Ungültige Grenzen für private Downloads."
 
 msgid "Invalid product selection."
 msgstr "Ungültige Produktauswahl."
@@ -343,11 +661,41 @@ msgstr "Ungültige Einstellungsdatei. Erlaubt sind nur Shop-Adressen und Cache-E
 msgid "Invalid shop response."
 msgstr "Ungültige Antwort des Shops."
 
+msgid "Invalid sort order."
+msgstr "Ungültige Sortierung."
+
+msgid "Invalid star count."
+msgstr "Ungültige Anzahl der GitHub-Sterne."
+
+msgid "Invalid stars date."
+msgstr "Ungültiges Datum der GitHub-Sterne."
+
+msgid "Invalid status filter."
+msgstr "Ungültiger Statusfilter."
+
+msgid "Jan"
+msgstr "Jan"
+
+msgid "January"
+msgstr "Januar"
+
 msgid "JavaScript is required for settings transfer. The normal settings form remains available."
 msgstr "Für die Einstellungsübertragung ist JavaScript erforderlich. Das normale Einstellungsformular bleibt verfügbar."
 
 msgid "JavaScript is required to select products. Existing assignments are preserved."
 msgstr "Zur Produktauswahl ist JavaScript erforderlich. Vorhandene Zuordnungen bleiben erhalten."
+
+msgid "Jul"
+msgstr "Jul"
+
+msgid "July"
+msgstr "Juli"
+
+msgid "Jun"
+msgstr "Jun"
+
+msgid "June"
+msgstr "Juni"
 
 msgid "Keep dialogs closed until opened and provide keyboard, close and documentation fallbacks."
 msgstr "Dialoge bis zum Öffnen geschlossen halten und Tastaturbedienung, Schließen sowie Dokumentationslinks absichern."
@@ -367,6 +715,9 @@ msgstr "Letzter Verbindungstest erfolgreich."
 msgid "Last request duration"
 msgstr "Dauer des letzten Abrufs"
 
+msgid "Last successful check: "
+msgstr "Zuletzt erfolgreich geprüft: "
+
 msgid "Last successful shop request"
 msgstr "Letzter erfolgreicher Shop-Abruf"
 
@@ -378,6 +729,18 @@ msgstr "Leer lassen für die Standardsortierung aus Shopware."
 
 msgid "Left of image"
 msgstr "Links vom Bild"
+
+msgid "Library"
+msgstr "Library"
+
+msgid "Library changelog"
+msgstr "Library-Änderungsverlauf"
+
+msgid "Library settings"
+msgstr "Library-Einstellungen"
+
+msgid "Library settings saved."
+msgstr "Library-Einstellungen gespeichert."
 
 msgid "List price"
 msgstr "Streichpreis"
@@ -394,6 +757,9 @@ msgstr "Produkt wird geladen …"
 msgid "Made admin translations consistently extractable and tightened input and output handling without changing saved selections."
 msgstr "Admin-Übersetzungen einheitlich erfassbar gemacht und Eingabe- sowie Ausgabebehandlung verbessert; gespeicherte Auswahlen bleiben erhalten."
 
+msgid "Manage Content"
+msgstr "Inhalte verwalten"
+
 msgid "Manage installed plugins"
 msgstr "Installierte Plugins verwalten"
 
@@ -409,14 +775,38 @@ msgstr "Tab Hersteller"
 msgid "Manufacturer website"
 msgstr "Hersteller-Website"
 
+msgid "Mar"
+msgstr "Mär"
+
+msgid "March"
+msgstr "März"
+
 msgid "Matching products for this article"
 msgstr "Passende Produkte zu diesem Artikel"
 
 msgid "Maximum products"
 msgstr "Maximale Produktanzahl"
 
+msgid "May"
+msgstr "Mai"
+
 msgid "Misc"
 msgstr "Sonstiges"
+
+msgid "Missing display text."
+msgstr "Anzeigetext fehlt."
+
+msgid "Missing plugin header."
+msgstr "Plugin-Header fehlt."
+
+msgid "Mon"
+msgstr "Mo"
+
+msgid "Monday"
+msgstr "Montag"
+
+msgid "More by deckerweb"
+msgstr "Mehr von deckerweb"
 
 msgid "More products in the shop"
 msgstr "Weitere Produkte im Shop"
@@ -433,6 +823,24 @@ msgstr "Nach unten"
 msgid "Move up"
 msgstr "Nach oben"
 
+msgid "Multisite"
+msgstr "Multisite"
+
+msgid "Name A–Z"
+msgstr "Name A–Z"
+
+msgid "Name Z–A"
+msgstr "Name Z–A"
+
+msgid "Network activate"
+msgstr "Netzwerkweit aktivieren"
+
+msgid "Network active"
+msgstr "Netzwerkweit aktiv"
+
+msgid "Network permission denied."
+msgstr "Keine Berechtigung für das Netzwerk."
+
 msgid "New"
 msgstr "Neu"
 
@@ -447,6 +855,9 @@ msgstr "Nächste Treffer"
 
 msgid "No active dynamic categories found. Assign a product group to an active category in Shopware."
 msgstr "Keine aktiven dynamischen Kategorien gefunden. In Shopware einer aktiven Kategorie eine Produktgruppe zuordnen."
+
+msgid "No approved plugins match this selection."
+msgstr "Keine freigegebenen Plugins passen zu dieser Auswahl."
 
 msgid "No products assigned to the current article."
 msgstr "Dem aktuellen Artikel sind keine Produkte zugeordnet."
@@ -463,6 +874,9 @@ msgstr "Keine Produkte gefunden."
 msgid "No saved selections on this page."
 msgstr "Keine gespeicherte Auswahl auf dieser Übersichtsseite."
 
+msgid "No update reported."
+msgstr "Kein Update gemeldet."
+
 msgid "None detected. External/CDN caches must be managed separately."
 msgstr "Keine erkannt. Externe Caches und CDN-Caches müssen separat verwaltet werden."
 
@@ -472,20 +886,65 @@ msgstr "Nicht konfiguriert"
 msgid "Not found in the Sales Channel. Review this selection."
 msgstr "Im Verkaufskanal nicht gefunden. Prüfen Sie diese Zuordnung."
 
+msgid "Not installed"
+msgstr "Nicht installiert"
+
+msgid "Not installed. You can try again."
+msgstr "Nicht installiert. Ein erneuter Versuch ist möglich."
+
 msgid "Not recorded yet"
 msgstr "Noch nicht erfasst"
 
 msgid "Not yet complete"
 msgstr "Noch offen"
 
+msgid "Nov"
+msgstr "Nov"
+
+msgid "November"
+msgstr "November"
+
+msgid "Oct"
+msgstr "Okt"
+
+msgid "October"
+msgstr "Oktober"
+
+msgid "Off by default. Applies only when no other host is installed, including inactive hosts. Removes Library settings, installation records and introduction status. Installed plugins, their content and other plugin settings remain unchanged. Network data is shared across sites."
+msgstr "Standardmäßig ausgeschaltet. Gilt nur, wenn kein weiterer Host installiert ist, auch kein deaktivierter. Entfernt Library-Einstellungen, Installationszuordnung und den Status des Einführungshinweises. Installierte Plugins, deren Inhalte und Einstellungen anderer Plugins bleiben erhalten. Netzwerkdaten werden gemeinsam von den Websites genutzt."
+
+msgid "Online catalog"
+msgstr "Online-Katalog"
+
+msgid "Only HTTPS on raw.githubusercontent.com/deckerweb. The server receives the requesting IP address. GitHub is contacted when installing a release."
+msgstr "Nur HTTPS auf raw.githubusercontent.com/deckerweb. Der Server sieht die anfragende IP-Adresse. Beim Installieren eines Releases wird GitHub kontaktiert."
+
 msgid "Only active categories using a dynamic product group are available. Rules remain in Shopware."
 msgstr "Verfügbar sind aktive Kategorien mit dynamischer Produktgruppe. Die Regeln bleiben in Shopware."
+
+msgid "Only approved releases"
+msgstr "Nur freigegebene Releases"
+
+msgid "Open catalog"
+msgstr "Katalog öffnen"
 
 msgid "Open product link in"
 msgstr "Produktlink öffnen in"
 
+msgid "Optional. The bundled catalog works immediately. Catalog requests are cached for 24 hours. No site URL, plugin list or usage data is sent."
+msgstr "Optional. Der mitgelieferte Katalog funktioniert sofort. Katalogabfragen werden 24 Stunden zwischengespeichert. Keine Website-URL, Plugin-Liste oder Nutzungsdaten werden übertragen."
+
 msgid "Optional: select a complete size and colour combination. Clear this when changing the main product."
 msgstr "Optional: vollständige Kombination aus Gebindegröße und Farbe wählen. Diese Auswahl beim Wechsel des Hauptprodukts leeren."
+
+msgid "PHP ZIP support is required."
+msgstr "PHP-ZIP-Unterstützung wird benötigt."
+
+msgid "POST required."
+msgstr "Eine POST-Anfrage ist erforderlich."
+
+msgid "Package download"
+msgstr "Paketdownload"
 
 msgid "Pagination"
 msgstr "Seitenzahlen"
@@ -496,14 +955,32 @@ msgstr "Exportierte Einstellungen als JSON einfügen"
 msgid "Permission denied."
 msgstr "Zugriff verweigert."
 
+msgid "Permission denied. Reload the page and check your permissions."
+msgstr "Zugriff verweigert. Laden Sie die Seite neu und prüfen Sie Ihre Berechtigungen."
+
+msgid "Planned: "
+msgstr "Geplant: "
+
 msgid "Please check current prices and availability in the shop."
 msgstr "Aktuelle Preise und Verfügbarkeit bitte im Shop prüfen."
 
 msgid "Please try again shortly."
 msgstr "Bitte in Kürze erneut versuchen."
 
+msgid "Plugin identity or version does not match the catalog."
+msgstr "Plugin oder Version stimmt nicht mit dem Katalog überein."
+
+msgid "Plugin is not installed."
+msgstr "Das Plugin ist nicht installiert."
+
 msgid "Plugin sections"
 msgstr "Plugin-Bereiche"
+
+msgid "Plugin series"
+msgstr "Plugin-Serien"
+
+msgid "Plugin status"
+msgstr "Plugin-Status"
 
 msgid "Plugin website"
 msgstr "Plugin-Website"
@@ -574,6 +1051,9 @@ msgstr "Produkt nicht verfügbar. Auswahl und Connector-Konfiguration prüfen."
 msgid "Product usage"
 msgstr "Produktverwendung"
 
+msgid "Product website"
+msgstr "Produktwebsite"
+
 msgid "Products matching in Shopware: %d"
 msgstr "Passende Produkte in Shopware: %d"
 
@@ -601,11 +1081,17 @@ msgstr "Shopware-Produkte ausschließlich lesend für Gutenberg und native Brick
 msgid "Ready to test"
 msgstr "Bereit für den Verbindungstest"
 
+msgid "Recently updated"
+msgstr "Zuletzt aktualisiert"
+
 msgid "Reference price"
 msgstr "Grundpreis"
 
 msgid "Refresh cached products"
 msgstr "Gespeicherte Produkte aktualisieren"
+
+msgid "Refresh catalog"
+msgstr "Katalog aktualisieren"
 
 msgid "Refresh individual products and dynamic grids in Gutenberg and the classic article selector without clearing unrelated product caches."
 msgstr "Einzelne Produkte und dynamische Raster in Gutenberg sowie der klassischen Artikelzuordnung aktualisieren, ohne andere Produkt-Caches zu leeren."
@@ -622,17 +1108,50 @@ msgstr "Wird aktualisiert …"
 msgid "Related products"
 msgstr "Passende Produkte"
 
+msgid "Release 1.0.0 is being prepared. Installation will be available after package verification."
+msgstr "Release 1.0.0 wird vorbereitet. Die Installation ist nach Prüfung des Pakets verfügbar."
+
+msgid "Release checksum is verified before installation. Activation is a separate step."
+msgstr "Vor der Installation wird die Release-Prüfsumme geprüft. Die Aktivierung erfolgt separat."
+
+msgid "Release in preparation"
+msgstr "Release in Vorbereitung"
+
+msgid "Release must contain exactly the approved plugin directory."
+msgstr "Das Release muss genau das freigegebene Plugin-Verzeichnis enthalten."
+
 msgid "Remove"
 msgstr "Entfernen"
 
 msgid "Remove Connector temporary caches and locks on uninstall while preserving settings, assigned products and installed Components."
 msgstr "Temporäre Connector-Caches und Sperren bei Deinstallation entfernen; Einstellungen, Produktzuordnungen und installierte Components erhalten."
 
+msgid "Remove filter: "
+msgstr "Filter entfernen: "
+
+msgid "Repository & documentation"
+msgstr "Repository & Dokumentation"
+
 msgid "Request time budget reached."
 msgstr "Zeitlimit für diesen Seitenaufruf erreicht."
 
+msgid "Requirements shown are preliminary until the stable release is verified."
+msgstr "Die gezeigten Voraussetzungen sind bis zur Prüfung des stabilen Releases vorläufig."
+
+msgid "Requires PHP %s or newer."
+msgstr "Benötigt PHP %s oder neuer."
+
+msgid "Requires WordPress %s or newer."
+msgstr "Benötigt WordPress %s oder neuer."
+
+msgid "Requires a WordPress Multisite network."
+msgstr "Benötigt ein WordPress-Multisite-Netzwerk."
+
 msgid "Reset Gutenberg display controls while preserving product selections, custom content and native block styles."
 msgstr "Gutenberg-Darstellung zurücksetzen; Produktauswahl, eigene Inhalte und native Block-Stile erhalten."
+
+msgid "Reset filters"
+msgstr "Filter zurücksetzen"
 
 msgid "Reset keeps product selections, custom text, button text and button URLs."
 msgstr "Produktauswahl, eigener Text, Buttontext und Button-Adressen bleiben erhalten."
@@ -640,8 +1159,14 @@ msgstr "Produktauswahl, eigener Text, Buttontext und Button-Adressen bleiben erh
 msgid "Reset product display"
 msgstr "Produktdarstellung zurücksetzen"
 
+msgid "Reset view"
+msgstr "Ansicht zurücksetzen"
+
 msgid "Resolve explicit server-side credentials per Multisite site while retaining the global-key fallback."
 msgstr "Explizite serverseitige Schlüssel je Multisite-Website zuordnen; globalen Schlüssel als Fallback erhalten."
+
+msgid "Retrieve approved catalog updates online"
+msgstr "Katalogfreigaben online aktualisieren"
 
 msgid "Reuse Shopware data for"
 msgstr "Shopware-Daten zwischenspeichern für"
@@ -658,11 +1183,23 @@ msgstr "Rechts vom Bild"
 msgid "SEO summary"
 msgstr "SEO-Kurztext"
 
+msgid "Safe package cleanup is unavailable for this update provider."
+msgstr "Für diesen Updateanbieter ist keine sichere Paketbereinigung verfügbar."
+
 msgid "Sales Channel context"
 msgstr "Sales-Channel-Kontext"
 
 msgid "Sales Channel key rejected."
 msgstr "Sales-Channel-Schlüssel wurde abgelehnt."
+
+msgid "Sat"
+msgstr "Sa"
+
+msgid "Saturday"
+msgstr "Samstag"
+
+msgid "Save settings"
+msgstr "Einstellungen speichern"
 
 msgid "Saved article assignments, Gutenberg blocks, reusable blocks and native Bricks elements on this site. Check a row to request fresh shop data. Nothing is removed or replaced automatically."
 msgstr "Gespeicherte Artikelzuordnungen, Gutenberg-Blöcke, wiederverwendbare Blöcke und native Bricks-Elemente dieser Website. Mit einer Zeilenprüfung werden aktuelle Shop-Daten abgerufen. Es wird nichts automatisch entfernt oder ersetzt."
@@ -670,8 +1207,14 @@ msgstr "Gespeicherte Artikelzuordnungen, Gutenberg-Blöcke, wiederverwendbare Bl
 msgid "Saved selections"
 msgstr "Gespeicherte Auswahl"
 
+msgid "Scripts"
+msgstr "Scripte"
+
 msgid "Search products"
 msgstr "Produkte suchen"
+
+msgid "Search this catalog"
+msgstr "Diesen Katalog durchsuchen"
 
 msgid "Section heading"
 msgstr "Bereichsüberschrift"
@@ -694,17 +1237,29 @@ msgstr "Ein Produkt und eine dazu passende Variante auswählen."
 msgid "Select a product family or a concrete product. Search by name or number."
 msgstr "Wählen Sie eine Produktfamilie oder ein konkretes Produkt. Suchen Sie nach Name oder Artikelnummer."
 
+msgid "Select and copy the text."
+msgstr "Text markieren und kopieren."
+
 msgid "Select product / variant"
 msgstr "Produkt / Variante wählen"
 
 msgid "Select product family"
 msgstr "Produktfamilie wählen"
 
+msgid "Selected by deckerweb · Installed from GitHub releases"
+msgstr "Von deckerweb ausgewählt · Installation aus GitHub-Releases"
+
 msgid "Selection could not be refreshed. Check the connection."
 msgstr "Die Auswahl konnte nicht aktualisiert werden. Prüfen Sie die Verbindung."
 
 msgid "Selection refreshed. Full-page caches may still need clearing."
 msgstr "Auswahl aktualisiert. Gegebenenfalls muss zusätzlich der Seiten-Cache geleert werden."
+
+msgid "Sep"
+msgstr "Sep"
+
+msgid "September"
+msgstr "September"
 
 msgid "Server-side key recognized"
 msgstr "Serverseitiger Schlüssel erkannt"
@@ -721,11 +1276,17 @@ msgstr "Einstellungen ohne Zugriffsschlüssel und Produktzuordnungen heruntergel
 msgid "Settings imported. Test the connection with the server-side key on this site."
 msgstr "Einstellungen importiert. Testen Sie die Verbindung mit dem serverseitigen Schlüssel dieser Website."
 
+msgid "Settings saved."
+msgstr "Einstellungen gespeichert."
+
 msgid "Setup checklist"
 msgstr "Einrichtungscheckliste"
 
 msgid "Shipping costs apply in the shop."
 msgstr "Versandkosten fallen im Shop an."
+
+msgid "Shop"
+msgstr "Shop"
 
 msgid "Shop URL saved"
 msgstr "Shop-Adresse gespeichert"
@@ -778,11 +1339,35 @@ msgstr "Shopware-Sortierung"
 msgid "Show"
 msgstr "Anzeigen"
 
+msgid "Show deckerweb under Add Plugins"
+msgstr "deckerweb unter „Plugins hinzufügen“ anzeigen"
+
 msgid "Show image %d"
 msgstr "Bild %d anzeigen"
 
 msgid "Show video"
 msgstr "Video anzeigen"
+
+msgid "Shows plugins whose platform and dependency requirements are met in this site or network. Without this filter, plugins with missing requirements remain visible."
+msgstr "Zeigt Plugins, deren Plattform- und Abhängigkeitsanforderungen auf dieser Website oder im Netzwerk erfüllt sind. Ohne diesen Filter bleiben Plugins mit fehlenden Voraussetzungen sichtbar."
+
+msgid "Shuffle again"
+msgstr "Neu mischen"
+
+msgid "Small plugins. Practical improvements."
+msgstr "Kleine Plugins. Konkrete Verbesserungen."
+
+msgid "Sort by"
+msgstr "Sortieren nach"
+
+msgid "Source: GitHub"
+msgstr "Quelle: GitHub"
+
+msgid "Stage: %1$s. %2$s"
+msgstr "Fehlerstufe: %1$s. %2$s"
+
+msgid "Standard"
+msgstr "Standard"
 
 msgid "Starter templates have no shop-specific selections. Choose products and categories through the native element controls inside each slot."
 msgstr "Startvorlagen enthalten keine shopspezifische Auswahl. Produkte und Kategorien über die nativen Element-Einstellungen im jeweiligen Slot auswählen."
@@ -790,11 +1375,20 @@ msgstr "Startvorlagen enthalten keine shopspezifische Auswahl. Produkte und Kate
 msgid "Store API URL (optional)"
 msgstr "Store-API-URL (optional)"
 
+msgid "Sun"
+msgstr "So"
+
+msgid "Sunday"
+msgstr "Sonntag"
+
 msgid "Tax-free; shipping costs apply in the shop."
 msgstr "Steuerfrei; Versandkosten fallen im Shop an."
 
 msgid "Technical details"
 msgstr "Technische Details"
+
+msgid "Technical information"
+msgstr "Technische Informationen"
 
 msgid "Test connection now"
 msgstr "Verbindung jetzt testen"
@@ -814,11 +1408,65 @@ msgstr "Das GitHub-Paket konnte nicht vorbereitet werden. Die installierte Versi
 msgid "The GitHub package does not contain the Connect for Shopware plugin file."
 msgstr "Das GitHub-Paket enthält nicht die Plugin-Datei von Connect for Shopware."
 
+msgid "The GitHub release could not be downloaded."
+msgstr "Das GitHub-Release konnte nicht heruntergeladen werden."
+
+msgid "The action is still running. Check its status again."
+msgstr "Die Aktion läuft noch. Bitte den Status erneut prüfen."
+
+msgid "The approved package could not be verified."
+msgstr "Das freigegebene Paket konnte nicht geprüft werden."
+
 msgid "The approved release changed. Refresh updates first."
 msgstr "Die freigegebene Version hat sich geändert. Suchen Sie zuerst erneut nach Updates."
 
 msgid "The approved release could not be verified."
 msgstr "Die freigegebene Version konnte nicht geprüft werden."
+
+msgid "The archive or plugin identity could not be verified. Installation was stopped."
+msgstr "Das Archiv oder die Pluginidentität konnte nicht geprüft werden. Die Installation wurde gestoppt."
+
+msgid "The catalog URL is not an allowed first-party HTTPS endpoint."
+msgstr "Die Katalog-URL ist keine erlaubte eigene HTTPS-Quelle."
+
+msgid "The catalog could not be verified. Please try again later."
+msgstr "Der Katalog konnte nicht geprüft werden. Bitte später erneut versuchen."
+
+msgid "The catalog is disabled."
+msgstr "Der Katalog ist deaktiviert."
+
+msgid "The catalog is hidden."
+msgstr "Der Katalog ist ausgeblendet."
+
+msgid "The catalog response is invalid, incompatible or too large."
+msgstr "Die Katalogantwort ist ungültig, inkompatibel oder zu groß."
+
+msgid "The connection timed out. Please try again later."
+msgstr "Die Zeit für die Verbindung wurde überschritten. Bitte später erneut versuchen."
+
+msgid "The deckerweb catalog could not load. Check platform requirements and the complete Library integration in the host plugin."
+msgstr "Der deckerweb-Katalog konnte nicht geladen werden. Bitte PHP-/WordPress-Anforderungen und die vollständige Library-Einbindung im Host-Plugin prüfen."
+
+msgid "The installed plugin identity could not be verified for this catalog update."
+msgstr "Die Identität des installierten Plugins konnte für dieses Katalogupdate nicht bestätigt werden."
+
+msgid "The installed plugin identity could not be verified. Use the Plugins screen to review it."
+msgstr "Die Identität des installierten Plugins konnte nicht geprüft werden. Prüfen Sie es auf der Plugins-Seite."
+
+msgid "The online catalog is unavailable. Showing cached or bundled entries; online approval is checked again before installation."
+msgstr "Der Online-Katalog ist nicht erreichbar. Angezeigt wird der gespeicherte oder mitgelieferte Katalog; vor der Installation wird die Online-Freigabe erneut geprüft."
+
+msgid "The online catalog source is not trusted."
+msgstr "Die Online-Katalogquelle ist nicht vertrauenswürdig."
+
+msgid "The package checksum does not match the approved release. Installation was stopped."
+msgstr "Die Paketprüfsumme stimmt nicht mit der freigegebenen Version überein. Die Installation wurde gestoppt."
+
+msgid "The package did not pass the archive or plugin identity checks. Installation was stopped."
+msgstr "Das Paket hat die Archiv- oder Plugin-Identitätsprüfung nicht bestanden. Die Installation wurde gestoppt."
+
+msgid "The package does not match the approved checksum. Installation was stopped."
+msgstr "Das Paket entspricht nicht der freigegebenen Prüfsumme. Die Installation wurde gestoppt."
 
 msgid "The package identity or version does not match a newer Connect for Shopware release."
 msgstr "Identität oder Version des Pakets entsprechen keiner neueren Veröffentlichung von Connect for Shopware."
@@ -844,8 +1492,35 @@ msgstr "Das private Update konnte nicht autorisiert werden. Prüfen Sie die Repo
 msgid "The private update download failed. Check credentials and try again."
 msgstr "Der Download des privaten Updates ist fehlgeschlagen. Prüfen Sie die Zugangsdaten und versuchen Sie es erneut."
 
+msgid "The release checksum does not match. Installation stopped."
+msgstr "Die Prüfsumme des Releases stimmt nicht überein. Installation gestoppt."
+
+msgid "The request could not be completed. Check the plugin status before trying again."
+msgstr "Die Anfrage konnte nicht abgeschlossen werden. Vor einem erneuten Versuch den Plugin-Status prüfen."
+
+msgid "The requirements below describe the catalog version for first installation, not an installed-plugin update."
+msgstr "Die folgenden Voraussetzungen beschreiben die Katalogversion für die Erstinstallation, nicht ein Bestandsupdate."
+
+msgid "The requirements below describe the offered release."
+msgstr "Die folgenden Voraussetzungen beziehen sich auf den angebotenen Release."
+
+msgid "The secure connection could not be verified."
+msgstr "Die sichere Verbindung konnte nicht bestätigt werden."
+
+msgid "The secure connection to the update server failed."
+msgstr "Die sichere Verbindung zum Updateserver ist fehlgeschlagen."
+
+msgid "The server address could not be resolved."
+msgstr "Die Serveradresse konnte nicht aufgelöst werden."
+
+msgid "The server returned HTTP %d. Please try again later."
+msgstr "Der Server hat HTTP %d zurückgegeben. Bitte später erneut versuchen."
+
 msgid "The update filesystem is unavailable. Please try again."
 msgstr "Das Dateisystem für das Update ist nicht verfügbar. Bitte versuchen Sie es erneut."
+
+msgid "The update has not been confirmed. You can try again."
+msgstr "Die Aktualisierung wurde nicht bestätigt. Sie können es erneut versuchen."
 
 msgid "The update package could not be checked."
 msgstr "Das Updatepaket konnte nicht geprüft werden."
@@ -853,14 +1528,56 @@ msgstr "Das Updatepaket konnte nicht geprüft werden."
 msgid "The update package has missing or invalid WordPress/PHP requirements."
 msgstr "Die WordPress-/PHP-Voraussetzungen des Updatepakets fehlen oder sind ungültig."
 
+msgid "The update package identity, version or requirements could not be verified."
+msgstr "Identität, Version oder Anforderungen des Updatepakets konnten nicht bestätigt werden."
+
+msgid "The update provider did not return valid update data."
+msgstr "Der Updateanbieter hat keine gültigen Updatedaten geliefert."
+
+msgid "The update request timed out. Try again later."
+msgstr "Die Updateanfrage hat zu lange gedauert. Versuchen Sie es später erneut."
+
+msgid "The update server address could not be resolved."
+msgstr "Die Adresse des Updateservers konnte nicht aufgelöst werden."
+
+msgid "The update server could not be reached. Try again later."
+msgstr "Der Updateserver ist nicht erreichbar. Versuchen Sie es später erneut."
+
+msgid "The update server returned an unsuccessful HTTP response."
+msgstr "Der Updateserver hat eine HTTP-Fehlerantwort zurückgegeben."
+
 msgid "These assignments feed Related Products in your Single template."
 msgstr "Diese Zuordnungen liefern die passenden Produkte im Single-Template."
+
+msgid "These details contain component versions and catalog status, without credentials or site content."
+msgstr "Diese Angaben enthalten Komponentenversionen und den Katalogstatus, keine Zugangsdaten oder Website-Inhalte."
+
+msgid "This catalog requires a newer Library."
+msgstr "Dieser Katalog benötigt eine neuere Library."
+
+msgid "This plugin directory already exists. Use the installed plugin; it will not be overwritten."
+msgstr "Dieses Plugin-Verzeichnis existiert bereits. Bitte das installierte Plugin verwenden; es wird nicht überschrieben."
+
+msgid "This release is no longer approved."
+msgstr "Dieses Release ist nicht mehr freigegeben."
+
+msgid "This release is not approved."
+msgstr "Dieses Release ist nicht freigegeben."
 
 msgid "This release requires a newer WordPress or PHP version. The installed version has been kept."
 msgstr "Dieses Release benötigt eine neuere WordPress- oder PHP-Version. Die installierte Version wurde beibehalten."
 
+msgid "Thu"
+msgstr "Do"
+
+msgid "Thursday"
+msgstr "Donnerstag"
+
 msgid "Title"
 msgstr "Titel"
+
+msgid "Tools"
+msgstr "Werkzeuge"
 
 msgid "Trademark notice and scope of integration"
 msgstr "Markenhinweis und technische Abgrenzung"
@@ -868,17 +1585,65 @@ msgstr "Markenhinweis und technische Abgrenzung"
 msgid "Transfer connection settings"
 msgstr "Verbindungseinstellungen übertragen"
 
+msgid "Tue"
+msgstr "Di"
+
+msgid "Tuesday"
+msgstr "Dienstag"
+
+msgid "Unsafe archive path."
+msgstr "Unsicherer Archivpfad."
+
 msgid "Untitled"
 msgstr "Ohne Titel"
+
+msgid "Untrusted release URL."
+msgstr "Nicht vertrauenswürdige Release-URL."
+
+msgid "Update %1$s to version %2$s or newer."
+msgstr "%1$s bitte auf Version %2$s oder neuer aktualisieren."
+
+msgid "Update available"
+msgstr "Update verfügbar"
+
+msgid "Update available: %s"
+msgstr "Update verfügbar: %s"
+
+msgid "Update failed."
+msgstr "Aktualisierung fehlgeschlagen."
+
+msgid "Update information changed. Reload the page and try again."
+msgstr "Die Updateinformationen haben sich geändert. Laden Sie die Seite neu und versuchen Sie es erneut."
+
+msgid "Update stopped at %1$s: %2$s"
+msgstr "Update gestoppt bei %1$s: %2$s"
 
 msgid "Update the embedded Plugin Library to 1.0.0 and improve shared-data cleanup during batch uninstall."
 msgstr "Eingebettete Plugin Library auf 1.0.0 aktualisieren und gemeinsame Daten bei Sammeldeinstallation zuverlässiger bereinigen."
 
+msgid "Update the other active deckerweb plugins to use translated shared update messages."
+msgstr "Aktualisieren Sie die anderen aktiven deckerweb-Plugins, damit die gemeinsamen Update-Meldungen übersetzt werden."
+
+msgid "Update to %s"
+msgstr "Auf %s aktualisieren"
+
+msgid "Updated"
+msgstr "Aktualisiert"
+
+msgid "Updated deckerweb Library to 1.3.0 and Updater to 2.4.0: normal updates are independent of the catalog, with bounded downloads and stricter package checks."
+msgstr "deckerweb Library auf 1.3.0 und Updater auf 2.4.0 aktualisiert: normale Updates unabhängig vom Katalog, begrenzte Downloads und strengere Paketprüfung."
+
 msgid "Updated the shared plugin catalog to Library 1.1.0 and the GitHub updater to 2.2.1."
 msgstr "Gemeinsamen Plugin-Katalog auf Library 1.1.0 und den GitHub-Updater auf 2.2.1 aktualisiert."
 
+msgid "Updating…"
+msgstr "Wird aktualisiert…"
+
 msgid "Use Test connection now below to check the shop. Verify the reported language, currency and tax context against the intended Sales Channel. This checklist is not live monitoring."
 msgstr "Prüfen Sie den Shop unten mit „Verbindung jetzt testen“. Vergleichen Sie die gemeldete Sprache, Währung und Steuerdarstellung mit dem gewünschten Verkaufskanal. Diese Checkliste ist keine Live-Überwachung."
+
+msgid "Use the Plugins screen to manage this installed plugin."
+msgstr "Verwalten Sie dieses installierte Plugin auf der Plugins-Seite."
 
 msgid "Use the bundled updater reliably alongside older updater copies and clean its repository cache during uninstall."
 msgstr "Gebündelten Updater auch neben älteren Updater-Kopien zuverlässig laden und seinen Repository-Cache bei Deinstallation bereinigen."
@@ -895,17 +1660,38 @@ msgstr "Paketidentität und Systemanforderungen auch bei Sammelupdates prüfen."
 msgid "Variant text"
 msgstr "Variantentext"
 
+msgid "Verified first installations · Independent plugin updates"
+msgstr "Geprüfte Erstinstallationen · Unabhängige Pluginupdates"
+
 msgid "Video"
 msgstr "Video"
+
+msgid "View plugins"
+msgstr "Plugins ansehen"
 
 msgid "View product"
 msgstr "Zum Produkt"
 
+msgid "Visibility"
+msgstr "Sichtbarkeit"
+
 msgid "Watch video on %s"
 msgstr "Video auf %s ansehen"
 
+msgid "Wed"
+msgstr "Mi"
+
+msgid "Wednesday"
+msgstr "Mittwoch"
+
+msgid "WordPress"
+msgstr "WordPress"
+
 msgid "WordPress updates from GitHub, optional deckerweb plugin catalog and German translations."
 msgstr "WordPress-Updates von GitHub, optionaler deckerweb-Plugin-Katalog und deutsche Übersetzungen."
+
+msgid "You already use one of my plugins. Find selected additions in the deckerweb tab."
+msgstr "Sie nutzen bereits ein Plugin von mir. Ausgewählte Ergänzungen finden Sie im deckerweb-Tab."
 
 msgid "Your shop. Your content. Connected."
 msgstr "Ihr Shop. Ihre Inhalte. Verbunden."

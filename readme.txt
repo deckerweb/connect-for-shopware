@@ -2,9 +2,9 @@
 Contributors: daveshine
 Tags: shopware, gutenberg, bricks, products
 Requires at least: 6.6
-Tested up to: 7.1.3
+Tested up to: 7.1
 Requires PHP: 8.1
-Stable tag: 1.1.1
+Stable tag: 1.1.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -18,7 +18,7 @@ Display Shopware products in your WordPress content using native Gutenberg block
 - Shared display controls for Gutenberg and Bricks; optional Bricks Components.
 - Site-scoped connection, diagnostics and 15/30/60-minute cache.
 
-**Version:** 1.1.1 · WordPress ≥ 6.6 · PHP ≥ 8.1 · Bricks Components ≥ 2.4.2 · Shopware 6.7 Store API.
+**Version:** 1.1.2 · WordPress ≥ 6.6 · PHP ≥ 8.1 · Bricks Components ≥ 2.4.2 · Shopware 6.7 Store API.
 
 == Installation ==
 
@@ -56,6 +56,9 @@ Complete FAQ by topic: https://github.com/deckerweb/connect-for-shopware/wiki/FA
 1. Settings: connection, cache, diagnostics and optional Bricks Components.
 
 == Changelog ==
+
+= 1.1.2 · 2026-11-09 =
+* Fixed: Updated deckerweb Library to 1.3.0 and Updater to 2.4.0: normal updates are independent of the catalog, with bounded downloads and stricter package checks.
 
 = 1.1.1 · 2026-10-22 =
 * Improved: Updated the shared plugin catalog to Library 1.1.0 and the GitHub updater to 2.2.1.

@@ -2,6 +2,10 @@
 
 [English](Changelog-English.md) · [Anleitung](Deutsch.md)
 
+## 1.1.2 · 2026-11-09
+
+- **Behoben:** deckerweb Library auf 1.3.0 und Updater auf 2.4.0 aktualisiert: normale Updates unabhängig vom Katalog, begrenzte Downloads und strengere Paketprüfung.
+
 ## 1.1.1 · 2026-10-22
 
 - **Verbessert:** Gemeinsamen Plugin-Katalog auf Library 1.1.0 und den GitHub-Updater auf 2.2.1 aktualisiert.

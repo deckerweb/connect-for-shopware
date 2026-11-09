@@ -3,6 +3,12 @@
 defined( 'ABSPATH' ) || exit;
 return [
     'history' =>
+        '= 1.1.2 · 2026-11-09 =
+' .
+        '* '.__( 'Fixed', 'connect-for-shopware' ).': '.__( 'Updated deckerweb Library to 1.3.0 and Updater to 2.4.0: normal updates are independent of the catalog, with bounded downloads and stricter package checks.', 'connect-for-shopware' ).'
+' .
+        '
+' .
         '= 1.1.1 · 2026-10-22 =
 ' .
         '* '.__( 'Improved', 'connect-for-shopware' ).': '.__( 'Updated the shared plugin catalog to Library 1.1.0 and the GitHub updater to 2.2.1.', 'connect-for-shopware' ).'

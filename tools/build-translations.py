@@ -14,7 +14,7 @@ for locale,catalog in source.items():
  catalog[en['title']]=de['title']
  catalog.update(dict(zip(en['paragraphs'],de['paragraphs'])))
 version=re.search(r'Version:\s*(\S+)',(root/'connect-for-shopware.php').read_text())[1]
-strings=set()
+strings=set().union(*(catalog.keys() for catalog in source.values()))
 for p in list((root/'src').glob('*.php'))+list((root/'bricks').glob('*.php'))+list((root/'assets').glob('*.js'))+[root/'connect-for-shopware.php',root/'includes/updater-translations.php',root/'includes/admin-content.php']:
  for m in re.finditer(r"(?:__|esc_html__|esc_attr__)\(\s*'((?:[^'\\]|\\.)*)'",p.read_text()):strings.add(m[1])
 for p in (root/'blocks').glob('*/block.json'):strings.add('block title\x04'+json.loads(p.read_text())['title'])

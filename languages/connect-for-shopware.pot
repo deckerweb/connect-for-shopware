@@ -4,25 +4,85 @@ msgstr "Content-Type: text/plain; charset=UTF-8\n"
 msgid "%1$d products · %2$d dynamic grids"
 msgstr ""
 
+msgid "%1$s of %2$s plugins"
+msgstr ""
+
 msgid "%d minutes"
+msgstr ""
+
+msgid "%d products · %d dynamic grids"
+msgstr ""
+
+msgid "%s is installed but inactive. Activate it first."
+msgstr ""
+
+msgid "%s is missing. Install and activate it first."
+msgstr ""
+
+msgid "%s must be network activated first."
+msgstr ""
+
+msgid "%s supports activation per site only."
 msgstr ""
 
 msgid "Access denied."
 msgstr ""
 
+msgid "Action cancelled."
+msgstr ""
+
+msgid "Activate"
+msgstr ""
+
+msgid "Activate Bricks QuickNav per site after selecting the Bricks parent or child theme."
+msgstr ""
+
+msgid "Activating…"
+msgstr ""
+
+msgid "Active"
+msgstr ""
+
+msgid "Active filters: "
+msgstr ""
+
 msgid "Add"
+msgstr ""
+
+msgid "Admin"
 msgstr ""
 
 msgid "Advanced connection settings"
 msgstr ""
 
+msgid "Affected features remain paused until their requirements are met."
+msgstr ""
+
 msgid "After expiry, the next request fetches fresh data. This is not a scheduled refresh."
+msgstr ""
+
+msgid "All"
+msgstr ""
+
+msgid "Already active"
 msgstr ""
 
 msgid "Already installed"
 msgstr ""
 
+msgid "Already up to date."
+msgstr ""
+
 msgid "Also install starter templates without product selections"
+msgstr ""
+
+msgid "Another action for this plugin is running. Please wait."
+msgstr ""
+
+msgid "Another component interrupted the request. If Git Updater is active, temporarily deactivate it and retry."
+msgstr ""
+
+msgid "Another updater provides a different release. Refresh updates before continuing."
 msgstr ""
 
 msgid "Apply a preset, then adjust individual settings."
@@ -31,7 +91,31 @@ msgstr ""
 msgid "Apply previewed settings"
 msgstr ""
 
+msgid "Apr"
+msgstr ""
+
+msgid "April"
+msgstr ""
+
+msgid "Archive contains too many files."
+msgstr ""
+
+msgid "Archive symlinks are not permitted."
+msgstr ""
+
+msgid "Archive verification"
+msgstr ""
+
 msgid "Article-related products, dynamic product grids, product buttons and optional Quick View."
+msgstr ""
+
+msgid "As of "
+msgstr ""
+
+msgid "Aug"
+msgstr ""
+
+msgid "August"
 msgstr ""
 
 msgid "Automatic"
@@ -46,6 +130,9 @@ msgstr ""
 msgid "Available in the Sales Channel"
 msgstr ""
 
+msgid "Back to deckerweb"
+msgstr ""
+
 msgid "Back to search results"
 msgstr ""
 
@@ -53,6 +140,12 @@ msgid "Below image"
 msgstr ""
 
 msgid "Bricks Components"
+msgstr ""
+
+msgid "Builder"
+msgstr ""
+
+msgid "Bundled catalog"
 msgstr ""
 
 msgid "Button"
@@ -76,6 +169,42 @@ msgstr ""
 msgid "Cache lifetime in seconds"
 msgstr ""
 
+msgid "Cached or bundled catalog"
+msgstr ""
+
+msgid "Cannot create temporary file."
+msgstr ""
+
+msgid "Cannot create verified archive."
+msgstr ""
+
+msgid "Cannot finalize archive."
+msgstr ""
+
+msgid "Cannot normalize archive."
+msgstr ""
+
+msgid "Cannot read archive entry."
+msgstr ""
+
+msgid "Catalog URL"
+msgstr ""
+
+msgid "Catalog approval"
+msgstr ""
+
+msgid "Catalog diagnostics require a public catalog provider."
+msgstr ""
+
+msgid "Catalog refreshed."
+msgstr ""
+
+msgid "Catalog retrieval does not limit updates of installed plugins. Those use their normal WordPress update provider."
+msgstr ""
+
+msgid "Catalog verification"
+msgstr ""
+
 msgid "Changelog"
 msgstr ""
 
@@ -94,7 +223,16 @@ msgstr ""
 msgid "Check saved selections"
 msgstr ""
 
+msgid "Check status"
+msgstr ""
+
 msgid "Checking saved selections…"
+msgstr ""
+
+msgid "Checking status…"
+msgstr ""
+
+msgid "Checksum verification"
 msgstr ""
 
 msgid "Choose variant"
@@ -115,7 +253,13 @@ msgstr ""
 msgid "Columns"
 msgstr ""
 
+msgid "Commerce"
+msgstr ""
+
 msgid "Compact recommendation"
+msgstr ""
+
+msgid "Compatible additions only"
 msgstr ""
 
 msgid "Complete"
@@ -131,6 +275,9 @@ msgid "Configurable shop connection, cache, diagnostics and optional Bricks Comp
 msgstr ""
 
 msgid "Connection and diagnostics"
+msgstr ""
+
+msgid "Connection failed. Please try again later."
 msgstr ""
 
 msgid "Connection interrupted."
@@ -149,6 +296,12 @@ msgid "Connector cache cleared. Products will reload on the next request."
 msgstr ""
 
 msgid "Content"
+msgstr ""
+
+msgid "Copied."
+msgstr ""
+
+msgid "Copy diagnostic information"
 msgstr ""
 
 msgid "Could not access the update filesystem."
@@ -190,16 +343,37 @@ msgstr ""
 msgid "Deactivate the legacy deckerweb Shopware Connector before activating Connect for Shopware. Existing settings and product assignments are preserved."
 msgstr ""
 
+msgid "Dec"
+msgstr ""
+
+msgid "December"
+msgstr ""
+
+msgid "Delete Library settings when removing the last host plugin"
+msgstr ""
+
 msgid "Description"
 msgstr ""
 
 msgid "Description tab"
 msgstr ""
 
+msgid "Details & requirements"
+msgstr ""
+
 msgid "Detected page caches"
 msgstr ""
 
 msgid "Disabled"
+msgstr ""
+
+msgid "Discover more plugins by deckerweb"
+msgstr ""
+
+msgid "Discover randomly"
+msgstr ""
+
+msgid "Dismiss permanently"
 msgstr ""
 
 msgid "Dismiss this notice"
@@ -209,6 +383,9 @@ msgid "Display preset"
 msgstr ""
 
 msgid "Documentation"
+msgstr ""
+
+msgid "Done. The plugin is active."
 msgstr ""
 
 msgid "Download settings"
@@ -229,6 +406,9 @@ msgstr ""
 msgid "Enabled"
 msgstr ""
 
+msgid "Enter a catalog URL first."
+msgstr ""
+
 msgid "Enter a public HTTPS shop URL without credentials, query parameters or fragments. The optional API URL must end in /store-api."
 msgstr ""
 
@@ -244,16 +424,46 @@ msgstr ""
 msgid "Excluding VAT; shipping costs apply in the shop."
 msgstr ""
 
+msgid "Expanded archive is too large."
+msgstr ""
+
 msgid "Export shop URLs and cache preferences without secrets; review and confirm changes before importing them."
 msgstr ""
 
 msgid "Export shop URLs and cache preferences. Access keys, product assignments, installed Components and Library settings are never included."
 msgstr ""
 
+msgid "F j, Y"
+msgstr ""
+
+msgid "Feb"
+msgstr ""
+
+msgid "February"
+msgstr ""
+
+msgid "Filesystem credentials are required."
+msgstr ""
+
+msgid "Filesystem credentials are required. Use the catalog with JavaScript enabled or the native Plugins screen."
+msgstr ""
+
+msgid "Filter"
+msgstr ""
+
 msgid "Find saved product selections in the Product usage tab, open their source content and check availability without changing assignments."
 msgstr ""
 
+msgid "Fits my installation"
+msgstr ""
+
 msgid "Fixed"
+msgstr ""
+
+msgid "Fri"
+msgstr ""
+
+msgid "Friday"
 msgstr ""
 
 msgid "From"
@@ -268,16 +478,25 @@ msgstr ""
 msgid "Git Updater is active. If a deckerweb installation or update fails, temporarily deactivate Git Updater and retry. Reactivate it afterwards if other plugins or themes need it. Only leave it disabled when those extensions have another reliable update provider."
 msgstr ""
 
+msgid "GitHub Stars"
+msgstr ""
+
 msgid "GitHub release does not contain the plugin main file."
 msgstr ""
 
 msgid "Grid gap"
 msgstr ""
 
+msgid "HTTP status: %d."
+msgstr ""
+
 msgid "Heading tag"
 msgstr ""
 
 msgid "Hide"
+msgstr ""
+
+msgid "Hide catalog"
 msgstr ""
 
 msgid "Hide the empty Components panel when the required Bricks integration is unavailable."
@@ -307,10 +526,22 @@ msgstr ""
 msgid "Improved"
 msgstr ""
 
+msgid "Inactive"
+msgstr ""
+
 msgid "Include a permanently visible trademark notice in settings and matching local notice documents."
 msgstr ""
 
 msgid "Including VAT; shipping costs apply in the shop."
+msgstr ""
+
+msgid "Install and activate this plugin in the network admin."
+msgstr ""
+
+msgid "Install deckerweb plugin"
+msgstr ""
+
+msgid "Install now"
 msgstr ""
 
 msgid "Install selected components"
@@ -322,16 +553,103 @@ msgstr ""
 msgid "Install this bundled version as an additional copy for existing components"
 msgstr ""
 
+msgid "Installation cancelled."
+msgstr ""
+
 msgid "Installation could not be completed. You can safely retry."
+msgstr ""
+
+msgid "Installation failed."
+msgstr ""
+
+msgid "Installed"
+msgstr ""
+
+msgid "Installed plugin identity does not match the approved release."
+msgstr ""
+
+msgid "Installed plugins use their normal update provider. Reload the update information and try again."
+msgstr ""
+
+msgid "Installed · inactive"
+msgstr ""
+
+msgid "Installed: "
 msgstr ""
 
 msgid "Installed: %1$d · Existing: %2$d · Example templates: %3$d"
 msgstr ""
 
+msgid "Installed: %d · Existing: %d · Example templates: %d"
+msgstr ""
+
+msgid "Installing…"
+msgstr ""
+
 msgid "Invalid GitHub repository URL."
 msgstr ""
 
+msgid "Invalid ZIP archive."
+msgstr ""
+
+msgid "Invalid approval flag."
+msgstr ""
+
 msgid "Invalid authentication provider."
+msgstr ""
+
+msgid "Invalid catalog field: "
+msgstr ""
+
+msgid "Invalid catalog revision."
+msgstr ""
+
+msgid "Invalid catalog schema."
+msgstr ""
+
+msgid "Invalid catalog timestamp."
+msgstr ""
+
+msgid "Invalid dependencies."
+msgstr ""
+
+msgid "Invalid dependency URL."
+msgstr ""
+
+msgid "Invalid dependency metadata."
+msgstr ""
+
+msgid "Invalid display field."
+msgstr ""
+
+msgid "Invalid icon color."
+msgstr ""
+
+msgid "Invalid icon label."
+msgstr ""
+
+msgid "Invalid identity or release metadata."
+msgstr ""
+
+msgid "Invalid local icon."
+msgstr ""
+
+msgid "Invalid network policy."
+msgstr ""
+
+msgid "Invalid network requirement."
+msgstr ""
+
+msgid "Invalid package cleanup provider."
+msgstr ""
+
+msgid "Invalid platform version."
+msgstr ""
+
+msgid "Invalid plugin series."
+msgstr ""
+
+msgid "Invalid private download limits."
 msgstr ""
 
 msgid "Invalid product selection."
@@ -343,10 +661,40 @@ msgstr ""
 msgid "Invalid shop response."
 msgstr ""
 
+msgid "Invalid sort order."
+msgstr ""
+
+msgid "Invalid star count."
+msgstr ""
+
+msgid "Invalid stars date."
+msgstr ""
+
+msgid "Invalid status filter."
+msgstr ""
+
+msgid "Jan"
+msgstr ""
+
+msgid "January"
+msgstr ""
+
 msgid "JavaScript is required for settings transfer. The normal settings form remains available."
 msgstr ""
 
 msgid "JavaScript is required to select products. Existing assignments are preserved."
+msgstr ""
+
+msgid "Jul"
+msgstr ""
+
+msgid "July"
+msgstr ""
+
+msgid "Jun"
+msgstr ""
+
+msgid "June"
 msgstr ""
 
 msgid "Keep dialogs closed until opened and provide keyboard, close and documentation fallbacks."
@@ -367,6 +715,9 @@ msgstr ""
 msgid "Last request duration"
 msgstr ""
 
+msgid "Last successful check: "
+msgstr ""
+
 msgid "Last successful shop request"
 msgstr ""
 
@@ -377,6 +728,18 @@ msgid "Leave empty to use Shopware default sorting."
 msgstr ""
 
 msgid "Left of image"
+msgstr ""
+
+msgid "Library"
+msgstr ""
+
+msgid "Library changelog"
+msgstr ""
+
+msgid "Library settings"
+msgstr ""
+
+msgid "Library settings saved."
 msgstr ""
 
 msgid "List price"
@@ -394,6 +757,9 @@ msgstr ""
 msgid "Made admin translations consistently extractable and tightened input and output handling without changing saved selections."
 msgstr ""
 
+msgid "Manage Content"
+msgstr ""
+
 msgid "Manage installed plugins"
 msgstr ""
 
@@ -409,13 +775,37 @@ msgstr ""
 msgid "Manufacturer website"
 msgstr ""
 
+msgid "Mar"
+msgstr ""
+
+msgid "March"
+msgstr ""
+
 msgid "Matching products for this article"
 msgstr ""
 
 msgid "Maximum products"
 msgstr ""
 
+msgid "May"
+msgstr ""
+
 msgid "Misc"
+msgstr ""
+
+msgid "Missing display text."
+msgstr ""
+
+msgid "Missing plugin header."
+msgstr ""
+
+msgid "Mon"
+msgstr ""
+
+msgid "Monday"
+msgstr ""
+
+msgid "More by deckerweb"
 msgstr ""
 
 msgid "More products in the shop"
@@ -433,6 +823,24 @@ msgstr ""
 msgid "Move up"
 msgstr ""
 
+msgid "Multisite"
+msgstr ""
+
+msgid "Name A–Z"
+msgstr ""
+
+msgid "Name Z–A"
+msgstr ""
+
+msgid "Network activate"
+msgstr ""
+
+msgid "Network active"
+msgstr ""
+
+msgid "Network permission denied."
+msgstr ""
+
 msgid "New"
 msgstr ""
 
@@ -446,6 +854,9 @@ msgid "Next results"
 msgstr ""
 
 msgid "No active dynamic categories found. Assign a product group to an active category in Shopware."
+msgstr ""
+
+msgid "No approved plugins match this selection."
 msgstr ""
 
 msgid "No products assigned to the current article."
@@ -463,6 +874,9 @@ msgstr ""
 msgid "No saved selections on this page."
 msgstr ""
 
+msgid "No update reported."
+msgstr ""
+
 msgid "None detected. External/CDN caches must be managed separately."
 msgstr ""
 
@@ -472,19 +886,64 @@ msgstr ""
 msgid "Not found in the Sales Channel. Review this selection."
 msgstr ""
 
+msgid "Not installed"
+msgstr ""
+
+msgid "Not installed. You can try again."
+msgstr ""
+
 msgid "Not recorded yet"
 msgstr ""
 
 msgid "Not yet complete"
 msgstr ""
 
+msgid "Nov"
+msgstr ""
+
+msgid "November"
+msgstr ""
+
+msgid "Oct"
+msgstr ""
+
+msgid "October"
+msgstr ""
+
+msgid "Off by default. Applies only when no other host is installed, including inactive hosts. Removes Library settings, installation records and introduction status. Installed plugins, their content and other plugin settings remain unchanged. Network data is shared across sites."
+msgstr ""
+
+msgid "Online catalog"
+msgstr ""
+
+msgid "Only HTTPS on raw.githubusercontent.com/deckerweb. The server receives the requesting IP address. GitHub is contacted when installing a release."
+msgstr ""
+
 msgid "Only active categories using a dynamic product group are available. Rules remain in Shopware."
+msgstr ""
+
+msgid "Only approved releases"
+msgstr ""
+
+msgid "Open catalog"
 msgstr ""
 
 msgid "Open product link in"
 msgstr ""
 
+msgid "Optional. The bundled catalog works immediately. Catalog requests are cached for 24 hours. No site URL, plugin list or usage data is sent."
+msgstr ""
+
 msgid "Optional: select a complete size and colour combination. Clear this when changing the main product."
+msgstr ""
+
+msgid "PHP ZIP support is required."
+msgstr ""
+
+msgid "POST required."
+msgstr ""
+
+msgid "Package download"
 msgstr ""
 
 msgid "Pagination"
@@ -496,13 +955,31 @@ msgstr ""
 msgid "Permission denied."
 msgstr ""
 
+msgid "Permission denied. Reload the page and check your permissions."
+msgstr ""
+
+msgid "Planned: "
+msgstr ""
+
 msgid "Please check current prices and availability in the shop."
 msgstr ""
 
 msgid "Please try again shortly."
 msgstr ""
 
+msgid "Plugin identity or version does not match the catalog."
+msgstr ""
+
+msgid "Plugin is not installed."
+msgstr ""
+
 msgid "Plugin sections"
+msgstr ""
+
+msgid "Plugin series"
+msgstr ""
+
+msgid "Plugin status"
 msgstr ""
 
 msgid "Plugin website"
@@ -574,6 +1051,9 @@ msgstr ""
 msgid "Product usage"
 msgstr ""
 
+msgid "Product website"
+msgstr ""
+
 msgid "Products matching in Shopware: %d"
 msgstr ""
 
@@ -601,10 +1081,16 @@ msgstr ""
 msgid "Ready to test"
 msgstr ""
 
+msgid "Recently updated"
+msgstr ""
+
 msgid "Reference price"
 msgstr ""
 
 msgid "Refresh cached products"
+msgstr ""
+
+msgid "Refresh catalog"
 msgstr ""
 
 msgid "Refresh individual products and dynamic grids in Gutenberg and the classic article selector without clearing unrelated product caches."
@@ -622,16 +1108,49 @@ msgstr ""
 msgid "Related products"
 msgstr ""
 
+msgid "Release 1.0.0 is being prepared. Installation will be available after package verification."
+msgstr ""
+
+msgid "Release checksum is verified before installation. Activation is a separate step."
+msgstr ""
+
+msgid "Release in preparation"
+msgstr ""
+
+msgid "Release must contain exactly the approved plugin directory."
+msgstr ""
+
 msgid "Remove"
 msgstr ""
 
 msgid "Remove Connector temporary caches and locks on uninstall while preserving settings, assigned products and installed Components."
 msgstr ""
 
+msgid "Remove filter: "
+msgstr ""
+
+msgid "Repository & documentation"
+msgstr ""
+
 msgid "Request time budget reached."
 msgstr ""
 
+msgid "Requirements shown are preliminary until the stable release is verified."
+msgstr ""
+
+msgid "Requires PHP %s or newer."
+msgstr ""
+
+msgid "Requires WordPress %s or newer."
+msgstr ""
+
+msgid "Requires a WordPress Multisite network."
+msgstr ""
+
 msgid "Reset Gutenberg display controls while preserving product selections, custom content and native block styles."
+msgstr ""
+
+msgid "Reset filters"
 msgstr ""
 
 msgid "Reset keeps product selections, custom text, button text and button URLs."
@@ -640,7 +1159,13 @@ msgstr ""
 msgid "Reset product display"
 msgstr ""
 
+msgid "Reset view"
+msgstr ""
+
 msgid "Resolve explicit server-side credentials per Multisite site while retaining the global-key fallback."
+msgstr ""
+
+msgid "Retrieve approved catalog updates online"
 msgstr ""
 
 msgid "Reuse Shopware data for"
@@ -658,10 +1183,22 @@ msgstr ""
 msgid "SEO summary"
 msgstr ""
 
+msgid "Safe package cleanup is unavailable for this update provider."
+msgstr ""
+
 msgid "Sales Channel context"
 msgstr ""
 
 msgid "Sales Channel key rejected."
+msgstr ""
+
+msgid "Sat"
+msgstr ""
+
+msgid "Saturday"
+msgstr ""
+
+msgid "Save settings"
 msgstr ""
 
 msgid "Saved article assignments, Gutenberg blocks, reusable blocks and native Bricks elements on this site. Check a row to request fresh shop data. Nothing is removed or replaced automatically."
@@ -670,7 +1207,13 @@ msgstr ""
 msgid "Saved selections"
 msgstr ""
 
+msgid "Scripts"
+msgstr ""
+
 msgid "Search products"
+msgstr ""
+
+msgid "Search this catalog"
 msgstr ""
 
 msgid "Section heading"
@@ -694,16 +1237,28 @@ msgstr ""
 msgid "Select a product family or a concrete product. Search by name or number."
 msgstr ""
 
+msgid "Select and copy the text."
+msgstr ""
+
 msgid "Select product / variant"
 msgstr ""
 
 msgid "Select product family"
 msgstr ""
 
+msgid "Selected by deckerweb · Installed from GitHub releases"
+msgstr ""
+
 msgid "Selection could not be refreshed. Check the connection."
 msgstr ""
 
 msgid "Selection refreshed. Full-page caches may still need clearing."
+msgstr ""
+
+msgid "Sep"
+msgstr ""
+
+msgid "September"
 msgstr ""
 
 msgid "Server-side key recognized"
@@ -721,10 +1276,16 @@ msgstr ""
 msgid "Settings imported. Test the connection with the server-side key on this site."
 msgstr ""
 
+msgid "Settings saved."
+msgstr ""
+
 msgid "Setup checklist"
 msgstr ""
 
 msgid "Shipping costs apply in the shop."
+msgstr ""
+
+msgid "Shop"
 msgstr ""
 
 msgid "Shop URL saved"
@@ -778,10 +1339,34 @@ msgstr ""
 msgid "Show"
 msgstr ""
 
+msgid "Show deckerweb under Add Plugins"
+msgstr ""
+
 msgid "Show image %d"
 msgstr ""
 
 msgid "Show video"
+msgstr ""
+
+msgid "Shows plugins whose platform and dependency requirements are met in this site or network. Without this filter, plugins with missing requirements remain visible."
+msgstr ""
+
+msgid "Shuffle again"
+msgstr ""
+
+msgid "Small plugins. Practical improvements."
+msgstr ""
+
+msgid "Sort by"
+msgstr ""
+
+msgid "Source: GitHub"
+msgstr ""
+
+msgid "Stage: %1$s. %2$s"
+msgstr ""
+
+msgid "Standard"
 msgstr ""
 
 msgid "Starter templates have no shop-specific selections. Choose products and categories through the native element controls inside each slot."
@@ -790,10 +1375,19 @@ msgstr ""
 msgid "Store API URL (optional)"
 msgstr ""
 
+msgid "Sun"
+msgstr ""
+
+msgid "Sunday"
+msgstr ""
+
 msgid "Tax-free; shipping costs apply in the shop."
 msgstr ""
 
 msgid "Technical details"
+msgstr ""
+
+msgid "Technical information"
 msgstr ""
 
 msgid "Test connection now"
@@ -814,10 +1408,64 @@ msgstr ""
 msgid "The GitHub package does not contain the Connect for Shopware plugin file."
 msgstr ""
 
+msgid "The GitHub release could not be downloaded."
+msgstr ""
+
+msgid "The action is still running. Check its status again."
+msgstr ""
+
+msgid "The approved package could not be verified."
+msgstr ""
+
 msgid "The approved release changed. Refresh updates first."
 msgstr ""
 
 msgid "The approved release could not be verified."
+msgstr ""
+
+msgid "The archive or plugin identity could not be verified. Installation was stopped."
+msgstr ""
+
+msgid "The catalog URL is not an allowed first-party HTTPS endpoint."
+msgstr ""
+
+msgid "The catalog could not be verified. Please try again later."
+msgstr ""
+
+msgid "The catalog is disabled."
+msgstr ""
+
+msgid "The catalog is hidden."
+msgstr ""
+
+msgid "The catalog response is invalid, incompatible or too large."
+msgstr ""
+
+msgid "The connection timed out. Please try again later."
+msgstr ""
+
+msgid "The deckerweb catalog could not load. Check platform requirements and the complete Library integration in the host plugin."
+msgstr ""
+
+msgid "The installed plugin identity could not be verified for this catalog update."
+msgstr ""
+
+msgid "The installed plugin identity could not be verified. Use the Plugins screen to review it."
+msgstr ""
+
+msgid "The online catalog is unavailable. Showing cached or bundled entries; online approval is checked again before installation."
+msgstr ""
+
+msgid "The online catalog source is not trusted."
+msgstr ""
+
+msgid "The package checksum does not match the approved release. Installation was stopped."
+msgstr ""
+
+msgid "The package did not pass the archive or plugin identity checks. Installation was stopped."
+msgstr ""
+
+msgid "The package does not match the approved checksum. Installation was stopped."
 msgstr ""
 
 msgid "The package identity or version does not match a newer Connect for Shopware release."
@@ -844,7 +1492,34 @@ msgstr ""
 msgid "The private update download failed. Check credentials and try again."
 msgstr ""
 
+msgid "The release checksum does not match. Installation stopped."
+msgstr ""
+
+msgid "The request could not be completed. Check the plugin status before trying again."
+msgstr ""
+
+msgid "The requirements below describe the catalog version for first installation, not an installed-plugin update."
+msgstr ""
+
+msgid "The requirements below describe the offered release."
+msgstr ""
+
+msgid "The secure connection could not be verified."
+msgstr ""
+
+msgid "The secure connection to the update server failed."
+msgstr ""
+
+msgid "The server address could not be resolved."
+msgstr ""
+
+msgid "The server returned HTTP %d. Please try again later."
+msgstr ""
+
 msgid "The update filesystem is unavailable. Please try again."
+msgstr ""
+
+msgid "The update has not been confirmed. You can try again."
 msgstr ""
 
 msgid "The update package could not be checked."
@@ -853,13 +1528,55 @@ msgstr ""
 msgid "The update package has missing or invalid WordPress/PHP requirements."
 msgstr ""
 
+msgid "The update package identity, version or requirements could not be verified."
+msgstr ""
+
+msgid "The update provider did not return valid update data."
+msgstr ""
+
+msgid "The update request timed out. Try again later."
+msgstr ""
+
+msgid "The update server address could not be resolved."
+msgstr ""
+
+msgid "The update server could not be reached. Try again later."
+msgstr ""
+
+msgid "The update server returned an unsuccessful HTTP response."
+msgstr ""
+
 msgid "These assignments feed Related Products in your Single template."
+msgstr ""
+
+msgid "These details contain component versions and catalog status, without credentials or site content."
+msgstr ""
+
+msgid "This catalog requires a newer Library."
+msgstr ""
+
+msgid "This plugin directory already exists. Use the installed plugin; it will not be overwritten."
+msgstr ""
+
+msgid "This release is no longer approved."
+msgstr ""
+
+msgid "This release is not approved."
 msgstr ""
 
 msgid "This release requires a newer WordPress or PHP version. The installed version has been kept."
 msgstr ""
 
+msgid "Thu"
+msgstr ""
+
+msgid "Thursday"
+msgstr ""
+
 msgid "Title"
+msgstr ""
+
+msgid "Tools"
 msgstr ""
 
 msgid "Trademark notice and scope of integration"
@@ -868,16 +1585,64 @@ msgstr ""
 msgid "Transfer connection settings"
 msgstr ""
 
+msgid "Tue"
+msgstr ""
+
+msgid "Tuesday"
+msgstr ""
+
+msgid "Unsafe archive path."
+msgstr ""
+
 msgid "Untitled"
+msgstr ""
+
+msgid "Untrusted release URL."
+msgstr ""
+
+msgid "Update %1$s to version %2$s or newer."
+msgstr ""
+
+msgid "Update available"
+msgstr ""
+
+msgid "Update available: %s"
+msgstr ""
+
+msgid "Update failed."
+msgstr ""
+
+msgid "Update information changed. Reload the page and try again."
+msgstr ""
+
+msgid "Update stopped at %1$s: %2$s"
 msgstr ""
 
 msgid "Update the embedded Plugin Library to 1.0.0 and improve shared-data cleanup during batch uninstall."
 msgstr ""
 
+msgid "Update the other active deckerweb plugins to use translated shared update messages."
+msgstr ""
+
+msgid "Update to %s"
+msgstr ""
+
+msgid "Updated"
+msgstr ""
+
+msgid "Updated deckerweb Library to 1.3.0 and Updater to 2.4.0: normal updates are independent of the catalog, with bounded downloads and stricter package checks."
+msgstr ""
+
 msgid "Updated the shared plugin catalog to Library 1.1.0 and the GitHub updater to 2.2.1."
 msgstr ""
 
+msgid "Updating…"
+msgstr ""
+
 msgid "Use Test connection now below to check the shop. Verify the reported language, currency and tax context against the intended Sales Channel. This checklist is not live monitoring."
+msgstr ""
+
+msgid "Use the Plugins screen to manage this installed plugin."
 msgstr ""
 
 msgid "Use the bundled updater reliably alongside older updater copies and clean its repository cache during uninstall."
@@ -895,16 +1660,37 @@ msgstr ""
 msgid "Variant text"
 msgstr ""
 
+msgid "Verified first installations · Independent plugin updates"
+msgstr ""
+
 msgid "Video"
+msgstr ""
+
+msgid "View plugins"
 msgstr ""
 
 msgid "View product"
 msgstr ""
 
+msgid "Visibility"
+msgstr ""
+
 msgid "Watch video on %s"
 msgstr ""
 
+msgid "Wed"
+msgstr ""
+
+msgid "Wednesday"
+msgstr ""
+
+msgid "WordPress"
+msgstr ""
+
 msgid "WordPress updates from GitHub, optional deckerweb plugin catalog and German translations."
+msgstr ""
+
+msgid "You already use one of my plugins. Find selected additions in the deckerweb tab."
 msgstr ""
 
 msgid "Your shop. Your content. Connected."
