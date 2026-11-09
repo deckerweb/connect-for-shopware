@@ -238,6 +238,9 @@ msgstr "Prüfsummenprüfung"
 msgid "Choose variant"
 msgstr "Variante wählen"
 
+msgid "Clean the plugin’s own temporary caches during Core batch uninstall, including when the plugin is inactive; preserve settings and product assignments."
+msgstr "Eigene temporäre Caches auch bei inaktivem Plugin und Core-Sammeldeinstallation bereinigen; Einstellungen und Produktzuordnungen erhalten."
+
 msgid "Clear detected page caches on manual connector refresh (entire site)."
 msgstr "Beim manuellen Connector-Refresh erkannte Seiten-Caches der gesamten Website leeren."
 

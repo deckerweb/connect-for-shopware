@@ -5,6 +5,7 @@
 ## 1.1.2 · 2026-11-09
 
 - **Fixed:** Updated deckerweb Library to 1.3.0 and Updater to 2.4.0: normal updates are independent of the catalog, with bounded downloads and stricter package checks.
+- **Fixed:** Clean the plugin’s own temporary caches during Core batch uninstall, including when the plugin is inactive; preserve settings and product assignments.
 
 ## 1.1.1 · 2026-10-22
 

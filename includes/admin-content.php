@@ -7,6 +7,8 @@ return [
 ' .
         '* '.__( 'Fixed', 'connect-for-shopware' ).': '.__( 'Updated deckerweb Library to 1.3.0 and Updater to 2.4.0: normal updates are independent of the catalog, with bounded downloads and stricter package checks.', 'connect-for-shopware' ).'
 ' .
+        '* '.__( 'Fixed', 'connect-for-shopware' ).': '.__( 'Clean the plugin’s own temporary caches during Core batch uninstall, including when the plugin is inactive; preserve settings and product assignments.', 'connect-for-shopware' ).'
+' .
         '
 ' .
         '= 1.1.1 · 2026-10-22 =

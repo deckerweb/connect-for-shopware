@@ -74,14 +74,33 @@ final class RuntimeCache {
  */
 final class Lifecycle {
     /**
+     * Verify this exact host's uninstall context, including Core batch deletion.
+     *
+     * @since 1.1.2
+     * @return bool Whether Core explicitly targets this plugin or its own marker matches.
+     */
+    public static function is_uninstall_context(): bool {
+        if(!defined('WP_UNINSTALL_PLUGIN'))return false;
+        $host='connect-for-shopware/connect-for-shopware.php';
+        if(WP_UNINSTALL_PLUGIN===$host)return true;
+        if(!function_exists('uninstall_plugin'))return false;
+        $core=new \ReflectionFunction('uninstall_plugin');
+        if(realpath((string)$core->getFileName())!==realpath(ABSPATH.'wp-admin/includes/plugin.php'))return false;
+        foreach(debug_backtrace(0,12) as $frame){
+            if(($frame['function']??'')==='uninstall_plugin'&&!isset($frame['class'])&&($frame['args'][0]??null)===$host)return true;
+        }
+        return false;
+    }
+
+    /**
      * Clean each site and this repository update cache during a valid uninstall.
      *
      * @since 1.0.1
      * @return void No return value; effects are described above.
      */
     public static function uninstall(): void {
-        if(!defined('WP_UNINSTALL_PLUGIN')||WP_UNINSTALL_PLUGIN!=='connect-for-shopware/connect-for-shopware.php')return;
-        $updater_class = require DW_SW_DIR . 'includes/deckerweb-github-release-updater-v2.php';
+        if(!self::is_uninstall_context())return;
+        $updater_class = require dirname(__DIR__) . '/includes/deckerweb-github-release-updater-v2.php';
         RuntimeCache::flush();
         if(is_multisite()){
             $offset=0;

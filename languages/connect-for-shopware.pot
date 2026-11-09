@@ -238,6 +238,9 @@ msgstr ""
 msgid "Choose variant"
 msgstr ""
 
+msgid "Clean the plugin’s own temporary caches during Core batch uninstall, including when the plugin is inactive; preserve settings and product assignments."
+msgstr ""
+
 msgid "Clear detected page caches on manual connector refresh (entire site)."
 msgstr ""
 
